@@ -1,0 +1,15 @@
+[2020-01-23 10:51:27] local.ERROR: Class Carbon\Carbon contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (DateTimeInterface::__wakeup) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 1): Class Carbon\\Carbon contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (DateTimeInterface::__wakeup) at C:\\xampp\\htdocs\\jiada_new\\vendor\
+esbot\\carbon\\src\\Carbon\\Carbon.php:509)
+[stacktrace]
+#0 {main}
+"} 
+[2020-01-23 10:51:27] local.ERROR: Class Carbon\Carbon contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (DateTimeInterface::__wakeup) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 1): Class Carbon\\Carbon contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (DateTimeInterface::__wakeup) at C:\\xampp\\htdocs\\jiada_new\\vendor\
+esbot\\carbon\\src\\Carbon\\Carbon.php:509)
+[stacktrace]
+#0 {main}
+"} 
+[2020-01-23 10:51:27] local.ERROR: Class Carbon\Carbon contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (DateTimeInterface::__wakeup) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 1): Class Carbon\\Carbon contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (DateTimeInterface::__wakeup) at C:\\xampp\\htdocs\\jiada_new\\vendor\
+esbot\\carbon\\src\\Carbon\\Carbon.php:509)
+[stacktrace]
+#0 {main}
+"} 
