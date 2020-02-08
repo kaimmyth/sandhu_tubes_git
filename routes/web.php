@@ -347,7 +347,7 @@ Route::get('org/org_contact/{id}','MasterController@Contact_type_destroy');
 
 
 //................................................Rohit...Org Designation........................................................
-// Route::get('org/org_designation','MasterController@index');
-// Route::post('org/org_relationship/Add','MasterController@inventory_Add');
-// Route::any('org/org_relationship/edit/{id}','MasterController@inventory_Edit');
-// Route::get('inventory/destroy/{id}','MasterController@inventory_destroy');
+Route::get('org/org_designation','MasterController@Designation_index');
+Route::post('org/org_designation/add','MasterController@Designation_add');
+Route::any('org/org_designation/edit/{id}','MasterController@Designation_edit');
+Route::get('org/org_designation/{id}','MasterController@Designation_destroy');
