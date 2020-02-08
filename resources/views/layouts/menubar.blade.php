@@ -214,6 +214,7 @@
 				<li>
 					<a href="{{url('land/registration')}}" class="waves-effect"><i class="ion-android-user-menu"></i>&nbsp;&nbsp;MAUNFACTURING</a>
 				</li>
+				<li><a href="{{URL::to('Manufacturing/list')}}" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>MAUNFACTURING_new</span></a></li>
 				<li><a href="{{URL::to('shipment/listing')}}" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>SHIPMENT</span></a></li>
 
 

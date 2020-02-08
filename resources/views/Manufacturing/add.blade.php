@@ -102,7 +102,7 @@
           </div> -->
           <div class="card" style="border-left: 3px solid #386900;box-shadow: 4px 4px #b1b1b1;">
             <div class="card-header" style="background: linear-gradient(to left, #dbf2fd, #ffffff 50%, #ffffff, #ffffff 75%);">
-              <form action="{{ URL::to('land/create/registration')}}" method="POST" id="FormValidation" enctype="multipart/form-data" autocomplete="off">
+              <form action="{{ URL::to('Manufacturing/create')}}" method="POST" id="FormValidation" enctype="multipart/form-data" autocomplete="off">
                 @csrf
                 <div class="card-body">
                   <h4 style="text-align: center;"><span id="msg" style="color: #F0560A;"></span></h4>
@@ -112,8 +112,8 @@
                       <!--   <label class="col-sm-3 control-label" for="example-input-normal">Search Land</label> -->
                       <div class="col-sm-7">
                         <div class="input-group">
-                          <input type="text" id="searchland" name="land_name" class="form-control" placeholder="Search Iteams">
-                          <input type="hidden" name="land_id" id="land_id">
+                          <input type="text" id="searchland" name="search_items_name" class="form-control" placeholder="Search items">
+                          <input type="hidden" name="manufacturing_details_id" value="{{@$manufacturing_details->id}}" >
                           <span class="input-group-prepend">
                             <button type="button" class="btn waves-effect waves-light btn-primary"><i class="fa fa-search"></i></button> &nbsp;
                             <!-- <button type="button" class="btn waves-effect waves-light btn-primary" onclick="addlandModel()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add New Land"><i class="fa fa-plus"></i></button> -->
@@ -130,14 +130,12 @@
 
                         <div class="form-group">
                           <label for="field-1" class="control-label">Mother Coil/Slit Coil</label>
-                          <select class="form-control" name="city" id="city" required="" aria-required="true">
+                          <select class="form-control" name="input_items_id" id="city" required="" aria-required="true">
                             <option value=""></option>
-                            <option value="Jamshedpur">Mother Coil</option>
-                            <option value="Ranchi">Slit Coil</option>
-                            <option value="Bokaro">Scraps</option>
-                            <option value="Dhanbad">Pipes</option>
-                            <option value="Saraikela kharsawan">Cut Sheets</option>
-                            <option value="East Singhbhum">Loss</option>
+                            @foreach($inv_item as $key=> $value)
+                            <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_id) {{"selected"}} @endif>{{$value['item_name']}}</option>
+                            @endforeach
+                           
                           </select>
                         </div>
 
@@ -146,19 +144,19 @@
                       <div class="col-md-3">
                         <div class="form-group">
                           <label for="field-3" class="control-label">Quantity</label>
-                          <input type="text" class="form-control" name="plot_value" id="plot_value" min="1" value="" placeholder="" required="" aria-required="true">
+                          <input type="text" class="form-control" name="input_items_quantity"  id="plot_value" min="1" value="@if(@$manufacturing_details->input_items_quantity) {{$manufacturing_details->input_items_quantity}} @endif" placeholder="" required="" aria-required="true">
                         </div>
                       </div>
 
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="field-3" class="control-label">Kilograms</label>
+                          <label for="field-3" class="control-label">UoM</label>
                           <label for="field-1" class="control-label"></label>
-                          <select class="form-control" name="city" id="city" required="" aria-required="true">
+                          <select class="form-control" name="input_items_uom" id="city" required="" aria-required="true">
                             <option value=""></option>
                             @foreach($uom as $key=> $value)
-                          <option value="{{$value['id']}}">{{$value['uom_name']}}</option>
-                          @endforeach
+                            <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_uom) {{"selected"}} @endif>{{$value['uom_name']}}</option>
+                            @endforeach
                           </select>
                         </div>
 
@@ -168,10 +166,11 @@
                         <div class="form-group">
                           <label for="field-3" class="control-label">Inventory Location</label>
                           <label for="field-1" class="control-label"></label>
-                          <select class="form-control" name="city" id="city" required="" aria-required="true">
+                          <select class="form-control" name="input_items_location" id="city" required="" aria-required="true">
                             <option value=""></option>
-                            <option value="Jamshedpur">Jamshedpur, Jharkhand 832108</option>
-
+                            @foreach($InventoryLocation as $key=> $value)
+                            <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_location) {{"selected"}} @endif>{{$value['location_name']}}</option>
+                            @endforeach
 
                           </select>
                         </div>
@@ -190,17 +189,7 @@
 
 
 
-                  <script type="text/javascript">
-                    function chkpsige(elem) {
-                      var chkval = Number(document.getElementById("p_size2").value);
-                      var inputval = Number(document.getElementById("inputval").value);
-                      if (chkval >= inputval) {
-                        document.getElementById("msg").innerHTML = '';
-                      } else {
-                        document.getElementById("msg").innerHTML = 'The size of the Possession cannot exceed the actual size...!<br>(कब्ज़ा का आकार वास्तविक आकार से अधिक नहीं कर सकते हैं ।)';
-                      }
-                    }
-                  </script>
+                  
                   <hr>
                   <p style="font-size: 17px; font-weight: 700;">Output</p>
                   <span style="color:#F83008; font-weight: 600;" id="NotAloowPccCust"> </span><br><br>
@@ -208,8 +197,7 @@
                     <div class="row form-group">
                       <div class="col-sm-7">
                         <div class="input-group" style="margin-top: -47px;">
-                          <input type="text" name="cust_name" id="searchcustomer" class="form-control" placeholder="Search Customer" autocomplete="off">
-                          <input type="hidden" name="cust_id" id="cust_id" value="">
+                          <input type="text" name="output_item_name" id="searchcustomer" class="form-control" placeholder="Search items" autocomplete="off">
                           <span class="input-group-prepend">
                             <button type="button" class="btn waves-effect waves-light btn-primary"><i class="fa fa-search"></i></button>&nbsp;
                             <!-- <button type="button" class="btn waves-effect waves-light btn-primary" onclick="addcustomerModel()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add New Customer"><i class="fa fa-plus"></i></button> -->
@@ -226,7 +214,7 @@
 
                       <div class="form-group">
                         <label for="field-1" class="control-label">Finished Goods</label>
-                        <input type="text" class="form-control" name="plot_value" id="plot_value" min="1" value="" placeholder="" required="" aria-required="true">
+                        <input type="text" class="form-control" name="finished_goods_name" id="finished_goods_name" value="@if(@$manufacturing_details->finished_goods_name) {{$manufacturing_details->finished_goods_name}} @endif"  placeholder="" required="" aria-required="true">
                       </div>
 
                     </div>
@@ -234,18 +222,18 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-3" class="control-label">Quantity</label>
-                        <input type="text" class="form-control" name="plot_value" id="plot_value" min="1" value="" placeholder="" required="" aria-required="true">
+                        <input type="text" class="form-control" name="finished_goods_quantity" id="finished_goods_quantity" min="1" value="@if(@$manufacturing_details->finished_goods_quantity) {{$manufacturing_details->finished_goods_quantity}} @endif" placeholder="" required="" aria-required="true">
                       </div>
                     </div>
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Kilograms</label>
+                        <label for="field-3" class="control-label">UoM</label>
                         <label for="field-1" class="control-label"></label>
-                        <select class="form-control" name="city" id="city" required="" aria-required="true">
+                        <select class="form-control" name="finished_goods_uom" id="finished_goods_uom" required="" aria-required="true">
                           <option value=""></option>
                           @foreach($uom as $key=> $value)
-                          <option value="{{$value['id']}}">{{$value['uom_name']}}</option>
+                          <option value="{{$value['id']}}" value="@if(@$manufacturing_details->finished_goods_uom) {{"selected"}} @endif">{{$value['uom_name']}}</option>
                           @endforeach
 
                         </select>
@@ -256,10 +244,12 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-3" class="control-label">Inventory Location</label>
-                        <label for="field-1" class="control-label"></label>
-                        <select class="form-control" name="city" id="city" required="" aria-required="true">
+                        <select class="form-control" name="finished_goods_location" id="finished_goods_location" required="" aria-required="true">
                           <option value=""></option>
-                          <option value="Jamshedpur">Jamshedpur, Jharkhand 832108</option>
+                          @foreach($InventoryLocation as $key=> $value)
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->finished_goods_location) {{"selected"}} @endif>{{$value['location_name']}}</option>
+                          @endforeach
+                          <!-- <option value="Jamshedpur">Jamshedpur, Jharkhand 832108</option> -->
 
 
                         </select>
@@ -281,7 +271,7 @@
 
                       <div class="form-group">
                         <label for="field-1" class="control-label">Metal Scrap</label>
-                        <input type="text" class="form-control" name="plot_value" id="plot_value" min="1" value="" placeholder="Metal Scrap" required="" aria-required="true">
+                        <input type="text" class="form-control" name="metal_scrap_name" id="metal_scrap_name"  value="@if(@$manufacturing_details->metal_scrap_name) {{$manufacturing_details->metal_scrap_name}} @endif" placeholder="Metal Scrap" required="" aria-required="true">
                       </div>
 
                     </div>
@@ -289,18 +279,18 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-3" class="control-label">Quantity</label>
-                        <input type="text" class="form-control" name="plot_value" id="plot_value" min="1" value="" placeholder="" required="" aria-required="true">
+                        <input type="text" class="form-control" name="metal_scrap_quantity" id="metal_scrap_quantity  "min="1" value="@if(@$manufacturing_details->metal_scrap_quantity) {{$manufacturing_details->metal_scrap_quantity}} @endif" placeholder="" required="" aria-required="true">
                       </div>
                     </div>
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Kilograms</label>
+                        <label for="field-3" class="control-label">UoM</label>
                         <label for="field-1" class="control-label"></label>
-                        <select class="form-control" name="city" id="city" required="" aria-required="true">
+                        <select class="form-control" name="metal_scrap_uom" id="metal_scrap_uom" required="" aria-required="true">
                           <option value=""></option>
                           @foreach($uom as $key=> $value)
-                          <option value="{{$value['id']}}">{{$value['uom_name']}}</option>
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->metal_scrap_uom) {{"selected"}} @endif>{{$value['uom_name']}}</option>
                           @endforeach
                         </select>
                       </div>
@@ -311,10 +301,11 @@
                       <div class="form-group">
                         <label for="field-3" class="control-label">Inventory Location</label>
                         <label for="field-1" class="control-label"></label>
-                        <select class="form-control" name="city" id="city" required="" aria-required="true">
+                        <select class="form-control" name="metal_scrap_location" id="metal_scrap_location" required="" aria-required="true">
                           <option value=""></option>
-                          <option value="Jamshedpur">Jamshedpur, Jharkhand 832108</option>
-
+                          @foreach($InventoryLocation as $key=> $value)
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->metal_scrap_location) {{"selected"}} @endif >{{$value['location_name']}}</option>
+                          @endforeach
                         </select>
                       </div>
 
@@ -332,7 +323,7 @@
 
                       <div class="form-group">
                         <label for="field-1" class="control-label">Invisible Loss</label>
-                        <input type="text" class="form-control" name="plot_value" id="plot_value" min="1" value="" placeholder="" required="" aria-required="true">
+                        <input type="text" class="form-control" name="invisible_loss_name" id="invisible_loss_name"  value="@if(@$manufacturing_details->invisible_loss_name) {{$manufacturing_details->invisible_loss_name}} @endif" placeholder="" required="" aria-required="true">
                       </div>
 
                     </div>
@@ -340,18 +331,17 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-3" class="control-label">Quantity</label>
-                        <input type="text" class="form-control" name="plot_value" id="plot_value" min="1" value="" placeholder="" required="" aria-required="true">
+                        <input type="text" class="form-control" name="invisible_loss_quantity" id="invisible_loss_quantity" min="1" value="@if(@$manufacturing_details->invisible_loss_quantity) {{$manufacturing_details->invisible_loss_quantity}} @endif" placeholder="" required="" aria-required="true">
                       </div>
                     </div>
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Kilograms</label>
-                        <label for="field-1" class="control-label"></label>
-                        <select class="form-control" name="city" id="city" required="" aria-required="true">
+                        <label for="field-3" class="control-label">UoM</label>
+                        <select class="form-control" name="invisible_loss_uom" id="invisible_loss_uom" required="" aria-required="true">
                           <option value=""></option>
                           @foreach($uom as $key=> $value)
-                          <option value="{{$value['id']}}">{{$value['uom_name']}}</option>
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->invisible_loss_uom) {{"selected"}} @endif>{{$value['uom_name']}}</option>
                           @endforeach
 
                         </select>
@@ -361,12 +351,12 @@
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">This is autopopulated</label>
-                        <label for="field-1" class="control-label"></label>
-                        <select class="form-control" name="city" id="city" required="" aria-required="true">
+                        <label for="field-3" class="control-label">Invisible Loss Quantity</label>
+                        <select class="form-control" name="invisible_loss_auto" id="invisible_loss_auto" required="" aria-required="true">
                           <option value=""></option>
-                          <option value="Jamshedpur">Jamshedpur, Jharkhand 832108</option>
-
+                          @foreach($InventoryLocation as $key=> $value)
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->invisible_loss_auto) {{"selected"}} @endif >{{$value['location_name']}}</option>
+                          @endforeach
                         </select>
                       </div>
 
@@ -383,11 +373,12 @@
                         <p>Total Quantity </p>
                       </div>
                       <div class="col-md-6">
-                        <p> 1000 Kilograms</p>
+                        <p> 1000 UoM</p>
                       </div>
                     </div>
                   </div>
-
+                  <br>
+                  <input type="submit" class="btn btn-primary" name="submit" value="Create">
 
                   <hr>
                   <script type="text/javascript">
@@ -417,7 +408,7 @@
           <hr>
           <p style="font-size: 17px; font-weight: 700;">Review & Submit</p>
           <hr> -->
-
+                    
                 </div> <!-- card -->
             </div> <!-- container -->
           </div> <!-- content -->
@@ -480,7 +471,7 @@
       }
 
     </script>
- 
+
 
 
     <script type="text/javascript">

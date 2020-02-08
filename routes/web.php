@@ -313,6 +313,8 @@ Route::get('inventory/destroy/{id}','InventoryLocation_Controller@inventory_dest
 //................................................Amit...Manufacturing........................................................
 Route::get('Manufacturing/list','ManufacturingController@list');
 Route::get('Manufacturing/add','ManufacturingController@add');
+Route::post('Manufacturing/create','ManufacturingController@create');
+Route::get('Manufacturing/edit/{id}','ManufacturingController@edit');
 
 /* =================================================== Inventory Define Items Raj.. 08/02/2020=================================================== */
 Route::prefix('inv_item')->group(function () {

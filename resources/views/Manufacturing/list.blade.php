@@ -61,6 +61,42 @@
                                                     <th style="width: 20%;">Action</th>
                                                 </tr>
                                             </thead>
+                                            <tbody>
+
+                                              
+                                                @foreach($toReturn['details'] as $key_del=>$value_del)
+                                                @php $item=DB::table('inv_item')->where('id',$value_del['input_items_id'])->first();
+                                                    $Location=DB::table('inventory_location')->where('id',$value_del['input_items_location'])->first();
+                                                @endphp
+                                                <td>{{@$item->item_name}}</td>
+                                                <td>{{@$value_del['input_items_quantity']}}</td>
+                                                <td>{{@$Location->location_name}}</td>
+                                                
+                                                @if(@$value_del['status']==1)
+                                                    <td>
+                                                        <p class="mb-0">
+                                                            <span class="badge badge-success">Active</span>
+                                                        </p>
+                                                    </td>
+                                                    @else
+                                                    <td>
+                                                        <p class="mb-0">
+                                                            <span class="badge badge-danger">Inactive</span>
+                                                        </p>
+                                                    </td>
+                                                @endif
+                                              
+                                                <td>
+
+                                                    <a href="{{url('Manufacturing/edit/'.$value_del['id'])}}" class="on-default view-row" data-toggle="tooltip"  data-placement="top" title="" data-original-title="Update"><i class="fas fa-edit"></i></a> 
+                                                    <a href="{{url('land/customercompany/view/'.$value_del['id'])}}" class="on-default view-row" data-toggle="tooltip"  data-placement="top" title="" data-original-title="View"><i class="fa fa-eye" aria-hidden="true"></i></a> 
+                                                    <a href="{{url('land/customer/delete/'.$value_del['id'])}}"  class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash" style="color:red;"></i></a>
+
+                                                </td>
+                                            </tr>
+                                                @endforeach
+                                               
+                                            </tbody>
                                             
                                         </table>
                                     </div>
