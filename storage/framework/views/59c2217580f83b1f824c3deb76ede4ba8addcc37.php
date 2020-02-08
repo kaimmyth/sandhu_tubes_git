@@ -223,9 +223,9 @@
 					<a href="#" class="waves-effect"><i class="ion-settings"></i>&nbsp;&nbsp;SETTINGS<span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
 						
-						<li><a href="<?php echo e(url('inventory/inventory-location')); ?>"><span>LOCATION </span></a></li>
-						<-<li><a href="<?php echo e(url('department')); ?>">ORGNIZATIONS</a></li>
-						<!--<li><a href="<?php echo e(url('subdepartment')); ?>">SUB-DEPARTMENTS</a></li>
+						<li><a href="<?php echo e(url('land/area-location')); ?>"><span>LOCATION</span></a></li>
+						<li><a href="<?php echo e(url('department')); ?>">ORGNIZATIONS</a></li>
+						<!--<li><a href="<?php echo e(url('subdepartment')); ?>">SUB-DEPARTMENTS</a></li>-->
 						<li><a href="<?php echo e(url('category')); ?>">CATEGORIES</a></li>
 						<li><a href="<?php echo e(url('uom_master')); ?>">UoM Master</a></li>
 						
