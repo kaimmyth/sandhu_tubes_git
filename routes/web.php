@@ -253,6 +253,11 @@ Route::post('add/status_master', 'MasterController@Add_Status');
 Route::get('status_master/destroy/{id}', 'MasterController@Delete_Status');
 Route::any('status_master/edit/{id}', 'MasterController@Status_Edit');
 Route::any('get_statusid/{StatusID}','TicketController@get_Statuslist');
+// UOM
+Route::get('uom_master', 'MasterController@Uom_Listing');
+Route::post('add/uom_master', 'MasterController@Add_Uom');
+Route::get('uom_master/destroy/{id}', 'MasterController@Delete_Uom');
+Route::any('uom_master/edit/{id}', 'MasterController@Uom_Edit');
 Route::get('/', function () {
 
     return view('static-pages.index');
@@ -296,3 +301,7 @@ Route::get('list/all_unit','UnitListingController@view_all_unit');
 Route::get('/inventory-location', function () {
 	return view('land.inventory-location');
 });
+
+
+Route::get('Manufacturing/list','ManufacturingController@list');
+Route::get('Manufacturing/add','ManufacturingController@add');

@@ -804,6 +804,54 @@ class MasterController extends Controller
 			return back();
 				
 	}
+	/* uom master*/
+	public function Uom_Listing(Request $request)
+	{
+		$uomData = DB::table('uom')->get();
+	    $data['content'] = 'master.indexuom';
+		return view('layouts.content', compact('data'))->with(['uomData' => $uomData]);
+	}
+
+	public function Add_Uom(Request $request)
+	{        
+		$data = array(
+			'uom_name' => $request->uom_name,
+			'uom_description' => $request->uom_description,
+			'uom_type' => $request->uom_type,
+			'status' => $request->is_active,
+			'created_at' => date('Y-m-d H:i:s'),
+			'created_by' => 1,
+			'updated_by' => 1,
+
+		);
+
+		if($request->ids != ''){
+			Session::flash('success', 'Updated Successfully..!');
+			$Updatepmaterials = DB::table('uom')->where('id', $request->ids)->update($data);
+			return back();
+		}else{
+			Session::flash('success', 'Inserted Successfully..!');
+			$Addmaterials= DB::table('uom')->insert($data);
+			return back();
+		}
+	}
+
+	public function Uom_Edit(Request $request,$id)
+	{
+		$data =  DB::table('uom')->where('id', $id)->first();
+		if($data) {
+			return Response::json($data);
+		}
+	}
+
+
+	public function Delete_Uom(Request $request,$id)
+	{		
+			Session::flash('error', 'Deleted Successfully..!');
+			$delete = DB::table('uom')->where('id', '=', $id)->delete();
+			return back();
+				
+	}
 
 
 

@@ -222,10 +222,12 @@
 
 						
 						<li><a href="{{url('land/area-location')}}"><span>LOCATION</span></a></li>
-						<-<li><a href="{{ url('department')}}">ORGNIZATIONS</a></li>
-						<!--<li><a href="{{ url('subdepartment')}}">SUB-DEPARTMENTS</a></li>
+						<li><a href="{{ url('department')}}">ORGNIZATIONS</a></li>
+						<!--<li><a href="{{ url('subdepartment')}}">SUB-DEPARTMENTS</a></li>-->
 						<li><a href="{{ url('category')}}">CATEGORIES</a></li>
-						<li><a href="{{ url('subcategory')}}">SUB-CATEGORIES</a></li>
+						<li><a href="{{ url('uom_master')}}">UoM Master</a></li>
+						
+						<!--<li><a href="{{ url('subcategory')}}">SUB-CATEGORIES</a></li>
 						<li><a href="{{ url('priority_lavels')}}">PRIORITY LEVELS</a></li>
 						<li><a href="{{ url('users')}}">USERS</a></li>
 						<li><a href="{{ url('entity_master')}}" class="waves-effect">ENTITY </span></a></li>
@@ -281,18 +283,20 @@
 					<ul class="list-unstyled">
 
 						
-						<li><a href="{{url('land/area-location')}}"><span>SECTORS/ZONES</span></a></li>
-						<li><a href="{{ url('department')}}">DEPARTMENTS</a></li>
+						<li><a href="{{url('land/area-location')}}"><span>LOCATION</span></a></li>
+						<li><a href="{{ url('department')}}">ORGNIZATIONS</a></li>
 						<!--<li><a href="{{ url('subdepartment')}}">SUB-DEPARTMENTS</a></li>-->
 						<li><a href="{{ url('category')}}">CATEGORIES</a></li>
-						<li><a href="{{ url('subcategory')}}">SUB-CATEGORIES</a></li>
+						<li><a href="{{ url('uom_master')}}">UoM Master</a></li>
+						
+						<!--<li><a href="{{ url('subcategory')}}">SUB-CATEGORIES</a></li>
 						<li><a href="{{ url('priority_lavels')}}">PRIORITY LEVELS</a></li>
 						<li><a href="{{ url('users')}}">USERS</a></li>
 						<li><a href="{{ url('entity_master')}}" class="waves-effect">ENTITY </span></a></li>
-						<!--<li><a href="{{ url('pcc_master')}}" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>PCC ACTION</span></a></li>			-->
+						<!--<li><a href="{{ url('pcc_master')}}" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>PCC ACTION</span></a></li>
 						<li><a href="{{ url('industries_master')}}" class="waves-effect">INDUSTRIES </a></li>
 						<li><a href="{{ url('material_master')}}" class="waves-effect">MATERIAL</a></li>
-
+						<!--   <a href="{{ URL::to('company')}}" class="waves-effect"><span>Company </span></a> -->
 
 
 						<!--   <a href="{{ URL::to('company')}}" class="waves-effect"><span>Company </span></a> -->
