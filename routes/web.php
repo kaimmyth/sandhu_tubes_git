@@ -296,3 +296,10 @@ Route::get('list/all_unit','UnitListingController@view_all_unit');
 Route::get('/inventory-location', function () {
 	return view('land.inventory-location');
 });
+
+
+//................................................Rohit...Inventory Location........................................................
+Route::get('inventory/inventory-location','InventoryLocation_Controller@index');
+Route::post('inventory-location/Add','InventoryLocation_Controller@inventory_Add');
+Route::any('inventory-location/edit/{id}','InventoryLocation_Controller@inventory_Edit');
+Route::get('inventory/destroy/{id}','InventoryLocation_Controller@inventory_destroy');

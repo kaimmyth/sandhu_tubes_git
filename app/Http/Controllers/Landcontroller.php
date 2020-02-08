@@ -295,43 +295,43 @@ class Landcontroller extends Controller
 
 
 
-  public function AreaLocation(Request $request)
-  {
-    try {
-      if ($request->checkrequest == 'createarea') {
-        $data = new AllLocationzone();
-        $data->sector_zone = $request->area;
-        $data->created_at = date('Y-m-d');
-        $data->save();
-        Session::flash('success', 'Create Success');
-        return back();
-      } elseif ($request->checkrequest == 'createsector') {
-        $data = new AllLocationphase();
-        $data->zone_id = $request->zone_id;
-        $data->phase = $request->sector;
-        $data->created_at = date('Y-m-d');
-        $data->save();
-        Session::flash('success', 'Create Success');
-        return back();
-      } elseif ($request->checkrequest == 'createblock') {
-        $data = new AllLocationblock();
-        $data->phase_id = $request->phase_id;
-        $data->block = $request->block;
-        $data->created_at = date('Y-m-d');
-        $data->save();
-        Session::flash('success', 'Create Success');
-        return back();
-      }
+  // public function AreaLocation(Request $request)
+  // {
+  //   try {
+  //     if ($request->checkrequest == 'createarea') {
+  //       $data = new AllLocationzone();
+  //       $data->sector_zone = $request->area;
+  //       $data->created_at = date('Y-m-d');
+  //       $data->save();
+  //       Session::flash('success', 'Create Success');
+  //       return back();
+  //     } elseif ($request->checkrequest == 'createsector') {
+  //       $data = new AllLocationphase();
+  //       $data->zone_id = $request->zone_id;
+  //       $data->phase = $request->sector;
+  //       $data->created_at = date('Y-m-d');
+  //       $data->save();
+  //       Session::flash('success', 'Create Success');
+  //       return back();
+  //     } elseif ($request->checkrequest == 'createblock') {
+  //       $data = new AllLocationblock();
+  //       $data->phase_id = $request->phase_id;
+  //       $data->block = $request->block;
+  //       $data->created_at = date('Y-m-d');
+  //       $data->save();
+  //       Session::flash('success', 'Create Success');
+  //       return back();
+  //     }
 
-      $TableData = AllLocationzone::all();
-      $phaseData = DB::table('location_phase')->join('location_zone', 'location_zone.id', '=', 'location_phase.zone_id')->select('location_phase.*', 'location_zone.sector_zone')->get();
-      $blockData = DB::table('location_block')->join('location_phase', 'location_phase.id', '=', 'location_block.phase_id')->select('location_block.*', 'location_phase.phase')->get();
-      $data['content'] = 'land.area_location';
-      return view('layouts.content', compact('data'))->with(['tableData' => $TableData,  'phaseData' => $phaseData, 'blockData' => $blockData]);
-    } catch (\Exception $e) {
-      return $e->getMessage();
-    }
-  }
+  //     $TableData = AllLocationzone::all();
+  //     $phaseData = DB::table('location_phase')->join('location_zone', 'location_zone.id', '=', 'location_phase.zone_id')->select('location_phase.*', 'location_zone.sector_zone')->get();
+  //     $blockData = DB::table('location_block')->join('location_phase', 'location_phase.id', '=', 'location_block.phase_id')->select('location_block.*', 'location_phase.phase')->get();
+  //     $data['content'] = 'land.area_location';
+  //     return view('layouts.content', compact('data'))->with(['tableData' => $TableData,  'phaseData' => $phaseData, 'blockData' => $blockData]);
+  //   } catch (\Exception $e) {
+  //     return $e->getMessage();
+  //   }
+  // }
 
   /* By haresh*/
   public function delete_sector_zone($id)

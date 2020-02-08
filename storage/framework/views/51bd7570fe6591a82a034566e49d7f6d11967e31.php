@@ -392,4 +392,4 @@ Sandhu Tubes Pvt. Ltd. is listed in Trade India's list of verified sellers offer
 
 </body>
 
-</html><?php /**PATH C:\xampp\htdocs\sandhu_tubes\resources\views/static-pages/index.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/static-pages/index.blade.php ENDPATH**/ ?>

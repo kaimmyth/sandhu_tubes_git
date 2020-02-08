@@ -235,4 +235,4 @@
 </div><!-- end of container fluid-->
 </div><!--end of content-->
 </div><!--end of content page-->
-<?php /**PATH C:\xampp\htdocs\sandhu_tubes\resources\views/admin/home.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/admin/home.blade.php ENDPATH**/ ?>

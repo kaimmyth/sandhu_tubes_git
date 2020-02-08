@@ -15,4 +15,4 @@
 	<?php }else if(Session::get('message')){  ?>
 		toastr.info("<?php echo Session::get('message'); ?>");
 	<?php } ?>
-</script><?php /**PATH C:\xampp\htdocs\sandhu_tubes\resources\views/layouts/alert.blade.php ENDPATH**/ ?>
+</script><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/layouts/alert.blade.php ENDPATH**/ ?>

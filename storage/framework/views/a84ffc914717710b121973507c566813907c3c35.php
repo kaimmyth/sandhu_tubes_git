@@ -174,4 +174,4 @@
  
 	
 
-<?php /**PATH C:\xampp\htdocs\sandhu_tubes\resources\views/static-pages/footer.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/static-pages/footer.blade.php ENDPATH**/ ?>

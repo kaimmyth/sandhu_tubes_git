@@ -488,4 +488,4 @@
         $("input[name='demo0']").TouchSpin({});
     });
 </script>
-<?php /**PATH C:\xampp\htdocs\sandhu_tubes\resources\views/layouts/footer.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/layouts/footer.blade.php ENDPATH**/ ?>

@@ -656,4 +656,4 @@
     }
   });
  }
-</script><?php /**PATH C:\xampp\htdocs\sandhu_tubes\resources\views/land/area_location.blade.php ENDPATH**/ ?>
+</script><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/land/area_location.blade.php ENDPATH**/ ?>
