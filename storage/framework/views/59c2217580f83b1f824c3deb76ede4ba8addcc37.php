@@ -215,20 +215,24 @@
 					<a href="<?php echo e(url('land/registration')); ?>" class="waves-effect"><i class="ion-android-user-menu"></i>&nbsp;&nbsp;MAUNFACTURING</a>
 				</li>
 				<li><a href="<?php echo e(URL::to('pcc/pcc_action_view')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>SHIPMENT</span></a></li>
-				
-				
+
+
 				<!--<li><a href="<?php echo e(url('ticket')); ?>" class="waves-effect"><i class="md md-storage"></i>&nbsp;&nbsp;<span>TICKETS</span></a></li>-->
 				<?php if(Auth::user()->users_role==1): ?>
 				<li class="has_sub">
 					<a href="#" class="waves-effect"><i class="ion-settings"></i>&nbsp;&nbsp;SETTINGS<span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
-						
-						<li><a href="<?php echo e(url('land/area-location')); ?>"><span>LOCATION</span></a></li>
+
+						<li><a href="<?php echo e(url('inventory/inventory-location')); ?>"><span>LOCATION</span></a></li>
+						<li><a href="<?php echo e(url('convertion')); ?>"><span>CONVERTIONS</span></a></li>
+						<li><a href="<?php echo e(url('org/org_relationship')); ?>"><span>ORG RELATIONSHIP</span></a></li>
+						<li><a href="<?php echo e(url('org/org_contact')); ?>"><span>ORG CONTACT TYPE</span></a></li>
+						<li><a href="<?php echo e(url('org/org_designation')); ?>"><span>ORG DESIGNATION</span></a></li>
 						<li><a href="<?php echo e(url('department')); ?>">ORGNIZATIONS</a></li>
 						<!--<li><a href="<?php echo e(url('subdepartment')); ?>">SUB-DEPARTMENTS</a></li>-->
 						<li><a href="<?php echo e(url('category')); ?>">CATEGORIES</a></li>
 						<li><a href="<?php echo e(url('uom_master')); ?>">UoM Master</a></li>
-						
+
 						<!--<li><a href="<?php echo e(url('subcategory')); ?>">SUB-CATEGORIES</a></li>
 						<li><a href="<?php echo e(url('priority_lavels')); ?>">PRIORITY LEVELS</a></li>
 						<li><a href="<?php echo e(url('users')); ?>">USERS</a></li>
@@ -273,7 +277,7 @@
 				</li>
 				<?php endif; ?>
 				<?php if(in_array(7,@$module_id)): ?>
-				<li><a href="<?php echo e(URL::to('pcc/pcc_action_view')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>PCC  AGENDA</span></a></li>
+				<li><a href="<?php echo e(URL::to('pcc/pcc_action_view')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>PCC AGENDA</span></a></li>
 
 				<?php endif; ?>
 				<?php if(in_array(8, @$module_id)): ?>
@@ -284,13 +288,17 @@
 					<a href="#" class="waves-effect"><i class="ion-settings"></i>&nbsp;&nbsp;SETTINGS<span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
 
-						
-						<li><a href="<?php echo e(url('land/area-location')); ?>"><span>LOCATION</span></a></li>
+
+						<li><a href="<?php echo e(url('inventory/inventory-location')); ?>"><span>LOCATION</span></a></li>
+						<li><a href="<?php echo e(url('convertion')); ?>"><span>CONVERTIONS</span></a></li>
+						<li><a href="<?php echo e(url('org/org_relationship')); ?>"><span>ORG RELATIONSHIP</span></a></li>
+						<li><a href="<?php echo e(url('org/org_contact')); ?>"><span>ORG CONTACT TYPE</span></a></li>
+						<li><a href="<?php echo e(url('org/org_designation')); ?>"><span>ORG DESIGNATION</span></a></li>
 						<li><a href="<?php echo e(url('department')); ?>">ORGNIZATIONS</a></li>
 						<!--<li><a href="<?php echo e(url('subdepartment')); ?>">SUB-DEPARTMENTS</a></li>-->
 						<li><a href="<?php echo e(url('category')); ?>">CATEGORIES</a></li>
 						<li><a href="<?php echo e(url('uom_master')); ?>">UoM Master</a></li>
-						
+
 						<!--<li><a href="<?php echo e(url('subcategory')); ?>">SUB-CATEGORIES</a></li>
 						<li><a href="<?php echo e(url('priority_lavels')); ?>">PRIORITY LEVELS</a></li>
 						<li><a href="<?php echo e(url('users')); ?>">USERS</a></li>
@@ -304,7 +312,7 @@
 						<!--   <a href="<?php echo e(URL::to('company')); ?>" class="waves-effect"><span>Company </span></a> -->
 				</li>
 				<?php endif; ?>
-				
+
 			</ul>
 			<?php endif; ?>
 			<div class="clearfix"></div>

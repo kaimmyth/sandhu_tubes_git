@@ -93,11 +93,11 @@ Route::prefix('land')->group(function () {
 	Route::post('editSave/registration','Landcontroller@registration_editSave');
 });
 
-Route::prefix('area-location')->group(function () {
-	Route::any('create/area-location', 'Landcontroller@AreaLocation');
-	Route::any('create/sector-phase', 'Landcontroller@AreaLocation');
-	Route::any('create/block', 'Landcontroller@AreaLocation');
-});
+// Route::prefix('area-location')->group(function () {
+// 	Route::any('create/area-location', 'Landcontroller@AreaLocation');
+// 	Route::any('create/sector-phase', 'Landcontroller@AreaLocation');
+// 	Route::any('create/block', 'Landcontroller@AreaLocation');
+// });
 
 /* Haresh */
 Route::get('delete/sectro-zone/{id}', 'Landcontroller@delete_sector_zone');
