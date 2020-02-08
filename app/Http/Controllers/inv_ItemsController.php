@@ -6,18 +6,26 @@ use Illuminate\Http\Request;
 use App\inv_item;
 use Auth;
 use Session;
+use DB;
 class inv_ItemsController extends Controller
 {
     public function index()
     {
         $inv_itemdata = inv_item::get();
+        foreach ($inv_itemdata as $key => $value) {
+            $value->item_category_id = DB::table('category')->where('id',$value->item_category_id)->value('category_name');
+            $value->uom_id = DB::table('uom')->where('id',$value->uom_id)->value('uom_name');
+        }
+        $categorytData = DB::table('category');
         $data['content'] = 'inventory.inv_item';
         return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata]);
     }
     public function addView()
     {
+        $categorytData = DB::table('category')->where('is_active',1)->select('id','category_name')->get();
+        $uomData = DB::table('uom')->where('status',1)->select('id','uom_name')->get();
         $data['content'] = 'inventory.add_inv_item';
-        return view('layouts.content', compact('data'));
+        return view('layouts.content', compact('data'))->with(['categorytData' => $categorytData,'uomData' => $uomData]);
     }
     public function addStore(Request $request)
     {
@@ -38,14 +46,18 @@ class inv_ItemsController extends Controller
     public function showView($id)
     {
         $inv_itemdata = inv_item::where('id',$id)->first();
+        $inv_itemdata->item_category_id = DB::table('category')->where('id',$inv_itemdata->item_category_id)->value('category_name');
+        $inv_itemdata->uom_id = DB::table('uom')->where('id',$inv_itemdata->uom_id)->value('uom_name');
         $data['content'] = 'inventory.view_inv_item';
         return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata]);
     }
     public function editView($id)
     {
         $inv_itemdata = inv_item::where('id',$id)->first();
+        $categorytData = DB::table('category')->where('is_active',1)->select('id','category_name')->get();
+        $uomData = DB::table('uom')->where('status',1)->select('id','uom_name')->get();
         $data['content'] = 'inventory.edit_inv_item';
-        return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata]);
+        return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata,'categorytData' => $categorytData,'uomData' => $uomData]);
     }
     public function editStore(Request $request)
     {

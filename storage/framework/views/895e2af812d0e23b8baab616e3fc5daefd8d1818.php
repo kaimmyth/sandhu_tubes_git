@@ -62,9 +62,9 @@
                                   <label for="field-4" class="control-label">Item Category</label>
                                   <select class="form-control" name="item_category" id="item_category">
                                     <option value="">--Select--</option>
-                                    <option value="1">Materials</option>
-                                    <option value="2">Waste</option>
-                                    <option value="3">Loss</option>
+                                    <?php $__currentLoopData = $categorytData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($val->id); ?>"><?php echo e($val->category_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                   </select>
                                 </div>
                               </div>
@@ -84,10 +84,9 @@
                                   <label for="field-4" class="control-label">UoM</label>
                                   <select class="form-control" name="uom" id="uom" required  aria-required="true">
                                     <option value="">--Select--</option>
-                                    <option value="1">Kilograms</option>
-                                    <option value="2">Millimeter</option>
-                                    <option value="3">Gallon</option>
-                                    <option value="4">Centimeters</option>
+                                    <?php $__currentLoopData = $uomData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($val->id); ?>"><?php echo e($val->uom_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                   </select>
                                 </div>
                               </div>

@@ -61,10 +61,9 @@
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">Item Category</label>
                                   <select class="form-control" name="item_category" id="item_category">
-                                    <option value="">--Select--</option>
-                                    <option value="1">Materials</option>
-                                    <option value="2">Waste</option>
-                                    <option value="3">Loss</option>
+                                    @foreach($categorytData as $key=>$val)
+                                    <option value="{{$val->id}}" @if(@$val->id==@$inv_itemdata->item_category_id ?? ''){{'selected'}} @endif>{{$val->category_name}}</option>
+                                    @endforeach
                                   </select>
                                 </div>
                               </div>
@@ -83,11 +82,9 @@
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">UoM</label>
                                   <select class="form-control" name="uom" id="uom" required  aria-required="true">
-                                    <option value="">--Select--</option>
-                                    <option value="1">Kilograms</option>
-                                    <option value="2">Millimeter</option>
-                                    <option value="3">Gallon</option>
-                                    <option value="4">Centimeters</option>
+                                    @foreach($uomData as $key=>$val)
+                                    <option value="{{$val->id}}" @if(@$val->id==@$inv_itemdata->uom_id ?? ''){{'selected'}} @endif>{{$val->uom_name}}</option>
+                                    @endforeach
                                   </select>
                                 </div>
                               </div>
