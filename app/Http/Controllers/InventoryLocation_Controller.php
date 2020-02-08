@@ -23,7 +23,7 @@ class InventoryLocation_Controller extends Controller
         # code...
         $inventory_location=InventoryLocation::orderBy('id','DESC')->get()->toArray();
 
-        $data['content'] = 'Inventory.inventory-location';
+        $data['content'] = 'inventory.inventory-location';
         return view('layouts.content', compact('data'))->with('inventory_location',$inventory_location);
     }
 
