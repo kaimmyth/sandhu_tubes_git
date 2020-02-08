@@ -323,3 +323,31 @@ Route::prefix('inv_item')->group(function () {
 	Route::post('editStore', 'inv_ItemsController@editStore');
 	Route::get('deletedata/{id}', 'inv_ItemsController@deletedata');
 });
+
+
+//................................................Rohit...Convertion........................................................
+Route::get('convertion','MasterController@Convertion_index');
+Route::post('convertion/add','MasterController@Convertion_Add');
+Route::any('convertion/edit/{id}','MasterController@Convertion_Edit');
+Route::get('convertion/destroy/{id}','MasterController@Convertion_destroy');
+
+
+//................................................Rohit...Org Relationship........................................................
+Route::get('org/org_relationship','MasterController@Org_Relation_index');
+Route::post('org/org_relationship/add','MasterController@Org_Relation_add');
+Route::any('org/org_relationship/edit/{id}','MasterController@Org_Relation_edit');
+Route::get('org/org_relationship/{id}','MasterController@Org_Relation_destroy');
+
+
+//................................................Rohit...Org Contact ........................................................
+Route::get('org/org_contact','MasterController@Contact_type_index');
+Route::post('org/org_contact/add','MasterController@Contact_type_add');
+Route::any('org/org_contact/edit/{id}','MasterController@Contact_type_edit');
+Route::get('org/org_contact/{id}','MasterController@Contact_type_destroy');
+
+
+//................................................Rohit...Org Designation........................................................
+// Route::get('org/org_designation','MasterController@index');
+// Route::post('org/org_relationship/Add','MasterController@inventory_Add');
+// Route::any('org/org_relationship/edit/{id}','MasterController@inventory_Edit');
+// Route::get('inventory/destroy/{id}','MasterController@inventory_destroy');
