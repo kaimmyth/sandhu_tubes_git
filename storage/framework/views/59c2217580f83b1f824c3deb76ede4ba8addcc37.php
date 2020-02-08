@@ -206,7 +206,10 @@
 					<a href="<?php echo e(URL::to('dashboard')); ?>" class="waves-effect"><i class="md md-home"></i>&nbsp;&nbsp;<span>DASHBOARD</span></a>
 				</li>
 				<li>
-					<a href="<?php echo e(URL::to('land/listing')); ?>" class="waves-effect"><i class="md md-receipt"></i>&nbsp;&nbsp; INVENTORY</a>
+					<a href="#" class="waves-effect"><i class="md md-receipt"></i>&nbsp;&nbsp; INVENTORY<span class="pull-right"><i class="md md-add"></i></span></a>
+					<ul class="list-unstyled">
+						<li><a href="<?php echo e(url('inv_item/listing')); ?>"><span>Define Item</span></a></li>
+					</ul>
 				</li>
 				<li>
 					<a href="<?php echo e(url('land/registration')); ?>" class="waves-effect"><i class="ion-android-user-menu"></i>&nbsp;&nbsp;MAUNFACTURING</a>
@@ -224,7 +227,9 @@
 						<-<li><a href="<?php echo e(url('department')); ?>">ORGNIZATIONS</a></li>
 						<!--<li><a href="<?php echo e(url('subdepartment')); ?>">SUB-DEPARTMENTS</a></li>
 						<li><a href="<?php echo e(url('category')); ?>">CATEGORIES</a></li>
-						<li><a href="<?php echo e(url('subcategory')); ?>">SUB-CATEGORIES</a></li>
+						<li><a href="<?php echo e(url('uom_master')); ?>">UoM Master</a></li>
+						
+						<!--<li><a href="<?php echo e(url('subcategory')); ?>">SUB-CATEGORIES</a></li>
 						<li><a href="<?php echo e(url('priority_lavels')); ?>">PRIORITY LEVELS</a></li>
 						<li><a href="<?php echo e(url('users')); ?>">USERS</a></li>
 						<li><a href="<?php echo e(url('entity_master')); ?>" class="waves-effect">ENTITY </span></a></li>
@@ -280,18 +285,20 @@
 					<ul class="list-unstyled">
 
 						
-						<li><a href="<?php echo e(url('land/area-location')); ?>"><span>SECTORS/ZONES</span></a></li>
-						<li><a href="<?php echo e(url('department')); ?>">DEPARTMENTS</a></li>
+						<li><a href="<?php echo e(url('land/area-location')); ?>"><span>LOCATION</span></a></li>
+						<li><a href="<?php echo e(url('department')); ?>">ORGNIZATIONS</a></li>
 						<!--<li><a href="<?php echo e(url('subdepartment')); ?>">SUB-DEPARTMENTS</a></li>-->
 						<li><a href="<?php echo e(url('category')); ?>">CATEGORIES</a></li>
-						<li><a href="<?php echo e(url('subcategory')); ?>">SUB-CATEGORIES</a></li>
+						<li><a href="<?php echo e(url('uom_master')); ?>">UoM Master</a></li>
+						
+						<!--<li><a href="<?php echo e(url('subcategory')); ?>">SUB-CATEGORIES</a></li>
 						<li><a href="<?php echo e(url('priority_lavels')); ?>">PRIORITY LEVELS</a></li>
 						<li><a href="<?php echo e(url('users')); ?>">USERS</a></li>
 						<li><a href="<?php echo e(url('entity_master')); ?>" class="waves-effect">ENTITY </span></a></li>
-						<!--<li><a href="<?php echo e(url('pcc_master')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>PCC ACTION</span></a></li>			-->
+						<!--<li><a href="<?php echo e(url('pcc_master')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>PCC ACTION</span></a></li>
 						<li><a href="<?php echo e(url('industries_master')); ?>" class="waves-effect">INDUSTRIES </a></li>
 						<li><a href="<?php echo e(url('material_master')); ?>" class="waves-effect">MATERIAL</a></li>
-
+						<!--   <a href="<?php echo e(URL::to('company')); ?>" class="waves-effect"><span>Company </span></a> -->
 
 
 						<!--   <a href="<?php echo e(URL::to('company')); ?>" class="waves-effect"><span>Company </span></a> -->

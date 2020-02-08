@@ -206,7 +206,10 @@
 					<a href="{{ URL::to('dashboard')}}" class="waves-effect"><i class="md md-home"></i>&nbsp;&nbsp;<span>DASHBOARD</span></a>
 				</li>
 				<li>
-					<a href="{{URL::to('land/listing')}}" class="waves-effect"><i class="md md-receipt"></i>&nbsp;&nbsp; INVENTORY</a>
+					<a href="#" class="waves-effect"><i class="md md-receipt"></i>&nbsp;&nbsp; INVENTORY<span class="pull-right"><i class="md md-add"></i></span></a>
+					<ul class="list-unstyled">
+						<li><a href="{{url('inv_item/listing')}}"><span>Define Item</span></a></li>
+					</ul>
 				</li>
 				<li>
 					<a href="{{url('land/registration')}}" class="waves-effect"><i class="ion-android-user-menu"></i>&nbsp;&nbsp;MAUNFACTURING</a>

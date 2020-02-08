@@ -312,3 +312,14 @@ Route::get('inventory/destroy/{id}','InventoryLocation_Controller@inventory_dest
 //................................................Amit...Manufacturing........................................................
 Route::get('Manufacturing/list','ManufacturingController@list');
 Route::get('Manufacturing/add','ManufacturingController@add');
+
+/* =================================================== Inventory Define Items Raj.. 08/02/2020=================================================== */
+Route::prefix('inv_item')->group(function () {
+	Route::get('listing', 'inv_ItemsController@index');
+	Route::get('add', 'inv_ItemsController@addView');
+	Route::post('addStore', 'inv_ItemsController@addStore');
+	Route::get('showView/{id}', 'inv_ItemsController@showView');
+	Route::get('editView/{id}', 'inv_ItemsController@editView');
+	Route::post('editStore', 'inv_ItemsController@editStore');
+	Route::get('deletedata/{id}', 'inv_ItemsController@deletedata');
+});
