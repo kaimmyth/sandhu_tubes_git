@@ -214,7 +214,7 @@
 				<li>
 					<a href="<?php echo e(url('land/registration')); ?>" class="waves-effect"><i class="ion-android-user-menu"></i>&nbsp;&nbsp;MAUNFACTURING</a>
 				</li>
-				<li><a href="<?php echo e(URL::to('pcc/pcc_action_view')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>SHIPMENT</span></a></li>
+				<li><a href="<?php echo e(URL::to('shipment/listing')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>SHIPMENT</span></a></li>
 
 
 				<!--<li><a href="<?php echo e(url('ticket')); ?>" class="waves-effect"><i class="md md-storage"></i>&nbsp;&nbsp;<span>TICKETS</span></a></li>-->

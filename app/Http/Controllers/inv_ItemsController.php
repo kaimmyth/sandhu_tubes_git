@@ -16,7 +16,6 @@ class inv_ItemsController extends Controller
             $value->item_category_id = DB::table('category')->where('id',$value->item_category_id)->value('category_name');
             $value->uom_id = DB::table('uom')->where('id',$value->uom_id)->value('uom_name');
         }
-        $categorytData = DB::table('category');
         $data['content'] = 'inventory.inv_item';
         return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata]);
     }

@@ -324,6 +324,16 @@ Route::prefix('inv_item')->group(function () {
 	Route::get('deletedata/{id}', 'inv_ItemsController@deletedata');
 });
 
+/* =================================================== Shipment Define Items Raj.. 08/02/2020=================================================== */
+Route::prefix('shipment')->group(function () {
+	Route::get('listing', 'shipmentController@index');
+	Route::get('add', 'shipmentController@addView');
+	Route::post('addStore', 'shipmentController@addStore');
+	Route::get('showView/{id}', 'shipmentController@showView');
+	Route::get('editView/{id}', 'shipmentController@editView');
+	Route::post('editStore', 'shipmentController@editStore');
+	Route::get('deletedata/{id}', 'shipmentController@deletedata');
+});
 
 //................................................Rohit...Convertion........................................................
 Route::get('convertion','MasterController@Convertion_index');
