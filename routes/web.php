@@ -253,6 +253,11 @@ Route::post('add/status_master', 'MasterController@Add_Status');
 Route::get('status_master/destroy/{id}', 'MasterController@Delete_Status');
 Route::any('status_master/edit/{id}', 'MasterController@Status_Edit');
 Route::any('get_statusid/{StatusID}','TicketController@get_Statuslist');
+// UOM
+Route::get('uom_master', 'MasterController@Uom_Listing');
+Route::post('add/uom_master', 'MasterController@Add_Uom');
+Route::get('uom_master/destroy/{id}', 'MasterController@Delete_Uom');
+Route::any('uom_master/edit/{id}', 'MasterController@Uom_Edit');
 Route::get('/', function () {
 
     return view('static-pages.index');
@@ -303,3 +308,7 @@ Route::get('inventory/inventory-location','InventoryLocation_Controller@index');
 Route::post('inventory-location/Add','InventoryLocation_Controller@inventory_Add');
 Route::any('inventory-location/edit/{id}','InventoryLocation_Controller@inventory_Edit');
 Route::get('inventory/destroy/{id}','InventoryLocation_Controller@inventory_destroy');
+
+//................................................Amit...Manufacturing........................................................
+Route::get('Manufacturing/list','ManufacturingController@list');
+Route::get('Manufacturing/add','ManufacturingController@add');
