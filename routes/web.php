@@ -339,6 +339,18 @@ Route::prefix('shipment')->group(function () {
 	Route::get('fetchItems', 'shipmentController@fetchItems');
 });
 
+/* =================================================== Define Organization Raj.. 08/02/2020=================================================== */
+Route::prefix('organization')->group(function () {
+	Route::get('listing', 'organizationController@index');
+	Route::get('add', 'organizationController@addView');
+	Route::post('addStore', 'organizationController@addStore');
+	Route::get('showView/{id}', 'organizationController@showView');
+	Route::get('editView/{id}', 'organizationController@editView');
+	Route::post('editStore', 'organizationController@editStore');
+	Route::get('deletedata/{id}', 'organizationController@deletedata');
+	Route::get('fetchItems', 'organizationController@fetchItems');
+});
+
 //................................................Rohit...Convertion........................................................
 Route::get('convertion','MasterController@Convertion_index');
 Route::post('convertion/add','MasterController@Convertion_Add');

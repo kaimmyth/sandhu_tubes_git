@@ -215,6 +215,7 @@
 					<!--<a href="{{url('land/registration')}}" class="waves-effect"><i class="ion-android-user-menu"></i>&nbsp;&nbsp;MAUNFACTURING</a>-->
 				</li>
 				<li><a href="{{URL::to('Manufacturing/list')}}" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>MAUNFACTURING</span></a></li>
+				<li><a href="{{URL::to('organization/listing')}}" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>ORGNIZATIONS</span></a></li>
 				<li><a href="{{URL::to('shipment/listing')}}" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>SHIPMENT</span></a></li>
 
 
@@ -229,7 +230,7 @@
 						<li><a href="{{url('org/org_relationship')}}"><span>ORG RELATIONSHIP</span></a></li>
 						<li><a href="{{url('org/org_contact')}}"><span>ORG CONTACT TYPE</span></a></li>
 						<li><a href="{{url('org/org_designation')}}"><span>ORG DESIGNATION</span></a></li>
-						<li><a href="{{ url('department')}}">ORGNIZATIONS</a></li>
+						<!-- <li><a href="{{ url('organization/listing')}}">ORGNIZATIONS</a></li> -->
 						<!--<li><a href="{{ url('subdepartment')}}">SUB-DEPARTMENTS</a></li>-->
 						<li><a href="{{ url('category')}}">CATEGORIES</a></li>
 						<li><a href="{{ url('uom_master')}}">UoM Master</a></li>
