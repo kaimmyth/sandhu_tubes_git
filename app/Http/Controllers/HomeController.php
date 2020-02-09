@@ -21,6 +21,11 @@ use App\User;
 use DB;
 use Hash;
 use Auth;
+use App\inv_item;
+use App\manufacturing_details;
+use App\organization;
+use App\shipment;
+
 
 class HomeController extends Controller
 {
@@ -46,8 +51,8 @@ class HomeController extends Controller
     ]);
     if ($validator->fails()) {
       return redirect()->back()
-      ->withErrors($validator)
-      ->withInput();
+        ->withErrors($validator)
+        ->withInput();
     }
     if ($request->c_ids != '') {
       $cdata['org_name'] = $request->name;
@@ -64,20 +69,29 @@ class HomeController extends Controller
     return back();
   }
 
+  //.......................................................Rohit item,manufatureing,orgnization,Inventory,
   public function Dashboard(Request $request)
   {
-    // return Session::get('gorgID');
-    $totalLeads = DB::table('lands')->where('status', '1')->count();
-    $totalcustomers = DB::table('customer_company')->where('status', '1')->count();
-    $totaltickets = DB::table('ticket')->count();
-    
+    if (Auth::check() && Auth::user()->users_role == 1) {
+      $total_items = inv_item::where('created_by', Auth::user()->id)->count();
+      $total_manufacturing_details = manufacturing_details::where('created_by', Auth::user()->id)->where('status', 1)->count();
+      $total_organization = organization::where('created_by', Auth::user()->id)->where('status', 1)->count();
+      $total_shipment = shipment::where('created_by',Auth::user()->id)->where('status', 1)->count();
+    }
+    else{
+
+      $total_items = inv_item::count();
+      $total_manufacturing_details = manufacturing_details::where('status', 1)->count();
+      $total_organization = organization::where('status', 1)->count();
+      $total_shipment = shipment::where('status', 1)->count();
+    }
+
     $data['content'] = 'admin.home';
-    return view('layouts.content', compact('data'))->with(['totalLeads'=>$totalLeads ?? '0', 'totalcustomers'=>$totalcustomers ?? '0', 'totaltickets'=>$totaltickets ?? '0']);
+    return view('layouts.content', compact('data'))->with(['total_items' => $total_items ?? '0', 'total_manufacturing_details' => $total_manufacturing_details ?? '0', 'total_organization' => $total_organization ?? '0', 'total_shipment' => $total_shipment ?? '0']);
   }
 
   public function index()
   {
     return Redirect::action('HomeController@Dashboard');
   }
-  
 }

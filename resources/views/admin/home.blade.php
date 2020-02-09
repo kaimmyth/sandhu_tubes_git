@@ -90,37 +90,37 @@
     <div class="row one" style="width: 102%; margin-left:0px;">
 
       <div class="col-md-3 widget">
-        <a target="_blank()" href="{{url('land/listing')}}"  >
+        <a target="_blank()" href="{{url('inv_item/listing')}}"  >
           <div class="stats-left ">
             <h4><i class="md md-map" style="color: #c30d00;"></i>&nbsp;</h4>
-            <h5 style="color: #fff;">View Detail</h5>
+            <h5 style="color: #fff;">INVENTORY</h5>
           </div>
           <div class="stats-right">
-           <label>{{ $totalLeads }} </label>
+           <label>{{ $total_items }} </label>
          </div>
          <div class="clearfix"> </div>
        </a>
      </div>
      <div class="col-md-3 widget states-mdl">
-      <a target="_blank()" href="{{url('land/customer')}}" >
+      <a target="_blank()" href="{{url('Manufacturing/list')}}" >
         <div class="stats-left">
           <h4><i class="ion-android-add-contact" style=" color: #001796;"></i>&nbsp;</h4>
-          <h5 style="color: #fff;">View Detail</h5>
+          <h5 style="color: #fff;">MAUNFACTURING</h5>
         </div>
         <div class="stats-right">
-          <label>{{ $totalcustomers }}</label>
+          <label>{{ $total_manufacturing_details }}</label>
         </div>
       </a>
       <div class="clearfix"> </div>
     </div>
     <div class="col-md-3 widget states-thrd">
-      <a target="_blank()" href="{{url('ticket')}}">
+      <a target="_blank()" href="{{url('organization/listing')}}">
        <div class="stats-left">
          <h4><i class="md md-storage" style="color: #c30d00;"></i>&nbsp;</h4>
-         <h5 style="color: #fff;">View Detail</h5>
+         <h5 style="color: #fff;">ORGNIZATIONS</h5>
        </div>
        <div class="stats-right">
-         <label>{{ $totaltickets }}</label>
+         <label>{{ $total_organization }}</label>
        </div>
      </a>
      <div class="clearfix"> </div>
@@ -128,12 +128,13 @@
 
 
    <div class="col-md-3 widget states-last">
+    <a target="_blank()" href="{{url('shipment/listing')}}">
      <div class="stats-left">
        <h4><i class="ion-arrow-shrink" style=" color: #001796;"></i>&nbsp;</h4>
-       <h5 style="color: #fff;">View Detail</h5>
+       <h5 style="color: #fff;">SHIPMENT</h5>
      </div>
      <div class="stats-right">                         
-       <label>0</label>
+       <label>{{ $total_shipment }}</label>
      </div>
      <div class="clearfix"> </div>
    </div>
