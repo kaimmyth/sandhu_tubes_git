@@ -104,6 +104,8 @@ class ManufacturingController extends Controller
       $manufacturing_details->created_by=Auth::user()->id;
       $manufacturing_details->update_by=Auth::user()->id;
       $manufacturing_details->save();
+      Session::flash('success', 'Manufacturing Details Update Succesfully');
+
     }
     else
     {
@@ -129,8 +131,11 @@ class ManufacturingController extends Controller
     $manufacturing_details->created_by=Auth::user()->id;
     $manufacturing_details->update_by=Auth::user()->id;
     $manufacturing_details->save();
-    }
+    Session::flash('success', 'Manufacturing Details Save Succesfully');
 
+    }
+  
+return redirect('Manufacturing/list');
     return $manufacturing_details;
   }
   public function edit($id="")

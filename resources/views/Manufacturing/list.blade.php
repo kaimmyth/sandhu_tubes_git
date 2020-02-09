@@ -69,7 +69,7 @@
                                                     $Location=DB::table('inventory_location')->where('id',$value_del['input_items_location'])->first();
                                                 @endphp
                                                 <td>{{@$item->item_name}}</td>
-                                                <td>{{@$value_del['input_items_quantity']}}</td>
+                                                <td align="right">{{@$value_del['input_items_quantity']}}</td>
                                                 <td>{{@$Location->location_name}}</td>
                                                 
                                                 @if(@$value_del['status']==1)

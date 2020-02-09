@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Session;
 use App\InventoryLocation;
 use DB;
@@ -20,8 +19,9 @@ use App\User;
 
 
 
-class MasterController extends Controllers
+class MasterController extends Controller
 {
+
 /* Category */
 	public function Category_Listing()
 	{
