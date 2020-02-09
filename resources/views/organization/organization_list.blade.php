@@ -24,7 +24,7 @@
                               <th>Organization Name</th>
                               <th>City, State</th>
                               <th>CIN</th>
-                              <th>Revenue (in CR)</th>
+                              <th>Revenue (In CR)</th>
                               <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 68px;" aria-label="Action: activate to sort column ascending">Action</th>
                            </tr>
                         </thead>

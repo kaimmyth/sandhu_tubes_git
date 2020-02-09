@@ -19,7 +19,7 @@
       <!-- Page-Title -->
       <div class="row" id="dashboard-row">
         <div class="col-sm-12">
-          <h4 class="pull-left page-title" style="color: #000; font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp; Update Organization
+          <h4 class="pull-left page-title" style="color: #000; font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp; Update Organization&nbsp;&nbsp;/ &nbsp;
             <a href="javascript::void(0);" onclick="history.back();">Back</a></h4>
           <ol class="breadcrumb pull-right">
             <li><a href="{{ URL::to('home') }}">Home</a></li>
@@ -81,16 +81,20 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="field-4" class="control-label">Relationships</label>
-                                <input type="text" class="form-control" name="relationships" id="relationships" value="{{$organizationtdata->relationships}}" placeholder="Relationships" required aria-required="true">
+                                <select class="form-control" name="relationships" id="relationships" required aria-required="true">
+                                  @foreach($org_relation as $key=>$val)
+                                  <option value="{{$val->org_relation_id}}" @if(@$val->org_relation_id==@$organizationtdata->relationships ?? ''){{'selected'}} @endif>{{$val->relation_name}}</option>
+                                  @endforeach
+                                </select>
                               </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <!-- <div class="col-md-3">
                               <div class="form-group">
                                 <label for="field-4" class="control-label">Suppliers</label>
                                 <input type="text" class="form-control" name="suppliers" id="suppliers" value="{{$organizationtdata->suppliers}}" placeholder="Suppliers" required aria-required="true">
                               </div>
-                            </div>
+                            </div> -->
                           </div>
                           <div class="row">
                             <div class="col-md-12">
@@ -126,14 +130,22 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="field-4" class="control-label">Department</label>
-                                <input type="text" class="form-control" name="department" value="{{$organizationtdata->contact_department}}" id="department" placeholder="Department" required aria-required="true">
+                                <select class="form-control" name="department" id="department" required aria-required="true">
+                                  @foreach($departments as $key=>$val)
+                                  <option value="{{$val->id}}" @if(@$val->id==@$organizationtdata->contact_department ?? ''){{'selected'}} @endif>{{$val->department_name}}</option>
+                                  @endforeach
+                                </select>
                               </div>
                             </div>
 
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label for="field-4" class="control-label">Contact Type</label>
-                                <input type="text" class="form-control" name="contact_type" value="{{$organizationtdata->contact_type}}" id="contact_type" placeholder="Contact Type" required aria-required="true">
+                                <select class="form-control" name="contact_type" id="contact_type" required aria-required="true">
+                                  @foreach($org_contact as $key=>$val)
+                                  <option value="{{$val->org_contact_type_id}}" @if(@$val->org_contact_type_id==@$organizationtdata->contact_type ?? ''){{'selected'}} @endif>{{$val->org_contact_type_name}}</option>
+                                  @endforeach
+                                </select>
                               </div>
                             </div>
 
@@ -144,7 +156,7 @@
                     <hr class="new2">
                   </div>
                   <div class="col-md-12" style="    text-align: left; margin-bottom: 6px;">
-                    <button type="submit" class="btn btn-success waves-effect waves-light m-b-5">Create</button>
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-b-5">Update</button>
                   </div>
                 </form>
               </div>

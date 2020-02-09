@@ -234,6 +234,7 @@
 						<!--<li><a href="<?php echo e(url('subdepartment')); ?>">SUB-DEPARTMENTS</a></li>-->
 						<li><a href="<?php echo e(url('category')); ?>">CATEGORIES</a></li>
 						<li><a href="<?php echo e(url('uom_master')); ?>">UoM Master</a></li>
+						<li><a href="<?php echo e(url('users')); ?>">USERS</a></li>
 
 						<!--<li><a href="<?php echo e(url('subcategory')); ?>">SUB-CATEGORIES</a></li>
 						<li><a href="<?php echo e(url('priority_lavels')); ?>">PRIORITY LEVELS</a></li>

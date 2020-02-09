@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\inv_item;
+use App\Org_Relation;
 use App\organization;
+use App\Org_Contact;
 use Auth;
 use Session;
 use DB;
@@ -18,8 +19,11 @@ class organizationController extends Controller
     }
     public function addView()
     {
+        $org_relation = Org_Relation::where('status',1)->select('org_relation_id','relation_name')->get();
+        $org_contact = Org_Contact::where('status',1)->select('org_contact_type_name','org_contact_type_name')->get();
+        $departments = DB::table('departments')->where('is_active',1)->select('id','department_name')->get();
         $data['content'] = 'organization.add_organization';
-        return view('layouts.content', compact('data'));
+        return view('layouts.content', compact('data'))->with(['org_relation' => $org_relation,'org_contact' => $org_contact,'departments' => $departments]);
     }
     public function addStore(Request $request)
     {
@@ -38,7 +42,7 @@ class organizationController extends Controller
         $organizationData->contact_role = $request->role;
         $organizationData->contact_department = $request->department;
         $organizationData->contact_type = $request->contact_type;
-        $organizationData->suppliers = $request->suppliers;
+        // $organizationData->suppliers = $request->suppliers;
         $organizationData->status = 1;
         $organizationData->created_by = Auth::user()->id;
         $organizationData->ceated_at = date('Y-m-d');
@@ -55,9 +59,11 @@ class organizationController extends Controller
     public function editView($id)
     {
         $organizationtdata = organization::where('id',$id)->first();
-       
+        $org_relation = Org_Relation::where('status',1)->select('org_relation_id','relation_name')->get();
+        $org_contact = Org_Contact::where('status',1)->select('org_contact_type_name','org_contact_type_name')->get();
+        $departments = DB::table('departments')->where('is_active',1)->select('id','department_name')->get();
         $data['content'] = 'organization.edit_organization';
-        return view('layouts.content', compact('data'))->with(['organizationtdata' => $organizationtdata]);
+        return view('layouts.content', compact('data'))->with(['organizationtdata' => $organizationtdata,'org_relation' => $org_relation,'org_contact' => $org_contact,'departments' => $departments]);
     }
     public function editStore(Request $request)
     {
@@ -76,7 +82,7 @@ class organizationController extends Controller
         $Edit_organizationData->contact_role = $request->role;
         $Edit_organizationData->contact_department = $request->department;
         $Edit_organizationData->contact_type = $request->contact_type;
-        $Edit_organizationData->suppliers = $request->suppliers;
+        // $Edit_organizationData->suppliers = $request->suppliers;
         // $Edit_organizationData->status = 1;
         $Edit_organizationData->updated_by = Auth::user()->id;
         $Edit_organizationData->update_at = date('Y-m-d');
