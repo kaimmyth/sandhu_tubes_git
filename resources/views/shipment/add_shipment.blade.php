@@ -47,7 +47,8 @@
                                                 <input type="text" class="form-control" name="supplier_name" id="supplier_name" placeholder="Supplier Name" required aria-required="true">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <input type="hidden" name="shipment_type" value="1">
+                                        <!-- <div class="col-md-3">
 
                                             <div class="form-group">
                                                 <label for="field-2" class="control-label">Shipment Type *</label>
@@ -57,7 +58,7 @@
                                                     <option value="0">OUT</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field-2" class="control-label">Status *</label>
@@ -168,7 +169,7 @@
                                         <div class="col-md-9">
                                             <button type="button" onclick="append_data();" class="btn btn-secondary btn-sm btn-circle">Add <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
                                         </div>
-                                        <div class="col-md-3" id="append_here">
+                                        <div class="col-md-6 row" id="append_here">
 
                                         </div>
                                     </div>
@@ -195,16 +196,28 @@
             contentType: 'application/json',
             dataType: "json",
             success: function (data) {
-                var to_append = `<div class="form-group">
+                console.log(data);
+                var to_append = `<div class="col-md-6"><div class="form-group">
                             <label for="field-2" class="control-label">Item Name *</label>
                             <select class="form-control" name="item_ids[]" id="item_ids" required="" aria-required="true">
                                 <option value="" selected>--Select--</option>`
-                                for(var i = 0; i < data.length; i++)
+                                for(var i = 0; i < data.inv_item.length; i++)
                                 {
-                                    to_append += `<option value=\"`+ data[i].id+ `\">`+ data[i].item_name +`</option>`
+                                    to_append += `<option value=\"`+ data.inv_item[i].id+ `\">`+ data.inv_item[i].item_name +`</option>`
                                 }
                     to_append += `</select>
-                        </div>`;
+                        </div></div>
+                        <div class="col-md-6"><div class="form-group">
+                            <label for="field-2" class="control-label">Item Location *</label>
+                            <select class="form-control" name="item_location[]" id="item_location" required="" aria-required="true">
+                                <option value="" selected>--Select--</option>`
+                                for(var i = 0; i < data.inventory_location.length; i++)
+                                {
+                                    to_append += `<option value=\"`+ data.inventory_location[i].id+ `\">`+ data.inventory_location[i].location_name +`</option>`
+                                }
+                    to_append += `</select>
+                        </div></div>
+                        `;
                 $("#append_here").append(to_append);
                 append_i++;
             }

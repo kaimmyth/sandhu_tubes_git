@@ -330,7 +330,7 @@ Route::prefix('inv_item')->group(function () {
 /* =================================================== Shipment Define Items Raj.. 08/02/2020=================================================== */
 Route::prefix('shipment')->group(function () {
 	Route::get('listing', 'shipmentController@index');
-	Route::get('add', 'shipmentController@addView');
+	Route::get('add/{id}', 'shipmentController@addView');
 	Route::post('addStore', 'shipmentController@addStore');
 	Route::get('showView/{id}', 'shipmentController@showView');
 	Route::get('editView/{id}', 'shipmentController@editView');
@@ -349,6 +349,18 @@ Route::prefix('organization')->group(function () {
 	Route::post('editStore', 'organizationController@editStore');
 	Route::get('deletedata/{id}', 'organizationController@deletedata');
 	Route::get('fetchItems', 'organizationController@fetchItems');
+});
+
+/* =================================================== Define Organization Raj.. 08/02/2020=================================================== */
+Route::prefix('shipment_out')->group(function () {
+	Route::get('listing', 'shipmentOutController@index');
+	Route::get('add/{id}', 'shipmentOutController@addView');
+	Route::post('addStore', 'shipmentOutController@addStore');
+	Route::get('showView/{id}', 'shipmentOutController@showView');
+	Route::get('editView/{id}', 'shipmentOutController@editView');
+	Route::post('editStore', 'shipmentOutController@editStore');
+	Route::get('deletedata/{id}', 'shipmentOutController@deletedata');
+	Route::get('fetchItems', 'shipmentOutController@fetchItems');
 });
 
 //................................................Rohit...Convertion........................................................

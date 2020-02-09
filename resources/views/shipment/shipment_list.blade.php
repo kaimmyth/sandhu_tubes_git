@@ -40,7 +40,8 @@
                             <div class="card-body">
                                 <div class="row"><br><br><br>
                                     <div class="col-md-12 col-sm-12 col-12">
-                                        <a href="{{url('shipment/add')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 1%;"><i class="md md-add-circle-outline"></i> Add</button></a><br>
+                                        <a href="{{url('shipment/add/0')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 1%;"><i class="md md-add-circle-outline"></i> Shipment</button></a>
+                                        <a href="{{url('shipment/add/1')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 1%;"><i class="md md-add-circle-outline"></i> Shipment Receive</button></a><br>
                                         <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead style="background: #b6e9ff;">
                                                 <tr>
