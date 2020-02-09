@@ -89,6 +89,46 @@
                                 </div>
                               </div>
 
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="field-4" class="control-label">Seralized</label>
+                                  <select class="form-control" name="seralized" id="seralized" onchange="showDiv('hidden_div', this)" required aria-required="true">
+                                    @if($inv_itemdata->seralized == 1)
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                    @else
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                    @endif
+                                  </select>
+                                </div>
+                              </div>
+
+                            </div>
+                            <div class="row">
+
+                              <div class="col-md-4" id="hidden_div" style="display: none;">
+                                <div class="form-group">
+                                  <label for="field-4" class="control-label">Item Number</label>
+                                  <input type="text" class="form-control" name="serial_no" value="{{$inv_itemdata->serial_no}}" id="serial_no" placeholder="Item Number" required aria-required="true">
+                                </div>
+                              </div>
+  
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="field-4" class="control-label">Leasable</label>
+                                  <select class="form-control" name="leasable" id="leasable" required aria-required="true">
+                                    @if($inv_itemdata->leasable == 1)
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                    @else
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                    @endif
+                                  </select>
+                                </div>
+                              </div>
+  
                             </div>
                           </div>
                         </div>
@@ -107,3 +147,17 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function () {
+    var seralized = $("#seralized").val();
+    if(seralized == 1)
+    $("#hidden_div").css("display", "block");
+    else
+    $("#hidden_div").css("display", "none");
+
+  });
+  function showDiv(divId, element)
+  {
+      document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
+  }
+</script>

@@ -208,12 +208,13 @@
 				<li>
 					<a href="#" class="waves-effect"><i class="md md-receipt"></i>&nbsp;&nbsp; INVENTORY<span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
-						<li><a href="<?php echo e(url('inv_item/listing')); ?>"><span>Define Item</span></a></li>
+						<li><a href="<?php echo e(url('inv_item/listing')); ?>"><span>Items</span></a></li>
 					</ul>
 				</li>
 				<li>
-					<a href="<?php echo e(url('land/registration')); ?>" class="waves-effect"><i class="ion-android-user-menu"></i>&nbsp;&nbsp;MAUNFACTURING</a>
+					<!--<a href="<?php echo e(url('land/registration')); ?>" class="waves-effect"><i class="ion-android-user-menu"></i>&nbsp;&nbsp;MAUNFACTURING</a>-->
 				</li>
+				<li><a href="<?php echo e(URL::to('Manufacturing/list')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>MAUNFACTURING</span></a></li>
 				<li><a href="<?php echo e(URL::to('shipment/listing')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>SHIPMENT</span></a></li>
 
 

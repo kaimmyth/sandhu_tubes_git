@@ -37,65 +37,96 @@
 
                 <form action="{{url('inv_item/addStore')}}" method="post" id="FormValidation" required="" aria-required="true" enctype="multipart/form-data">
                   <div class="row gutters justify-content-left">
-                      @csrf
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-sm-12">
-                            <div class="row">
+                    @csrf
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="row">
 
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="field-4" class="control-label">Item Code</label>
-                                  <input type="text" class="form-control" name="item_code" id="item_code" placeholder="Item Code" required aria-required="true">
-                                </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="field-4" class="control-label">Item Code</label>
+                                <input type="text" class="form-control" name="item_code" id="item_code" placeholder="Item Code" required aria-required="true">
                               </div>
-
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="field-4" class="control-label">Item Name</label>
-                                  <input type="text" class="form-control" name="item_name" id="item_name" placeholder="Item Name" required aria-required="true">
-                                </div>
-                              </div>
-
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="field-4" class="control-label">Item Category</label>
-                                  <select class="form-control" name="item_category" id="item_category">
-                                    <option value="">--Select--</option>
-                                    @foreach($categorytData as $key=>$val)
-                                    <option value="{{$val->id}}">{{$val->category_name}}</option>
-                                    @endforeach
-                                  </select>
-                                </div>
-                              </div>
-
                             </div>
-                            <div class="row">
 
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="field-4" class="control-label">Quantity</label>
-                                  <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Quantity" required aria-required="true">
-                                </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="field-4" class="control-label">Item Name</label>
+                                <input type="text" class="form-control" name="item_name" id="item_name" placeholder="Item Name" required aria-required="true">
                               </div>
-
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="field-4" class="control-label">UoM</label>
-                                  <select class="form-control" name="uom" id="uom" required  aria-required="true">
-                                    <option value="">--Select--</option>
-                                    @foreach($uomData as $key=>$val)
-                                    <option value="{{$val->id}}">{{$val->uom_name}}</option>
-                                    @endforeach
-                                  </select>
-                                </div>
-                              </div>
-
                             </div>
+
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="field-4" class="control-label">Item Category</label>
+                                <select class="form-control" name="item_category" id="item_category">
+                                  <option value="">--Select--</option>
+                                  @foreach($categorytData as $key=>$val)
+                                  <option value="{{$val->id}}">{{$val->category_name}}</option>
+                                  @endforeach
+                                </select>
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="row">
+
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="field-4" class="control-label">Quantity</label>
+                                <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Quantity" required aria-required="true">
+                              </div>
+                            </div>
+
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="field-4" class="control-label">UoM</label>
+                                <select class="form-control" name="uom" id="uom" required aria-required="true">
+                                  <option value="">--Select--</option>
+                                  @foreach($uomData as $key=>$val)
+                                  <option value="{{$val->id}}">{{$val->uom_name}}</option>
+                                  @endforeach
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="field-4" class="control-label">Seralized</label>
+                                <select class="form-control" name="seralized" id="seralized" onchange="showDiv('hidden_div', this)" required aria-required="true">
+                                  <option value="">--Select--</option>
+                                  <option value="1">Yes</option>
+                                  <option value="0">No</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+
+                            <div class="col-md-4" id="hidden_div" style="display: none;">
+                              <div class="form-group">
+                                <label for="field-4" class="control-label">Item Number</label>
+                                <input type="text" class="form-control" name="serial_no" id="serial_no" placeholder="Item Number" required aria-required="true">
+                              </div>
+                            </div>
+
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="field-4" class="control-label">Leasable</label>
+                                <select class="form-control" name="leasable" id="leasable" required aria-required="true">
+                                  <option value="">--Select--</option>
+                                  <option value="1">Yes</option>
+                                  <option value="0">No</option>
+                                </select>
+                              </div>
+                            </div>
+
                           </div>
                         </div>
                       </div>
-                      <hr class="new2">
+                    </div>
+                    <hr class="new2">
                   </div>
                   <div class="col-md-12" style="    text-align: left; margin-bottom: 6px;">
                     <button type="submit" class="btn btn-success waves-effect waves-light m-b-5">Create</button>
@@ -109,3 +140,10 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  function showDiv(divId, element)
+  {
+      document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
+  }
+</script>

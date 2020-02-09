@@ -440,7 +440,7 @@ background-position: center;
 
             <li class="dropdown open">
             	<?php  $logo = DB::table('users')->where('id',Auth::user()->id)->selectRaw("concat('".url('public/images/user_profile/').'/'."',user_image) as logo")->first();  ?>
-            	<a href="#" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="<?php if(@$logo->logo!=''): ?> <?php echo e(@$logo->logo); ?> <?php else: ?> <?php echo e(asset('public/assets/images/users/avatar-1.jpg')); ?> <?php endif; ?>" alt="user-img" class="rounded-circle"> &nbsp;&nbsp;admin </a>
+            	<a href="#" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src=" <?php echo e(asset('public/assets/images/users/avatar-1.jpg')); ?> " alt="user-img" class="rounded-circle"> &nbsp;&nbsp;admin </a>
             	<ul class="dropdown-menu">
             		<li><a href="<?php echo e(url('user-profile')); ?>" class="dropdown-item"><i class="md md-face-unlock mr-2"></i> Profile</a></li>
             		<li><a href="javascript:void(0)" class="dropdown-item"><i class="md md-settings mr-2"></i> Settings</a></li>

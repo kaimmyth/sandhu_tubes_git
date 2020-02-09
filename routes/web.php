@@ -336,6 +336,7 @@ Route::prefix('shipment')->group(function () {
 	Route::get('editView/{id}', 'shipmentController@editView');
 	Route::post('editStore', 'shipmentController@editStore');
 	Route::get('deletedata/{id}', 'shipmentController@deletedata');
+	Route::get('fetchItems', 'shipmentController@fetchItems');
 });
 
 //................................................Rohit...Convertion........................................................

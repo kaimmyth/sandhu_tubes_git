@@ -181,23 +181,23 @@
                                         <div class="col-md-9">
                                             <button type="button" onclick="append_data();" class="btn btn-secondary btn-sm btn-circle">Add <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-3" id="append_here">
                                         <?php if($inv_itemdata): ?>
                                             <?php $__currentLoopData = $inv_itemdata; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="form-group">
                                                     <label for="field-2" class="control-label">Item Name *</label>
                                                     <select class="form-control" name="item_ids[]" id="item_ids" required="" aria-required="true">
-                                                        <option value="" selected>--Select--</option>
-                                                        <option value="1">Mother Coil</option>
-                                                        <option value="2">Slit Coil</option>
+                                                        <?php $__currentLoopData = $inv_item; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kee=>$val1): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($val1->id); ?>" <?php if(@$val1->id==@$val->id ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>><?php echo e($val1->item_name); ?></option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                     </select>
                                                 </div>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         <?php endif; ?>
                                                 </div>
-                                        <div class="col-md-3" id="append_here">
+                                        <!-- <div class="col-md-3" id="append_here">
 
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="col-md-12" style="text-align: left; margin-bottom: 6px;">
                                         <button type="submit" class="btn btn-success waves-effect waves-light m-b-5">Update</button>
@@ -215,16 +215,27 @@
 <script>
     var append_i = 0;
     function append_data() {
-        var to_append = `<div class="form-group">
+        $.ajax({
+            url: "<?php echo e(url('shipment/fetchItems')); ?>",
+            data: {},
+            method: "GET",
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                var to_append = `<div class="form-group">
                             <label for="field-2" class="control-label">Item Name *</label>
                             <select class="form-control" name="item_ids[]" id="item_ids" required="" aria-required="true">
-                                <option value="" selected>--Select--</option>
-                                <option value="1">Mother Coil</option>
-                                <option value="2">Slit Coil</option>
-                            </select>
+                                <option value="" selected>--Select--</option>`
+                                for(var i = 0; i < data.length; i++)
+                                {
+                                    to_append += `<option value=\"`+ data[i].id+ `\">`+ data[i].item_name +`</option>`
+                                }
+                    to_append += `</select>
                         </div>`;
-        $("#append_here").append(to_append);
-        append_i++;
+                $("#append_here").append(to_append);
+                append_i++;
+            }
+        });
     }
 
 </script><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/shipment/edit_shipment.blade.php ENDPATH**/ ?>

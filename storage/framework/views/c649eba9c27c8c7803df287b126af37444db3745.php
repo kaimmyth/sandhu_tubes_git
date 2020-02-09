@@ -1,5 +1,5 @@
 <footer class="footer">
-    JAIDA © 2019 IT-SCIENT 
+    Sandhu-Tubes © 2019 IT-SCIENT 
 </footer>
 <?php echo $__env->make('layouts.alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <style>

@@ -46,6 +46,7 @@
                                                 <tr>
                                                     <th>Shipment No</th>
                                                     <th>Shipment Type</th>
+                                                    <th>Supplier Name</th>
                                                     <th>Shipped Date</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
@@ -61,6 +62,7 @@
                                                     <?php else: ?>
                                                     <td>OUT</td>
                                                     <?php endif; ?>
+                                                    <td><?php echo e($val->supplier_name); ?></td>
                                                     <td><?php echo e($val->created_date); ?></td>
                                                     <?php if($val->status == 1): ?>
                                                     <td>

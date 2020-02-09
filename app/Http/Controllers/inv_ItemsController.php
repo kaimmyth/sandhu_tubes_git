@@ -36,6 +36,10 @@ class inv_ItemsController extends Controller
         $inv_itemData->item_name = $request->item_name;
         $inv_itemData->item_code = $request->item_code;
         $inv_itemData->quantity = $request->quantity;
+        $inv_itemData->seralized = $request->seralized;
+        if($request->serial_no)
+        $inv_itemData->serial_no = $request->serial_no;
+        $inv_itemData->leasable = $request->leasable;
         $inv_itemData->created_by = Auth::user()->id;
         $inv_itemData->created_date = date('Y-m-d');
         $inv_itemData->save();
@@ -68,6 +72,14 @@ class inv_ItemsController extends Controller
         $Edit_inv_itemData->item_name = $request->item_name;
         $Edit_inv_itemData->item_code = $request->item_code;
         $Edit_inv_itemData->quantity = $request->quantity;
+        $Edit_inv_itemData->seralized = $request->seralized;
+        
+        if($request->seralized == 0)
+        $Edit_inv_itemData->serial_no = null;
+        else
+        $Edit_inv_itemData->serial_no = $request->serial_no;
+
+        $Edit_inv_itemData->leasable = $request->leasable;
         $Edit_inv_itemData->modified_by = Auth::user()->id;
         $Edit_inv_itemData->modified_date = date('Y-m-d');
         $Edit_inv_itemData->save();

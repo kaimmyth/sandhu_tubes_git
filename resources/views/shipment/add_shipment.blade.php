@@ -40,21 +40,6 @@
                             <form action="{{url('shipment/addStore')}}" method="post" id="FormValidationshipment" required="" aria-required="true" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
-                                    <!-- <div class="col-sm-12">
-                                        <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid" aria-describedby="datatable_info">
-                                            <thead>
-                                                <tr role="row">
-                                                    <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 144px;" aria-label="Phone: activate to sort column ascending">Shipment No: </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 319px;" aria-label="Contract Start Date: activate to sort column ascending">Shipment Type: IN </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 308px;" aria-label="Contract End Date: activate to sort column ascending">Shipped Date</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 145px;" aria-label="Action: activate to sort column ascending">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                            </tbody>
-                                        </table>
-                                    </div> -->
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
@@ -203,16 +188,27 @@
 <script>
     var append_i = 0;
     function append_data() {
-        var to_append = `<div class="form-group">
+        $.ajax({
+            url: "{{url('shipment/fetchItems')}}",
+            data: {},
+            method: "GET",
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                var to_append = `<div class="form-group">
                             <label for="field-2" class="control-label">Item Name *</label>
                             <select class="form-control" name="item_ids[]" id="item_ids" required="" aria-required="true">
-                                <option value="" selected>--Select--</option>
-                                <option value="1">Mother Coil</option>
-                                <option value="2">Slit Coil</option>
-                            </select>
+                                <option value="" selected>--Select--</option>`
+                                for(var i = 0; i < data.length; i++)
+                                {
+                                    to_append += `<option value=\"`+ data[i].id+ `\">`+ data[i].item_name +`</option>`
+                                }
+                    to_append += `</select>
                         </div>`;
-        $("#append_here").append(to_append);
-        append_i++;
+                $("#append_here").append(to_append);
+                append_i++;
+            }
+        });
     }
 
 </script>

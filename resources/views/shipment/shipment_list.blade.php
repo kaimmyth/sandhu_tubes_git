@@ -46,6 +46,7 @@
                                                 <tr>
                                                     <th>Shipment No</th>
                                                     <th>Shipment Type</th>
+                                                    <th>Supplier Name</th>
                                                     <th>Shipped Date</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
@@ -61,6 +62,7 @@
                                                     @else
                                                     <td>OUT</td>
                                                     @endif
+                                                    <td>{{$val->supplier_name}}</td>
                                                     <td>{{$val->created_date}}</td>
                                                     @if($val->status == 1)
                                                     <td>

@@ -72,8 +72,10 @@ class shipmentController extends Controller
         $ids = [];
         $ids = json_decode($shipmentdata->items_received_ids);
         $inv_itemdata = inv_item::whereIn('id',$ids)->select('id','item_name')->get();
+        $inv_item = inv_item::select('id','item_name')->orderBy('id')->get();
+        // return $inv_itemdata;
         $data['content'] = 'shipment.edit_shipment';
-        return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata,'shipmentdata' => $shipmentdata]);
+        return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata,'shipmentdata' => $shipmentdata,'inv_item' => $inv_item]);
     }
     public function editStore(Request $request)
     {
@@ -108,5 +110,10 @@ class shipmentController extends Controller
         }
         Session::flash('success', 'Itam Delete Success');
         return redirect('shipment/listing');
+    }
+    public function fetchItems()
+    {
+        $inv_item = inv_item::select('id','item_name')->orderBy('id')->get();
+        return $inv_item;
     }
 }
