@@ -144,10 +144,10 @@ Route::get('department/destroy/{id}', 'MasterController@Delete_Department');
 Route::any('department/edit/{id}', 'MasterController@Department_Edit');
 
 /* Category all routes*/
-// Route::get('category', 'MasterController@Category_Listing');
-// Route::post('add/category', 'MasterController@Add_Category');
-// Route::get('category/destroy/{id}', 'MasterController@Delete_Category');
-// Route::any('category/edit/{id}', 'MasterController@Category_Edit');
+Route::get('category', 'MasterController@Category_Listing');
+Route::post('add/category', 'MasterController@Add_Category');
+Route::get('category/destroy/{id}', 'MasterController@Delete_Category');
+Route::any('category/edit/{id}', 'MasterController@Category_Edit');
 
 /* SubCategory */
 
@@ -254,10 +254,10 @@ Route::get('status_master/destroy/{id}', 'MasterController@Delete_Status');
 Route::any('status_master/edit/{id}', 'MasterController@Status_Edit');
 Route::any('get_statusid/{StatusID}','TicketController@get_Statuslist');
 // UOM
-// Route::get('uom_master', 'MasterController@Uom_Listing');
-// Route::post('add/uom_master', 'MasterController@Add_Uom');
-// Route::get('uom_master/destroy/{id}', 'MasterController@Delete_Uom');
-// Route::any('uom_master/edit/{id}', 'MasterController@Uom_Edit');
+Route::get('uom_master', 'MasterController@Uom_Listing');
+Route::post('add/uom_master', 'MasterController@Add_Uom');
+Route::get('uom_master/destroy/{id}', 'MasterController@Delete_Uom');
+Route::any('uom_master/edit/{id}', 'MasterController@Uom_Edit');
 
 Route::get('/', function () {
 

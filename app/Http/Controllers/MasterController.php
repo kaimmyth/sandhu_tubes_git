@@ -19,7 +19,151 @@ use App\Org_Designation;
 
 class MasterController extends Controller
 {
+/* Category */
+	public function Category_Listing()
+	{
+		$userData = DB::table('users')->get();
+		$categorytData = DB::table('category')
+		->join('users', 'users.id', '=', 'category.pos_id')
+		->select('users.name', 'category.*')
+		->get();
+		$data['content'] = 'master.category';
+		return view('layouts.content', compact('data'))->with(['categorytData' => $categorytData, 'userData' => $userData]);
+	}
 
+	public function Add_Category(Request $request)
+	{        
+		$data = array(
+			'category_name' => $request->category_name,
+			'description' => $request->description,
+			'pos_id' => $request->pos_id,
+			'is_active' => $request->is_active,
+			'created_at' => date('Y-m-d H:i:s'),
+		);
+
+		if($request->ids != ''){
+			Session::flash('success', 'Updated Successfully..!');
+			$Updatedepartment = DB::table('category')->where('id', $request->ids)->update($data);
+			return back();
+		}else{
+			Session::flash('success', 'Inserted Successfully..!');
+			$Adddepartment = DB::table('category')->insert($data);
+			return back();
+		}
+	}
+
+	public function Category_Edit(Request $request,$id)
+	{
+		$data =  DB::table('category')->where('id', $id)->first();
+		if($data) {
+			return Response::json($data);
+		}
+	}
+
+	public function Delete_Category (Request $request,$id)
+	{
+		Session::flash('error', 'Deleted Successfully..!');
+		$delete = DB::table('category')->where('id', '=', $id)->delete();
+		return back();
+	}
+	/* uom master*/
+	public function Uom_Listing(Request $request)
+	{
+		$uomData = DB::table('uom')->get();
+	    $data['content'] = 'master.indexuom';
+		return view('layouts.content', compact('data'))->with(['uomData' => $uomData]);
+	}
+
+	public function Add_Uom(Request $request)
+	{        
+		$data = array(
+			'uom_name' => $request->uom_name,
+			'uom_description' => $request->uom_description,
+			'uom_type' => $request->uom_type,
+			'status' => $request->is_active,
+			'created_at' => date('Y-m-d H:i:s'),
+			'created_by' => 1,
+			'updated_by' => 1,
+
+		);
+
+		if($request->ids != ''){
+			Session::flash('success', 'Updated Successfully..!');
+			$Updatepmaterials = DB::table('uom')->where('id', $request->ids)->update($data);
+			return back();
+		}else{
+			Session::flash('success', 'Inserted Successfully..!');
+			$Addmaterials= DB::table('uom')->insert($data);
+			return back();
+		}
+	}
+
+	public function Uom_Edit(Request $request,$id)
+	{
+		$data =  DB::table('uom')->where('id', $id)->first();
+		if($data) {
+			return Response::json($data);
+		}
+	}
+
+
+	public function Delete_Uom(Request $request,$id)
+	{		
+			Session::flash('error', 'Deleted Successfully..!');
+			$delete = DB::table('uom')->where('id', '=', $id)->delete();
+			return back();
+				
+	}
+
+
+	/* Department*/
+	public function Department_Listing(Request $request)
+	{
+		$userData = DB::table('users')->get();
+		$departmentData = DB::table('departments')
+		->join('users', 'users.id', '=', 'departments.pos_id')
+		->select('users.name', 'departments.*')
+		->get();
+		$data['content'] = 'master.department';
+		return view('layouts.content', compact('data'))->with(['departmentData' => $departmentData, 'userData' => $userData]);
+		
+	}
+
+	public function Add_Department(Request $request)
+	{        
+		$data = array(
+			'department_name' => $request->department_name,
+			'description' => $request->description,
+			'pos_id' => $request->pos_id,
+			'is_active' => $request->is_active,
+			'created_at' => date('Y-m-d H:i:s'),
+		);
+
+		if($request->ids != ''){
+			Session::flash('success', 'Updated Successfully..!');
+			$Updatedepartment = DB::table('departments')->where('id', $request->ids)->update($data);
+			return back();
+		}else{
+			Session::flash('success', 'Inserted Successfully..!');
+			$Adddepartment = DB::table('departments')->insert($data);
+			return back();
+		}
+	}
+
+	public function Department_Edit(Request $request,$id)
+	{
+		$data =  DB::table('departments')->where('id', $id)->first();
+		if($data) {
+			return Response::json($data);
+		}
+	}
+
+	public function Delete_Department(Request $request,$id)
+	{
+		Session::flash('error', 'Deleted Successfully..!');
+		$delete = DB::table('departments')->where('id', '=', $id)->delete();
+		return back();
+	}
     ///...................................................Start Master For Convertions............................................  
     public function Convertion_index()
     {
