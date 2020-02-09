@@ -87,6 +87,42 @@
                           </div>
                           
                         </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <?php if($shipmentdata->shipment_type == 'IN'): ?>
+                            <h4>ITEMS RECEIVED</h4>
+                            <?php else: ?>
+                            <h4>ITEMS SHIPPED</h4>
+                            <?php endif; ?>
+                          </div>
+                          <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead style="background: #b6e9ff;">
+                                <tr>
+                                    <th>Item ID</th>
+                                    <th>Item Name</th>
+                                    <th>Quantity</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if($inv_itemdata): ?>
+                                <?php $__currentLoopData = $inv_itemdata; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <tr>
+                                    <td><?php echo e($val->id); ?></td>
+                                    <td><?php echo e($val->item_name); ?></td>
+                                    <td><?php echo e($val->quantity); ?></td>
+                                    <?php if($locationiddata != null): ?>
+                                    <td><?php echo e($locationiddata[$key]->location_name); ?></td>
+                                    <?php else: ?>
+                                    <td>NA</td>
+                                    <?php endif; ?>
+                                    
+                                </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                        </div>
                       </div>
                       <hr>
                     </section>

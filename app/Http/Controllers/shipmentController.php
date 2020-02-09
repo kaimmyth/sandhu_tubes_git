@@ -64,11 +64,16 @@ class shipmentController extends Controller
         } else {
             $shipmentdata->status = "InActive";
         }
-        
-        // $inv_itemdata->item_category_id = DB::table('category')->where('id',$inv_itemdata->item_category_id)->value('category_name');
-        // $inv_itemdata->uom_id = DB::table('uom')->where('id',$inv_itemdata->uom_id)->value('uom_name');
+        $ids = [];
+        $loc_ids = [];
+        if($shipmentdata->items_received_ids)
+        $ids = json_decode($shipmentdata->items_received_ids);
+        if($shipmentdata->items_location_ids)
+        $loc_ids = json_decode($shipmentdata->items_location_ids);
+        $inv_itemdata = inv_item::whereIn('id',$ids)->get();
+        $locationiddata = DB::table('inventory_location')->whereIn('id',$loc_ids)->get();
         $data['content'] = 'shipment.view_shipment';
-        return view('layouts.content', compact('data'))->with(['shipmentdata' => $shipmentdata]);
+        return view('layouts.content', compact('data'))->with(['shipmentdata' => $shipmentdata,'inv_itemdata' => $inv_itemdata,'locationiddata' => $locationiddata]);
     }
     public function editView($id)
     {

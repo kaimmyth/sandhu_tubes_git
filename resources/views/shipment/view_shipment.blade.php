@@ -87,6 +87,42 @@
                           </div>
                           
                         </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            @if($shipmentdata->shipment_type == 'IN')
+                            <h4>ITEMS RECEIVED</h4>
+                            @else
+                            <h4>ITEMS SHIPPED</h4>
+                            @endif
+                          </div>
+                          <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead style="background: #b6e9ff;">
+                                <tr>
+                                    <th>Item ID</th>
+                                    <th>Item Name</th>
+                                    <th>Quantity</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if($inv_itemdata)
+                                @foreach($inv_itemdata as $key=>$val)
+                                <tr>
+                                    <td>{{$val->id}}</td>
+                                    <td>{{$val->item_name}}</td>
+                                    <td>{{$val->quantity}}</td>
+                                    @if($locationiddata != null)
+                                    <td>{{$locationiddata[$key]->location_name}}</td>
+                                    @else
+                                    <td>NA</td>
+                                    @endif
+                                    
+                                </tr>
+                                @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                        </div>
                       </div>
                       <hr>
                     </section>

@@ -169,7 +169,7 @@
                                         <div class="col-md-9">
                                             <button type="button" onclick="append_data();" class="btn btn-secondary btn-sm btn-circle">Add <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
                                         </div>
-                                        <div class="col-md-8 row" id="append_here">
+                                        <div class="col-md-6 row" id="append_here">
 
                                         </div>
                                     </div>
@@ -197,7 +197,7 @@
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                var to_append = `<div class="col-md-3"><div class="form-group">
+                var to_append = `<div class="col-md-6"><div class="form-group">
                             <label for="field-2" class="control-label">Item Name *</label>
                             <select class="form-control" name="item_ids[]" id="item_ids" required="" aria-required="true">
                                 <option value="" selected>--Select--</option>`
@@ -207,7 +207,7 @@
                                 }
                     to_append += `</select>
                         </div></div>
-                        <div class="col-md-3"><div class="form-group">
+                        <div class="col-md-6"><div class="form-group">
                             <label for="field-2" class="control-label">Item Location *</label>
                             <select class="form-control" name="item_location[]" id="item_location" required="" aria-required="true">
                                 <option value="" selected>--Select--</option>`
