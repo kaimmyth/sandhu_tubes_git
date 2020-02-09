@@ -20,7 +20,7 @@ use App\User;
 
 
 
-class MasterController extends Controller
+class MasterController extends Controllers
 {
 /* Category */
 	public function Category_Listing()
@@ -493,8 +493,12 @@ class MasterController extends Controller
 		// }
 		Session::flash('success', 'Update Successfully..!');
 		return redirect('users');
+    }
+    
+    public function delete_users (Request $request,$id)
+	{
+		Session::flash('error', 'Deleted Successfully..!');
+		$delete = DB::table('users')->where('id', '=', $id)->delete();
+		return back();
 	}
-
-
-
 }

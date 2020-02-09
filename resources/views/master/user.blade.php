@@ -19,17 +19,9 @@
                         <div class="card-header" style="background-image: linear-gradient(#e9f8ff, white);">
                             
                             <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                            
-                            
-                            
-                                    <button type="button" data-toggle="modal" data-target="#generic-model" class="btn btn-purple" style="float:right;margin-top: 0px !important;">Set Generic  User<i class="md md-add-circle-outline"></i></button>
+                                    <!-- <button type="button" data-toggle="modal" data-target="#generic-model" class="btn btn-purple" style="float:right;margin-top: 0px !important;">Set Generic  User<i class="md md-add-circle-outline"></i></button> -->
                                       <!-- <!-- <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;" onclick="addRecords()">Add <si class="md md-add-circle-outline"></si></button> --> 
                                       <a href="{{url('add/users/from')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 0px !important;">Add <i class="md md-add-circle-outline"></i></button></a>
-  
-                             
-                            
-                            
-                            
                                 <thead style="background: #b6e9ff;">
                                     <tr>
                                         <th>Id</th>

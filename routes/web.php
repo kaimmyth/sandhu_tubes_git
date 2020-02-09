@@ -377,3 +377,11 @@ Route::get('org/org_designation','MasterController@Designation_index');
 Route::post('org/org_designation/add','MasterController@Designation_add');
 Route::any('org/org_designation/edit/{id}','MasterController@Designation_edit');
 Route::get('org/org_designation/{id}','MasterController@Designation_destroy');
+//.............rohit user module.............................................................
+Route::get('users','MasterController@userindex');
+Route::post('add/users', 'MasterController@add_users');
+Route::get('add/users/from','MasterController@add_users_form');
+Route::get('users/destroy/{id}', 'MasterController@delete_users');
+Route::get('edit/users/from/{id}','MasterController@users_edit');
+Route::any('users/edit/{id}', 'MasterController@users_edit');
+Route::post('update/users','MasterController@update_user');

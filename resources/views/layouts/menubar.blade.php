@@ -234,6 +234,7 @@
 						<!--<li><a href="{{ url('subdepartment')}}">SUB-DEPARTMENTS</a></li>-->
 						<li><a href="{{ url('category')}}">CATEGORIES</a></li>
 						<li><a href="{{ url('uom_master')}}">UoM Master</a></li>
+						<li><a href="{{ url('users')}}">USERS</a></li>
 
 						<!--<li><a href="{{ url('subcategory')}}">SUB-CATEGORIES</a></li>
 						<li><a href="{{ url('priority_lavels')}}">PRIORITY LEVELS</a></li>
