@@ -12,6 +12,9 @@ use App\Convertion;
 use App\Org_Relation;
 use App\Org_Contact;
 use App\Org_Designation;
+use App\module;
+use App\user_permission;
+use App\User;
 
 
 
@@ -356,6 +359,142 @@ class MasterController extends Controller
     }
 
 ///..............................................................End Master For Org-Designation.......................................  
+    public function userindex(Request $request)
+    {
+        $userData = DB::table('users')->get();
+
+        $data['content'] = 'master.user';
+        return view('layouts.content', compact('data'))->with(['userData' => $userData]);
+    }
+
+    public function add_users(Request $request)
+	{      
+		$data = array(
+			'users_role' => '2',
+			'name' => $request->name,
+			'email' => $request->email,
+			'username' => $request->user_name,
+			'phone' => $request->phone,
+			'password' => bcrypt($request->password),
+			'status' => $request->status,
+			'created_at' => date('Y-m-d H:i:s'),
+		);
+
+		$add_user=new User();
+		$add_user->users_role=2;
+		$add_user->name=$request->name;
+		$add_user->email=$request->email;
+		$add_user->username=$request->user_name;
+		$add_user->designation=$request->designation;
+		$add_user->phone=$request->phone;
+		$add_user->password=bcrypt($request->password);
+		$add_user->status=1;
+		$add_user->created_at=date('Y-m-d H:i:s');
+		$add_user->save();
+		// return $add_user;
+		$module = $request->module;
+			if($add_user!="")
+			{
+			if($module!="")
+			{
+				foreach ($module as $key => $value) {
+					$permission = new user_permission();
+					$permission->user_id = $add_user->id;
+					$permission->employer_id = Session::get('gorgID');
+					$permission->company_id = Session::get('gorgID');
+					$permission->permission_value = $value;
+					$permission->is_read = (!empty($request->input('read' . $value))) ? "yes" : "no";
+					$permission->is_add = (!empty($request->input('add' . $value))) ? "yes" : "no";
+					$permission->is_edit = (!empty($request->input('edit' . $value))) ? "yes" : "no";
+					$permission->is_delete = (!empty($request->input('delete' . $value))) ? "yes" : "no";
+					$permission->save();
+				}
+				// return $Adduser;
+				
+			}
+			else
+			{
+				Session::flash('danger', 'Please Select Module');
+				return redirect('users');
+			}
+		}
+		else
+		{
+			Session::flash('danger', 'User No Created!');
+			return redirect('users');
+		}
+		Session::flash('success', 'Inserted Successfully..!');
+		return redirect('users');
+    }
+
+    public function add_users_form()
+	{
+		$module=module::get();
+		// return $module;
+		$data['content'] = 'master.add_user';
+		return view('layouts.content', compact('data'))->with('module',$module);
+
+    }
+
+    public function users_edit(Request $request,$id)
+	{
+		$toReturn['module']=module::get()->toArray();
+		$toReturn['data']=  DB::table('users')->where('id', $id)->first();
+		$toReturn['permission_record']=user_permission::where('user_id',$id)->get()->toArray();
+		// $decrypt= Crypt::decrypt($toReturn['data']->password);  
+		// print_r($decrypt);
+		// exit;
+		$data['content'] = 'master.edit_user';
+		return view('layouts.content', compact('data'))->with('toReturn',$toReturn);
+    }
+    
+    public function update_user(Request $request)
+	{
+		// return $request->module_permission_id[1];
+		// return $permission;
+		$add_user= User::find($request->user_id);
+		$add_user->users_role=2;
+		$add_user->name=$request->name;
+		$add_user->email=$request->email;
+		$add_user->username=$request->user_name;
+		$add_user->designation=$request->designation;
+		$add_user->phone=$request->phone;
+		$add_user->password=bcrypt($request->password);
+		$add_user->status=$request->status;
+		$add_user->created_at=date('Y-m-d H:i:s');
+		$add_user->save();
+		// return $add_user;
+		$module = $request->module;
+			// if($add_user!="")
+			// {
+			if($module!="")
+			{
+				foreach ($module as $key => $value) {
+					$permission_update = user_permission::find($request->module_permission_id[$key]);
+					$permission_update->user_id = $add_user->id;
+					$permission_update->employer_id = Session::get('gorgID');
+					$permission_update->company_id = Session::get('gorgID');
+					$permission_update->permission_value = $value;
+					$permission_update->is_read = (!empty($request->input('read'.$value))) ? "yes" : "no"; 
+					$permission_update->is_add = (!empty($request->input('add'.$value))) ? "yes" : "no"; 
+					$permission_update->is_edit = (!empty($request->input('edit'.$value))) ? "yes" : "no";
+					$permission_update->is_delete = (!empty($request->input('delete'.$value))) ? "yes" : "no";
+					$permission_update->save();
+					// echo $permission_update;
+				}
+				// return $permission_update;
+				
+			}
+			else
+			{
+				Session::flash('danger', 'Please Select Module');
+				return redirect('users');
+			}
+		// }
+		Session::flash('success', 'Update Successfully..!');
+		return redirect('users');
+	}
+
 
 
 }

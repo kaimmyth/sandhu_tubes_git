@@ -66,6 +66,7 @@ class HomeController extends Controller
 
   public function Dashboard(Request $request)
   {
+    // return Session::get('gorgID');
     $totalLeads = DB::table('lands')->where('status', '1')->count();
     $totalcustomers = DB::table('customer_company')->where('status', '1')->count();
     $totaltickets = DB::table('ticket')->count();

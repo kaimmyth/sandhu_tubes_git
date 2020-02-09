@@ -22,11 +22,8 @@
 
 </head>
 <body>
-
-
     <div class="wrapper-page">
         <div class="card card-pages">
-
             <div class="card-header bg-img"> 
                 <div class="bg-overlay"></div>
                 <h3 class="text-center m-t-10 text-white"> Reset Password </h3>
@@ -54,19 +51,16 @@
                 <div class="form-group m-b-0"> 
                     <div class="input-group"> 
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus> 
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
+                        <!-- @error('email') -->
+                        <!-- <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
+                        </span> -->
+                        <!-- @enderror -->
                         <span class="input-group-append"> <button type="submit"  class="btn btn-primary waves-effect waves-light"> {{ __('Send Password Reset Link') }}</button> </span> 
                     </div> 
                 </div> 
-
             </form>
-
         </div>                                 
-
     </div>
 </div>
 
