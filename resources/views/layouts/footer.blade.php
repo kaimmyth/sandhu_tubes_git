@@ -1,5 +1,5 @@
 <footer class="footer">
-    JAIDA © 2019 IT-SCIENT 
+    Sandhu-Tubes © 2019 IT-SCIENT 
 </footer>
 @include('layouts.alert')
 <style>
