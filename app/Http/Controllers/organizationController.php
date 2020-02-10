@@ -20,7 +20,7 @@ class organizationController extends Controller
     public function addView()
     {
         $org_relation = Org_Relation::where('status',1)->select('org_relation_id','relation_name')->get();
-        $org_contact = Org_Contact::where('status',1)->select('org_contact_type_name','org_contact_type_name')->get();
+        $org_contact = Org_Contact::where('status',1)->select('org_contact_type_id','org_contact_type_name')->get();
         $departments = DB::table('departments')->where('is_active',1)->select('id','department_name')->get();
         $data['content'] = 'organization.add_organization';
         return view('layouts.content', compact('data'))->with(['org_relation' => $org_relation,'org_contact' => $org_contact,'departments' => $departments]);
@@ -60,7 +60,7 @@ class organizationController extends Controller
     {
         $organizationtdata = organization::where('id',$id)->first();
         $org_relation = Org_Relation::where('status',1)->select('org_relation_id','relation_name')->get();
-        $org_contact = Org_Contact::where('status',1)->select('org_contact_type_name','org_contact_type_name')->get();
+        $org_contact = Org_Contact::where('status',1)->select('org_contact_type_id','org_contact_type_name')->get();
         $departments = DB::table('departments')->where('is_active',1)->select('id','department_name')->get();
         $data['content'] = 'organization.edit_organization';
         return view('layouts.content', compact('data'))->with(['organizationtdata' => $organizationtdata,'org_relation' => $org_relation,'org_contact' => $org_contact,'departments' => $departments]);
