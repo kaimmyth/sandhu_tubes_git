@@ -83,9 +83,10 @@
                                                 @foreach($toReturn['details'] as $key_del=>$value_del)
                                                 @php $item=DB::table('inv_item')->where('id',$value_del['input_items_id'])->first();
                                                     $Location=DB::table('inventory_location')->where('id',$value_del['input_items_location'])->first();
-                                                @endphp
+                                                    $uom=DB::table('uom')->where('id',$value_del['input_items_uom'])->first();
+                                                    @endphp
                                                 <td>{{@$item->item_name}}</td>
-                                                <td class="rig">{{@$value_del['input_items_quantity']}}</td>
+                                                <td class="rig">{{@$value_del['input_items_quantity']}} {{@$uom->uom_name}}</td>
                                                 <td>{{@$Location->location_name}}</td>
                                                 
                                                 @if(@$value_del['status']==1)
@@ -104,9 +105,8 @@
                                               
                                                 <td>
 
-                                                    <a href="{{url('land/customercompany/view/'.$value_del['id'])}}" class="on-default view-row" data-toggle="tooltip"  data-placement="top" title="" data-original-title="View"><i class="fa fa-eye" style="color:green;" aria-hidden="true"></i></a> 
                                                     <a href="{{url('Manufacturing/edit/'.$value_del['id'])}}" class="on-default view-row" data-toggle="tooltip"  data-placement="top" title="" data-original-title="Update"><i class="fas fa-edit"></i></a> 
-                                                    <a href="{{url('land/customer/delete/'.$value_del['id'])}}"  class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash" style="color:red;"></i></a>
+                                                    <a href="{{url('Manufacturing/delete/'.$value_del['id'])}}"  class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash" style="color:red;"></i></a>
 
                                                 </td>
                                             </tr>
