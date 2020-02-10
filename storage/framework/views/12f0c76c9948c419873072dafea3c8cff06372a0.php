@@ -93,16 +93,24 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-
                                             <div class="form-group">
                                                 <label for="field-2" class="control-label">City</label>
-                                                <input type="text" class="form-control" value="<?php echo e($shipmentdata->city); ?>" name="city" id="city" placeholder="City">
+                                                <select class="form-control" name="city" id="city" required="" aria-required="true">
+                                                    <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($val->id); ?>" <?php if(@$val->id==@$shipmentdata->city ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>><?php echo e($val->city); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field-2" class="control-label">State</label>
-                                                <input type="text" class="form-control" value="<?php echo e($shipmentdata->state); ?>" name="state" id="state" placeholder="State">
+                                                <select class="form-control" name="state" id="state" required="" aria-required="true">
+                                                    <option value="" selected>--Select--</option>
+                                                    <?php $__currentLoopData = $state; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($val->id); ?>" <?php if(@$val->id==@$shipmentdata->state ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>><?php echo e($val->state); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">

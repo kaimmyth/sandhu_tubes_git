@@ -41,7 +41,7 @@
                 <div class="col-lg-12">
                     <div class="card card-border card-info">
                         <div class="card-header" style="background-image: linear-gradient(#e9f8ff, white);">
-                            <form action="{{url('shipment/editStore')}}" method="post" id="FormValidationshipment" required="" aria-required="true" enctype="multipart/form-data">
+                            <form action="{{url('shipment/editStore')}}" method="post" id="FormValidation" required="" aria-required="true" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <input type="hidden" name="shipment_id" value="{{$shipmentdata->id}}">
@@ -93,22 +93,30 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-
                                             <div class="form-group">
                                                 <label for="field-2" class="control-label">City</label>
-                                                <input type="text" class="form-control" value="{{$shipmentdata->city}}" name="city" id="city" placeholder="City">
+                                                <select class="form-control" name="city" id="city">
+                                                    @foreach($cities as $key=>$val)
+                                                    <option value="{{$val->id}}" @if(@$val->id==@$shipmentdata->city ?? ''){{'selected'}} @endif>{{$val->city}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field-2" class="control-label">State</label>
-                                                <input type="text" class="form-control" value="{{$shipmentdata->state}}" name="state" id="state" placeholder="State">
+                                                <select class="form-control" name="state" id="state">
+                                                    <option value="" selected>--Select--</option>
+                                                    @foreach($state as $key=>$val)
+                                                    <option value="{{$val->id}}" @if(@$val->id==@$shipmentdata->state ?? ''){{'selected'}} @endif>{{$val->state}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="field-2" class="control-label">Pin Code</label>
-                                                <input type="text" class="form-control" value="{{$shipmentdata->pincode}}" name="pin" id="pin" placeholder="Pin Code">
+                                                <label for="field-2" class="control-label">Pin Code *</label>
+                                                <input type="text" min="1" class="form-control" value="{{$shipmentdata->pincode}}" name="pin" id="pin" placeholder="Pin Code" required aria-required="true">
                                             </div>
                                         </div>
                                     </div>
@@ -145,8 +153,8 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="field-2" class="control-label">License No.</label>
-                                                <input type="text" class="form-control" value="{{$shipmentdata->license_no}}" name="license_no" id="license_no" placeholder="License No.">
+                                                <label for="field-2" class="control-label">License No. *</label>
+                                                <input type="text" class="form-control" value="{{$shipmentdata->license_no}}" name="license_no" id="license_no" placeholder="License No." required aria-required="true">
                                             </div>
                                         </div>
                                     </div>
@@ -162,14 +170,14 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="field-2" class="control-label">Phone1</label>
-                                                <input type="text" class="form-control" value="{{$shipmentdata->phone1}}" name="phone1" id="phone1" placeholder="Phone1">
+                                                <label for="field-2" class="control-label">Phone1 *</label>
+                                                <input type="text" class="form-control" min="1" value="{{$shipmentdata->phone1}}" name="phone1" id="phone1" placeholder="Phone1" required aria-required="true">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field-2" class="control-label">Phone2</label>
-                                                <input type="text" class="form-control" value="{{$shipmentdata->phone2}}" name="phone2" id="phone2" placeholder="Phone2">
+                                                <input type="text" class="form-control" min="1" value="{{$shipmentdata->phone2}}" name="phone2" id="phone2" placeholder="Phone2">
                                             </div>
                                         </div>
                                         <div class="col-md-3">

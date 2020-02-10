@@ -45,22 +45,22 @@
                               <input type="hidden" name="item_id"value="{{$inv_itemdata->id}}">
                               <div class="col-md-4">
                                 <div class="form-group">
-                                  <label for="field-4" class="control-label">Item Code</label>
+                                  <label for="field-4" class="control-label">Item Code *</label>
                                   <input type="text" class="form-control" name="item_code" id="item_code" value="{{$inv_itemdata->item_code}}" placeholder="Item Code" required aria-required="true">
                                 </div>
                               </div>
 
                               <div class="col-md-4">
                                 <div class="form-group">
-                                  <label for="field-4" class="control-label">Item Name</label>
+                                  <label for="field-4" class="control-label">Item Name *</label>
                                   <input type="text" class="form-control" name="item_name" id="item_name" value="{{$inv_itemdata->item_name}}" placeholder="Item Name" required aria-required="true">
                                 </div>
                               </div>
 
                               <div class="col-md-4">
                                 <div class="form-group">
-                                  <label for="field-4" class="control-label">Item Category</label>
-                                  <select class="form-control" name="item_category" id="item_category">
+                                  <label for="field-4" class="control-label">Item Category *</label>
+                                  <select class="form-control" name="item_category" id="item_category" required aria-required="true">
                                     @foreach($categorytData as $key=>$val)
                                     <option value="{{$val->id}}" @if(@$val->id==@$inv_itemdata->item_category_id ?? ''){{'selected'}} @endif>{{$val->category_name}}</option>
                                     @endforeach
@@ -73,14 +73,14 @@
 
                               <div class="col-md-4">
                                 <div class="form-group">
-                                  <label for="field-4" class="control-label">Quantity</label>
-                                  <input type="text" class="form-control" name="quantity" id="quantity" value="{{$inv_itemdata->quantity}}" placeholder="Quantity" required aria-required="true">
+                                  <label for="field-4" class="control-label">Quantity *</label>
+                                  <input type="text" min="0" class="form-control" name="quantity" id="quantity" value="{{$inv_itemdata->quantity}}" placeholder="Quantity" required aria-required="true">
                                 </div>
                               </div>
 
                               <div class="col-md-4">
                                 <div class="form-group">
-                                  <label for="field-4" class="control-label">UoM</label>
+                                  <label for="field-4" class="control-label">UoM *</label>
                                   <select class="form-control" name="uom" id="uom" required  aria-required="true">
                                     @foreach($uomData as $key=>$val)
                                     <option value="{{$val->id}}" @if(@$val->id==@$inv_itemdata->uom_id ?? ''){{'selected'}} @endif>{{$val->uom_name}}</option>
@@ -92,7 +92,7 @@
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">Seralized</label>
-                                  <select class="form-control" name="seralized" id="seralized" onchange="showDiv('hidden_div', this)" required aria-required="true">
+                                  <select class="form-control" name="seralized" id="seralized" onchange="showDiv('hidden_div', this)">
                                     @if($inv_itemdata->seralized == 1)
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
@@ -110,14 +110,14 @@
                               <div class="col-md-4" id="hidden_div" style="display: none;">
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">Item Number</label>
-                                  <input type="text" class="form-control" name="serial_no" value="{{$inv_itemdata->serial_no}}" id="serial_no" placeholder="Item Number" required aria-required="true">
+                                  <input type="text" class="form-control" name="serial_no" value="{{$inv_itemdata->serial_no}}" id="serial_no" placeholder="Item Number">
                                 </div>
                               </div>
   
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">Leasable</label>
-                                  <select class="form-control" name="leasable" id="leasable" required aria-required="true">
+                                  <select class="form-control" name="leasable" id="leasable">
                                     @if($inv_itemdata->leasable == 1)
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>

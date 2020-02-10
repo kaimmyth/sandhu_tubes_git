@@ -18,11 +18,13 @@ class shipmentController extends Controller
     }
     public function addView($id)
     {
+        $cities = DB::table('cities')->where('status',1)->select('id','city')->orderBy('city','ASC')->get();
+        $state = DB::table('state')->where('status',1)->select('id','state')->orderBy('state','ASC')->get();
         if($id == 1)
         $data['content'] = 'shipment.add_shipment';
         else
         $data['content'] = 'shipment.add_shipment_out';
-        return view('layouts.content', compact('data'));
+        return view('layouts.content', compact('data'))->with(['cities' => $cities,'state' => $state]);
     }
     public function addStore(Request $request)
     {
@@ -88,11 +90,13 @@ class shipmentController extends Controller
         $locationiddata = DB::table('inventory_location')->whereIn('id',$loc_ids)->select('id','location_name')->get();
         $inv_item = inv_item::select('id','item_name')->orderBy('id')->get();
         $inventory_location = DB::table('inventory_location')->where('status',1)->get();
+        $cities = DB::table('cities')->where('status',1)->select('id','city')->orderBy('city','ASC')->get();
+        $state = DB::table('state')->where('status',1)->select('id','state')->orderBy('state','ASC')->get();
         if($shipmentdata->shipment_type == 1)
         $data['content'] = 'shipment.edit_shipment';
         else
         $data['content'] = 'shipment.edit_shipment_out';
-        return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata,'shipmentdata' => $shipmentdata,'inv_item' => $inv_item,'inventory_location' => $inventory_location,'locationiddata' => $locationiddata]);
+        return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata,'shipmentdata' => $shipmentdata,'inv_item' => $inv_item,'inventory_location' => $inventory_location,'locationiddata' => $locationiddata,'cities' => $cities,'state' => $state]);
     }
     public function editStore(Request $request)
     {
