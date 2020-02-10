@@ -102,9 +102,7 @@
                                                         </p>
                                                     </td>
                                                 @endif
-                                              
                                                 <td>
-
                                                     <a href="{{url('Manufacturing/edit/'.$value_del['id'])}}" class="on-default view-row" data-toggle="tooltip"  data-placement="top" title="" data-original-title="Update"><i class="fas fa-edit"></i></a> 
                                                     <a href="{{url('Manufacturing/delete/'.$value_del['id'])}}"  class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash" style="color:red;"></i></a>
 

@@ -243,21 +243,22 @@
 				</li>
 				@endif
 				@if(in_array(2, $module_id))
-				<a href="#" class="waves-effect"><i class="md md-receipt"></i>&nbsp;&nbsp; INVENTORY<span class="pull-right"><i class="md md-add"></i></span></a>
-				<ul class="list-unstyled">
-					<li><a href="{{url('inv_item/listing')}}"><span>Items</span></a></li>
-				</ul>
+				<li class="has_sub">
+					<a href="#" class="waves-effect"><i class="fa fa-list" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp; <span style="margin-left: 19px;">INVENTORY</span><span class="pull-right"><i class="md md-add"></i></span></a>
+					<ul class="list-unstyled">
+						<li><a href="{{url('inv_item/listing')}}"><span>ITEMS</span></a></li>
+					</ul>
+				</li>
 				@endif
 				@if(in_array(3, @$module_id))
-                <li><a href="{{URL::to('Manufacturing/list')}}" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>MAUNFACTURING</span></a></li>
+				<li><a href="{{URL::to('Manufacturing/list')}}" class="waves-effect"><i class="fa fa-industry" style="margin-left: 4px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">MAUNFACTURING</span></a></li>
 				
 				@endif
 				@if(in_array(4, @$module_id))
-				<li><a href="{{URL::to('organization/listing')}}" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>ORGNIZATIONS</span></a></li>
-
+				<li><a href="{{URL::to('organization/listing')}}" class="waves-effect"><i class="fa fa-building" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 24px;">ORGNIZATIONS</span></a></li>
 				@endif
 				@if(in_array(5, @$module_id))
-				<li><a href="{{URL::to('shipment/listing')}}" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>SHIPMENT</span></a></li>
+				<li><a href="{{URL::to('shipment/listing')}}" class="waves-effect"><i class="fa fa-truck" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SHIPMENT</span></a></li>
 				@endif
 				@if(in_array(6, @$module_id))
 				<li class="has_sub">

@@ -58,7 +58,6 @@ table td {
      <td class="rig">{{ $key+1 }}</td>
      <td>{{ $data->category_name }}</td>
      <td>{{ $data->description }}</td>
-     <!-- <td>{{ $data->name }}</td> -->
      @if($data->is_active == 1)
      <td>
       <p class="mb-0">

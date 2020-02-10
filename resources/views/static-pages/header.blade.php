@@ -43,7 +43,7 @@
                             
                         </ul>
                     </li>
-					<li><a href="{{url('unit')}}" class="hvr-underline-from-center ">Serivces</a></li>
+					<!-- <li><a href="{{url('unit')}}" class="hvr-underline-from-center ">Serivces</a></li> -->
                     <li><a href="#" class="hvr-underline-from-center">Career</a></li>
                     <li><a href="#contact" class="scroll">Contact</a>
 					<li><a href="{{url('portal')}}" class="hvr-underline-from-center ">Login</a></li>

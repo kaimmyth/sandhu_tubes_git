@@ -27,8 +27,6 @@ class MasterController extends Controller
 	{
 		$userData = DB::table('users')->get();
 		$categorytData = DB::table('category')
-		->join('users', 'users.id', '=', 'category.pos_id')
-		->select('users.name', 'category.*')
 		->get();
 		$data['content'] = 'master.category';
 		return view('layouts.content', compact('data'))->with(['categorytData' => $categorytData, 'userData' => $userData]);
@@ -124,12 +122,9 @@ class MasterController extends Controller
 	{
 		$userData = DB::table('users')->get();
 		$departmentData = DB::table('departments')
-		->join('users', 'users.id', '=', 'departments.pos_id')
-		->select('users.name', 'departments.*')
 		->get();
 		$data['content'] = 'master.department';
 		return view('layouts.content', compact('data'))->with(['departmentData' => $departmentData, 'userData' => $userData]);
-		
 	}
 
 	public function Add_Department(Request $request)
@@ -137,7 +132,6 @@ class MasterController extends Controller
 		$data = array(
 			'department_name' => $request->department_name,
 			'description' => $request->description,
-			'pos_id' => $request->pos_id,
 			'is_active' => $request->is_active,
 			'created_at' => date('Y-m-d H:i:s'),
 		);
