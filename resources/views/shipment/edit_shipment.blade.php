@@ -27,8 +27,13 @@
             <!-- Page-Title -->
             <div class="row" id="dashboard-row">
                 <div class="col-sm-12">
-                    <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Update Shipment Receive
+                    <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Update Shipment Receive&nbsp;&nbsp;/ &nbsp;
                         <a href="javascript::void(0);" onclick="history.back();">Back</a></h4>
+                        <ol class="breadcrumb pull-right">
+                            <li><a href="{{ URL::to('home') }}">Home</a></li>
+                            <li><a href="{{URL::to('home')}}">List</a></li>
+                            <li class="active">Update Shipment Receive</li>
+                        </ol>
                 </div>
             </div>
             <hr class="new2">
