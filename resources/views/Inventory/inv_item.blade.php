@@ -63,7 +63,6 @@
                           <td>{{$val->item_code}}</td>
                           <td>{{$val->item_category_id}}</td>
                           <td class="rig">{{$val->quantity}} {{$val->uom_id}}</td>
-                          <!-- <td>{{$val->uom_id}}</td> -->
                           <td class="actions">
                             <a href="{{url('inv_item/showView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
                             <a href="{{url('inv_item/editView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick=""><i class="fa fa-edit"></i></a>

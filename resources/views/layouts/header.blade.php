@@ -395,16 +395,15 @@ background-position: center;
 		<!-- Top Bar Start -->
 		<div class="topbar">
 			<!-- LOGO -->
-			<div class="topbar-left" style="background: #ffdbd7;border: 2px solid #c19792;">
+			<div class="topbar-left" style="background: #393e4a;border: 2px solid #393e4a;">
+			<!--<div class="topbar-left" style="background: #ffdbd7;border: 2px solid #c19792;">-->
 				<div class="text-center">
 					<a href="{{url('dashboard')}}" class="logo">
-					
-						<!--<img class="logo-hid" src="http://localhost/jiada_new/public/form/images/toplogo.png" style="height:60px;float:left;margin-left: 9px;">-->
-						
-						<span><p style="margin-top:7px;color:#248957;font-size:30px;margin-right: 34px;"><br>Sandhu</p></span></a>
+						<span><p style="margin-top:7px;color: #fff;font-size:30px;margin-right: 34px;"><br>Sandhu</p></span></a>
 						
 					</div>
 				</div>
+
 				<!-- Button mobile view to collapse sidebar menu -->
 
 				<nav class="navbar navbar-default">

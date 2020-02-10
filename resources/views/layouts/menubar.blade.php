@@ -43,8 +43,8 @@
 	}
 
 	#sidebar-menu>ul>li>a.active {
-		background: #dff1ff !important;
-		color: #000;
+		background: #262c32 !important;
+		color: #fff;
 		width: 95%;
 		margin-left: 2%;
 		border-radius: 4px;
@@ -96,6 +96,13 @@
 		margin-left: 2%;
 		border-radius: 11px;
 	}
+
+	#sidebar-menu>ul>li>a.active.subdrop {
+    background: #262c32 !important;
+    width: 95%;
+    margin-left: 2%;
+    border-radius: 11px;
+}
 
 	.form-control {
 		-moz-border-radius: 2px;
