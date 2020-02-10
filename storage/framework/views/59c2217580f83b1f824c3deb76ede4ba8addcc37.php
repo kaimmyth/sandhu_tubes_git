@@ -205,10 +205,10 @@
 				<li>
 					<a href="<?php echo e(URL::to('dashboard')); ?>" class="waves-effect"><i class="md md-home"></i>&nbsp;&nbsp;<span>DASHBOARD</span></a>
 				</li>
-				<li>
-					<a href="#" class="waves-effect"><i class="fa fa-list" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp; <span style="margin-left: 21px;">INVENTORY</span><span class="pull-right"><i class="md md-add"></i></span></a>
+				<li class="has_sub">
+					<a href="#" class="waves-effect"><i class="fa fa-list" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp; <span style="margin-left: 19px;">INVENTORY</span><span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
-						<li><a href="<?php echo e(url('inv_item/listing')); ?>"><span>Items</span></a></li>
+						<li><a href="<?php echo e(url('inv_item/listing')); ?>"><span>ITEMS</span></a></li>
 					</ul>
 				</li>
 				
