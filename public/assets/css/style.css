@@ -657,13 +657,14 @@ File: Main Style scss
     border: 1px solid #dddddd;
     color: #373e4a;
   }
-
+ 
+  
   .pagination > .active > a, .pagination > .active > span,
-  .pagination > .active > a:hover, .pagination > .active > span:hover,
-  .pagination > .active > a:focus, .pagination > .active > span:focus {
-    background-color: #317eeb !important;
-    border-color: #317eeb !important;
-  }
+   .pagination > .active > a:hover, .pagination > .active > span:hover,
+    .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #16469d !important;
+    border-color: #16469d !important;
+}
 
   .spinner-border, .spinner-grow {
     margin-right: 10px;
@@ -1648,8 +1649,8 @@ body.fixed-left .side-menu.left {
   }
 
   .btn-purple, .btn-purple:hover, .btn-purple:focus, .btn-purple:active {
-    background-color: #6e5e5c !important;
-    border: 1px solid #6e5e5c !important;
+    background-color: #16469d !important;
+    border: 1px solid #16469d !important;
     color: #ffffff;
   }
 
