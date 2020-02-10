@@ -88,7 +88,11 @@ hr.new2 {
     color: #fff;
 }
 
-
+.btn-danger:hover {
+    color: #fff !important;
+    background-color: #16469d !important;
+    border-color: #16469d !important;
+}
     
     </style>
 
@@ -120,7 +124,7 @@ hr.new2 {
                     <p>Sandhu Tubes
                     </p>
                 </div>
-                <hr class="new2">
+               
                 <!---728x90--->
                <div class="wrapper">
                    

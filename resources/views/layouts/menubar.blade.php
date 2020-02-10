@@ -232,11 +232,11 @@
 						<li><a href="{{url('org/org_relationship')}}"><span>ORG RELATIONSHIP</span></a></li>
 						<li><a href="{{url('org/org_contact')}}"><span>ORG CONTACT TYPE</span></a></li>
 						<li><a href="{{url('org/org_designation')}}"><span>ORG DESIGNATION</span></a></li>
-						<li><a href="{{ url('department')}}">Department</a></li>
+						<li><a href="{{ url('department')}}">DEPARTMENT</a></li>
 						<!-- <li><a href="{{ url('organization/listing')}}">ORGNIZATIONS</a></li> -->
 						<!--<li><a href="{{ url('subdepartment')}}">SUB-DEPARTMENTS</a></li>-->
 						<li><a href="{{ url('category')}}">CATEGORIES</a></li>
-						<li><a href="{{ url('uom_master')}}">UoM Master</a></li>
+						<li><a href="{{ url('uom_master')}}">UoM</a></li>
 						<li><a href="{{ url('users')}}">USERS</a></li>
 
 				</li>
@@ -281,11 +281,11 @@
 						<li><a href="{{url('org/org_relationship')}}"><span>ORG RELATIONSHIP</span></a></li>
 						<li><a href="{{url('org/org_contact')}}"><span>ORG CONTACT TYPE</span></a></li>
 						<li><a href="{{url('org/org_designation')}}"><span>ORG DESIGNATION</span></a></li>
-						<li><a href="{{ url('department')}}">Department</a></li>
+						<li><a href="{{ url('department')}}"> DEPARTMENT</a></li>
 						<!-- <li><a href="{{ url('organization/listing')}}">ORGNIZATIONS</a></li> -->
 						<!--<li><a href="{{ url('subdepartment')}}">SUB-DEPARTMENTS</a></li>-->
 						<li><a href="{{ url('category')}}">CATEGORIES</a></li>
-						<li><a href="{{ url('uom_master')}}">UoM Master</a></li>
+						<li><a href="{{ url('uom_master')}}">UoM</a></li>
                         <li><a href="{{ url('users')}}">USERS</a></li>
 				</li>
 				@endif

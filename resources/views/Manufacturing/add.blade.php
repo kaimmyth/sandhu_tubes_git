@@ -129,7 +129,7 @@
                       <div class="col-md-3">
 
                         <div class="form-group">
-                          <label for="field-1" class="control-label">Mother Coil/Slit Coil</label>
+                          <label for="field-1" class="control-label">Mother Coil/Slit Coil*</label>
                           <select class="form-control" name="input_items_id" id="city" required="" aria-required="true">
                             <option value=""></option>
                             @foreach($inv_item as $key=> $value)
@@ -143,14 +143,14 @@
 
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="field-3" class="control-label">Quantity</label>
+                          <label for="field-3" class="control-label">Quantity*</label>
                           <input type="text" class="form-control" name="input_items_quantity" onblur="clc_per();"  id="input_items_quantity" min="1" value="@if(@$manufacturing_details->input_items_quantity) {{$manufacturing_details->input_items_quantity}} @endif" placeholder="" required="" aria-required="true">
                         </div>
                       </div>
 
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="field-3" class="control-label">UoM</label>
+                          <label for="field-3" class="control-label">UoM*</label>
                           <label for="field-1" class="control-label"></label>
                           <select class="form-control" name="input_items_uom" id="city" required="" aria-required="true">
                             <option value=""></option>
@@ -164,7 +164,7 @@
 
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="field-3" class="control-label">Inventory Location</label>
+                          <label for="field-3" class="control-label">Inventory Location*</label>
                           <label for="field-1" class="control-label"></label>
                           <select class="form-control" name="input_items_location" id="city" required="" aria-required="true">
                             <option value=""></option>
@@ -213,7 +213,7 @@
                     <div class="col-md-3">
 
                       <div class="form-group">
-                        <label for="field-1" class="control-label">Finished Goods</label>
+                        <label for="field-1" class="control-label">Finished Goods*</label>
                         <select class="form-control" name="finished_goods_name" id="finished_goods_name" required="" aria-required="true">
                           <option value=""></option>
                         @foreach($inv_item as $key=> $value)
@@ -227,14 +227,14 @@
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Quantity</label>
+                        <label for="field-3" class="control-label">Quantity*</label>
                         <input type="text" class="form-control" name="finished_goods_quantity" id="finished_goods_quantity" min="1" value="@if(@$manufacturing_details->finished_goods_quantity) {{$manufacturing_details->finished_goods_quantity}} @endif" placeholder="" required="" aria-required="true">
                       </div>
                     </div>
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">UoM</label>
+                        <label for="field-3" class="control-label">UoM*</label>
                         <label for="field-1" class="control-label"></label>
                         <select class="form-control" name="finished_goods_uom" id="finished_goods_uom" required="" aria-required="true">
                           <option value=""></option>
@@ -249,7 +249,7 @@
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Inventory Location</label>
+                        <label for="field-3" class="control-label">Inventory Location*</label>
                         <select class="form-control" name="finished_goods_location" id="finished_goods_location" required="" aria-required="true">
                           <option value=""></option>
                           @foreach($InventoryLocation as $key=> $value)
@@ -276,7 +276,7 @@
                     <div class="col-md-3">
 
                       <div class="form-group">
-                        <label for="field-1" class="control-label">Metal Scrap</label>
+                        <label for="field-1" class="control-label">Metal Scrap*</label>
                         <select class="form-control" name="metal_scrap_name" id="metal_scrap_name" required="" aria-required="true">
                           <option value=""></option>
                         @foreach($inv_item as $key=> $value)
@@ -290,14 +290,14 @@
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Quantity</label>
+                        <label for="field-3" class="control-label">Quantity*</label>
                         <input type="text" class="form-control" name="metal_scrap_quantity" onblur="check_quantity();" id="metal_scrap_quantity" min="1" value="@if(@$manufacturing_details->metal_scrap_quantity) {{$manufacturing_details->metal_scrap_quantity}} @endif" placeholder="" required="" aria-required="true">
                       </div>
                     </div>
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">UoM</label>
+                        <label for="field-3" class="control-label">UoM*</label>
                         <label for="field-1" class="control-label"></label>
                         <select class="form-control" name="metal_scrap_uom" id="metal_scrap_uom" required="" aria-required="true">
                           <option value=""></option>
@@ -311,7 +311,7 @@
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Inventory Location</label>
+                        <label for="field-3" class="control-label">Inventory Location*</label>
                         <label for="field-1" class="control-label"></label>
                         <select class="form-control" name="metal_scrap_location" id="metal_scrap_location" required="" aria-required="true">
                           <option value=""></option>
@@ -334,7 +334,7 @@
                     <div class="col-md-3">
 
                       <div class="form-group">
-                        <label for="field-1" class="control-label">Invisible Loss</label>
+                        <label for="field-1" class="control-label">Invisible Loss*</label>
                         <select class="form-control" name="invisible_loss_name" id="invisible_loss_name" required="" aria-required="true">
                           <option value=""></option>
                         @foreach($inv_item as $key=> $value)
@@ -348,14 +348,14 @@
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Quantity</label>
+                        <label for="field-3" class="control-label">Quantity*</label>
                         <input type="text" class="form-control" readonly name="invisible_loss_quantity" id="invisible_loss_quantity" min="0" value="@if(@$manufacturing_details->invisible_loss_quantity) {{$manufacturing_details->invisible_loss_quantity}} @endif" placeholder="" required="" aria-required="true">
                       </div>
                     </div>
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">UoM</label>
+                        <label for="field-3" class="control-label">UoM*</label>
                         <select class="form-control" name="invisible_loss_uom" id="invisible_loss_uom" required="" aria-required="true">
                           <option value=""></option>
                           @foreach($uom as $key=> $value)
@@ -369,7 +369,7 @@
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Inventory Location</label>
+                        <label for="field-3" class="control-label">Inventory Location*</label>
                         <select class="form-control" name="invisible_loss_auto" id="invisible_loss_auto" required="" aria-required="true">
                           <option value=""></option>
                           @foreach($InventoryLocation as $key=> $value)
