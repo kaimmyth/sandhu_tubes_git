@@ -46,6 +46,21 @@
   .side {
     margin-left: 8px;
   }
+  table th {
+        text-align: center;
+    }
+
+    table td {
+        padding: 3px 10px 3px 10px !important;
+    }
+
+    .rig {
+        text-align: right;
+    }
+
+    .action {
+        width: 50px;
+    }
 </style>
 
 <div class="content-page">
@@ -87,6 +102,8 @@
                           </div>
                           
                         </div>
+                      </div>
+                      <hr>
                         <div class="row">
                           <div class="col-md-12">
                             @if($shipmentdata->shipment_type == 'IN')
@@ -108,9 +125,9 @@
                                 @if($inv_itemdata)
                                 @foreach($inv_itemdata as $key=>$val)
                                 <tr>
-                                    <td>{{$val->id}}</td>
+                                    <td class="rig">{{$val->id}}</td>
                                     <td>{{$val->item_name}}</td>
-                                    <td>{{$val->quantity}}</td>
+                                    <td class="rig">{{$val->quantity}}</td>
                                     @if($locationiddata != null)
                                     <td>{{$locationiddata[$key]->location_name}}</td>
                                     @else
@@ -123,7 +140,7 @@
                             </tbody>
                         </table>
                         </div>
-                      </div>
+                      
                       <hr>
                     </section>
               </div> <!-- End card-body -->

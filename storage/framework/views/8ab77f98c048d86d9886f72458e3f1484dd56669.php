@@ -46,6 +46,21 @@
   .side {
     margin-left: 8px;
   }
+  table th {
+        text-align: center;
+    }
+
+    table td {
+        padding: 3px 10px 3px 10px !important;
+    }
+
+    .rig {
+        text-align: right;
+    }
+
+    .action {
+        width: 50px;
+    }
 </style>
 
 <div class="content-page">
@@ -87,6 +102,8 @@
                           </div>
                           
                         </div>
+                      </div>
+                      <hr>
                         <div class="row">
                           <div class="col-md-12">
                             <?php if($shipmentdata->shipment_type == 'IN'): ?>
@@ -108,9 +125,9 @@
                                 <?php if($inv_itemdata): ?>
                                 <?php $__currentLoopData = $inv_itemdata; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td><?php echo e($val->id); ?></td>
+                                    <td class="rig"><?php echo e($val->id); ?></td>
                                     <td><?php echo e($val->item_name); ?></td>
-                                    <td><?php echo e($val->quantity); ?></td>
+                                    <td class="rig"><?php echo e($val->quantity); ?></td>
                                     <?php if($locationiddata != null): ?>
                                     <td><?php echo e($locationiddata[$key]->location_name); ?></td>
                                     <?php else: ?>
@@ -123,7 +140,7 @@
                             </tbody>
                         </table>
                         </div>
-                      </div>
+                      
                       <hr>
                     </section>
               </div> <!-- End card-body -->
