@@ -214,7 +214,7 @@
 				
 				<li><a href="{{URL::to('Manufacturing/list')}}" class="waves-effect"><i class="fa fa-industry" style="margin-left: 4px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">MAUNFACTURING</span></a></li>
 				<li><a href="{{URL::to('organization/listing')}}" class="waves-effect"><i class="fa fa-building" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 24px;">ORGNIZATIONS</span></a></li>
-				<li><a href="{{URL::to('shipment/listing')}}" class="waves-effect"><i class="fa fa-ship" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SHIPMENT</span></a></li>
+				<li><a href="{{URL::to('shipment/listing')}}" class="waves-effect"><i class="fa fa-truck" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SHIPMENT</span></a></li>
 				@if(Auth::user()->users_role==1)
 				<li class="has_sub">
 					<a href="#" class="waves-effect"><i class="ion-settings"></i>&nbsp;&nbsp;SETTINGS<span class="pull-right"><i class="md md-add"></i></span></a>
