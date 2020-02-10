@@ -1,14 +1,21 @@
+<style>
+
+table th {
+        text-align: center;
+    }
+
+</style>
 <div class="content-page"> 
    <div class="content">
       <div class="container-fluid">
          <!-- Page-Title -->
          <div class="row" id="dashboard-row">
             <div class="col-sm-12">
-               <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Organization Summary</h4>
+               <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Manage Department</h4>
                <ol class="breadcrumb pull-right">
                   <li><a href="{{ URL::to('home') }}">Home</a></li>
-                  <li><a href="{{URL::to('home')}}">Organization</a></li>
-                  <li class="active">Organization Summary</li>
+                  <li><a href="{{URL::to('home')}}">Master</a></li>
+                  <li class="active">Manage Department</li>
                </ol>
             </div>
          </div><hr class="new2">
@@ -27,56 +34,40 @@
 					 
                         <thead style="background: #b6e9ff;">
                            <tr>
-                              <th>Organization Name</th>
-                              <th>City, State</th>
-                              <th>CIN</th>
-                              <th>Revenue (in CR)</th>
-							  <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 68px;" aria-label="Action: activate to sort column ascending">Action</th>
-                              
+                              <th>Id</th>
+                              <th>Department Name</th>
+                              <th>Description</th>
+                              <th>Is Active</th>
+                              <th>Created Date</th>
+                              <th>Actions</th>
                            </tr>
                         </thead>
                         <tbody>
                            @foreach($departmentData as $key => $data)
                            <tr>
-                              <td>Tata Tubes</td>
-                              <td>Jamshedpur, JH</td>
-                              <td>8776744dhjhj</td>
-                              <td></td>
-							  
-							  <td class="actions">
-                                            <a href="javascript::void(0);" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick="viweland(1)"><svg class="svg-inline--fa fa-eye fa-w-18" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="eye" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"></path></svg><!-- <i class="fa fa-eye"></i> --></a>                                      
-                                                &nbsp;&nbsp;&nbsp;
-                              </td>
-							  
+                              <td>{{ $key+1 }}</td>
+                              <td>{{ $data->department_name }}</td>
+                              <td>{{ $data->description }}</td>
                               @if($data->is_active == 1)
-                             
-                              @else
-                             
-                              @endif
-                             
-                             
-                           </tr>
-						   
-						   <tr>
-                              <td>Tata Steel </td>
-                              <td>Jamshedpur, JH</td>
-                              <td>8776744dhjhj</td>
-                              <td></td>
-							   <td class="actions">
-                                            <a href="javascript::void(0);" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick="viweland(1)"><svg class="svg-inline--fa fa-eye fa-w-18" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="eye" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"></path></svg><!-- <i class="fa fa-eye"></i> --></a>                                      
-                                                &nbsp;&nbsp;&nbsp;
+                              <td>
+                                 <p class="mb-0">
+                                    <span class="badge badge-success">Active</span>
+                                 </p>
                               </td>
-                              @if($data->is_active == 1)
-                             
                               @else
-                             
+                              <td>
+                                 <p class="mb-0">
+                                    <span class="badge badge-danger">Inactive</span>
+                                 </p>
+                              </td>
                               @endif
-                             
-                             
+                              <td>{{ date('d-M-Y',strtotime($data->created_at)) }}</td>
+                              <td class="actions">
+                                 <a href="javascript::void(0)" class="on-default edit-row"  onclick="editRecords({{$data->id}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a> 
+                                 &nbsp;&nbsp;&nbsp;
+                                 <a href="{{ URL::to('department/destroy',$data->id)}}" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                              </td>
                            </tr>
-						   
-						   
-						   
                            @endforeach
                         </tbody>
                      </table>
@@ -109,7 +100,7 @@
                   <div class="col-md-6">
                      <div class="form-group"> 
                         <label for="field-1" class="control-label">Department Name </label> 
-                        <input  type="text" id="department_name" name="department_name" class="form-control" required="" aria-required="true" placeholder="Research and Development"> 
+                        <input  type="text" id="department_name" name="department_name" class="form-control" required="" aria-required="true" placeholder="Department Name"> 
                      </div>
                   </div>
                   <div class="col-md-6">
@@ -118,7 +109,7 @@
                         <input id="description" type="text" name="description" class="form-control" required="" aria-required="true" placeholder="Enter  Description"> 
                      </div>
                   </div>
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                      <div class="form-group">
                         <label for="sel1">POC</label>
                         <select class="select2 form-control" name="pos_id" id="pos_id" >
@@ -132,7 +123,7 @@
                            @endif
                         </select>
                      </div>
-                  </div>
+                  </div> -->
                   <div class="col-md-6">
                      <div class="form-group">
                         <p class="control-label"><b>Is Active</b> <font color="red">*</font></p>
@@ -173,7 +164,6 @@
             document.getElementById("ids").value = data.id;
             document.getElementById("department_name").value = data.department_name;
             document.getElementById("description").value = data.description;
-            document.getElementById("pos_id").value = data.pos_id;
             var val = data.is_active;
             if( val == 1)
             {
@@ -190,7 +180,6 @@
    document.getElementById("ids").value ='';
    document.getElementById("department_name").value = '';
    document.getElementById("description").value = '';
-   document.getElementById("pos_id").value = '';
    document.getElementById("submitbtn").innerText ='Save';
    $('#department-model').modal('show');
 }

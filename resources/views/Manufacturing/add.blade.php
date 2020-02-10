@@ -133,7 +133,7 @@
                           <select class="form-control" name="input_items_id" id="city" required="" aria-required="true">
                             <option value=""></option>
                             @foreach($inv_item as $key=> $value)
-                            <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_id) {{"selected"}} @endif>{{$value['item_name']}}</option>
+                            <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_id==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
                             @endforeach
                            
                           </select>
@@ -155,7 +155,7 @@
                           <select class="form-control" name="input_items_uom" id="city" required="" aria-required="true">
                             <option value=""></option>
                             @foreach($uom as $key=> $value)
-                            <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_uom) {{"selected"}} @endif>{{$value['uom_name']}}</option>
+                            <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_uom==$value['id']) {{"selected"}} @endif>{{$value['uom_name']}}</option>
                             @endforeach
                           </select>
                         </div>
@@ -169,7 +169,7 @@
                           <select class="form-control" name="input_items_location" id="city" required="" aria-required="true">
                             <option value=""></option>
                             @foreach($InventoryLocation as $key=> $value)
-                            <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_location) {{"selected"}} @endif>{{$value['location_name']}}</option>
+                            <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_location==$value['id']) {{"selected"}} @endif>{{$value['location_name']}}</option>
                             @endforeach
 
                           </select>
@@ -214,7 +214,13 @@
 
                       <div class="form-group">
                         <label for="field-1" class="control-label">Finished Goods</label>
-                        <input type="text" class="form-control" name="finished_goods_name" id="finished_goods_name" value="@if(@$manufacturing_details->finished_goods_name) {{$manufacturing_details->finished_goods_name}} @endif"  placeholder="" required="" aria-required="true">
+                        <select class="form-control" name="finished_goods_name" id="finished_goods_name" required="" aria-required="true">
+                          <option value=""></option>
+                        @foreach($inv_item as $key=> $value)
+                        <option value="{{$value['id']}}" @if(@$manufacturing_details->finished_goods_name==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
+                        @endforeach
+                        <!-- <input type="text" class="form-control" name="finished_goods_name" id="finished_goods_name" value="@if(@$manufacturing_details->finished_goods_name) {{$manufacturing_details->finished_goods_name}} @endif"  placeholder="" required="" aria-required="true"> -->
+                        </select>
                       </div>
 
                     </div>
@@ -233,7 +239,7 @@
                         <select class="form-control" name="finished_goods_uom" id="finished_goods_uom" required="" aria-required="true">
                           <option value=""></option>
                           @foreach($uom as $key=> $value)
-                          <option value="{{$value['id']}}" value="@if(@$manufacturing_details->finished_goods_uom) {{"selected"}} @endif">{{$value['uom_name']}}</option>
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->finished_goods_uom==$value['id']) {{"selected"}} @endif>{{$value['uom_name']}}</option>
                           @endforeach
 
                         </select>
@@ -247,7 +253,7 @@
                         <select class="form-control" name="finished_goods_location" id="finished_goods_location" required="" aria-required="true">
                           <option value=""></option>
                           @foreach($InventoryLocation as $key=> $value)
-                          <option value="{{$value['id']}}" @if(@$manufacturing_details->finished_goods_location) {{"selected"}} @endif>{{$value['location_name']}}</option>
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->finished_goods_location==$value['id']) {{"selected"}} @endif>{{$value['location_name']}}</option>
                           @endforeach
                           <!-- <option value="Jamshedpur">Jamshedpur, Jharkhand 832108</option> -->
 
@@ -271,7 +277,13 @@
 
                       <div class="form-group">
                         <label for="field-1" class="control-label">Metal Scrap</label>
-                        <input type="text" class="form-control" name="metal_scrap_name" id="metal_scrap_name"  value="@if(@$manufacturing_details->metal_scrap_name) {{$manufacturing_details->metal_scrap_name}} @endif" placeholder="Metal Scrap" required="" aria-required="true">
+                        <select class="form-control" name="metal_scrap_name" id="metal_scrap_name" required="" aria-required="true">
+                          <option value=""></option>
+                        @foreach($inv_item as $key=> $value)
+                        <option value="{{$value['id']}}" @if(@$manufacturing_details->metal_scrap_name==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
+                        @endforeach
+                        </select>
+                        <!-- <input type="text" class="form-control" name="metal_scrap_name" id="metal_scrap_name"  value="@if(@$manufacturing_details->metal_scrap_name) {{$manufacturing_details->metal_scrap_name}} @endif" placeholder="Metal Scrap" required="" aria-required="true"> -->
                       </div>
 
                     </div>
@@ -290,7 +302,7 @@
                         <select class="form-control" name="metal_scrap_uom" id="metal_scrap_uom" required="" aria-required="true">
                           <option value=""></option>
                           @foreach($uom as $key=> $value)
-                          <option value="{{$value['id']}}" @if(@$manufacturing_details->metal_scrap_uom) {{"selected"}} @endif>{{$value['uom_name']}}</option>
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->metal_scrap_uom==$value['id']) {{"selected"}} @endif>{{$value['uom_name']}}</option>
                           @endforeach
                         </select>
                       </div>
@@ -304,7 +316,7 @@
                         <select class="form-control" name="metal_scrap_location" id="metal_scrap_location" required="" aria-required="true">
                           <option value=""></option>
                           @foreach($InventoryLocation as $key=> $value)
-                          <option value="{{$value['id']}}" @if(@$manufacturing_details->metal_scrap_location) {{"selected"}} @endif >{{$value['location_name']}}</option>
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->metal_scrap_location==$value['id']) {{"selected"}} @endif >{{$value['location_name']}}</option>
                           @endforeach
                         </select>
                       </div>
@@ -323,7 +335,13 @@
 
                       <div class="form-group">
                         <label for="field-1" class="control-label">Invisible Loss</label>
-                        <input type="text" class="form-control" name="invisible_loss_name" id="invisible_loss_name"  value="@if(@$manufacturing_details->invisible_loss_name) {{$manufacturing_details->invisible_loss_name}} @endif" placeholder="" required="" aria-required="true">
+                        <select class="form-control" name="invisible_loss_name" id="invisible_loss_name" required="" aria-required="true">
+                          <option value=""></option>
+                        @foreach($inv_item as $key=> $value)
+                        <option value="{{$value['id']}}" @if(@$manufacturing_details->invisible_loss_name==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
+                        @endforeach
+                        </select>
+                        <!-- <input type="text" class="form-control" name="invisible_loss_name" id="invisible_loss_name"  value="@if(@$manufacturing_details->invisible_loss_name) {{$manufacturing_details->invisible_loss_name}} @endif" placeholder="" required="" aria-required="true"> -->
                       </div>
 
                     </div>
@@ -341,7 +359,7 @@
                         <select class="form-control" name="invisible_loss_uom" id="invisible_loss_uom" required="" aria-required="true">
                           <option value=""></option>
                           @foreach($uom as $key=> $value)
-                          <option value="{{$value['id']}}" @if(@$manufacturing_details->invisible_loss_uom) {{"selected"}} @endif>{{$value['uom_name']}}</option>
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->invisible_loss_uom==$value['id']) {{"selected"}} @endif>{{$value['uom_name']}}</option>
                           @endforeach
 
                         </select>
@@ -355,7 +373,7 @@
                         <select class="form-control" name="invisible_loss_auto" id="invisible_loss_auto" required="" aria-required="true">
                           <option value=""></option>
                           @foreach($InventoryLocation as $key=> $value)
-                          <option value="{{$value['id']}}" @if(@$manufacturing_details->invisible_loss_auto) {{"selected"}} @endif >{{$value['location_name']}}</option>
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->invisible_loss_auto ==$value['id']) {{"selected"}} @endif >{{$value['location_name']}}</option>
                           @endforeach
                         </select>
                       </div>
@@ -418,348 +436,19 @@
       </div>
       <!--  Wizard Form -->
 
-    </div>
-    <script type="text/javascript">
-      function wizardForm(elem) {
-        $("#wform").css("display", "block");
-        $("#default-form").css("display", "none");
 
-      }
-      function defaultForm(elem) {
-        $("#wform").css("display", "none");
-        $("#default-form").css("display", "block");
-      }
-    </script>
-
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('#additional_charge').on('change', function () {
-          var value = $(this).val();
-          var bs = Number(document.getElementById('based_rent').value);
-          var tax = Number(document.getElementById('taxes').value);
-          var ins = Number(document.getElementById('insurance').value);
-          var mainti = Number(document.getElementById('maintanance').value);
-          var adi = Number(document.getElementById('additional_charge').value);
-          var pay = bs + tax + ins + mainti + adi;
-          document.getElementById('netpaybill').value = pay;
-        });
-
-        $("input[name$='add_net_payable']").click(function () {
-          var test = $(this).val();
-          if (test == 'monthly') {
-            document.getElementById('add_tag_n').textContent = 'Month';
-            document.getElementById('add_time_duration').value = 'm';
-          } else {
-            document.getElementById('add_tag_n').textContent = 'Year';
-            document.getElementById('add_time_duration').value = 'yr';
-          }
-        });
-
-      });
-    </script>
-
-    <script type="text/javascript">
-      try {
-        function addcustomerModel() {
-          $('#add_customer').modal('show');
-        }
-        function addlandModel() {
-          $('#add_land').modal('show');
-        }
-      } catch (err) {
-        var error = err.message;
-        alert(error)
-      }
-
-    </script>
+    
 
 
 
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('#e_additional_charge').on('change', function () {
-          var value = $(this).val();
-          var bs = Number(document.getElementById('e_based_rent').value);
-          var tax = Number(document.getElementById('e_taxes').value);
-          var ins = Number(document.getElementById('e_insurance').value);
-          var mainti = Number(document.getElementById('e_maintanance').value);
-          var adi = Number(document.getElementById('e_additional_charge').value);
-          var pay = bs + tax + ins + mainti + adi;
-          document.getElementById('e_netpaybill').value = pay;
-        });
 
-      });
-    </script>
+  
 
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $("input[name$='net_payable']").click(function () {
-          var test = $(this).val();
-          if (test == 'monthly') {
-            document.getElementById('tag_n').textContent = 'Month';
-            document.getElementById('time_duration').value = 'm';
-          } else {
-            document.getElementById('tag_n').textContent = 'Year';
-            document.getElementById('time_duration').value = 'yr';
-          }
-        });
-      });
-    </script>
-
-
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('#searchcustomer').on('keyup', function () {
-          var query = $(this).val();
-          if (query != '') {
-            $("#loader1").css("display", "block");
-            $.ajaxSetup({
-              headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-            });
-            $.ajax({
-              url: "{{url('land/serachcustomers/')}}" + '/' + query,
-              type: "GET",
-              success: function (data) {
-                $("#loader1").css("display", "none");
-                $('#customer_list').html(data);
-              }
-            })
-          } else {
-            $('#customer_list').html("");
-          }
-        });
-        $(document).on('click', 'td', function () {
-          var value = $(this).text();
-          $('#customer_list').html("");
-        });
-
-
-        /* Wizard Customer*/
-
-        $('#wsearchcustomer').on('keyup', function () {
-          var query = $(this).val();
-          if (query != '') {
-            $("#loader1").css("display", "block");
-            $.ajaxSetup({
-              headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-            });
-            $.ajax({
-              url: "{{url('land/wserachcustomers/')}}" + '/' + query,
-              type: "GET",
-              success: function (data) {
-                $("#loader1").css("display", "none");
-                $('#wcustomer_list').html(data);
-              }
-            })
-          } else {
-            $('#wcustomer_list').html("");
-          }
-        });
-        $(document).on('click', 'td', function () {
-          var value = $(this).text();
-          $('#wcustomer_list').html("");
-        });
-
-        /* Land */
-        $('#searchland').on('keyup', function () {
-          var query = $(this).val();
-          if (query != '') {
-            $("#loader1").css("display", "block");
-            $.ajaxSetup({
-              headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-            });
-            $.ajax({
-              url: "{{url('land/serachland/')}}" + '/' + query,
-              type: "GET",
-              success: function (data) {
-                $("#loader1").css("display", "none");
-                $('#land_list').html(data);
-              }
-            })
-          } else {
-            $('#land_list').html("");
-          }
-        });
-        $(document).on('click', 'td', function () {
-          var value = $(this).text();
-          $('#land_list').html("");
-        });
-
-
-        $('#wsearchland').on('keyup', function () {
-          var query = $(this).val();
-          if (query != '') {
-            $("#loader1").css("display", "block");
-            $.ajaxSetup({
-              headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-            });
-            $.ajax({
-              url: "{{url('land/wserachland/')}}" + '/' + query,
-              type: "GET",
-              success: function (data) {
-                $("#loader1").css("display", "none");
-                $('#wland_list').html(data);
-              }
-            })
-          } else {
-            $('#wland_list').html("");
-          }
-        });
-        $(document).on('click', 'td', function () {
-          var value = $(this).text();
-          $('#wland_list').html("");
-        });
-
-
-
-      });
-
-      function addcustomer(id) {
-        $("#loader1").css("display", "block");
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-        $.ajax({
-          url: "{{url('land/customer/add/')}}" + '/' + id,
-          method: "POST",
-          contentType: 'application/json',
-          success: function (data) {
-            console.log(data)
-            if (data == 0) {
-              $("#loader1").css("display", "none");
-              document.getElementById("NotAloowPccCust").innerText = 'This client is already registered.';
-              document.getElementById("cust_id").value = '';
-              document.getElementById("searchcustomer").value = '';
-              document.getElementById("c_name").innerText = '';
-              document.getElementById("c_email").innerText = '';
-              document.getElementById("c_company").innerText = '';
-            } else {
-              document.getElementById("NotAloowPccCust").innerText = '';
-              $("#loader1").css("display", "none");
-              var company_reg_no = data.company_reg_no;
-              var company = data.company;
-              var company_type = data.company_type;
-              var address = data.address;
-              document.getElementById("cust_id").value = data.id;
-              document.getElementById("searchcustomer").value = company;
-              document.getElementById("c_name").innerText = company;
-              document.getElementById("c_email").innerText = company_type;
-
-              document.getElementById("c_company").innerText = address;
-              document.getElementById("c_Regi").innerText = company_reg_no;
-
-            }
-          }
-        });
-      }
-
-      /* Wizard Customer */
-      function waddcustomer(id) {
-        $("#loader1").css("display", "block");
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-        $.ajax({
-          url: "{{url('land/wcustomer/add/')}}" + '/' + id,
-          method: "POST",
-          contentType: 'application/json',
-          success: function (data) {
-            console.log(data)
-            $("#loader1").css("display", "none");
-            var name = data.f_name + ' ' + data.l_name;
-            var email = data.email;
-            var mobile = data.mobile;
-            var company = data.company;
-            document.getElementById("wcust_id").value = data.id;
-            document.getElementById("wsearchcustomer").value = name;
-            document.getElementById("wc_name").innerText = name;
-            document.getElementById("wc_email").innerText = email;
-            document.getElementById("wc_mobile").innerText = mobile;
-            document.getElementById("wc_company").innerText = company;
-          }
-        });
-      }
-
-
-
-      function addland(id) {
-        $("#loader1").css("display", "block");
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-        $.ajax({
-          url: "{{url('land/land/add/')}}" + '/' + id,
-          method: "POST",
-          contentType: 'application/json',
-          success: function (data) {
-            console.log(data)
-            $("#loader1").css("display", "none");
-            var name = data.land_name;
-            document.getElementById("land_id").value = data.id;
-            document.getElementById("searchland").value = name;
-            document.getElementById("p_no").innerText = data.plot_no;
-            document.getElementById("p_name").innerText = name;
-            document.getElementById("p_size").innerText = data.plot_size + ' ' + data.uom;
-            document.getElementById("p_size2").value = data.plot_size;
-            document.getElementById("p_uom").innerText = data.uom;
-            document.getElementById("sect").innerText = data.area;
-            document.getElementById("phas").innerText = data.sector;
-            document.getElementById("l_block").innerText = data.block;
-
-          }
-        });
-      }
-      function addlandwizard(id) {
-        $("#loader1").css("display", "block");
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-        $.ajax({
-          url: "{{url('land/land/wizard/add/')}}" + '/' + id,
-          method: "POST",
-          contentType: 'application/json',
-          success: function (data) {
-            console.log(data)
-            $("#loader1").css("display", "none");
-            var name = data.land_name;
-            document.getElementById("wland_id").value = data.id;
-            document.getElementById("wsearchland").value = name;
-            document.getElementById("wp_no").innerText = data.plot_no;
-            document.getElementById("wp_name").innerText = name;
-            document.getElementById("wp_size").innerText = data.plot_size + ' ' + data.uom;
-            document.getElementById("wsect").innerText = data.area;
-            document.getElementById("wphas").innerText = data.sector;
-            document.getElementById("wl_block").innerText = data.block;
-
-          }
-        });
-      }
-    </script>
-    <script>
-      $(function () {
-        $(".datepicker").datepicker();
-      });
-    </script>
+      
+  
     <script>
       function check_quantity()
       {
-
         var input_items_quantity=$("#input_items_quantity").val();
         var finished_goods_quantity=$("#finished_goods_quantity").val();
         var metal_scrap_quantity=$("#metal_scrap_quantity").val();
@@ -781,12 +470,6 @@
         alert("Your Output Quantity is Greater Than Input Quantity");
         return false;
         }
-       
-// alert(int_input_quantity);
-//         alert(output_quantity);
-       
-// return false;
-
       }
     </script>
     <script>

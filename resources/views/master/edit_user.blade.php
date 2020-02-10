@@ -100,16 +100,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+
                                     @foreach($toReturn['module'] as $key => $value) 
                                     <tr> 
-                                        <?php $module_permission=DB::table('user_permission')->where('permission_value',$value['ID'])->first();
+                                        <?php @$module_permission=DB::table('user_permission')->where('permission_value',$value['ID'])->first();
                                         ?>
 
-                                    <td>{{$value['module_name']}}<input id="text" name="module[]" value="{{$value['ID']}}" type="hidden"> <input type="hidden" name="module_permission_id[]" value="{{$module_permission->ID}}" > </td>
-                                    <td><input  name="read{{$value['ID']}}"  value="read"  @if($module_permission->is_read=='yes') checked='checked'  @endif   type="checkbox" ></td>
-                                    <td><input  name="add{{$value['ID']}}"  value="add"  @if($module_permission->is_add=='yes') checked='checked'  @endif   type="checkbox"></td>
-                                    <td><input  name="edit{{$value['ID']}}"   value="edit" @if($module_permission->is_edit=='yes') checked='checked'  @endif   type="checkbox"></td>
-                                    <td><input  name="delete{{$value['ID']}}}" value="delete" @if($module_permission->is_delete=='yes') checked='checked'  @endif   type="checkbox"></td>
+                                    <td>{{@$value['module_name']}}<input id="text" name="module[]" value="{{@$value['ID']}}" type="hidden"> <input type="hidden" name="module_permission_id[]" value="{{@$module_permission->ID}}" > </td>
+                                    <td><input  name="read{{@$value['ID']}}"  value="read"  @if(@$module_permission->is_read=='yes') checked='checked'  @endif   type="checkbox" ></td>
+                                    <td><input  name="add{{@$value['ID']}}"  value="add"  @if(@$module_permission->is_add=='yes') checked='checked'  @endif   type="checkbox"></td>
+                                    <td><input  name="edit{{@$value['ID']}}"   value="edit" @if(@$module_permission->is_edit=='yes') checked='checked'  @endif   type="checkbox"></td>
+                                    <td><input  name="delete{{@$value['ID']}}}" value="delete" @if(@$module_permission->is_delete=='yes') checked='checked'  @endif   type="checkbox"></td>
                                     <tr>
                                     <tr>
                                     @endforeach

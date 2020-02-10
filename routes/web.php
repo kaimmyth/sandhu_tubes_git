@@ -287,6 +287,10 @@ Route::post('add_ticket_by_user','TicketController@add_ticket_by_user');
 Route::get('/portal', function () {
 	return view('admin.portal_login');
 });
+Route::get('/login_page',function()
+{
+   return view('login/employer_login') ;
+});
 Route::get('user/forget_password','forgetPasswordController@view_page');
 Route::post('check_email','forgetPasswordController@check_email');
 Route::get('resetpassword/update{id}/{email}','forgetPasswordController@change_password');
@@ -315,6 +319,7 @@ Route::get('Manufacturing/list','ManufacturingController@list');
 Route::get('Manufacturing/add','ManufacturingController@add');
 Route::post('Manufacturing/create','ManufacturingController@create');
 Route::get('Manufacturing/edit/{id}','ManufacturingController@edit');
+Route::get('Manufacturing/delete/{id}','ManufacturingController@delete');
 
 /* =================================================== Inventory Define Items Raj.. 08/02/2020=================================================== */
 Route::prefix('inv_item')->group(function () {

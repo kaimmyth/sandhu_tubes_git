@@ -151,7 +151,22 @@ return redirect('Manufacturing/list');
     $landdata = Land::all();
     $data['content'] = 'Manufacturing.add';
     return view('layouts.content', compact('data'))->with(['manufacturing_details'=>$manufacturing_details,'zone' => $zone, 'phase' => $phase, 'block' => $block,'uom'=>$uom,'inv_item'=>$inv_item,'InventoryLocation'=>$InventoryLocation]);
- 
+  }
+  public function delete($id="")
+  {
+    if($id!="")
+    {
+      Session::flash('success', 'Manufacturing Details Delete Succesfully');
+    $manufacturing_details=manufacturing_details::where('id',$id)->delete();
+    return back();
+    }
+    else
+    {
+      Session::flash('danger', 'Manufacturing Details Delete Failled');
 
+      return back();
+    }
+
+    return $id;
   }
 }
