@@ -1,3 +1,20 @@
+<style>
+   table th {
+    text-align: center;
+  }
+
+  table td {
+    padding: 3px 10px 3px 10px !important;
+  }
+
+  .rig {
+    text-align: right;
+  }
+
+  .action {
+    width: 50px;
+  }
+</style>
 <div class="content-page">
    <div class="content">
       <div class="container-fluid">
@@ -35,11 +52,11 @@
                               <td>{{$val->organization_name}}</td>
                               <td>{{$val->city}}, {{$val->state}}</td>
                               <td>{{$val->cin}}</td>
-                              <td>{{$val->revenue}}</td>
+                              <td class="rig">{{$val->revenue}}</td>
                               <td class="actions">
-                                 <a href="{{url('organization/showView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye"></i></a>
+                                 <a href="{{url('organization/showView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
                                  <a href="{{url('organization/editView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick=""><i class="fa fa-edit"></i></a>
-                                 <a href="{{url('organization/deletedata/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this Data?');"><i class="fa fa-trash"></i></a>
+                                 <a href="{{url('organization/deletedata/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this Data?');"><i class="fa fa-trash" style="color:red;"></i></a>
                               </td>
                            </tr>
                            @endforeach

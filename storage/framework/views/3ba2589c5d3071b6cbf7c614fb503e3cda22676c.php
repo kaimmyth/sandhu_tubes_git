@@ -120,8 +120,8 @@ endif; ?>
                             <!--<a href="#" class="pass">Forgot Password ?</a>-->
                             <br>
                             <!-- <input type="submit" value="Log In" /> -->
-                            <button class="btn btn-danger btn-block" type="submit">Login</button >                
-
+                            <button class="btn btn-danger btn-block" type="submit">Login</button>                
+                            <a href="<?php echo e(url('password/reset')); ?>" class="aply-btn rrtt " style="text-align:center; color: #CDDC39;font-weight: 600;">Forget Password ?</a>
                         </form>
 
                     </div>

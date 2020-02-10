@@ -39,7 +39,7 @@ class MasterController extends Controller
 		$data = array(
 			'category_name' => $request->category_name,
 			'description' => $request->description,
-			'pos_id' => $request->pos_id,
+			// 'pos_id' => $request->pos_id,
 			'is_active' => $request->is_active,
 			'created_at' => date('Y-m-d H:i:s'),
 		);
@@ -82,7 +82,7 @@ class MasterController extends Controller
 		$data = array(
 			'uom_name' => $request->uom_name,
 			'uom_description' => $request->uom_description,
-			'uom_type' => $request->uom_type,
+			// 'uom_type' => $request->uom_type,
 			'status' => $request->is_active,
 			'created_at' => date('Y-m-d H:i:s'),
 			'created_by' => 1,

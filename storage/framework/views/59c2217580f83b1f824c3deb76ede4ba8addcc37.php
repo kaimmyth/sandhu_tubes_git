@@ -217,7 +217,7 @@
 				<li><a href="<?php echo e(URL::to('Manufacturing/list')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>MAUNFACTURING</span></a></li>
 				<li><a href="<?php echo e(URL::to('organization/listing')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>ORGNIZATIONS</span></a></li>
 				<li><a href="<?php echo e(URL::to('shipment/listing')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>SHIPMENT</span></a></li>
-				<li><a href="<?php echo e(URL::to('shipment_out/listing')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>SHIPMENT OUT</span></a></li>
+				<!-- <li><a href="<?php echo e(URL::to('shipment_out/listing')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>SHIPMENT OUT</span></a></li> -->
 
 
 				<!--<li><a href="<?php echo e(url('ticket')); ?>" class="waves-effect"><i class="md md-storage"></i>&nbsp;&nbsp;<span>TICKETS</span></a></li>-->

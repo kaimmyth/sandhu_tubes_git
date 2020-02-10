@@ -1,3 +1,20 @@
+<style>
+   table th {
+   text-align: center;
+ }
+ 
+ table td {
+   padding: 3px 10px 3px 10px !important;
+ }
+ 
+ .rig {
+   text-align: right;
+ }
+ 
+ .action {
+   width: 50px;
+ }
+ </style>
 <div class="content-page">
    <div class="content">
       <div class="container-fluid">
@@ -27,22 +44,22 @@
                      <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead style="background: #b6e9ff;">
                            <tr>
-                              <th>Id</th>
+                              <th style="width: 55px;">Sl.</th>
                               <th>UoM Name</th>
                               <th>UoM Description</th>
-                              <th>UoM Type</th>
+                              <!-- <th>UoM Type</th> -->
                               <th>Is Active</th>
                               <th>Created Date</th>
-                              <th>Actions</th>
+                              <th class="action">Actions</th>
                            </tr>
                         </thead>
                         <tbody>
                            @foreach($uomData as $key => $data)
                            <tr>
-                              <td>{{ $key+1 }}</td>
+                              <td class="rig">{{ $key+1 }}</td>
                               <td>{{$data->uom_name}}</td>
                               <td>{{$data->uom_description}}</td>
-                              <td>{{$data->uom_type}}</td>
+                              <!-- <td>{{$data->uom_type}}</td> -->
                               @if($data->status == 1)
                               <td>
                                  <p class="mb-0">
@@ -56,9 +73,9 @@
                                  </p>
                               </td>
                               @endif
-                              <td>{{$data->created_at}}</td>
+                              <td>{{date('j M, Y ',strtotime($data->created_at))}}</td>
                               <td class="actions">
-                                 <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords({{$data->id}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                                 <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords({{$data->id}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
                                  &nbsp;&nbsp;&nbsp;
                                  <a href="{{ URL::to('uom_master/destroy',$data->id)}}" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
                               </td>
@@ -104,7 +121,7 @@
                         <input id="uom_description" type="text" name="uom_description" class="form-control" required="" aria-required="true" placeholder="UoM Description">
                      </div>
                   </div>
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                      <div class="form-group">
                         <label for="sel1">UoM Type</label>
                         <select class="select2 form-control" name="uom_type" id="uom_type" required="">
@@ -113,7 +130,7 @@
                            <option value="Material">Material</option>                              
                         </select>
                      </div>
-                  </div>
+                  </div> -->
                   <div class="col-md-6">
                      <div class="form-group">
                         <p class="control-label"><b>Is Active</b>
@@ -160,7 +177,7 @@
             document.getElementById("ids").value = data.id;
             document.getElementById("uom_name").value = data.uom_name;
             document.getElementById("uom_description").value = data.uom_description;
-            document.getElementById("uom_type").value = data.uom_type;
+            // document.getElementById("uom_type").value = data.uom_type;
             var val = data.status;
             if (val == 1) {
                $('input[name=is_active][value=' + val + ']').prop('checked', true);
@@ -177,7 +194,7 @@
       document.getElementById("ids").value = '';
       document.getElementById("uom_name").value = '';
       document.getElementById("uom_description").value = '';
-      document.getElementById("uom_type").value = '';
+      // document.getElementById("uom_type").value = '';
       document.getElementById("submitbtn").innerText = 'Save';
       $('#material-model').modal('show');
    }

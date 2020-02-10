@@ -19,6 +19,22 @@
         box-shadow: 0px 0px #ffffff;
         width: 100%;
     }
+
+    table th {
+        text-align: center;
+    }
+
+    table td {
+        padding: 3px 10px 3px 10px !important;
+    }
+
+    .rig {
+        text-align: right;
+    }
+
+    .action {
+        width: 50px;
+    }
 </style>
 <div class="content-page">
     <div class="content">
@@ -40,31 +56,31 @@
                             <div class="card-body">
                                 <div class="row"><br><br><br>
                                     <div class="col-md-12 col-sm-12 col-12">
-                                        <a href="{{url('shipment/add/0')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 1%;"><i class="md md-add-circle-outline"></i> Shipment</button></a>
+                                        <a href="{{url('shipment/add/0')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 1%;"><i class="md md-add-circle-outline"></i> Shipment Out</button></a>
                                         <a href="{{url('shipment/add/1')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 1%;"><i class="md md-add-circle-outline"></i> Shipment Receive</button></a><br>
                                         <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead style="background: #b6e9ff;">
                                                 <tr>
-                                                    <th>Shipment No</th>
+                                                    <th style="width: 85px;">Shipment No</th>
                                                     <th>Shipment Type</th>
                                                     <th>Supplier Name</th>
                                                     <th>Shipped Date</th>
                                                     <th>Status</th>
-                                                    <th>Action</th>
+                                                    <th class="action">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @if($statusdata)
                                                 @foreach($statusdata as $key=>$val)
                                                 <tr>
-                                                    <td>{{$key + 1}}</td>
+                                                    <td class="rig">{{$key + 1}}</td>
                                                     @if($val->shipment_type == 1)
                                                     <td>IN</td>
                                                     @else
                                                     <td>OUT</td>
                                                     @endif
                                                     <td>{{$val->supplier_name}}</td>
-                                                    <td>{{$val->created_date}}</td>
+                                                    <td>{{date('j M, Y ',strtotime($val->created_date))}}</td>
                                                     @if($val->status == 1)
                                                     <td>
                                                         <p class="mb-0">
@@ -79,9 +95,9 @@
                                                     </td>
                                                     @endif
                                                     <td class="actions">
-                                                        <a href="{{url('shipment/showView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye"></i></a>
+                                                        <a href="{{url('shipment/showView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
                                                         <a href="{{url('shipment/editView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick=""><i class="fa fa-edit"></i></a>
-                                                        <a href="{{url('shipment/deletedata/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash"></i></a>
+                                                        <a href="{{url('shipment/deletedata/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash" style="color:#f12409;"></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

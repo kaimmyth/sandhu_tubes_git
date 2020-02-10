@@ -90,37 +90,37 @@
     <div class="row one" style="width: 102%; margin-left:0px;">
 
       <div class="col-md-3 widget">
-        <a target="_blank()" href="<?php echo e(url('land/listing')); ?>"  >
+        <a target="_blank()" href="<?php echo e(url('inv_item/listing')); ?>"  >
           <div class="stats-left ">
             <h4><i class="md md-map" style="color: #c30d00;"></i>&nbsp;</h4>
-            <h5 style="color: #fff;">View Detail</h5>
+            <h5 style="color: #fff;">INVENTORY</h5>
           </div>
           <div class="stats-right">
-           <label><?php echo e($totalLeads); ?> </label>
+           <label><?php echo e($total_items); ?> </label>
          </div>
          <div class="clearfix"> </div>
        </a>
      </div>
      <div class="col-md-3 widget states-mdl">
-      <a target="_blank()" href="<?php echo e(url('land/customer')); ?>" >
+      <a target="_blank()" href="<?php echo e(url('Manufacturing/list')); ?>" >
         <div class="stats-left">
           <h4><i class="ion-android-add-contact" style=" color: #001796;"></i>&nbsp;</h4>
-          <h5 style="color: #fff;">View Detail</h5>
+          <h5 style="color: #fff;">MAUNFACTURING</h5>
         </div>
         <div class="stats-right">
-          <label><?php echo e($totalcustomers); ?></label>
+          <label><?php echo e($total_manufacturing_details); ?></label>
         </div>
       </a>
       <div class="clearfix"> </div>
     </div>
     <div class="col-md-3 widget states-thrd">
-      <a target="_blank()" href="<?php echo e(url('ticket')); ?>">
+      <a target="_blank()" href="<?php echo e(url('organization/listing')); ?>">
        <div class="stats-left">
          <h4><i class="md md-storage" style="color: #c30d00;"></i>&nbsp;</h4>
-         <h5 style="color: #fff;">View Detail</h5>
+         <h5 style="color: #fff;">ORGNIZATIONS</h5>
        </div>
        <div class="stats-right">
-         <label><?php echo e($totaltickets); ?></label>
+         <label><?php echo e($total_organization); ?></label>
        </div>
      </a>
      <div class="clearfix"> </div>
@@ -128,12 +128,13 @@
 
 
    <div class="col-md-3 widget states-last">
+    <a target="_blank()" href="<?php echo e(url('shipment/listing')); ?>">
      <div class="stats-left">
        <h4><i class="ion-arrow-shrink" style=" color: #001796;"></i>&nbsp;</h4>
-       <h5 style="color: #fff;">View Detail</h5>
+       <h5 style="color: #fff;">SHIPMENT</h5>
      </div>
      <div class="stats-right">                         
-       <label>0</label>
+       <label><?php echo e($total_shipment); ?></label>
      </div>
      <div class="clearfix"> </div>
    </div>

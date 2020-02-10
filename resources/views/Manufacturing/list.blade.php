@@ -3,22 +3,38 @@
         padding: 1px 20px;
         border: none;
     }
-    .form-control {
-    -moz-border-radius: 2px;
-    -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-    -webkit-border-radius: 2px;
-    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    border-radius: 2px;
-    border: 1px solid #b3b1b1;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    color: rgba(0, 0, 0, 0.6);
-    font-size: 14px;
-    box-shadow: 0px 0px #ffffff;
-    width: 100%;
-}
 
+    .form-control {
+        -moz-border-radius: 2px;
+        -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        -webkit-border-radius: 2px;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 2px;
+        border: 1px solid #b3b1b1;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 14px;
+        box-shadow: 0px 0px #ffffff;
+        width: 100%;
+    }
+
+    table th {
+        text-align: center;
+    }
+
+    table td {
+        padding: 3px 10px 3px 10px !important;
+    }
+
+    .rig {
+        text-align: right;
+    }
+
+    .action {
+        width: 50px;
+    }
 </style>
 <div class="content-page">
     <div class="content">
@@ -54,11 +70,11 @@
                                         <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; width:100%; border-spacing: 0;">
                                             <thead style="background: #b6e9ff;">
                                                 <tr>
-                                                    <th style="width: 10%;">Item Name </th>
-                                                    <th style="width: 10%;">Quantity</th>
-                                                    <th style="width: 10%;">Inventory Location</th>                                     
-                                                    <th style="width: 7%;">Status</th>
-                                                    <th style="width: 20%;">Action</th>
+                                                    <th>Item Name </th>
+                                                    <th>Quantity</th>
+                                                    <th>Inventory Location</th>                                     
+                                                    <th>Status</th>
+                                                    <th class="action">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -69,7 +85,7 @@
                                                     $Location=DB::table('inventory_location')->where('id',$value_del['input_items_location'])->first();
                                                 @endphp
                                                 <td>{{@$item->item_name}}</td>
-                                                <td align="right">{{@$value_del['input_items_quantity']}}</td>
+                                                <td class="rig">{{@$value_del['input_items_quantity']}}</td>
                                                 <td>{{@$Location->location_name}}</td>
                                                 
                                                 @if(@$value_del['status']==1)
@@ -88,8 +104,8 @@
                                               
                                                 <td>
 
+                                                    <a href="{{url('land/customercompany/view/'.$value_del['id'])}}" class="on-default view-row" data-toggle="tooltip"  data-placement="top" title="" data-original-title="View"><i class="fa fa-eye" style="color:green;" aria-hidden="true"></i></a> 
                                                     <a href="{{url('Manufacturing/edit/'.$value_del['id'])}}" class="on-default view-row" data-toggle="tooltip"  data-placement="top" title="" data-original-title="Update"><i class="fas fa-edit"></i></a> 
-                                                    <a href="{{url('land/customercompany/view/'.$value_del['id'])}}" class="on-default view-row" data-toggle="tooltip"  data-placement="top" title="" data-original-title="View"><i class="fa fa-eye" aria-hidden="true"></i></a> 
                                                     <a href="{{url('land/customer/delete/'.$value_del['id'])}}"  class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash" style="color:red;"></i></a>
 
                                                 </td>

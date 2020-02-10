@@ -1,3 +1,20 @@
+<style>
+    table th {
+    text-align: center;
+  }
+
+  table td {
+    padding: 3px 10px 3px 10px !important;
+  }
+
+  .rig {
+    text-align: right;
+  }
+
+  .action {
+    width: 50px;
+  }
+</style>
 <div class="content-page">
     <!-- Start content -->
     <div class="content">
@@ -23,16 +40,16 @@
                             <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th>SL No.</th>
+                                        <th style="width: 55px;">SL No.</th>
                                         <th>Designation Type</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th class="action">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($result_contact_type as $key => $value)
                                     <tr>
-                                        <td>{{$key+1}}</td>
+                                        <td class="rig">{{$key+1}}</td>
                                         <td>{{$value['org_designation_name']}}</td>
                                         @if($value['status']== 1)
                                         <td>
@@ -48,7 +65,7 @@
                                         </td>
                                         @endif
                                         <td class="actions">
-                                            <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords({{$value['org_designation_id']}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords({{$value['org_designation_id']}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
                                             &nbsp;&nbsp;&nbsp;
                                             <a href="{{ URL::to('org/org_designation',$value['org_designation_id'])}}" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
                                         </td>

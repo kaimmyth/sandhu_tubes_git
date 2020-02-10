@@ -1,3 +1,20 @@
+<style>
+   table th {
+        text-align: center;
+    }
+
+    table td {
+        padding: 3px 10px 3px 10px !important;
+    }
+
+    .rig {
+        text-align: right;
+    }
+
+    .action {
+        width: 50px;
+    }
+</style>
 <div class="content-page">
     <!-- Start content -->
     <div class="content">
@@ -23,20 +40,20 @@
                             <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                   <tr>
-                                    <th>SL No.</th>                   
+                                    <th style="width: 55px;">SL No.</th>                   
                                     <th>Location ID </th>
                                     <th>Location Name</th>
                                     <th>Description</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th class="action">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                     <?php $__currentLoopData = $inventory_location; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                       <td><?php echo e($key+1); ?></td>
+                                       <td class="rig"><?php echo e($key+1); ?></td>
                                        <!-- <td><?php echo e($value['id']); ?></td> -->
-                                       <td><?php echo e($value['location_id']); ?></td>
+                                       <td class="rig"><?php echo e($value['location_id']); ?></td>
                                        <td><?php echo e($value['location_name']); ?></td>
                                        <td><?php echo e($value['location_description']); ?></td>
                                        <?php if($value['status']== 1): ?>
@@ -53,7 +70,7 @@
                                        </td>
                                        <?php endif; ?>
                                        <td class="actions">
-                                          <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords(<?php echo e($value['id']); ?>)" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                                          <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords(<?php echo e($value['id']); ?>)" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
                                           &nbsp;&nbsp;&nbsp;
                                           <a href="<?php echo e(URL::to('inventory/destroy',$value['id'])); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
                                        </td>
