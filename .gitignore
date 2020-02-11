@@ -1,17 +1,6 @@
 /node_modules
-/public/storage
-/storage
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-storage/logs/laravel-2020-02-08.log
-storage/framework/sessions/HeMJmB9OhMy77gfXt74PheEBOXpfOq7CERXleso3
-storage/framework/sessions/RFn4ZpiKOiYpRRBoT9JPktSY2y4dIZtHGfhjj9eA
-storage/framework/sessions/UHN9eEovb51HwM6FjteHj7G52ZF3fxLjqabUlaBi
-storage/framework/sessions/vMj4CGjxCLDyO0JBooxDtJTx0Gh82ZFXVw2Ixd1i
-storage/framework/sessions/zwQeSMRMYHSQcrd9KksL6q8gledpRN9WGCNzoLTV
-storage/framework/views/4a2c5b03c3017e5d3d0cb77584c6b095b66c71b1.php
-storage/framework/views/5a33cd19ab7a3396ab52d196dfdb664b9f1db2e3.php
-storage/framework/views/895e2af812d0e23b8baab616e3fc5daefd8d1818.php

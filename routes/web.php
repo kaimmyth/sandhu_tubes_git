@@ -320,6 +320,7 @@ Route::get('Manufacturing/add','ManufacturingController@add');
 Route::post('Manufacturing/create','ManufacturingController@create');
 Route::get('Manufacturing/edit/{id}','ManufacturingController@edit');
 Route::get('Manufacturing/delete/{id}','ManufacturingController@delete');
+Route::get('Manufacturing/view_details/{id}','ManufacturingController@view_details');
 
 /* =================================================== Inventory Define Items Raj.. 08/02/2020=================================================== */
 Route::prefix('inv_item')->group(function () {
