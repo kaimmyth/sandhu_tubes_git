@@ -116,4 +116,5 @@
                 </div> <!-- End Row -->
             </div> <!-- card -->
         </div> <!-- container -->
-    </div> <!-- content --><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/shipment/shipment_list.blade.php ENDPATH**/ ?>
+    </div> <!-- content -->
+</div><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/shipment/shipment_list.blade.php ENDPATH**/ ?>

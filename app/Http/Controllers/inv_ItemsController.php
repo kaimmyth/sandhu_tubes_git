@@ -23,8 +23,9 @@ class inv_ItemsController extends Controller
     {
         $categorytData = DB::table('category')->where('is_active',1)->select('id','category_name')->get();
         $uomData = DB::table('uom')->where('status',1)->select('id','uom_name')->get();
+        $inventory_location = DB::table('inventory_location')->where('status',1)->get();
         $data['content'] = 'inventory.add_inv_item';
-        return view('layouts.content', compact('data'))->with(['categorytData' => $categorytData,'uomData' => $uomData]);
+        return view('layouts.content', compact('data'))->with(['categorytData' => $categorytData,'uomData' => $uomData,'inventory_location' => $inventory_location]);
     }
     public function addStore(Request $request)
     {
@@ -32,9 +33,10 @@ class inv_ItemsController extends Controller
         $inv_itemData = new inv_item();
         $inv_itemData->item_category_id = $request->item_category;
         $inv_itemData->uom_id = $request->uom;
-        $inv_itemData->inv_location_id = 1;
+        $inv_itemData->inv_location_id = $request->location;
         $inv_itemData->item_name = $request->item_name;
         $inv_itemData->item_code = $request->item_code;
+        $inv_itemData->batch_no = $request->batch_no;
         $inv_itemData->quantity = $request->quantity;
         $inv_itemData->seralized = $request->seralized;
         if($request->serial_no)
@@ -59,8 +61,9 @@ class inv_ItemsController extends Controller
         $inv_itemdata = inv_item::where('id',$id)->first();
         $categorytData = DB::table('category')->where('is_active',1)->select('id','category_name')->get();
         $uomData = DB::table('uom')->where('status',1)->select('id','uom_name')->get();
+        $inventory_location = DB::table('inventory_location')->where('status',1)->get();
         $data['content'] = 'inventory.edit_inv_item';
-        return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata,'categorytData' => $categorytData,'uomData' => $uomData]);
+        return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata,'categorytData' => $categorytData,'uomData' => $uomData,'inventory_location' => $inventory_location]);
     }
     public function editStore(Request $request)
     {
@@ -68,9 +71,10 @@ class inv_ItemsController extends Controller
         $Edit_inv_itemData = inv_item::find($request->item_id);
         $Edit_inv_itemData->item_category_id = $request->item_category;
         $Edit_inv_itemData->uom_id = $request->uom;
-        // $Edit_inv_itemData->inv_location_id = 1;
+        $Edit_inv_itemData->inv_location_id = $request->location;
         $Edit_inv_itemData->item_name = $request->item_name;
         $Edit_inv_itemData->item_code = $request->item_code;
+        $Edit_inv_itemData->batch_no = $request->batch_no;
         $Edit_inv_itemData->quantity = $request->quantity;
         $Edit_inv_itemData->seralized = $request->seralized;
         

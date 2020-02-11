@@ -43,8 +43,8 @@
 	}
 
 	#sidebar-menu>ul>li>a.active {
-		background: #dff1ff !important;
-		color: #000;
+		background: #262c32 !important;
+		color: #fff;
 		width: 95%;
 		margin-left: 2%;
 		border-radius: 4px;
@@ -96,6 +96,13 @@
 		margin-left: 2%;
 		border-radius: 11px;
 	}
+
+	#sidebar-menu>ul>li>a.active.subdrop {
+    background: #262c32 !important;
+    width: 95%;
+    margin-left: 2%;
+    border-radius: 11px;
+}
 
 	.form-control {
 		-moz-border-radius: 2px;
@@ -225,11 +232,11 @@
 						<li><a href="<?php echo e(url('org/org_relationship')); ?>"><span>ORG RELATIONSHIP</span></a></li>
 						<li><a href="<?php echo e(url('org/org_contact')); ?>"><span>ORG CONTACT TYPE</span></a></li>
 						<li><a href="<?php echo e(url('org/org_designation')); ?>"><span>ORG DESIGNATION</span></a></li>
-						<li><a href="<?php echo e(url('department')); ?>">Department</a></li>
+						<li><a href="<?php echo e(url('department')); ?>">DEPARTMENT</a></li>
 						<!-- <li><a href="<?php echo e(url('organization/listing')); ?>">ORGNIZATIONS</a></li> -->
 						<!--<li><a href="<?php echo e(url('subdepartment')); ?>">SUB-DEPARTMENTS</a></li>-->
 						<li><a href="<?php echo e(url('category')); ?>">CATEGORIES</a></li>
-						<li><a href="<?php echo e(url('uom_master')); ?>">UoM Master</a></li>
+						<li><a href="<?php echo e(url('uom_master')); ?>">UoM</a></li>
 						<li><a href="<?php echo e(url('users')); ?>">USERS</a></li>
 
 				</li>
@@ -243,21 +250,22 @@
 				</li>
 				<?php endif; ?>
 				<?php if(in_array(2, $module_id)): ?>
-				<a href="#" class="waves-effect"><i class="md md-receipt"></i>&nbsp;&nbsp; INVENTORY<span class="pull-right"><i class="md md-add"></i></span></a>
-				<ul class="list-unstyled">
-					<li><a href="<?php echo e(url('inv_item/listing')); ?>"><span>Items</span></a></li>
-				</ul>
+				<li class="has_sub">
+					<a href="#" class="waves-effect"><i class="fa fa-list" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp; <span style="margin-left: 19px;">INVENTORY</span><span class="pull-right"><i class="md md-add"></i></span></a>
+					<ul class="list-unstyled">
+						<li><a href="<?php echo e(url('inv_item/listing')); ?>"><span>ITEMS</span></a></li>
+					</ul>
+				</li>
 				<?php endif; ?>
 				<?php if(in_array(3, @$module_id)): ?>
-                <li><a href="<?php echo e(URL::to('Manufacturing/list')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>MAUNFACTURING</span></a></li>
+				<li><a href="<?php echo e(URL::to('Manufacturing/list')); ?>" class="waves-effect"><i class="fa fa-industry" style="margin-left: 4px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">MAUNFACTURING</span></a></li>
 				
 				<?php endif; ?>
 				<?php if(in_array(4, @$module_id)): ?>
-				<li><a href="<?php echo e(URL::to('organization/listing')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>ORGNIZATIONS</span></a></li>
-
+				<li><a href="<?php echo e(URL::to('organization/listing')); ?>" class="waves-effect"><i class="fa fa-building" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 24px;">ORGNIZATIONS</span></a></li>
 				<?php endif; ?>
 				<?php if(in_array(5, @$module_id)): ?>
-				<li><a href="<?php echo e(URL::to('shipment/listing')); ?>" class="waves-effect"><i class="ion-android-add-contact"></i>&nbsp;&nbsp;<span>SHIPMENT</span></a></li>
+				<li><a href="<?php echo e(URL::to('shipment/listing')); ?>" class="waves-effect"><i class="fa fa-truck" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SHIPMENT</span></a></li>
 				<?php endif; ?>
 				<?php if(in_array(6, @$module_id)): ?>
 				<li class="has_sub">
@@ -273,11 +281,11 @@
 						<li><a href="<?php echo e(url('org/org_relationship')); ?>"><span>ORG RELATIONSHIP</span></a></li>
 						<li><a href="<?php echo e(url('org/org_contact')); ?>"><span>ORG CONTACT TYPE</span></a></li>
 						<li><a href="<?php echo e(url('org/org_designation')); ?>"><span>ORG DESIGNATION</span></a></li>
-						<li><a href="<?php echo e(url('department')); ?>">Department</a></li>
+						<li><a href="<?php echo e(url('department')); ?>"> DEPARTMENT</a></li>
 						<!-- <li><a href="<?php echo e(url('organization/listing')); ?>">ORGNIZATIONS</a></li> -->
 						<!--<li><a href="<?php echo e(url('subdepartment')); ?>">SUB-DEPARTMENTS</a></li>-->
 						<li><a href="<?php echo e(url('category')); ?>">CATEGORIES</a></li>
-						<li><a href="<?php echo e(url('uom_master')); ?>">UoM Master</a></li>
+						<li><a href="<?php echo e(url('uom_master')); ?>">UoM</a></li>
                         <li><a href="<?php echo e(url('users')); ?>">USERS</a></li>
 				</li>
 				<?php endif; ?>

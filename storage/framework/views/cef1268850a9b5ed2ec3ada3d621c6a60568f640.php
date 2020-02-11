@@ -18,7 +18,7 @@
 
   }
 
-  @media screen and (max-width: 1366px) {
+  @media  screen and (max-width: 1366px) {
     .wizard>.steps>ul>li {
       width: 16% !important;
       font-size: 11px !important;
@@ -55,38 +55,36 @@
       <!-- Page-Title -->
       <div class="row" id="dashboard-row">
         <div class="col-sm-12">
-          <h4 class="pull-left page-title" style="color: #000; font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Inventory Item Info&nbsp;&nbsp;/ &nbsp; <a href="{{url('inv_item/listing')}}">Back</a></h4>
+          <h4 class="pull-left page-title" style="color: #000; font-weight:200;"><i class="ion-arrow-right-b"></i> Organization Info&nbsp;&nbsp;/ &nbsp; 
+            <a href="javascript::void(0);" onclick="history.back();">Back</a></h4>
           <ol class="breadcrumb pull-right">
-            <li><a href="{{ URL::to('home') }}">Home</a></li>
-            <li><a href="">Item</a></li>
-            <li class="active">View Inventory Item</li>
+            <li><a href="<?php echo e(URL::to('home')); ?>">Home</a></li>
+            <li><a href="">Organization</a></li>
+            <li class="active">View Organization</li>
           </ol>
         </div>
       </div>
-      <hr class="new2">
+
       <div class="row">
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
               <div class="card-body">
-                <h4>Inventory Item Information</h4>
+                <h4>Organization Information</h4>
                     <section style="left: inherit;">
                       <div class="col-md-10">
                         <div class="row">
                           <div class="col-md-3">
-                            <p>Item Name : <b style="color: #F0560A" id="c_name">{{$inv_itemdata->item_name}}</b></p>
+                            <p>Organization Name : <b style="color: #F0560A" id="c_name"><?php echo e($organizationdata->organization_name); ?></b></p>
                           </div>
                           <div class="col-md-3">
-                            <p>Item Code : <b style="color: #F0560A" id="c_mobile">{{$inv_itemdata->item_code}}</b></p>
+                            <p>City, State : <b style="color: #F0560A" id="c_mobile"><?php echo e($organizationdata->city); ?>, <?php echo e($organizationdata->state); ?></b></p>
                           </div>
                           <div class="col-md-3">
-                            <p>Item Category : <b style="color: #F0560A" id="c_email">{{$inv_itemdata->item_category_id}}</b></p>
+                            <p>CIN : <b style="color: #F0560A" id="c_email"><?php echo e($organizationdata->cin); ?></b></p>
                           </div>
                           <div class="col-md-3">
-                            <p>Quantity : <b style="color: #F0560A" id="c_company">{{$inv_itemdata->quantity}}</b></p>
-                          </div>
-                          <div class="col-md-3">
-                            <p>Unit of M : <b>{{$inv_itemdata->uom_id}}</b></p>
+                            <p>Revenue (in CR) : <b style="color: #F0560A" id="c_company"><?php echo e($organizationdata->revenue); ?></b></p>
                           </div>
                           
                         </div>
@@ -101,3 +99,4 @@
     </div>
   </div>
 
+<?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/organization/view_organization.blade.php ENDPATH**/ ?>

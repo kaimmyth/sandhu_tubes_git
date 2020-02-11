@@ -36,21 +36,63 @@ hr.new2 {
   border-top: 1px dashed #fff;
 }
 
-#particle {
-    background: linear-gradient(to left, #3F51B5 50%, #8fa0ff 50%);
-  position:fixed;
-  top:0;
-  right:0;
-  bottom:0;
-  left:0;
-  z-index:0; 
-}
+
 #overlay {
   position: relative;
 }
 
+.w3_info {
+    flex-basis: 50%;
+    margin-top: 10% !important;
+}
 
+#particle {
+	
+	 background: url(public/images/bg-img.jpg) no-repeat;
+    background-size: cover;
+	
+  
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+}
 
+.wrapper {
+    margin: auto;
+    /* border-radius: 20px; */
+    text-align: center;
+    padding: 8% 0px;
+        background: #292023;
+		background: rgba(39, 39, 39, 0.4);
+	border: solid 2px #777070;
+    webkit-box-shadow: 10px 3px 66px -19px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 3px 66px -19px rgba(0,0,0,0.75);
+    /* box-shadow: 10px 3px 66px -19px rgba(0,0,0,0.75); */
+}
+
+.btn-danger {
+    color: #fff;
+       background-color: #3e3635;
+    border-color: #7e7877;
+    padding: 0.7em;
+    border-radius: 22px;
+}
+
+.w3ls-form a {
+    display: block;
+    text-align: right;
+    margin: 15px 0px;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    color: #fff !important;
+    background-color: #16469d !important;
+    border-color: #16469d !important;
+}
     
     </style>
 
@@ -62,24 +104,27 @@ hr.new2 {
 <div class="signupform">
 	<div class="container-fluid">
         <div class="row">
-        <div class="col-md-6">
-            <center><img src="public/images/image1.png" alt="" style="width: 70%; margin-top: 7em;">  </center>
-        </div>
+         <!--<div class="col-md-6">
+           <center><img src="public/images/image4.jpg" alt="" style="width: 90%; margin-top: 3%;">  </center>
+        </div>-->
 
 
+ <div class="col-md-3"> </div>
+ 
         <div class="col-md-6">  
 		    <div class="w3_info">
-                <div class=" header-side"  style="margin-top: 4em;">
-                    <center><img src="public/images/logo.png" alt="" style="width:20%;">  </center>
+			
+              <div class=" header-side"  style="margin-top: 4em;">
+                      <!--<center><img src="public/images/logo.png" alt="" style="width:20%;">  </center>-->
 
-                    <h4>[ CRIS ]</h4>
+                   
                 </div>
                
                 <div class="copy">
-                    <p>Customer Relationship Integrated System
+                    <p>Sandhu Tubes
                     </p>
                 </div>
-                <hr class="new2">
+               
                 <!---728x90--->
                <div class="wrapper">
                    
@@ -120,15 +165,30 @@ endif; ?>
                             <!--<a href="#" class="pass">Forgot Password ?</a>-->
                             <br>
                             <!-- <input type="submit" value="Log In" /> -->
-                            <button class="btn btn-danger btn-block" type="submit">Login</button>                
-                            <a href="<?php echo e(url('password/reset')); ?>" class="aply-btn rrtt " style="text-align:center; color: #CDDC39;font-weight: 600;">Forget Password ?</a>
+                            <button class="btn btn-danger btn-block" type="submit">Login</button >   
+
+                      <div class="row">
+                                        <br>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="rememberPass" style="margin: 12px 0 0 2px;">
+                                                  <span class="mdl-switch__label" style="text-transform: capitalize;font-weight: normal;font-size: 14px;">Remember</span>
+                                        <input type="checkbox" id="rememberPass" class="mdl-switch__input" style="vertical-align: text-bottom;">
+                                      
+                                        </label>
+
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style=" text-align:right;">
+                                            <a href="#">Forgot Password?</a>
+                                        </div>
+                                    </div>							
+
                         </form>
 
                     </div>
                 </div>
                 <br>
                
-                <center><a href="<?php echo e(url('/')); ?>"><button class="btn btn-secondary" type="button" style="background: #8BC34A;color: #fff;">Back to Home</button ></a></center>
+                <center><a href="<?php echo e(url('/')); ?>"><button class="btn btn-secondary" type="button" style="background: #574442;color: #fff;">Back to Home</button ></a></center>
 
            
                 <!---728x90--->

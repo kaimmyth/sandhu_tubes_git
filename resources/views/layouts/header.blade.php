@@ -398,7 +398,7 @@ background-position: center;
 			<div class="topbar-left" style="background: #393e4a;border: 2px solid #393e4a;">
 				<div class="text-center">
 					<a href="{{url('dashboard')}}" class="logo">
-						<span><p style="margin-top:7px;color: #fff;font-size:30px;margin-right: 34px;"><br>Sandhu</p></span></a>
+						<span><span><img src="{{url('public/assets/images/sandhu_tubes.png')}}" style="height: 68px;"></span></a></span></a>
 						
 					</div>
 				</div>

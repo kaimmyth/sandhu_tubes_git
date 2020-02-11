@@ -343,6 +343,7 @@ Route::prefix('shipment')->group(function () {
 	Route::post('editStore', 'shipmentController@editStore');
 	Route::get('deletedata/{id}', 'shipmentController@deletedata');
 	Route::get('fetchItems', 'shipmentController@fetchItems');
+	Route::get('fetchItemsserialno/{id}', 'shipmentController@fetchItemsserialno');
 });
 
 /* =================================================== Define Organization Raj.. 08/02/2020=================================================== */

@@ -3,7 +3,9 @@
         padding: 1px 20px;
         border: none;
     }
-
+    hr.new2 {
+    border-top: 1px dashed #000;
+  }
     .form-control {
         -moz-border-radius: 2px;
         -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -19,6 +21,14 @@
         box-shadow: 0px 0px #ffffff;
         width: 100%;
     }
+    .card {
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 0px;
+    border: 0px solid whitesmoke;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
 </style>
 <div class="content-page">
     <div class="content">
@@ -41,157 +51,167 @@
                 <div class="col-lg-12">
                     <div class="card card-border card-info">
                         <div class="card-header" style="background-image: linear-gradient(#e9f8ff, white);">
-                            <form action="<?php echo e(url('shipment/addStore')); ?>" method="post" id="FormValidation" required="" aria-required="true" enctype="multipart/form-data">
-                                <?php echo csrf_field(); ?>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">Supplier Name *</label>
-                                                <input type="text" class="form-control" name="supplier_name" id="supplier_name" placeholder="Supplier Name" required aria-required="true">
+                            <div class="card-body">
+                                <form action="<?php echo e(url('shipment/addStore')); ?>" method="post" id="FormValidation" required="" aria-required="true" enctype="multipart/form-data">
+                                    <?php echo csrf_field(); ?>
+                                    <div class="row gutters justify-content-left">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">Supplier Name *</label>
+                                                                <input type="text" class="form-control" name="supplier_name" id="supplier_name" placeholder="Supplier Name" required aria-required="true">
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="shipment_type" value="1">
+                                                        <!-- <div class="col-md-3">
+                                                    
+                                                                                                <div class="form-group">
+                                                                                                    <label for="field-2" class="control-label">Shipment Type *</label>
+                                                                                                    <select class="form-control" name="shipment_type" id="shipment_type" required="" aria-required="true">
+                                                                                                        <option value="" selected>--Select--</option>
+                                                                                                        <option value="1">IN</option>
+                                                                                                        <option value="0">OUT</option>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div> -->
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">Status *</label>
+                                                                <select class="form-control" name="status" id="status" required="" aria-required="true">
+                                                                    <option value="" selected>--Select--</option>
+                                                                    <option value="1">Active</option>
+                                                                    <option value="0">InActive</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h4>SHIP-FROM LOCATION:</h4>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">Address *</label>
+                                                                <input type="text" class="form-control" name="address" id="address" placeholder="Address" required aria-required="true">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                        
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">City</label>
+                                                                <select class="form-control" name="city" id="city">
+                                                                    <option value="" selected>--Select--</option>
+                                                                    <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                    <option value="<?php echo e($val->id); ?>"><?php echo e($val->city); ?></option>
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">State</label>
+                                                                <select class="form-control" name="state" id="state">
+                                                                    <option value="" selected>--Select--</option>
+                                                                    <?php $__currentLoopData = $state; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                    <option value="<?php echo e($val->id); ?>"><?php echo e($val->state); ?></option>
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">Pin Code *</label>
+                                                                <input type="text" min="1" class="form-control" name="pin" id="pin" placeholder="Pin Code" required="" aria-required="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h4>VEHICLE</h4>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">Vehicle Type *</label>
+                                                                <select class="form-control" name="vehicle_type" id="vehicle_type" required="" aria-required="true">
+                                                                    <option value="">--Select-</option>
+                                                                    <option value="Bus">Bus</option>
+                                                                    <option value="Truck">Truck</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">Vehicle Make</label>
+                                                                <input type="text" class="form-control" name="vehicle_make" id="vehicle_make" placeholder="Vehicle Make">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">Model</label>
+                                                                <input type="text" class="form-control" name="model" id="model" placeholder="Model">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">License No. *</label>
+                                                                <input type="text" class="form-control" name="license_no" id="license_no" placeholder="License No." required="" aria-required="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h4>Driver</h4>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">Driver Name *</label>
+                                                                <input type="text" class="form-control" name="driver_name" id="driver_name" placeholder="Driver Name" required aria-required="true">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">Phone1 *</label>
+                                                                <input type="text" min="1" class="form-control" name="phone1" id="phone1" placeholder="Phone1" required="" aria-required="true">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">Phone2</label>
+                                                                <input type="text" min="1" class="form-control" name="phone2" id="phone2" placeholder="Phone2">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-2" class="control-label">Address</label>
+                                                                <input type="text" class="form-control" name="driver_address" id="driver_address" placeholder="Address">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <h4>ITEMS RECEIVED</h4>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <button type="button" onclick="append_data();" class="btn btn-secondary btn-sm btn-circle">Add <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                                        </div>
+                                                        <div class="col-md-8 row" id="append_here">
+                        
+                                                        </div>
+                                                    </div>
+                        
+                                                </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="shipment_type" value="1">
-                                        <!-- <div class="col-md-3">
-
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">Shipment Type *</label>
-                                                <select class="form-control" name="shipment_type" id="shipment_type" required="" aria-required="true">
-                                                    <option value="" selected>--Select--</option>
-                                                    <option value="1">IN</option>
-                                                    <option value="0">OUT</option>
-                                                </select>
-                                            </div>
-                                        </div> -->
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">Status *</label>
-                                                <select class="form-control" name="status" id="status" required="" aria-required="true">
-                                                    <option value="" selected>--Select--</option>
-                                                    <option value="1">Active</option>
-                                                    <option value="0">InActive</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h4>SHIP-FROM LOCATION:</h4>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">Address *</label>
-                                                <input type="text" class="form-control" name="address" id="address" placeholder="Address" required aria-required="true">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">City</label>
-                                                <select class="form-control" name="city" id="city">
-                                                    <option value="" selected>--Select--</option>
-                                                    <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <option value="<?php echo e($val->id); ?>"><?php echo e($val->city); ?></option>
-                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">State</label>
-                                                <select class="form-control" name="state" id="state">
-                                                    <option value="" selected>--Select--</option>
-                                                    <?php $__currentLoopData = $state; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <option value="<?php echo e($val->id); ?>"><?php echo e($val->state); ?></option>
-                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">Pin Code *</label>
-                                                <input type="text" min="1" class="form-control" name="pin" id="pin" placeholder="Pin Code" required="" aria-required="true">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h4>VEHICLE</h4>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">Vehicle Type *</label>
-                                                <select class="form-control" name="vehicle_type" id="vehicle_type" required="" aria-required="true">
-                                                    <option value="">--Select-</option>
-                                                    <option value="Bus">Bus</option>
-                                                    <option value="Truck">Truck</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">Vehicle Make</label>
-                                                <input type="text" class="form-control" name="vehicle_make" id="vehicle_make" placeholder="Vehicle Make">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">Model</label>
-                                                <input type="text" class="form-control" name="model" id="model" placeholder="Model">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">License No. *</label>
-                                                <input type="text" class="form-control" name="license_no" id="license_no" placeholder="License No." required="" aria-required="true">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h4>Driver</h4>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">Driver Name *</label>
-                                                <input type="text" class="form-control" name="driver_name" id="driver_name" placeholder="Driver Name" required aria-required="true">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">Phone1 *</label>
-                                                <input type="text" min="1" class="form-control" name="phone1" id="phone1" placeholder="Phone1"  required="" aria-required="true">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">Phone2</label>
-                                                <input type="text" min="1" class="form-control" name="phone2" id="phone2" placeholder="Phone2">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="field-2" class="control-label">Address</label>
-                                                <input type="text" class="form-control" name="driver_address" id="driver_address" placeholder="Address">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <h4>ITEMS RECEIVED</h4>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <button type="button" onclick="append_data();" class="btn btn-secondary btn-sm btn-circle">Add <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
-                                        </div>
-                                        <div class="col-md-6 row" id="append_here">
-
-                                        </div>
+                                        <hr class="new2">
                                     </div>
                                     <div class="col-md-12" style="text-align: left; margin-bottom: 6px;">
-                                        <button type="submit" class="btn btn-success waves-effect waves-light m-b-5">Create</button>
+                                        <button type="submit" class="btn btn-success waves-effect waves-light m-b-5"  onclick="return datacheck()">Create</button>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -210,10 +230,9 @@
             contentType: 'application/json',
             dataType: "json",
             success: function (data) {
-                console.log(data);
-                var to_append = `<div class="col-md-6"><div class="form-group">
+                var to_append = `<span class="col-md-12 row"><div class="col-md-3"><div class="form-group">
                             <label for="field-2" class="control-label">Item Name *</label>
-                            <select class="form-control" name="item_ids[]" id="item_ids" required="" aria-required="true">
+                            <select class="form-control" name="item_ids[]" id="item_ids" onchange="showserailno(this.value,`+append_i+`,this)" required="" aria-required="true">
                                 <option value="" selected>--Select--</option>`
                                 for(var i = 0; i < data.inv_item.length; i++)
                                 {
@@ -221,7 +240,12 @@
                                 }
                     to_append += `</select>
                         </div></div>
-                        <div class="col-md-6"><div class="form-group">
+                        <div class="col-md-3"><div class="form-group">
+                            <label for="field-2" class="control-label">Quantity *</label>
+                            <input type="text" class="form-control" name="quantity[]" onchange="checkitemquantity(this.value,this)" id="quantity" placeholder="Quantity" required aria-required="true">
+                            <span id="errorquantity" style="color:red;display:none">Dispatch Quantity Mismatch</span>
+                            </div></div>
+                        <div class="col-md-3"><div class="form-group">
                             <label for="field-2" class="control-label">Item Location *</label>
                             <select class="form-control" name="item_location[]" id="item_location" required="" aria-required="true">
                                 <option value="" selected>--Select--</option>`
@@ -231,6 +255,11 @@
                                 }
                     to_append += `</select>
                         </div></div>
+                        <div class="col-md-3"><div class="form-group" id="hidden_sl" style="display:none">
+                            <label for="field-2" class="control-label">Serial No. *</label>
+                            <input type="text" class="form-control" name="serial_no[]" readonly id="serial_no" placeholder="Serial No." required aria-required="true">
+                        </div></div>
+                        </span>
                         `;
                 $("#append_here").append(to_append);
                 append_i++;
@@ -238,4 +267,63 @@
         });
     }
 
+    function showserailno(element,append,e)
+    {
+        // alert(append);
+        $.ajax({
+            url: "<?php echo e(url('shipment/fetchItemsserialno/')); ?>"+'/'+element,
+            data: {},
+            method: "GET",
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                if (data.inv_item_sl.serial_no != null) {
+                     $(e).closest('span').find("#hidden_sl").css('display', 'block');
+                     $(e).closest('span').find("#serial_no").val(data.inv_item_sl.serial_no);
+                }
+                else {
+                     $(e).closest('span').find("#hidden_sl").css('display', 'none');
+                }
+                
+            }
+        });
+    }
+    // $('#errorquantity').hide();
+    var quantity_error = true;
+    function checkitemquantity(element,e) {
+        var item_id = $(e).closest('span').find("#item_ids").val();
+
+       $.ajax({
+            url: "<?php echo e(url('shipment/fetchItemsserialno/')); ?>"+'/'+item_id,
+            data: {},
+            method: "GET",
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                if(data.inv_item_sl.quantity >= element)
+                {
+                    // $('#errorquantity').hide();
+                    quantity_error = false;
+                    $(e).closest('span').find("#errorquantity").css('display', 'none');
+                }
+                else
+                {
+                    // $('#errorquantity').show();
+                    quantity_error = true;
+                    $(e).closest('span').find("#errorquantity").css('display', 'block');
+                }
+                
+            }
+        });
+    }
+
+    function datacheck() {
+        
+        if (quantity_error==true) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 </script><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/shipment/add_shipment.blade.php ENDPATH**/ ?>

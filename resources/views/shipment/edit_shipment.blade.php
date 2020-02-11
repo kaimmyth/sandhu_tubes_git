@@ -194,30 +194,44 @@
                                         <div class="col-md-9">
                                             <button type="button" onclick="append_data();" class="btn btn-secondary btn-sm btn-circle">Add <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
                                         </div>
-                                        <div class="col-md-6 row" id="append_here">
-                                        @if($inv_itemdata)
-                                            @foreach($inv_itemdata as $key=>$val)
-                                            <div class="col-md-6">
+                                        <div class="col-md-8 row" id="append_here">
+                                        @if($shiped_item_data)
+                                            @foreach($shiped_item_data as $key=>$val)
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="field-2" class="control-label">Item Name *</label>
-                                                    <select class="form-control" name="item_ids[]" id="item_ids" required="" aria-required="true">
+                                                    <select class="form-control" name="item_ids[]" id="item_ids" onchange="showserailno(this.value,append_i,this)" required="" aria-required="true">
                                                         <option value="" selected>--Select--</option>
                                                         @foreach($inv_item as $kee=>$val1)
-                                                        <option value="{{$val1->id}}" @if(@$val1->id==@$val->id ?? ''){{'selected'}} @endif>{{$val1->item_name}}</option>
+                                                        <option value="{{$val1->id}}" @if(@$val1->id==@$val->item_id ?? ''){{'selected'}} @endif>{{$val1->item_name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="field-2" class="control-label">Item Name *</label>
+                                                <label for="field-2" class="control-label">Quantity *</label>
+                                                <input type="text" class="form-control" name="quantity[]" id="quantity" value="{{$val->item_quantity}}" placeholder="Quantity" required aria-required="true">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="field-2" class="control-label">Item Location *</label>
                                                     <select class="form-control" name="item_location[]" id="item_location" required="" aria-required="true">
                                                         <option value="" selected>--Select--</option>
                                                         @foreach($inventory_location as $kee=>$val1)
-                                                        <option value="{{$val1->id}}" @if(@$val1->id==@$locationiddata[$key]->id ?? ''){{'selected'}} @endif>{{$val1->location_name}}</option>
+                                                        <option value="{{$val1->id}}" @if(@$val1->id==@$val->item_location_id ?? ''){{'selected'}} @endif>{{$val1->location_name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                @if($val->item_serial_no != null)
+                                                <div class="form-group">
+                                                <label for="field-2" class="control-label">Serial No. *</label>
+                                                <input type="text" class="form-control" name="serial_no[]" value="{{$val->item_serial_no}}" readonly id="serial_no" placeholder="Serial No." required aria-required="true">
+                                                </div>
+                                                @endif
                                             </div>
                                             @endforeach
                                         @endif
@@ -249,10 +263,9 @@
             contentType: 'application/json',
             dataType: "json",
             success: function (data) {
-                console.log(data);
-                var to_append = `<div class="col-md-6"><div class="form-group">
+                var to_append = `<span class="col-md-12 row"><div class="col-md-3"><div class="form-group">
                             <label for="field-2" class="control-label">Item Name *</label>
-                            <select class="form-control" name="item_ids[]" id="item_ids" required="" aria-required="true">
+                            <select class="form-control" name="item_ids[]" id="item_ids" onchange="showserailno(this.value,`+append_i+`,this)" required="" aria-required="true">
                                 <option value="" selected>--Select--</option>`
                                 for(var i = 0; i < data.inv_item.length; i++)
                                 {
@@ -260,7 +273,11 @@
                                 }
                     to_append += `</select>
                         </div></div>
-                        <div class="col-md-6"><div class="form-group">
+                        <div class="col-md-3"><div class="form-group">
+                            <label for="field-2" class="control-label">Quantity *</label>
+                            <input type="text" class="form-control" name="quantity[]" id="quantity" placeholder="Quantity" required aria-required="true">
+                        </div></div>
+                        <div class="col-md-3"><div class="form-group">
                             <label for="field-2" class="control-label">Item Location *</label>
                             <select class="form-control" name="item_location[]" id="item_location" required="" aria-required="true">
                                 <option value="" selected>--Select--</option>`
@@ -270,6 +287,11 @@
                                 }
                     to_append += `</select>
                         </div></div>
+                        <div class="col-md-3"><div class="form-group" id="hidden_sl" style="display:none">
+                            <label for="field-2" class="control-label">Serial No. *</label>
+                            <input type="text" class="form-control" name="serial_no[]" readonly id="serial_no" placeholder="Serial No." required aria-required="true">
+                        </div></div>
+                        </span>
                         `;
                 $("#append_here").append(to_append);
                 append_i++;
@@ -277,4 +299,25 @@
         });
     }
 
+    function showserailno(element,append,e)
+    {
+        // alert(append);
+        $.ajax({
+            url: "{{url('shipment/fetchItemsserialno/')}}"+'/'+element,
+            data: {},
+            method: "GET",
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                if (data.inv_item_sl.serial_no != null) {
+                     $(e).closest('span').find("#hidden_sl").css('display', 'block');
+                     $(e).closest('span').find("#serial_no").val(data.inv_item_sl.serial_no);
+                }
+                else {
+                     $(e).closest('span').find("#hidden_sl").css('display', 'none');
+                }
+                
+            }
+        });
+    }
 </script>

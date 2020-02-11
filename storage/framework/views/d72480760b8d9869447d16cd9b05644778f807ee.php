@@ -28,8 +28,8 @@
         <div class="col-sm-12">
           <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp; Inventory Item</h4>
           <ol class="breadcrumb pull-right">
-            <li><a href="{{ URL::to('home') }}">Home</a></li>
-            <li><a href="{{URL::to('home')}}">Item</a></li>
+            <li><a href="<?php echo e(URL::to('home')); ?>">Home</a></li>
+            <li><a href="<?php echo e(URL::to('home')); ?>">Item</a></li>
             <li class="active">Inventory Item</li>
           </ol>
         </div>
@@ -43,7 +43,7 @@
               <div class="card-body">
                 <div class="row"><br><br><br>
                   <div class="col-md-12 col-sm-12 col-12">
-                    <a href="{{url('inv_item/add')}}"><button id="addToTable" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" data-toggle="modal" style="float:right; margin-top: 19px;"><i class="md md-add-circle-outline"></i> Add</button></a><br>
+                    <a href="<?php echo e(url('inv_item/add')); ?>"><button id="addToTable" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" data-toggle="modal" style="float:right; margin-top: 19px;"><i class="md md-add-circle-outline"></i> Add</button></a><br>
                     <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                       <thead style="background: #b6e9ff;">
                         <tr>
@@ -56,21 +56,21 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @if($inv_itemdata)
-                        @foreach($inv_itemdata as $key=>$val)
+                        <?php if($inv_itemdata): ?>
+                        <?php $__currentLoopData = $inv_itemdata; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                          <td>{{$val->item_code}}</td>
-                          <td>{{$val->item_name}}</td>
-                          <td>{{$val->item_category_id}}</td>
-                          <td class="rig">{{$val->quantity}} {{$val->uom_id}}</td>
+                          <td><?php echo e($val->item_code); ?></td>
+                          <td><?php echo e($val->item_name); ?></td>
+                          <td><?php echo e($val->item_category_id); ?></td>
+                          <td class="rig"><?php echo e($val->quantity); ?> <?php echo e($val->uom_id); ?></td>
                           <td class="actions">
-                            <a href="{{url('inv_item/showView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
-                            <a href="{{url('inv_item/editView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick=""><i class="fa fa-edit"></i></a>
-                            <a href="{{url('inv_item/deletedata/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash" style="color:red;"></i></a>
+                            <a href="<?php echo e(url('inv_item/showView/'.$val->id)); ?>" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
+                            <a href="<?php echo e(url('inv_item/editView/'.$val->id)); ?>" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick=""><i class="fa fa-edit"></i></a>
+                            <a href="<?php echo e(url('inv_item/deletedata/'.$val->id)); ?>" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash" style="color:red;"></i></a>
                           </td>
                         </tr>
-                        @endforeach
-                        @endif
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
                       </tbody>
                     </table>
                   </div>
@@ -82,4 +82,4 @@
       </div>
     </div>
   </div>
-</div>
+</div><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/inventory/inv_item.blade.php ENDPATH**/ ?>

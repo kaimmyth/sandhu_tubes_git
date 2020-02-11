@@ -28,7 +28,16 @@ class shipmentController extends Controller
     }
     public function addStore(Request $request)
     {
-        // return $request;
+        $items_received_ids = [];
+        if ($request->item_ids) {
+            foreach ($request->item_ids as $key => $value) {
+                $items_received_ids[] = array('item_id' => $value, 'item_location_id' => $request->item_location[$key], 'item_quantity' => $request->quantity[$key], 'item_serial_no' =>  $request->serial_no[$key]);
+            }
+        }
+        $items_received_ids_JSONencoded = json_encode($items_received_ids);
+        // echo "<pre>";
+        // print_r($items_received_ids_JSONencoded);exit;
+        // return $items_received_ids_JSONencoded;
         $shipmentData = new shipment();
         $shipmentData->supplier_name = $request->supplier_name;
         $shipmentData->shipment_type = $request->shipment_type;
@@ -44,12 +53,34 @@ class shipmentController extends Controller
         $shipmentData->phone1 = $request->phone1;
         $shipmentData->phone2 = $request->phone2;
         $shipmentData->driver_address = $request->driver_address;
-        $shipmentData->items_received_ids = json_encode($request->item_ids);
-        $shipmentData->items_location_ids = json_encode($request->item_location);
+        $shipmentData->shiped_item = $items_received_ids_JSONencoded;
+        // $shipmentData->items_location_ids = json_encode($request->item_location);
         $shipmentData->status = $request->status;
         $shipmentData->created_by = Auth::user()->id;
         $shipmentData->created_date = date('Y-m-d');
         $shipmentData->save();
+
+        if($request->shipment_type == 1) 
+        {
+            if ($request->item_ids) {
+                foreach ($request->item_ids as $key => $value) {
+                    $Edit_inv_itemData = inv_item::find($value);
+                    $Edit_inv_itemData->quantity = $Edit_inv_itemData->quantity + $request->quantity[$key];
+                    $Edit_inv_itemData->save();
+                }
+            }
+
+        }
+        else
+        {
+            if ($request->item_ids) {
+                foreach ($request->item_ids as $key => $value) {
+                    $Edit_inv_itemData = inv_item::find($value);
+                    $Edit_inv_itemData->quantity = $Edit_inv_itemData->quantity - $request->quantity[$key];
+                    $Edit_inv_itemData->save();
+                }
+            }
+        }
         Session::flash('success', 'Create Success');
         return redirect('shipment/listing');
     }
@@ -80,14 +111,25 @@ class shipmentController extends Controller
     public function editView($id)
     {
         $shipmentdata = shipment::where('id',$id)->first();
-        $ids = [];
-        $loc_ids = [];
-        if($shipmentdata->items_received_ids)
-        $ids = json_decode($shipmentdata->items_received_ids);
-        if($shipmentdata->items_location_ids)
-        $loc_ids = json_decode($shipmentdata->items_location_ids);
-        $inv_itemdata = inv_item::whereIn('id',$ids)->select('id','item_name')->get();
-        $locationiddata = DB::table('inventory_location')->whereIn('id',$loc_ids)->select('id','location_name')->get();
+        $shiped_item_data = [];
+        if($shipmentdata->shiped_item)
+        $shiped_item_data = json_decode($shipmentdata->shiped_item);
+        // foreach ($shiped_item_data as $key => $value) {
+        //     $value->item_id = inv_item::where('id',$value->item_id)->value('item_name');
+        //     $value->item_location_id = DB::table('inventory_location')->where('id',$value->item_location_id)->value('location_name');
+        //     // $value->item_quantity;
+        //     // $value->item_serial_no;
+        // }
+        // echo "<pre>";
+        // print_r($shiped_item_data);exit;
+        // $ids = [];
+        // $loc_ids = [];
+        // if($shipmentdata->items_received_ids)
+        // $ids = json_decode($shipmentdata->items_received_ids);
+        // if($shipmentdata->items_location_ids)
+        // $loc_ids = json_decode($shipmentdata->items_location_ids);
+        // $inv_itemdata = inv_item::whereIn('id',$ids)->select('id','item_name','serial_no')->get();
+        // $locationiddata = DB::table('inventory_location')->whereIn('id',$loc_ids)->select('id','location_name')->get();
         $inv_item = inv_item::select('id','item_name')->orderBy('id')->get();
         $inventory_location = DB::table('inventory_location')->where('status',1)->get();
         $cities = DB::table('cities')->where('status',1)->select('id','city')->orderBy('city','ASC')->get();
@@ -96,10 +138,17 @@ class shipmentController extends Controller
         $data['content'] = 'shipment.edit_shipment';
         else
         $data['content'] = 'shipment.edit_shipment_out';
-        return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata,'shipmentdata' => $shipmentdata,'inv_item' => $inv_item,'inventory_location' => $inventory_location,'locationiddata' => $locationiddata,'cities' => $cities,'state' => $state]);
+        return view('layouts.content', compact('data'))->with(['shipmentdata' => $shipmentdata,'inv_item' => $inv_item,'inventory_location' => $inventory_location,'cities' => $cities,'state' => $state,'shiped_item_data' => $shiped_item_data]);
     }
     public function editStore(Request $request)
     {
+        $items_received_ids = [];
+        if ($request->item_ids) {
+            foreach ($request->item_ids as $key => $value) {
+                $items_received_ids[] = array('item_id' => $value, 'item_location_id' => $request->item_location[$key], 'item_quantity' => $request->quantity[$key], 'item_serial_no' =>  $request->serial_no[$key]);
+            }
+        }
+        $items_received_ids_JSONencoded = json_encode($items_received_ids);
         // return $request;
         $edit_shipmentData = shipment::find($request->shipment_id);
         $edit_shipmentData->supplier_name = $request->supplier_name;
@@ -116,12 +165,34 @@ class shipmentController extends Controller
         $edit_shipmentData->phone1 = $request->phone1;
         $edit_shipmentData->phone2 = $request->phone2;
         $edit_shipmentData->driver_address = $request->driver_address;
-        $edit_shipmentData->items_received_ids = json_encode($request->item_ids);
-        $edit_shipmentData->items_location_ids = json_encode($request->item_location);
+        $edit_shipmentData->shiped_item = $items_received_ids_JSONencoded;
+        // $edit_shipmentData->items_location_ids = json_encode($request->item_location);
         $edit_shipmentData->status = $request->status;
         $edit_shipmentData->modified_by = Auth::user()->id;
         $edit_shipmentData->modified_date = date('Y-m-d');
         $edit_shipmentData->save();
+
+        if($edit_shipmentData->shipment_type == 1) 
+        {
+            if ($request->item_ids) {
+                foreach ($request->item_ids as $key => $value) {
+                    $Edit_inv_itemData = inv_item::find($value);
+                    $Edit_inv_itemData->quantity = $Edit_inv_itemData->quantity + $request->quantity[$key];
+                    $Edit_inv_itemData->save();
+                }
+            }
+
+        }
+        else
+        {
+            if ($request->item_ids) {
+                foreach ($request->item_ids as $key => $value) {
+                    $Edit_inv_itemData = inv_item::find($value);
+                    $Edit_inv_itemData->quantity = $Edit_inv_itemData->quantity - $request->quantity[$key];
+                    $Edit_inv_itemData->save();
+                }
+            }
+        }
         Session::flash('success', 'Update Success');
         return redirect('shipment/listing');
     }
@@ -137,6 +208,12 @@ class shipmentController extends Controller
     {
         $toReturn['inventory_location'] = DB::table('inventory_location')->where('status',1)->get();
         $toReturn['inv_item'] = inv_item::select('id','item_name')->orderBy('id')->get();
+        return $toReturn;
+    }
+
+    public function fetchItemsserialno($id)
+    {
+        $toReturn['inv_item_sl'] = inv_item::select('id','item_name','serial_no','quantity')->where('id',$id)->first();
         return $toReturn;
     }
 }

@@ -18,7 +18,7 @@
 
   }
 
-  @media screen and (max-width: 1366px) {
+  @media  screen and (max-width: 1366px) {
     .wizard>.steps>ul>li {
       width: 16% !important;
       font-size: 11px !important;
@@ -55,9 +55,9 @@
       <!-- Page-Title -->
       <div class="row" id="dashboard-row">
         <div class="col-sm-12">
-          <h4 class="pull-left page-title" style="color: #000; font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Inventory Item Info&nbsp;&nbsp;/ &nbsp; <a href="{{url('inv_item/listing')}}">Back</a></h4>
+          <h4 class="pull-left page-title" style="color: #000; font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Inventory Item Info&nbsp;&nbsp;/ &nbsp; <a href="<?php echo e(url('inv_item/listing')); ?>">Back</a></h4>
           <ol class="breadcrumb pull-right">
-            <li><a href="{{ URL::to('home') }}">Home</a></li>
+            <li><a href="<?php echo e(URL::to('home')); ?>">Home</a></li>
             <li><a href="">Item</a></li>
             <li class="active">View Inventory Item</li>
           </ol>
@@ -74,19 +74,19 @@
                       <div class="col-md-10">
                         <div class="row">
                           <div class="col-md-3">
-                            <p>Item Name : <b style="color: #F0560A" id="c_name">{{$inv_itemdata->item_name}}</b></p>
+                            <p>Item Name : <b style="color: #F0560A" id="c_name"><?php echo e($inv_itemdata->item_name); ?></b></p>
                           </div>
                           <div class="col-md-3">
-                            <p>Item Code : <b style="color: #F0560A" id="c_mobile">{{$inv_itemdata->item_code}}</b></p>
+                            <p>Item Code : <b style="color: #F0560A" id="c_mobile"><?php echo e($inv_itemdata->item_code); ?></b></p>
                           </div>
                           <div class="col-md-3">
-                            <p>Item Category : <b style="color: #F0560A" id="c_email">{{$inv_itemdata->item_category_id}}</b></p>
+                            <p>Item Category : <b style="color: #F0560A" id="c_email"><?php echo e($inv_itemdata->item_category_id); ?></b></p>
                           </div>
                           <div class="col-md-3">
-                            <p>Quantity : <b style="color: #F0560A" id="c_company">{{$inv_itemdata->quantity}}</b></p>
+                            <p>Quantity : <b style="color: #F0560A" id="c_company"><?php echo e($inv_itemdata->quantity); ?></b></p>
                           </div>
                           <div class="col-md-3">
-                            <p>Unit of M : <b>{{$inv_itemdata->uom_id}}</b></p>
+                            <p>Unit of M : <b><?php echo e($inv_itemdata->uom_id); ?></b></p>
                           </div>
                           
                         </div>
@@ -101,3 +101,4 @@
     </div>
   </div>
 
+<?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/inventory/view_inv_item.blade.php ENDPATH**/ ?>

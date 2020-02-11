@@ -22,8 +22,8 @@
           <h4 class="pull-left page-title" style="color: #000; font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp; Create Organization&nbsp;&nbsp;/ &nbsp;
             <a href="javascript::void(0);" onclick="history.back();">Back</a></h4>
           <ol class="breadcrumb pull-right">
-            <li><a href="{{ URL::to('home') }}">Home</a></li>
-            <li><a href="{{URL::to('home')}}">Organization</a></li>
+            <li><a href="<?php echo e(URL::to('home')); ?>">Home</a></li>
+            <li><a href="<?php echo e(URL::to('home')); ?>">organization</a></li>
             <li class="active">Add Organization</li>
           </ol>
         </div>
@@ -35,9 +35,9 @@
             <div class="card-header" style="background: linear-gradient(to left, #6e5e5c, #ffffff 50%, #ffffff, #ffffff 75%);">
               <div class="card-body">
 
-                <form action="{{url('organization/addStore')}}" method="post" id="FormValidation" required="" aria-required="true" enctype="multipart/form-data">
+                <form action="<?php echo e(url('organization/addStore')); ?>" method="post" id="FormValidation" required="" aria-required="true" enctype="multipart/form-data">
                   <div class="row gutters justify-content-left">
-                    @csrf
+                    <?php echo csrf_field(); ?>
                     <div class="card-body">
                       <div class="row">
                         <div class="col-sm-12">
@@ -83,9 +83,9 @@
                                 <label for="field-4" class="control-label">Relationships *</label>
                                 <select class="form-control" name="relationships" id="relationships" required aria-required="true">
                                   <option value="">--Select--</option>
-                                  @foreach($org_relation as $key=>$val)
-                                  <option value="{{$val->org_relation_id}}">{{$val->relation_name}}</option>
-                                  @endforeach
+                                  <?php $__currentLoopData = $org_relation; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <option value="<?php echo e($val->org_relation_id); ?>"><?php echo e($val->relation_name); ?></option>
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                               </div>
                             </div>
@@ -133,9 +133,9 @@
                                 <label for="field-4" class="control-label">Department *</label>
                                 <select class="form-control" name="department" id="department" required aria-required="true">
                                   <option value="">--Select--</option>
-                                  @foreach($departments as $key=>$val)
-                                  <option value="{{$val->id}}">{{$val->department_name}}</option>
-                                  @endforeach
+                                  <?php $__currentLoopData = $departments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <option value="<?php echo e($val->id); ?>"><?php echo e($val->department_name); ?></option>
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                               </div>
                             </div>
@@ -145,9 +145,9 @@
                                 <label for="field-4" class="control-label">Contact Type *</label>
                                 <select class="form-control" name="contact_type" id="contact_type" required aria-required="true">
                                   <option value="">--Select--</option>
-                                  @foreach($org_contact as $key=>$val)
-                                  <option value="{{$val->org_contact_type_id}}">{{$val->org_contact_type_name}}</option>
-                                  @endforeach
+                                  <?php $__currentLoopData = $org_contact; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <option value="<?php echo e($val->org_contact_type_id); ?>"><?php echo e($val->org_contact_type_name); ?></option>
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                               </div>
                             </div>
@@ -169,4 +169,4 @@
       </div>
     </div>
   </div>
-</div>
+</div><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/organization/add_organization.blade.php ENDPATH**/ ?>

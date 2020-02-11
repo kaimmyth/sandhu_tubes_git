@@ -20,10 +20,10 @@
       <div class="row" id="dashboard-row">
         <div class="col-sm-12">
           <h4 class="pull-left page-title" style="color: #000; font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp; Create Inventory Item&nbsp;&nbsp;/ &nbsp;
-            <a href="{{url('inv_item/listing')}}">Back</a></h4>
+            <a href="<?php echo e(url('inv_item/listing')); ?>">Back</a></h4>
           <ol class="breadcrumb pull-right">
-            <li><a href="{{ URL::to('home') }}">Home</a></li>
-            <li><a href="{{URL::to('home')}}">Item</a></li>
+            <li><a href="<?php echo e(URL::to('home')); ?>">Home</a></li>
+            <li><a href="<?php echo e(URL::to('home')); ?>">Item</a></li>
             <li class="active">Add Inventory Item</li>
           </ol>
         </div>
@@ -35,9 +35,9 @@
             <div class="card-header" style="background: linear-gradient(to left, #6e5e5c, #ffffff 50%, #ffffff, #ffffff 75%);">
               <div class="card-body">
 
-                <form action="{{url('inv_item/addStore')}}" method="post" id="FormValidation" required="" aria-required="true" enctype="multipart/form-data">
+                <form action="<?php echo e(url('inv_item/addStore')); ?>" method="post" id="FormValidation" required="" aria-required="true" enctype="multipart/form-data">
                   <div class="row gutters justify-content-left">
-                    @csrf
+                    <?php echo csrf_field(); ?>
                     <div class="card-body">
                       <div class="row">
                         <div class="col-sm-12">
@@ -72,9 +72,9 @@
                                 <label for="field-4" class="control-label">Item Category *</label>
                                 <select class="form-control" name="item_category" id="item_category" required aria-required="true">
                                   <option value="">--Select--</option>
-                                  @foreach($categorytData as $key=>$val)
-                                  <option value="{{$val->id}}">{{$val->category_name}}</option>
-                                  @endforeach
+                                  <?php $__currentLoopData = $categorytData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <option value="<?php echo e($val->id); ?>"><?php echo e($val->category_name); ?></option>
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                               </div>
                             </div>
@@ -91,9 +91,9 @@
                                 <label for="field-4" class="control-label">UoM *</label>
                                 <select class="form-control" name="uom" id="uom" required aria-required="true">
                                   <option value="">--Select--</option>
-                                  @foreach($uomData as $key=>$val)
-                                  <option value="{{$val->id}}">{{$val->uom_name}}</option>
-                                  @endforeach
+                                  <?php $__currentLoopData = $uomData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <option value="<?php echo e($val->id); ?>"><?php echo e($val->uom_name); ?></option>
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                               </div>
                             </div>
@@ -134,9 +134,9 @@
                                 <label for="field-4" class="control-label">Location</label>
                                 <select class="form-control" name="location" id="location">
                                   <option value="">--Select--</option>
-                                  @foreach($inventory_location as $key=>$val)
-                                  <option value="{{$val->id}}">{{$val->location_name}}</option>
-                                  @endforeach
+                                  <?php $__currentLoopData = $inventory_location; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <option value="<?php echo e($val->id); ?>"><?php echo e($val->location_name); ?></option>
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                               </div>
                             </div>
@@ -165,4 +165,4 @@
   {
       document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
   }
-</script>
+</script><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/inventory/add_inv_item.blade.php ENDPATH**/ ?>
