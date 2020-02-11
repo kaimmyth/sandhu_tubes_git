@@ -33,13 +33,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-border card-info">
-                        <div class="card-header" style="background-image: linear-gradient(#e9f8ff, white);">
+                        <div class="card-header" style="padding-top: 20px !important;">
                             
                             <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                     <!-- <button type="button" data-toggle="modal" data-target="#generic-model" class="btn btn-purple" style="float:right;margin-top: 0px !important;">Set Generic  User<i class="md md-add-circle-outline"></i></button> -->
                                       <!-- <!-- <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;" onclick="addRecords()">Add <si class="md md-add-circle-outline"></si></button> --> 
                                       <a href="{{url('add/users/from')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 0px !important;">Add <i class="md md-add-circle-outline"></i></button></a>
-                                <thead style="background: #b6e9ff;">
+                                <thead style="">
                                     <tr>
                                         <th style="width: 55px;">Sl.</th>
                                         <th>Name</th>

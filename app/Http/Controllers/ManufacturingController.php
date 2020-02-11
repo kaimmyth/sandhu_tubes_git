@@ -32,18 +32,18 @@ use App\manufacturing_details;
 
 class ManufacturingController extends Controller
 {
-    public function list(Request $request)
+  public function list(Request $request)
   {
     try {
 
-      $toReturn=array();
-      $toReturn['details']=manufacturing_details::where('status',1)->get();
-     
-     
-      $user_id=Session::get('gorgID');
+      $toReturn = array();
+      $toReturn['details'] = manufacturing_details::where('status', 1)->get();
+
+
+      $user_id = Session::get('gorgID');
 
       $data['content'] = 'Manufacturing.list';
-      return view('layouts.content', compact('data'))->with(['toReturn'=>$toReturn,'user_id'=>$user_id]);
+      return view('layouts.content', compact('data'))->with(['toReturn' => $toReturn, 'user_id' => $user_id]);
     } catch (\Exception $e) {
       return $e->getMessage();
     }
@@ -52,101 +52,101 @@ class ManufacturingController extends Controller
   public function add(Request $request)
   {
 
-    $InventoryLocation=InventoryLocation::where('status',1)->get();
-    $inv_item=inv_item::all();
-    $uom=Uom::where('status',1)->get();
+    $InventoryLocation = InventoryLocation::where('status', 1)->get();
+    $inv_item = inv_item::all();
+    $uom = Uom::where('status', 1)->get();
     $data['content'] = 'Manufacturing.add';
-    return view('layouts.content', compact('data'))->with(['uom'=>$uom,'inv_item'=>$inv_item,'InventoryLocation'=>$InventoryLocation]);
+    return view('layouts.content', compact('data'))->with(['uom' => $uom, 'inv_item' => $inv_item, 'InventoryLocation' => $InventoryLocation]);
   }
   public function create(Request $request)
   {
-    if($request->manufacturing_details_id!="")
-    {
-      $manufacturing_details=manufacturing_details::find($request->manufacturing_details_id);
-      $manufacturing_details->input_items_id=$request->input_items_id;
-      $manufacturing_details->input_items_quantity=$request->input_items_quantity;
-      $manufacturing_details->input_items_uom=$request->input_items_uom;
-      $manufacturing_details->input_items_location=$request->input_items_location;
-      $manufacturing_details->finished_goods_name=$request->finished_goods_name;
-      $manufacturing_details->finished_goods_quantity=$request->finished_goods_quantity;
-      $manufacturing_details->finished_goods_uom=$request->finished_goods_uom;
-      $manufacturing_details->finished_goods_location=$request->finished_goods_location;
-      $manufacturing_details->metal_scrap_name=$request->metal_scrap_name;
-      $manufacturing_details->metal_scrap_quantity=$request->metal_scrap_quantity;
-      $manufacturing_details->metal_scrap_uom=$request->metal_scrap_uom;
-      $manufacturing_details->metal_scrap_location=$request->metal_scrap_location;
-      $manufacturing_details->invisible_loss_name=$request->invisible_loss_name;
-      $manufacturing_details->invisible_loss_quantity=$request->invisible_loss_quantity;
-      $manufacturing_details->invisible_loss_uom=$request->invisible_loss_uom;
-      $manufacturing_details->invisible_loss_auto=$request->invisible_loss_auto;
-      $manufacturing_details->status=1;
-      $manufacturing_details->updated_at=date('Y-m-d');
-      $manufacturing_details->created_by=Auth::user()->id;
-      $manufacturing_details->update_by=Auth::user()->id;
+    if ($request->manufacturing_details_id != "") {
+      $manufacturing_details = manufacturing_details::find($request->manufacturing_details_id);
+      $manufacturing_details->input_items_id = $request->input_items_id;
+      $manufacturing_details->input_items_quantity = $request->input_items_quantity;
+      $manufacturing_details->input_items_uom = $request->input_items_uom;
+      $manufacturing_details->input_items_location = $request->input_items_location;
+      $manufacturing_details->finished_goods_name = $request->finished_goods_name;
+      $manufacturing_details->finished_goods_quantity = $request->finished_goods_quantity;
+      $manufacturing_details->finished_goods_uom = $request->finished_goods_uom;
+      $manufacturing_details->finished_goods_location = $request->finished_goods_location;
+      $manufacturing_details->metal_scrap_name = $request->metal_scrap_name;
+      $manufacturing_details->metal_scrap_quantity = $request->metal_scrap_quantity;
+      $manufacturing_details->metal_scrap_uom = $request->metal_scrap_uom;
+      $manufacturing_details->metal_scrap_location = $request->metal_scrap_location;
+      $manufacturing_details->invisible_loss_name = $request->invisible_loss_name;
+      $manufacturing_details->invisible_loss_quantity = $request->invisible_loss_quantity;
+      $manufacturing_details->invisible_loss_uom = $request->invisible_loss_uom;
+      $manufacturing_details->invisible_loss_auto = $request->invisible_loss_auto;
+      $manufacturing_details->status = 1;
+      $manufacturing_details->updated_at = date('Y-m-d');
+      $manufacturing_details->created_by = Auth::user()->id;
+      $manufacturing_details->update_by = Auth::user()->id;
       $manufacturing_details->save();
       Session::flash('success', 'Manufacturing Details Update Succesfully');
-
+    } else {
+      $manufacturing_details = new  manufacturing_details();
+      $manufacturing_details->input_items_id = $request->input_items_id;
+      $manufacturing_details->input_items_quantity = $request->input_items_quantity;
+      $manufacturing_details->input_items_uom = $request->input_items_uom;
+      $manufacturing_details->input_items_location = $request->input_items_location;
+      $manufacturing_details->finished_goods_name = $request->finished_goods_name;
+      $manufacturing_details->finished_goods_quantity = $request->finished_goods_quantity;
+      $manufacturing_details->finished_goods_uom = $request->finished_goods_uom;
+      $manufacturing_details->finished_goods_location = $request->finished_goods_location;
+      $manufacturing_details->metal_scrap_name = $request->metal_scrap_name;
+      $manufacturing_details->metal_scrap_quantity = $request->metal_scrap_quantity;
+      $manufacturing_details->metal_scrap_uom = $request->metal_scrap_uom;
+      $manufacturing_details->metal_scrap_location = $request->metal_scrap_location;
+      $manufacturing_details->invisible_loss_name = $request->invisible_loss_name;
+      $manufacturing_details->invisible_loss_quantity = $request->invisible_loss_quantity;
+      $manufacturing_details->invisible_loss_uom = $request->invisible_loss_uom;
+      $manufacturing_details->invisible_loss_auto = $request->invisible_loss_auto;
+      $manufacturing_details->status = 1;
+      $manufacturing_details->updated_at = date('Y-m-d');
+      $manufacturing_details->created_by = Auth::user()->id;
+      $manufacturing_details->update_by = Auth::user()->id;
+      $manufacturing_details->save();
+      Session::flash('success', 'Manufacturing Details Save Succesfully');
     }
-    else
-    {
-    $manufacturing_details=new  manufacturing_details();
-    $manufacturing_details->input_items_id=$request->input_items_id;
-    $manufacturing_details->input_items_quantity=$request->input_items_quantity;
-    $manufacturing_details->input_items_uom=$request->input_items_uom;
-    $manufacturing_details->input_items_location=$request->input_items_location;
-    $manufacturing_details->finished_goods_name=$request->finished_goods_name;
-    $manufacturing_details->finished_goods_quantity=$request->finished_goods_quantity;
-    $manufacturing_details->finished_goods_uom=$request->finished_goods_uom;
-    $manufacturing_details->finished_goods_location=$request->finished_goods_location;
-    $manufacturing_details->metal_scrap_name=$request->metal_scrap_name;
-    $manufacturing_details->metal_scrap_quantity=$request->metal_scrap_quantity;
-    $manufacturing_details->metal_scrap_uom=$request->metal_scrap_uom;
-    $manufacturing_details->metal_scrap_location=$request->metal_scrap_location;
-    $manufacturing_details->invisible_loss_name=$request->invisible_loss_name;
-    $manufacturing_details->invisible_loss_quantity=$request->invisible_loss_quantity;
-    $manufacturing_details->invisible_loss_uom=$request->invisible_loss_uom;
-    $manufacturing_details->invisible_loss_auto=$request->invisible_loss_auto;
-    $manufacturing_details->status=1;
-    $manufacturing_details->updated_at=date('Y-m-d');
-    $manufacturing_details->created_by=Auth::user()->id;
-    $manufacturing_details->update_by=Auth::user()->id;
-    $manufacturing_details->save();
-    Session::flash('success', 'Manufacturing Details Save Succesfully');
 
-    }
-  
-return redirect('Manufacturing/list');
+    return redirect('Manufacturing/list');
     return $manufacturing_details;
   }
-  public function edit($id="")
+  public function edit($id = "")
   {
-    $manufacturing_details=manufacturing_details::where('id',$id)->first();
+    $manufacturing_details = manufacturing_details::where('id', $id)->first();
 
-    $InventoryLocation=InventoryLocation::where('status',1)->get();
-    $inv_item=inv_item::all();
-    $uom=Uom::where('status',1)->get();
-    $zone = AllLocationzone::all();
-    $phase = AllLocationphase::all();
-    $block = AllLocationblock::all();
-    $landdata = Land::all();
+    $InventoryLocation = InventoryLocation::where('status', 1)->get();
+    $inv_item = inv_item::all();
+    $uom = Uom::where('status', 1)->get();
     $data['content'] = 'Manufacturing.add';
-    return view('layouts.content', compact('data'))->with(['manufacturing_details'=>$manufacturing_details,'zone' => $zone, 'phase' => $phase, 'block' => $block,'uom'=>$uom,'inv_item'=>$inv_item,'InventoryLocation'=>$InventoryLocation]);
+    return view('layouts.content', compact('data'))->with(['manufacturing_details' => $manufacturing_details, 'inv_item' => $inv_item, 'InventoryLocation' => $InventoryLocation,'uom'=>$uom]);
   }
-  public function delete($id="")
+  public function delete($id = "")
   {
-    if($id!="")
-    {
+    if ($id != "") {
       Session::flash('success', 'Manufacturing Details Delete Succesfully');
-    $manufacturing_details=manufacturing_details::where('id',$id)->delete();
-    return back();
-    }
-    else
-    {
+      $manufacturing_details = manufacturing_details::where('id', $id)->delete();
+      return back();
+    } else {
       Session::flash('danger', 'Manufacturing Details Delete Failled');
 
       return back();
     }
 
     return $id;
+  }
+  public function view_details($id="")
+  {
+    $manufacturing_details = manufacturing_details::where('id', $id)->first();
+    $data['content'] = 'Manufacturing.view_details';
+    return view('layouts.content', compact('data'))->with(['manufacturing_details' => $manufacturing_details]);
+ 
+  }
+  public function get_item_details($id="")
+  {
+    $inv_item = inv_item::where('id',$id)->first();
+    return $inv_item;
   }
 }

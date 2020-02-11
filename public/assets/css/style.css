@@ -1617,8 +1617,8 @@ body.fixed-left .side-menu.left {
   }
 
   .btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open > .dropdown-toggle.btn-primary {
-    background-color: #317eeb !important;
-    border: 1px solid #317eeb !important;
+    background-color: #16469d !important;
+    border: 1px solid #16469d !important;
   }
 
   .btn-success, .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .btn-success.focus, .btn-success:active, .btn-success:focus, .btn-success:hover, .open > .dropdown-toggle.btn-success {
@@ -2500,6 +2500,7 @@ body.fixed-left .side-menu.left {
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     transition: all 0.4s;
+	padding: 0px 5px 15px 5px;
   }
 
   .portlet .portlet-heading {

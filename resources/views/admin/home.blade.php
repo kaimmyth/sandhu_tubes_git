@@ -15,7 +15,7 @@
   .stats-left {
     float: left;
     width: 70%;
-    background-image: linear-gradient(#bdbdbd, #6e5e5c);
+   background-image: linear-gradient(#bdbdbd, #393e4a);
     text-align: center;
     padding: 0px;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);

@@ -15,8 +15,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <h1><a href="{{url('/')}}"><i class="md md-terrain"></i>
-			Sandhu Tubes</a></h1>
+               <!-- <h1><a href="{{url('/')}}"><i class="md md-terrain"></i>Sandhu Tubes</a></h1>-->
+				
+				<h1><a href="#"><img src="public/images/logo1.png" style="border: none;"></a></h1>
+				
             </div>
             <!-- <div class="top-nav-text">
                 <div class="search-w3layouts">
@@ -26,7 +28,7 @@
                 </div>
             </div> -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav" style="    margin-top: 1em;">
+                <ul class="nav navbar-nav" style="    margin-top: 2em;">
                     <!--<li><a class="hvr-underline-from-center active" href="{{url('homepage')}}">Home</a></li>-->
                     <li><a href="#" data-toggle="dropdown"><span data-hover="dropdown">About Us</span><span class="caret"></span></a>
                         <ul class="dropdown-menu">

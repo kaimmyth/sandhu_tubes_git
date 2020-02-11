@@ -113,7 +113,7 @@
                       <div class="col-sm-7">
                         <div class="input-group">
                           <!-- <input type="text" id="searchland" name="search_items_name" class="form-control" placeholder="Search items"> -->
-                          <input type="hidden" name="manufacturing_details_id" value="{{@$manufacturing_details->id}}" >
+                          <input type="hidden" name="manufacturing_details_id" value="{{@$manufacturing_details->id}}">
                           <span class="input-group-prepend">
                             <!-- <button type="button" class="btn waves-effect waves-light btn-primary"><i class="fa fa-search"></i></button> &nbsp; -->
                             <!-- <button type="button" class="btn waves-effect waves-light btn-primary" onclick="addlandModel()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add New Land"><i class="fa fa-plus"></i></button> -->
@@ -130,13 +130,23 @@
 
                         <div class="form-group">
                           <label for="field-1" class="control-label">Mother Coil/Slit Coil*</label>
-                          <select class="form-control" name="input_items_id" id="city" required="" aria-required="true">
+                          <select class="form-control" name="input_items_id"  required="" onchange="get_item_details(this)" aria-required="true">
                             <option value=""></option>
                             @foreach($inv_item as $key=> $value)
                             <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_id==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
                             @endforeach
-                           
+
                           </select>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3" id="hidden_section_serial" style="display: none;">
+                              <label for="field-3" class="control-label">Serial No.</label>
+                              <input type="text" class="form-control"  id="Serial_no"  placeholder="" required="" aria-required="true">
+                            </div>
+                            <div class="col-sm-3" id="hidden_section_batch" style="display: none;">
+                              <label for="field-3" class="control-label">Batch No.</label>
+                              <input type="text" class="form-control"  id="batch_no"  placeholder="" required="" aria-required="true">
+                            </div>
                         </div>
 
                       </div>
@@ -144,7 +154,7 @@
                       <div class="col-md-3">
                         <div class="form-group">
                           <label for="field-3" class="control-label">Quantity*</label>
-                          <input type="text" class="form-control" name="input_items_quantity" onblur="clc_per();"  id="input_items_quantity" min="1" value="@if(@$manufacturing_details->input_items_quantity) {{$manufacturing_details->input_items_quantity}} @endif" placeholder="" required="" aria-required="true">
+                          <input type="text" class="form-control" name="input_items_quantity" onblur="clc_per();" id="input_items_quantity" min="1" value="@if(@$manufacturing_details->input_items_quantity) {{$manufacturing_details->input_items_quantity}} @endif" placeholder="" required="" aria-required="true">
                         </div>
                       </div>
 
@@ -152,7 +162,7 @@
                         <div class="form-group">
                           <label for="field-3" class="control-label">UoM*</label>
                           <label for="field-1" class="control-label"></label>
-                          <select class="form-control" name="input_items_uom" id="city" required="" aria-required="true">
+                          <select class="form-control" name="input_items_uom"  required="" aria-required="true">
                             <option value=""></option>
                             @foreach($uom as $key=> $value)
                             <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_uom==$value['id']) {{"selected"}} @endif>{{$value['uom_name']}}</option>
@@ -166,7 +176,7 @@
                         <div class="form-group">
                           <label for="field-3" class="control-label">Inventory Location*</label>
                           <label for="field-1" class="control-label"></label>
-                          <select class="form-control" name="input_items_location" id="city" required="" aria-required="true">
+                          <select class="form-control" name="input_items_location"  required="" aria-required="true">
                             <option value=""></option>
                             @foreach($InventoryLocation as $key=> $value)
                             <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_location==$value['id']) {{"selected"}} @endif>{{$value['location_name']}}</option>
@@ -189,7 +199,7 @@
 
 
 
-                  
+
                   <hr>
                   <p style="font-size: 17px; font-weight: 700;">Output</p>
                   <span style="color:#F83008; font-weight: 600;" id="NotAloowPccCust"> </span><br><br>
@@ -197,11 +207,11 @@
                     <div class="row form-group">
                       <div class="col-sm-7">
                         <!-- <div class="input-group" style="margin-top: -47px;"> -->
-                          <!-- <input type="text" name="output_item_name" id="searchcustomer" class="form-control" placeholder="Search items" autocomplete="off"> -->
-                          <!-- <span class="input-group-prepend"> -->
-                            <!-- <button type="button" class="btn waves-effect waves-light btn-primary"><i class="fa fa-search"></i></button>&nbsp; -->
-                            <!-- <button type="button" class="btn waves-effect waves-light btn-primary" onclick="addcustomerModel()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add New Customer"><i class="fa fa-plus"></i></button> -->
-                          <!-- </span> -->
+                        <!-- <input type="text" name="output_item_name" id="searchcustomer" class="form-control" placeholder="Search items" autocomplete="off"> -->
+                        <!-- <span class="input-group-prepend"> -->
+                        <!-- <button type="button" class="btn waves-effect waves-light btn-primary"><i class="fa fa-search"></i></button>&nbsp; -->
+                        <!-- <button type="button" class="btn waves-effect waves-light btn-primary" onclick="addcustomerModel()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add New Customer"><i class="fa fa-plus"></i></button> -->
+                        <!-- </span> -->
                         <!-- </div> -->
                         <div id="customer_list"></div>
                       </div>
@@ -214,12 +224,12 @@
 
                       <div class="form-group">
                         <label for="field-1" class="control-label">Finished Goods*</label>
-                        <select class="form-control" name="finished_goods_name" id="finished_goods_name" required="" aria-required="true">
+                        <select class="form-control" name="finished_goods_name" onchange="get_item_details(this)" id="finished_goods_name" required="" aria-required="true">
                           <option value=""></option>
-                        @foreach($inv_item as $key=> $value)
-                        <option value="{{$value['id']}}" @if(@$manufacturing_details->finished_goods_name==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
-                        @endforeach
-                        <!-- <input type="text" class="form-control" name="finished_goods_name" id="finished_goods_name" value="@if(@$manufacturing_details->finished_goods_name) {{$manufacturing_details->finished_goods_name}} @endif"  placeholder="" required="" aria-required="true"> -->
+                          @foreach($inv_item as $key=> $value)
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->finished_goods_name==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
+                          @endforeach
+                          <!-- <input type="text" class="form-control" name="finished_goods_name" id="finished_goods_name" value="@if(@$manufacturing_details->finished_goods_name) {{$manufacturing_details->finished_goods_name}} @endif"  placeholder="" required="" aria-required="true"> -->
                         </select>
                       </div>
 
@@ -228,8 +238,9 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-3" class="control-label">Quantity*</label>
-                        <input type="text" class="form-control" name="finished_goods_quantity" id="finished_goods_quantity" min="1" value="@if(@$manufacturing_details->finished_goods_quantity) {{$manufacturing_details->finished_goods_quantity}} @endif" placeholder="" required="" aria-required="true">
+                        <input type="text" class="form-control" name="finished_goods_quantity"  onblur="clc_scrap();" id="finished_goods_quantity" min="1" value="@if(@$manufacturing_details->finished_goods_quantity) {{$manufacturing_details->finished_goods_quantity}} @endif" placeholder="" required="" aria-required="true">
                       </div>
+                      <span id="finished_goods_quantity_error" style="color: #F83008;display:none">Finished Goods Quantity</span>
                     </div>
 
                     <div class="col-md-3">
@@ -250,7 +261,7 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-3" class="control-label">Inventory Location*</label>
-                        <select class="form-control" name="finished_goods_location" id="finished_goods_location" required="" aria-required="true">
+                        <select class="form-control" name="finished_goods_location" id="finished_goods_location"  required="" aria-required="true">
                           <option value=""></option>
                           @foreach($InventoryLocation as $key=> $value)
                           <option value="{{$value['id']}}" @if(@$manufacturing_details->finished_goods_location==$value['id']) {{"selected"}} @endif>{{$value['location_name']}}</option>
@@ -277,11 +288,11 @@
 
                       <div class="form-group">
                         <label for="field-1" class="control-label">Metal Scrap*</label>
-                        <select class="form-control" name="metal_scrap_name" id="metal_scrap_name" required="" aria-required="true">
+                        <select class="form-control" name="metal_scrap_name" id="metal_scrap_name" onchange="get_item_details(this)" required="" aria-required="true">
                           <option value=""></option>
-                        @foreach($inv_item as $key=> $value)
-                        <option value="{{$value['id']}}" @if(@$manufacturing_details->metal_scrap_name==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
-                        @endforeach
+                          @foreach($inv_item as $key=> $value)
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->metal_scrap_name==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
+                          @endforeach
                         </select>
                         <!-- <input type="text" class="form-control" name="metal_scrap_name" id="metal_scrap_name"  value="@if(@$manufacturing_details->metal_scrap_name) {{$manufacturing_details->metal_scrap_name}} @endif" placeholder="Metal Scrap" required="" aria-required="true"> -->
                       </div>
@@ -291,7 +302,7 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-3" class="control-label">Quantity*</label>
-                        <input type="text" class="form-control" name="metal_scrap_quantity" onblur="check_quantity();" id="metal_scrap_quantity" min="1" value="@if(@$manufacturing_details->metal_scrap_quantity) {{$manufacturing_details->metal_scrap_quantity}} @endif" placeholder="" required="" aria-required="true">
+                        <input type="text" class="form-control" readonly name="metal_scrap_quantity"  id="metal_scrap_quantity" min="1" value="@if(@$manufacturing_details->metal_scrap_quantity) {{$manufacturing_details->metal_scrap_quantity}} @endif" placeholder="" required="" aria-required="true">
                       </div>
                     </div>
 
@@ -335,11 +346,11 @@
 
                       <div class="form-group">
                         <label for="field-1" class="control-label">Invisible Loss*</label>
-                        <select class="form-control" name="invisible_loss_name" id="invisible_loss_name" required="" aria-required="true">
+                        <select class="form-control" name="invisible_loss_name" id="invisible_loss_name" onchange="get_item_details(this)" required="" aria-required="true">
                           <option value=""></option>
-                        @foreach($inv_item as $key=> $value)
-                        <option value="{{$value['id']}}" @if(@$manufacturing_details->invisible_loss_name==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
-                        @endforeach
+                          @foreach($inv_item as $key=> $value)
+                          <option value="{{$value['id']}}" @if(@$manufacturing_details->invisible_loss_name==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
+                          @endforeach
                         </select>
                         <!-- <input type="text" class="form-control" name="invisible_loss_name" id="invisible_loss_name"  value="@if(@$manufacturing_details->invisible_loss_name) {{$manufacturing_details->invisible_loss_name}} @endif" placeholder="" required="" aria-required="true"> -->
                       </div>
@@ -400,34 +411,9 @@
                   <input type="submit" class="btn btn-primary" name="submit" onclick="return check_quantity()" value="Create">
 
                   <hr>
-                  <script type="text/javascript">
-                    function chkdate(elem) {
-                      var date = document.getElementById("appliDate").value;
-                      //$(".selector" ).datepicker("setDate", date);
-                      var today = new Date();
-                      $('.selector').datepicker({
-                        format: 'dd-mm-yyyy',
-                        autoclose: true,
-                        setDate: date,
-                        startDate: date,
-                        minDate: date
-                      }).on('changeDate', function (ev) {
-                        $(this).datepicker('hide');
-                      });
-                      $('.selector').datepicker('setDate', date);
-                      $('.selector').keyup(function () {
-                        if (this.value.match(/[^0-9]/g)) {
-                          this.value = this.value.replace(/[^0-9^-]/g, '');
-                        }
-                      });
-                    }
-                  </script>
 
-                  <!--   <p style="font-size: 17px; font-weight: 700;">Payment Info</p>
-          <hr>
-          <p style="font-size: 17px; font-weight: 700;">Review & Submit</p>
-          <hr> -->
-                    
+
+
                 </div> <!-- card -->
             </div> <!-- container -->
           </div> <!-- content -->
@@ -437,47 +423,116 @@
       <!--  Wizard Form -->
 
 
-    
 
 
 
 
-  
 
-      
-  
-    <script>
-      function check_quantity()
-      {
-        var input_items_quantity=$("#input_items_quantity").val();
-        var finished_goods_quantity=$("#finished_goods_quantity").val();
-        var metal_scrap_quantity=$("#metal_scrap_quantity").val();
-        var int_input_quantity=input_items_quantity.replace(/\s/g, '');
-        var output_quantity=parseInt(finished_goods_quantity.replace(/\s/g, ''))+parseInt(metal_scrap_quantity.replace(/\s/g, ''));
-        var diff=0;
-        var final_quantity=0;
-        if(int_input_quantity>output_quantity)
+
+
+
+
+      <script>
+        function check_quantity() {
+          var input_items_quantity = $("#input_items_quantity").val();
+          var finished_goods_quantity = $("#finished_goods_quantity").val();
+          var metal_scrap_quantity = $("#metal_scrap_quantity").val();
+          var int_input_quantity = input_items_quantity.replace(/\s/g, '');
+          var output_quantity = parseInt(finished_goods_quantity.replace(/\s/g, '')) + parseInt(metal_scrap_quantity.replace(/\s/g, ''));
+          var diff = 0;
+          var final_quantity = 0;
+          if (int_input_quantity > output_quantity) {
+            diff = int_input_quantity - output_quantity;
+            final_quantity = output_quantity + diff;
+            $("#final_quantity").html(final_quantity);
+            $("#invisible_loss_quantity").val(diff);
+            return true;
+          }
+          else {
+            $("#final_quantity").html(final_quantity);
+            $("#invisible_loss_quantity").val(diff);
+            alert("Your Output Quantity is Greater Than Input Quantity");
+            return false;
+          }
+        }
+      </script>
+      <script>
+        function clc_scrap() {
+          var input_items_quantity = $("#input_items_quantity").val();
+          var finished_goods_quantity = $("#finished_goods_quantity").val();
+          // var metal_scrap_quantity = $("#metal_scrap_quantity").val();
+          var int_finished_goods_quantity=finished_goods_quantity.replace(/\s/g, '');
+          var int_input_quantity = input_items_quantity.replace(/\s/g, '');
+          var scrap_item=parseInt(input_items_quantity.replace(/\s/g, '')) - parseInt(finished_goods_quantity.replace(/\s/g, ''));
+          // var output_quantity = parseInt(finished_goods_quantity.replace(/\s/g, '')) + parseInt(metal_scrap_quantity.replace(/\s/g, ''));
+          var diff = 0;
+          var final_quantity = 0;
+          alert(int_input_quantity);
+          alert(int_finished_goods_quantity);
+          if (parseFloat(int_input_quantity)>parseFloat(int_finished_goods_quantity)) {
+          $("#metal_scrap_quantity").val(scrap_item);
+          $("#finished_goods_quantity_error").css('display','none');
+
+          }
+          else
+          {
+            $("#finished_goods_quantity_error").css('display','block');
+            $("#metal_scrap_quantity").val(0);
+          }
+          // if (int_input_quantity > output_quantity) {
+          //   diff = int_input_quantity - output_quantity;
+          //   final_quantity = output_quantity + diff;
+          //   $("#final_quantity").html(final_quantity);
+          //   $("#invisible_loss_quantity").val(diff);
+          //   return true;
+          // }
+          // else {
+          //   $("#final_quantity").html(final_quantity);
+          //   $("#invisible_loss_quantity").val(diff);
+          //   alert("Your Output Quantity is Greater Than Input Quantity");
+          //   return false;
+          // }
+        }
+      </script>
+      <script>
+        function clc_per() {
+          var input_items_quantity = $("#input_items_quantity").val();
+          var int_input_items_quantity = input_items_quantity.replace(/\s/g, '');
+          var invisible_los = (int_input_items_quantity / 300).toFixed(2);
+          $("#invisible_loss_quantity").val(invisible_los);
+        }
+      </script>
+      <script>
+        function get_item_details(e)
         {
-          diff=int_input_quantity-output_quantity;
-          final_quantity=output_quantity+diff;
-          $("#final_quantity").html(final_quantity);
-        $("#invisible_loss_quantity").val(diff);
-        return true;
+          var item_id=$(e).val();
+          $.ajax({
+          url: "{{url('Manufacturing/get_item_details/')}}" + '/' + item_id,
+          type: "GET",
+          success: function(data) {
+          console.log(data);
+          if(data.serial_no!=null)
+          {
+            $("#hidden_section_serial").css('display','block');
+          $("#Serial_no").val(data.serial_no);
+          }
+          else
+          {
+            $("#hidden_section_serial").css('display','none');
+          $("#Serial_no").val("");
+          }
+          if(data.batch_no!=null)
+          {
+            $("#hidden_section_batch").css('display','block');
+          $("#batch_no").val(data.batch_no);
+          }
+          else
+          {
+            $("#hidden_section_batch").css('display','none');
+          $("#batch_no").val("");
+          }
+          }
+        });
+         
         }
-        else{
-          $("#final_quantity").html(final_quantity);
-        $("#invisible_loss_quantity").val(diff);
-        alert("Your Output Quantity is Greater Than Input Quantity");
-        return false;
-        }
-      }
-    </script>
-    <script>
-      function clc_per()
-      {
-        var input_items_quantity=$("#input_items_quantity").val();
-        var int_input_items_quantity=input_items_quantity.replace(/\s/g, '');
-        var invisible_los=(int_input_items_quantity/300).toFixed(2);
-        $("#invisible_loss_quantity").val(invisible_los);
-      }
-    </script>
+      </script>

@@ -35,6 +35,24 @@
     .action {
         width: 50px;
     }
+
+    @media print {
+  table th:last-child {display:none}  
+  table td:last-child {display:none}
+}
+
+    #to-print-area { display: none; }
+  @media print
+   {
+      #to-print-area { display: block; }
+   }
+   @media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
 </style>
 <div class="content-page">
     <div class="content">
@@ -65,9 +83,11 @@
                                         <a href="{{url('Manufacturing/add')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 1%;"><i class="md md-add-circle-outline"></i> Add</button></a><br>
                                         @endif
                                         @else
+                                        <a href="#"><button id="prtbtn"  onclick="printDiv('datatable ')" class="btn btn-purple btn-rounded waves-effect waves-light" style="float:right; margin-top:5%;">Print</button></a>
                                         <a href="{{url('Manufacturing/add')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5 ttnne" style="float:right;margin-top: 1%;"><i class="md md-add-circle-outline"></i> Add</button></a><br>
                                         @endif
-                                        <table id="datatable" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; width:100%; border-spacing: 0;">
+                                        <div id="printable-area">
+                                        <table id="datatable"  class=" table table-striped table-bordered dt-responsive" style="border-collapse: collapse; width:100%; border-spacing: 0;">
                                             <thead style="background: #b6e9ff;">
                                                 <tr>
                                                     <th>Item Name </th>
@@ -102,7 +122,7 @@
                                                         </p>
                                                     </td>
                                                 @endif
-                                                <td>
+                                                <td >
                                                     <a href="{{url('Manufacturing/view_details/'.$value_del['id'])}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
 
                                                     <a href="{{url('Manufacturing/edit/'.$value_del['id'])}}" class="on-default view-row" data-toggle="tooltip"  data-placement="top" title="" data-original-title="Update"><i class="fas fa-edit"></i></a> 
@@ -115,6 +135,7 @@
                                             </tbody>
                                             
                                         </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -361,3 +382,17 @@
   };
 </script>
 
+<div id="to-print-area" style="position: fixed;top:0;left:0;width:100vw; height: 100vh; z-index: +999;background: white;">
+</div>
+
+<script>
+
+function printDiv(){
+
+$("#to-print-area").html($("#printable-area").html());
+
+
+window.print();
+}
+
+</script>
