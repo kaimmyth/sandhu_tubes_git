@@ -10,11 +10,19 @@ use Session;
 use DB;
 class shipmentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $statusdata = shipment::where('status',1)->get();
+        // return $request->shipment_type;
+        if ($request->shipment_type == null || $request->shipment_type == 2 || $request->shipment_type == 3) {
+            $statusdata = shipment::where('status',1)->orderBy('id','ASC')->get();
+        } elseif ($request->shipment_type == 1) {
+           $statusdata = shipment::where('status',1)->where('shipment_type',1)->orderBy('id','ASC')->get();
+        } elseif ($request->shipment_type == 0) {
+           $statusdata = shipment::where('status',1)->where('shipment_type',0)->orderBy('id','ASC')->get();
+        }
+        $type = $request->shipment_type;
         $data['content'] = 'shipment.shipment_list';
-        return view('layouts.content', compact('data'))->with(['statusdata' => $statusdata]);
+        return view('layouts.content', compact('data'))->with(['statusdata' => $statusdata,'type' => $type]);
     }
     public function addView($id)
     {

@@ -74,19 +74,19 @@
                       <div class="col-md-10">
                         <div class="row">
                           <div class="col-md-3">
-                            <p>Item Name : <b style="color: #F0560A" id="c_name">{{$inv_itemdata->item_name}}</b></p>
+                            <p>Item Name : <b style="color: #F0560A">{{$inv_itemdata->item_name}}</b></p>
                           </div>
                           <div class="col-md-3">
-                            <p>Item Code : <b style="color: #F0560A" id="c_mobile">{{$inv_itemdata->item_code}}</b></p>
+                            <p>Item Code : <b style="color: #F0560A">{{$inv_itemdata->item_code}}</b></p>
                           </div>
                           <div class="col-md-3">
-                            <p>Item Category : <b style="color: #F0560A" id="c_email">{{$inv_itemdata->item_category_id}}</b></p>
+                            <p>Item Category : <b style="color: #F0560A">{{$inv_itemdata->item_category_id}}</b></p>
                           </div>
                           <div class="col-md-3">
-                            <p>Quantity : <b style="color: #F0560A" id="c_company">{{$inv_itemdata->quantity}}</b></p>
+                            <p>Quantity : <b style="color: #F0560A">{{$inv_itemdata->quantity}} {{$inv_itemdata->uom_id}}</b></p>
                           </div>
                           <div class="col-md-3">
-                            <p>Unit of M : <b>{{$inv_itemdata->uom_id}}</b></p>
+                            <p>Created Date : <b style="color: #F0560A">{{date('j M, Y',strtotime($inv_itemdata->created_date))}}</b></p>
                           </div>
                           
                         </div>

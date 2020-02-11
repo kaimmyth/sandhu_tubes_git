@@ -60,6 +60,25 @@
                             <div class="card-body">
                                 <div class="row"><br><br><br>
                                     <div class="col-md-12 col-sm-12 col-12">
+                                        <form action="<?php echo e(url('shipment/listing')); ?>" method="post" id="FormValidation" aria-required="true" enctype="multipart/form-data">
+                                            <div class="row">
+                                            <?php echo csrf_field(); ?>
+                                                <div class="col-sm-2">
+                                                <select class="form-control" name="shipment_type" id="shipment_type">
+                                                    <option value="3" <?php if($type == 3 ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>>--Select--</option>
+                                                    <option value="2" <?php if($type == 2 ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>>All</option>
+                                                    <option value="1" <?php if($type == 1 ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>>IN</option>
+                                                    <option value="0" <?php if($type == 0 ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>>OUT</option>
+                                                </select>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <button type="submit" class="btn btn-success waves-effect waves-light m-b-5">Search</button>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <a href="<?php echo e(url('shipment/listing')); ?>"><button type="button" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5"><i class="fas fa-sync-alt"></i> Refresh</button></a>
+                                                </div>
+                                            </div>
+                                            </form>
                                         <a href="<?php echo e(url('shipment/add/0')); ?>"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 1%;"><i class="md md-add-circle-outline"></i> Shipment Out</button></a>
                                         <a href="<?php echo e(url('shipment/add/1')); ?>"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 1%;"><i class="md md-add-circle-outline"></i> Shipment Receive</button></a><br>
                                         <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -117,4 +136,20 @@
             </div> <!-- card -->
         </div> <!-- container -->
     </div> <!-- content -->
-</div><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/shipment/shipment_list.blade.php ENDPATH**/ ?>
+</div>
+
+<script>
+    function showtypedata(element) {
+        $.ajax({
+            url: "<?php echo e(url('shipment/listing/')); ?>"+'/'+element,
+            data: {},
+            method: "GET",
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+               console.log(data);
+                
+            }
+        });
+    }
+</script><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/shipment/shipment_list.blade.php ENDPATH**/ ?>

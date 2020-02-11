@@ -336,6 +336,7 @@ Route::prefix('inv_item')->group(function () {
 /* =================================================== Shipment Define Items Raj.. 08/02/2020=================================================== */
 Route::prefix('shipment')->group(function () {
 	Route::get('listing', 'shipmentController@index');
+	Route::post('listing', 'shipmentController@index');
 	Route::get('add/{id}', 'shipmentController@addView');
 	Route::post('addStore', 'shipmentController@addStore');
 	Route::get('showView/{id}', 'shipmentController@showView');
@@ -344,6 +345,7 @@ Route::prefix('shipment')->group(function () {
 	Route::get('deletedata/{id}', 'shipmentController@deletedata');
 	Route::get('fetchItems', 'shipmentController@fetchItems');
 	Route::get('fetchItemsserialno/{id}', 'shipmentController@fetchItemsserialno');
+	// Route::get('fetchacctype/{type}', 'shipmentController@fetchacctype');
 });
 
 /* =================================================== Define Organization Raj.. 08/02/2020=================================================== */

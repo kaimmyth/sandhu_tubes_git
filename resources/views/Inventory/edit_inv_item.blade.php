@@ -135,6 +135,7 @@
                                   </select>
                                 </div>
                               </div>
+                              
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">Location</label>
@@ -146,8 +147,16 @@
                                   </select>
                                 </div>
                               </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="field-4" class="control-label">Description</label>
+                                  <input type="text" class="form-control" name="description" value="{{$inv_itemdata->description}}" id="description" placeholder="Description">
+                                </div>
+                              </div>
   
                             </div>
+                            <!-- <div class="row">
+                            </div> -->
                           </div>
                         </div>
                       </div>

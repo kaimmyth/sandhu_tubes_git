@@ -11,7 +11,7 @@ class inv_ItemsController extends Controller
 {
     public function index()
     {
-        $inv_itemdata = inv_item::get();
+        $inv_itemdata = inv_item::orderBy('id','ASC')->get();
         foreach ($inv_itemdata as $key => $value) {
             $value->item_category_id = DB::table('category')->where('id',$value->item_category_id)->value('category_name');
             $value->uom_id = DB::table('uom')->where('id',$value->uom_id)->value('uom_name');
@@ -42,6 +42,7 @@ class inv_ItemsController extends Controller
         if($request->serial_no)
         $inv_itemData->serial_no = $request->serial_no;
         $inv_itemData->leasable = $request->leasable;
+        $inv_itemData->description = $request->description;
         $inv_itemData->created_by = Auth::user()->id;
         $inv_itemData->created_date = date('Y-m-d');
         $inv_itemData->save();
@@ -84,6 +85,7 @@ class inv_ItemsController extends Controller
         $Edit_inv_itemData->serial_no = $request->serial_no;
 
         $Edit_inv_itemData->leasable = $request->leasable;
+        $Edit_inv_itemData->description = $request->description;
         $Edit_inv_itemData->modified_by = Auth::user()->id;
         $Edit_inv_itemData->modified_date = date('Y-m-d');
         $Edit_inv_itemData->save();

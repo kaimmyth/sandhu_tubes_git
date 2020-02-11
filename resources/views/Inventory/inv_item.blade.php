@@ -51,7 +51,7 @@
                           <th>Item Name</th>
                           <th>Item Category</th>
                           <th>Quantity</th>
-                          <!-- <th>Unit of M</th> -->
+                          <th>Created Date</th>
                           <th class="action">Action</th>
                         </tr>
                       </thead>
@@ -63,6 +63,7 @@
                           <td>{{$val->item_name}}</td>
                           <td>{{$val->item_category_id}}</td>
                           <td class="rig">{{$val->quantity}} {{$val->uom_id}}</td>
+                          <td>{{date('j M, Y',strtotime($val->created_date))}}</td>
                           <td class="actions">
                             <a href="{{url('inv_item/showView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
                             <a href="{{url('inv_item/editView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick=""><i class="fa fa-edit"></i></a>

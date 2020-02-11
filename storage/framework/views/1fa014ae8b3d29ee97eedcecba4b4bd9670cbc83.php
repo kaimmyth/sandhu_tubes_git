@@ -165,14 +165,14 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="field-2" class="control-label">Driver Name *</label>
-                                                <input type="text" class="form-control" value="<?php echo e($shipmentdata->driver_name); ?>" name="driver_name" id="driver_name" placeholder="Driver Name" required aria-required="true">
+                                                <label for="field-2" class="control-label">Driver Name</label>
+                                                <input type="text" class="form-control" value="<?php echo e($shipmentdata->driver_name); ?>" name="driver_name" id="driver_name" placeholder="Driver Name">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="field-2" class="control-label">Phone1 *</label>
-                                                <input type="text" class="form-control" min="1" value="<?php echo e($shipmentdata->phone1); ?>" name="phone1" id="phone1" placeholder="Phone1" required aria-required="true">
+                                                <label for="field-2" class="control-label">Phone1</label>
+                                                <input type="text" class="form-control" min="1" value="<?php echo e($shipmentdata->phone1); ?>" name="phone1" id="phone1" placeholder="Phone1">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -199,44 +199,44 @@
                                             <?php if($shiped_item_data): ?>
                                             <?php $__currentLoopData = $shiped_item_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <span class="col-md-12 row">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="field-2" class="control-label">Item Name *</label>
-                                                    <select class="form-control" name="item_ids[]" id="item_ids" onchange="showserailno(this.value,append_i,this)" required="" aria-required="true">
-                                                        <option value="" selected>--Select--</option>
-                                                        <?php $__currentLoopData = $inv_item; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kee=>$val1): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <option value="<?php echo e($val1->id); ?>" <?php if(@$val1->id==@$val->item_id ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>><?php echo e($val1->item_name); ?></option>
-                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                    </select>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="field-2" class="control-label">Item Name *</label>
+                                                        <select class="form-control" name="item_ids[]" id="item_ids" onchange="showserailno(this.value,append_i,this)" required="" aria-required="true">
+                                                            <option value="" selected>--Select--</option>
+                                                            <?php $__currentLoopData = $inv_item; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kee=>$val1): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value="<?php echo e($val1->id); ?>" <?php if(@$val1->id==@$val->item_id ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>><?php echo e($val1->item_name); ?></option>
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="field-2" class="control-label">Quantity *</label>
-                                                    <input type="text" class="form-control" name="quantity[]" onchange="checkitemquantity(this.value,this)" id="quantity" value="<?php echo e($val->item_quantity); ?>" placeholder="Quantity" required aria-required="true">
-                                                    <span id="errorquantity" style="color:red;display:none">Dispatch Quantity Mismatch</span>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="field-2" class="control-label">Quantity *</label>
+                                                        <input type="text" class="form-control" name="quantity[]" onchange="checkitemquantity(this.value,this)" id="quantity" value="<?php echo e($val->item_quantity); ?>" placeholder="Quantity" required aria-required="true">
+                                                        <span id="errorquantity" style="color:red;display:none">Dispatch Quantity Mismatch</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="field-2" class="control-label">Item Location *</label>
-                                                    <select class="form-control" name="item_location[]" id="item_location" required="" aria-required="true">
-                                                        <option value="" selected>--Select--</option>
-                                                        <?php $__currentLoopData = $inventory_location; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kee=>$val1): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <option value="<?php echo e($val1->id); ?>" <?php if(@$val1->id==@$val->item_location_id ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>><?php echo e($val1->location_name); ?></option>
-                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                    </select>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="field-2" class="control-label">Item Location *</label>
+                                                        <select class="form-control" name="item_location[]" id="item_location" required="" aria-required="true">
+                                                            <option value="" selected>--Select--</option>
+                                                            <?php $__currentLoopData = $inventory_location; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kee=>$val1): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value="<?php echo e($val1->id); ?>" <?php if(@$val1->id==@$val->item_location_id ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>><?php echo e($val1->location_name); ?></option>
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <?php if($val->item_serial_no != null): ?>
-                                                <div class="form-group">
-                                                    <label for="field-2" class="control-label">Serial No. *</label>
-                                                    <input type="text" class="form-control" name="serial_no[]" value="<?php echo e($val->item_serial_no); ?>" readonly id="serial_no" placeholder="Serial No." required aria-required="true">
+                                                <div class="col-md-3">
+                                                    <?php if($val->item_serial_no != null): ?>
+                                                    <div class="form-group">
+                                                        <label for="field-2" class="control-label">Serial No. *</label>
+                                                        <input type="text" class="form-control" name="serial_no[]" value="<?php echo e($val->item_serial_no); ?>" readonly id="serial_no" placeholder="Serial No." required aria-required="true">
+                                                    </div>
+                                                    <?php endif; ?>
                                                 </div>
-                                                <?php endif; ?>
-                                            </div>
-                                        </span>
+                                            </span>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             <?php endif; ?>
                                         </div>

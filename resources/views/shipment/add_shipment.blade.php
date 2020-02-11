@@ -167,14 +167,14 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="form-group">
-                                                                <label for="field-2" class="control-label">Driver Name *</label>
-                                                                <input type="text" class="form-control" name="driver_name" id="driver_name" placeholder="Driver Name" required aria-required="true">
+                                                                <label for="field-2" class="control-label">Driver Name</label>
+                                                                <input type="text" class="form-control" name="driver_name" id="driver_name" placeholder="Driver Name">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="form-group">
-                                                                <label for="field-2" class="control-label">Phone1 *</label>
-                                                                <input type="text" min="1" class="form-control" name="phone1" id="phone1" placeholder="Phone1" required="" aria-required="true">
+                                                                <label for="field-2" class="control-label">Phone1</label>
+                                                                <input type="text" min="1" class="form-control" name="phone1" id="phone1" placeholder="Phone1">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3">
