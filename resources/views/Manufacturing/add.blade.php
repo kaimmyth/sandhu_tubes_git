@@ -438,19 +438,19 @@
           var finished_goods_quantity = $("#finished_goods_quantity").val();
           var metal_scrap_quantity = $("#metal_scrap_quantity").val();
           var int_input_quantity = input_items_quantity.replace(/\s/g, '');
-          var output_quantity = parseInt(finished_goods_quantity.replace(/\s/g, '')) + parseInt(metal_scrap_quantity.replace(/\s/g, ''));
+          var output_quantity = parseFloat(finished_goods_quantity.replace(/\s/g, '')) + parseFloat(metal_scrap_quantity.replace(/\s/g, ''));
           var diff = 0;
           var final_quantity = 0;
           if (int_input_quantity > output_quantity) {
             diff = int_input_quantity - output_quantity;
             final_quantity = output_quantity + diff;
             $("#final_quantity").html(final_quantity);
-            $("#invisible_loss_quantity").val(diff);
+            // $("#invisible_loss_quantity").val(diff);
             return true;
           }
           else {
             $("#final_quantity").html(final_quantity);
-            $("#invisible_loss_quantity").val(diff);
+            // $("#invisible_loss_quantity").val(diff);
             alert("Your Output Quantity is Greater Than Input Quantity");
             return false;
           }
@@ -463,12 +463,13 @@
           // var metal_scrap_quantity = $("#metal_scrap_quantity").val();
           var int_finished_goods_quantity=finished_goods_quantity.replace(/\s/g, '');
           var int_input_quantity = input_items_quantity.replace(/\s/g, '');
-          var scrap_item=parseInt(input_items_quantity.replace(/\s/g, '')) - parseInt(finished_goods_quantity.replace(/\s/g, ''));
-          // var output_quantity = parseInt(finished_goods_quantity.replace(/\s/g, '')) + parseInt(metal_scrap_quantity.replace(/\s/g, ''));
+          var invisible_loss_quantity   = $("#invisible_loss_quantity").val();
+           var int_invisible_loss_quantity=parseFloat(invisible_loss_quantity.replace(/\s/g, ''));
+
+          var scrap_item=parseFloat(input_items_quantity.replace(/\s/g, '')) - parseFloat(finished_goods_quantity.replace(/\s/g, ''))-int_invisible_loss_quantity;
+          // var output_quantity = parseFloat(finished_goods_quantity.replace(/\s/g, '')) + parseFloat(metal_scrap_quantity.replace(/\s/g, ''));
           var diff = 0;
           var final_quantity = 0;
-          alert(int_input_quantity);
-          alert(int_finished_goods_quantity);
           if (parseFloat(int_input_quantity)>parseFloat(int_finished_goods_quantity)) {
           $("#metal_scrap_quantity").val(scrap_item);
           $("#finished_goods_quantity_error").css('display','none');
