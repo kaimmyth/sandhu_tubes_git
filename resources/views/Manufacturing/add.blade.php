@@ -190,8 +190,13 @@
                         <div class="form-group">
                           <label for="field-3" class="control-label">Q/A</label>
                           <select class="form-control" name="qa_check" id="qa_check">
-                            <option value="1">Yes</option>
+                            @if(@$manufacturing_details->qa_check == "0")
                             <option value="0">No</option>
+                            <option value="1">Yes</option>
+                           @else
+                           <option value="1">Yes</option>
+                           <option value="0">No</option>
+                           @endif
                           </select>
                         </div>
                       </div>

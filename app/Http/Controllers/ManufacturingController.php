@@ -79,6 +79,7 @@ class ManufacturingController extends Controller
       $manufacturing_details->invisible_loss_uom = $request->invisible_loss_uom;
       $manufacturing_details->invisible_loss_auto = $request->invisible_loss_auto;
       $manufacturing_details->status = 1;
+      $manufacturing_details->qa_check = $request->qa_check;
       $manufacturing_details->updated_at = date('Y-m-d');
       $manufacturing_details->created_by = Auth::user()->id;
       $manufacturing_details->update_by = Auth::user()->id;
@@ -103,6 +104,7 @@ class ManufacturingController extends Controller
       $manufacturing_details->invisible_loss_uom = $request->invisible_loss_uom;
       $manufacturing_details->invisible_loss_auto = $request->invisible_loss_auto;
       $manufacturing_details->status = 1;
+      $manufacturing_details->qa_check = $request->qa_check;
       $manufacturing_details->updated_at = date('Y-m-d');
       $manufacturing_details->created_by = Auth::user()->id;
       $manufacturing_details->update_by = Auth::user()->id;
