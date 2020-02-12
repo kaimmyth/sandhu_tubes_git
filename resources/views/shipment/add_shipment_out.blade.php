@@ -28,7 +28,7 @@
             <div class="row" id="dashboard-row">
                 <div class="col-sm-12">
                     <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Add Shipment Out&nbsp;&nbsp;/ &nbsp;
-                        <a href="javascript::void(0);" onclick="history.back();">Back</a></h4>
+                        <a href="{{URL::to('shipment/listing')}}">Back</a></h4>
                         <ol class="breadcrumb pull-right">
                             <li><a href="{{ URL::to('home') }}">Home</a></li>
                             <li><a href="{{URL::to('home')}}">List</a></li>
@@ -65,6 +65,22 @@
                                         </div> -->
                                         <div class="col-md-3">
                                             <div class="form-group">
+                                                <label for="field-2" class="control-label">Q/A</label>
+                                                <select class="form-control" name="qa_check" id="qa_check">
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="field-2" class="control-label">Shipping Date</label>
+                                                <input type="text" class="form-control datepicker" name="date" id="date" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-3">
+                                            <div class="form-group">
                                                 <label for="field-2" class="control-label">Status *</label>
                                                 <select class="form-control" name="status" id="status" required="" aria-required="true">
                                                     <option value="" selected>--Select--</option>
@@ -72,7 +88,7 @@
                                                     <option value="0">InActive</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -80,8 +96,8 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="field-2" class="control-label">Address *</label>
-                                                <input type="text" class="form-control" name="address" id="address" placeholder="Address" required aria-required="true">
+                                                <label for="field-2" class="control-label">Address</label>
+                                                <input type="text" class="form-control" name="address" id="address" placeholder="Address">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -109,8 +125,8 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="field-2" class="control-label">Pin Code *</label>
-                                                <input type="text" min="1" class="form-control" name="pin" id="pin" placeholder="Pin Code" required aria-required="true">
+                                                <label for="field-2" class="control-label">Pin Code</label>
+                                                <input type="text" min="1" class="form-control" name="pin" id="pin" placeholder="Pin Code">
                                             </div>
                                         </div>
                                     </div>
@@ -120,8 +136,8 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="field-2" class="control-label">Vehicle Type *</label>
-                                                <select class="form-control" name="vehicle_type" id="vehicle_type" required="" aria-required="true">
+                                                <label for="field-2" class="control-label">Vehicle Type</label>
+                                                <select class="form-control" name="vehicle_type" id="vehicle_type">
                                                     <option value="">--Select-</option>
                                                     <option value="Bus">Bus</option>
                                                     <option value="Truck">Truck</option>
@@ -140,12 +156,12 @@
                                                 <input type="text" class="form-control" name="model" id="model" placeholder="Model">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <!-- <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="field-2" class="control-label">License No. *</label>
-                                                <input type="text" class="form-control" name="license_no" id="license_no" placeholder="License No." required aria-required="true">
+                                                <label for="field-2" class="control-label">License No.</label>
+                                                <input type="text" class="form-control" name="license_no" id="license_no" placeholder="License No.">
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -183,7 +199,7 @@
                                         <div class="col-md-9">
                                             <button type="button" onclick="append_data();" class="btn btn-secondary btn-sm btn-circle">Add <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
                                         </div>
-                                        <div class="col-md-8 row" id="append_here">
+                                        <div class="col-md-12 row" id="append_here">
 
                                         </div>
                                     </div>
@@ -210,9 +226,9 @@
             contentType: 'application/json',
             dataType: "json",
             success: function (data) {
-                var to_append = `<span class="col-md-12 row"><div class="col-md-3"><div class="form-group">
-                            <label for="field-2" class="control-label">Item Name *</label>
-                            <select class="form-control" name="item_ids[]" id="item_ids" onchange="showserailno(this.value,`+append_i+`,this)" required="" aria-required="true">
+                var to_append = `<span class="col-md-12 row"><div class="col-md-2"><div class="form-group">
+                            <label for="field-2" class="control-label">Item Name</label>
+                            <select class="form-control" name="item_ids[]" id="item_ids" onchange="showserailno(this.value,`+append_i+`,this)">
                                 <option value="" selected>--Select--</option>`
                                 for(var i = 0; i < data.inv_item.length; i++)
                                 {
@@ -220,14 +236,34 @@
                                 }
                     to_append += `</select>
                         </div></div>
-                        <div class="col-md-3"><div class="form-group">
-                            <label for="field-2" class="control-label">Quantity *</label>
-                            <input type="text" class="form-control" name="quantity[]" onchange="checkitemquantity(this.value,this)" id="quantity" placeholder="Quantity" required aria-required="true">
+                        <div class="col-md-2"><div class="form-group">
+                        <label for="field-2" class="control-label">GRN No.</label>
+                        <input type="text" class="form-control" name="grn_no[]" id="grn_no" placeholder="GRN No.">
+                        
+                        </div></div>
+                    <div class="col-md-2"><div class="form-group">
+                        <label for="field-2" class="control-label">Invoice No.</label>
+                        <input type="text" class="form-control" name="invoice_no[]" id="invoice_no" placeholder="Invoice No.">
+                        
+                        </div></div>
+                        <div class="col-md-2"><div class="form-group">
+                            <label for="field-2" class="control-label">Quantity</label>
+                            <input type="text" class="form-control" name="quantity[]" onchange="checkitemquantity(this.value,this)" id="quantity" placeholder="Quantity">
                             <span id="errorquantity" style="color:red;display:none">Dispatch Quantity Mismatch</span>
                             </div></div>
-                        <div class="col-md-3"><div class="form-group">
-                            <label for="field-2" class="control-label">Item Location *</label>
-                            <select class="form-control" name="item_location[]" id="item_location" required="" aria-required="true">
+                            <div class="col-md-2"><div class="form-group">
+                        <label for="field-2" class="control-label">UoM</label>
+                        <select class="form-control" name="uom_ids[]" id="uom_ids">
+                            <option value="" selected>--Select--</option>`
+                            for (var i = 0; i < data.uomData.length; i++) {
+                                to_append += `<option value=\"` + data.uomData[i].id + `\">` + data.uomData[i].uom_name + `</option>`
+                            }
+                            to_append += `</select>
+                        
+                        </div></div>
+                        <div class="col-md-2"><div class="form-group">
+                            <label for="field-2" class="control-label">Item Location</label>
+                            <select class="form-control" name="item_location[]" id="item_location">
                                 <option value="" selected>--Select--</option>`
                                 for(var i = 0; i < data.inventory_location.length; i++)
                                 {
@@ -235,9 +271,9 @@
                                 }
                     to_append += `</select>
                         </div></div>
-                        <div class="col-md-3"><div class="form-group" id="hidden_sl" style="display:none">
-                            <label for="field-2" class="control-label">Serial No. *</label>
-                            <input type="text" class="form-control" name="serial_no[]" readonly id="serial_no" placeholder="Serial No." required aria-required="true">
+                        <div class="col-md-2"><div class="form-group" id="hidden_sl" style="display:none">
+                            <label for="field-2" class="control-label">Serial No.</label>
+                            <input type="text" class="form-control" name="serial_no[]" readonly id="serial_no" placeholder="Serial No.">
                         </div></div>
                         </span>
                         `;
@@ -307,3 +343,9 @@
         }
     }
 </script>
+
+<script>
+    $(function () {
+    $(".datepicker").datepicker();
+    });
+</script> 

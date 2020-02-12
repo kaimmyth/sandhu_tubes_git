@@ -217,29 +217,31 @@
 					<ul class="list-unstyled">
 						<li><a href="{{url('inv_item/listing')}}"><span>ITEMS</span></a></li>
 						<li><a href="{{ url('category')}}">CATEGORIES</a></li>
+						<li><a href="{{url('inventory/inventory-location')}}"><span>LOCATION</span></a></li>
+						<li><a href="{{ url('uom_master')}}">UoM</a></li>
 					</ul>
 				</li>
 				
 				<li><a href="{{URL::to('Manufacturing/list')}}" class="waves-effect"><i class="fa fa-industry" style="margin-left: 4px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">MAUNFACTURING</span></a></li>
-				<li><a href="{{URL::to('organization/listing')}}" class="waves-effect"><i class="fa fa-building" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 24px;">ORGNIZATIONS</span></a></li>
+				<li class="has_sub">
+					<a href="#" class="waves-effect"><i class="fa fa-building" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp; <span style="margin-left: 19px;">ORGNIZATIONS</span><span class="pull-right"><i class="md md-add"></i></span></a>
+					<ul class="list-unstyled">
+						<li><a href="{{url('organization/listing')}}"><span>ORGNIZATIONS</span></a></li>
+						<li><a href="{{url('org/org_relationship')}}"><span>RELATIONSHIP</span></a></li>
+						<li><a href="{{url('org/org_contact')}}"><span>CONTACT TYPE</span></a></li>
+						<li><a href="{{url('org/org_designation')}}"><span>DESIGNATION</span></a></li>
+					</ul>
+				</li>
 				<li><a href="{{URL::to('shipment/listing')}}" class="waves-effect"><i class="fa fa-truck" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SHIPMENT</span></a></li>
 				@if(Auth::user()->users_role==1)
 				<li class="has_sub">
 					<a href="#" class="waves-effect"><i class="ion-settings"></i>&nbsp;&nbsp;SETTINGS<span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
-
-						<li><a href="{{url('inventory/inventory-location')}}"><span>LOCATION</span></a></li>
 						<li><a href="{{url('convertion')}}"><span>CONVERTIONS</span></a></li>
-						<li><a href="{{url('org/org_relationship')}}"><span>ORG RELATIONSHIP</span></a></li>
-						<li><a href="{{url('org/org_contact')}}"><span>ORG CONTACT TYPE</span></a></li>
-						<li><a href="{{url('org/org_designation')}}"><span>ORG DESIGNATION</span></a></li>
 						<li><a href="{{ url('department')}}">DEPARTMENT</a></li>
+						<li><a href="{{ url('users')}}">USERS</a></li>
 						<!-- <li><a href="{{ url('organization/listing')}}">ORGNIZATIONS</a></li> -->
 						<!--<li><a href="{{ url('subdepartment')}}">SUB-DEPARTMENTS</a></li>-->
-						
-						<li><a href="{{ url('uom_master')}}">UoM</a></li>
-						<li><a href="{{ url('users')}}">USERS</a></li>
-
 				</li>
 				@endif
 			</ul>
@@ -255,6 +257,9 @@
 					<a href="#" class="waves-effect"><i class="fa fa-list" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp; <span style="margin-left: 19px;">INVENTORY</span><span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
 						<li><a href="{{url('inv_item/listing')}}"><span>ITEMS</span></a></li>
+						<li><a href="{{ url('category')}}">CATEGORIES</a></li>
+						<li><a href="{{url('inventory/inventory-location')}}"><span>LOCATION</span></a></li>
+						<li><a href="{{ url('uom_master')}}">UoM</a></li>
 					</ul>
 				</li>
 				@endif
@@ -263,7 +268,16 @@
 				
 				@endif
 				@if(in_array(4, @$module_id))
-				<li><a href="{{URL::to('organization/listing')}}" class="waves-effect"><i class="fa fa-building" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 24px;">ORGNIZATIONS</span></a></li>
+				<!-- <li><a href="{{URL::to('organization/listing')}}" class="waves-effect"><i class="fa fa-building" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 24px;">ORGNIZATIONS</span></a></li> -->
+				<li class="has_sub">
+					<a href="#" class="waves-effect"><i class="fa fa-building" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp; <span style="margin-left: 19px;">ORGNIZATIONS</span><span class="pull-right"><i class="md md-add"></i></span></a>
+					<ul class="list-unstyled">
+						<li><a href="{{url('organization/listing')}}"><span>ORGNIZATIONS</span></a></li>
+						<li><a href="{{url('org/org_relationship')}}"><span>RELATIONSHIP</span></a></li>
+						<li><a href="{{url('org/org_contact')}}"><span>CONTACT TYPE</span></a></li>
+						<li><a href="{{url('org/org_designation')}}"><span>DESIGNATION</span></a></li>
+					</ul>
+				</li>
 				@endif
 				@if(in_array(5, @$module_id))
 				<li><a href="{{URL::to('shipment/listing')}}" class="waves-effect"><i class="fa fa-truck" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SHIPMENT</span></a></li>
@@ -272,22 +286,12 @@
 				<li class="has_sub">
 					<a href="#" class="waves-effect"><i class="ion-settings"></i>&nbsp;&nbsp;SETTINGS<span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
-
-
-
-
-
-                        <li><a href="{{url('inventory/inventory-location')}}"><span>LOCATION</span></a></li>
 						<li><a href="{{url('convertion')}}"><span>CONVERTIONS</span></a></li>
-						<li><a href="{{url('org/org_relationship')}}"><span>ORG RELATIONSHIP</span></a></li>
-						<li><a href="{{url('org/org_contact')}}"><span>ORG CONTACT TYPE</span></a></li>
-						<li><a href="{{url('org/org_designation')}}"><span>ORG DESIGNATION</span></a></li>
 						<li><a href="{{ url('department')}}"> DEPARTMENT</a></li>
+                        <li><a href="{{ url('users')}}">USERS</a></li>
+						
 						<!-- <li><a href="{{ url('organization/listing')}}">ORGNIZATIONS</a></li> -->
 						<!--<li><a href="{{ url('subdepartment')}}">SUB-DEPARTMENTS</a></li>-->
-						<li><a href="{{ url('category')}}">CATEGORIES</a></li>
-						<li><a href="{{ url('uom_master')}}">UoM</a></li>
-                        <li><a href="{{ url('users')}}">USERS</a></li>
 				</li>
 				@endif
 

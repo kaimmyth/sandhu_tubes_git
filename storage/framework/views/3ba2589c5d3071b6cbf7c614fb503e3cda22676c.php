@@ -75,8 +75,8 @@ hr.new2 {
 
 .btn-danger {
     color: #fff;
-       background-color: #3e3635;
-    border-color: #7e7877;
+       background-color: #16469d;
+    border-color: #16469d;
     padding: 0.7em;
     border-radius: 22px;
 }
@@ -88,11 +88,13 @@ hr.new2 {
     color: #fff;
 }
 
+
 .btn-danger:hover {
-    color: #fff !important;
-    background-color: #16469d !important;
-    border-color: #16469d !important;
+    color: #fff;
+    background-color: #16469d;
+    border-color: #16469d;
 }
+
     
     </style>
 
@@ -120,9 +122,8 @@ hr.new2 {
                    
                 </div>
                
-                <div class="copy">
-                    <p>Sandhu Tubes
-                    </p>
+                <div class="copy" style="text-align: center;margin-bottom: 30px;">
+                    <img src="public/images/logo1.png" style="border: none; width: 15%;">
                 </div>
                
                 <!---728x90--->
@@ -188,7 +189,7 @@ endif; ?>
                 </div>
                 <br>
                
-                <center><a href="<?php echo e(url('/')); ?>"><button class="btn btn-secondary" type="button" style="background: #574442;color: #fff;">Back to Home</button ></a></center>
+                <center><a href="<?php echo e(url('/')); ?>"><button class="btn btn-secondary" type="button" style="background: #16469d;color: #fff;">Back to Home</button ></a></center>
 
            
                 <!---728x90--->

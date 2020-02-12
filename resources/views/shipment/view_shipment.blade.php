@@ -70,7 +70,7 @@
       <!-- Page-Title -->
       <div class="row" id="dashboard-row">
         <div class="col-sm-12">
-          <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Shipment Info&nbsp;&nbsp;/ &nbsp; <a href="javascript::void(0);" onclick="history.back();">Back</a></h4>
+          <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Shipment Info&nbsp;&nbsp;/ &nbsp; <a href="{{URL::to('shipment/listing')}}">Back</a></h4>
           <ol class="breadcrumb pull-right">
             <li><a href="{{ URL::to('home') }}">Home</a></li>
             <li><a href="">Shipment</a></li>
@@ -117,23 +117,29 @@
                                 <tr>
                                     <th>Item ID</th>
                                     <th>Item Name</th>
+                                    <th>Serial Number</th>
                                     <th>Quantity</th>
                                     <th>Location</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($inv_itemdata)
-                                @foreach($inv_itemdata as $key=>$val)
+                                @if($shiped_item_data)
+                                @foreach($shiped_item_data as $key=>$val)
                                 <tr>
-                                    <td class="rig">{{$val->id}}</td>
-                                    <td>{{$val->item_name}}</td>
-                                    <td class="rig">{{$val->quantity}}</td>
-                                    @if($locationiddata != null)
-                                    <td>{{$locationiddata[$key]->location_name}}</td>
-                                    @else
-                                    <td>NA</td>
-                                    @endif
-                                    
+                                  <td class="rig">{{$val->item_id}}</td>
+                                  <td>{{$val->item_name}}</td>
+                                  @if($val->item_serial_no != null)
+                                  <td>{{$val->item_serial_no}}</td>
+                                  @else
+                                  <td>NA</td>
+                                  @endif
+                                  <td class="rig">{{$val->item_quantity}}</td>
+                                  @if($val->item_location_id != null)
+                                  <td>{{$val->item_location_id}}</td>
+                                  @else
+                                  <td>NA</td>
+                                  @endif
+                                
                                 </tr>
                                 @endforeach
                                 @endif
