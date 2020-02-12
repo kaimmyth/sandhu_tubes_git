@@ -85,7 +85,7 @@
       <!-- Page-Title -->
       <div class="row" id="dashboard-row">
         <div class="col-sm-12">
-          <h4 class="pull-left page-title" style="color: #000;font-weight:200;">&nbsp;<i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Manufacturing Actions <a href="javascript::void(0);" onclick="history.back();"></a></h4>
+          <h4 class="pull-left page-title" style="color: #000;font-weight:200;">&nbsp;<i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Manufacturing Actions&nbsp;&nbsp;/ &nbsp; <a href="{{URL::to('Manufacturing/list')}}">Back</a></h4>
           <ol class="breadcrumb pull-right">
             <li><a href="#">Home</a></li>
             <li><a href="#">Input/Output</a></li>
@@ -190,6 +190,17 @@
 
 
 
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="field-3" class="control-label">Q/A</label>
+                          <select class="form-control" name="qa_check" id="qa_check">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
