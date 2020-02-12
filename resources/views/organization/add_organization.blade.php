@@ -20,7 +20,7 @@
       <div class="row" id="dashboard-row">
         <div class="col-sm-12">
           <h4 class="pull-left page-title" style="color: #000; font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp; Create Organization&nbsp;&nbsp;/ &nbsp;
-            <a href="javascript::void(0);" onclick="history.back();">Back</a></h4>
+            <a href="{{url('organization/listing')}}">Back</a></h4>
           <ol class="breadcrumb pull-right">
             <li><a href="{{ URL::to('home') }}">Home</a></li>
             <li><a href="{{URL::to('home')}}">Organization</a></li>

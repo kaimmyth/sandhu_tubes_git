@@ -131,26 +131,26 @@
                         <div class="form-group">
                           <label for="field-1" class="control-label">Mother Coil/Slit Coil*</label>
                           <select class="form-control" name="input_items_id"  required="" onchange="get_item_details(this)" aria-required="true">
-                            <option value=""></option>
+                            <option value="">--Select--</option>
                             @foreach($inv_item as $key=> $value)
                             <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_id==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
                             @endforeach
 
                           </select>
                         </div>
-                        <div class="row">
-                          <div class="col-sm-3" id="hidden_section_serial" style="display: none;">
-                              <label for="field-3" class="control-label">Serial No.</label>
-                              <input type="text" class="form-control"  id="Serial_no"  placeholder="" required="" aria-required="true">
-                            </div>
-                            <div class="col-sm-3" id="hidden_section_batch" style="display: none;">
-                              <label for="field-3" class="control-label">Batch No.</label>
-                              <input type="text" class="form-control"  id="batch_no"  placeholder="" required="" aria-required="true">
-                            </div>
+                        <!-- <div class="row"> -->
+                          <!-- </div> -->
+                          
                         </div>
-
-                      </div>
-
+                        
+                      <div class="col-md-3" id="hidden_section_serial" style="display: none;">
+                          <label for="field-3" class="control-label">Serial No.</label>
+                          <input type="text" class="form-control"  id="Serial_no"  placeholder="" required="" aria-required="true">
+                        </div>
+                        <div class="col-md-3" id="hidden_section_batch" style="display: none;">
+                          <label for="field-3" class="control-label">Batch No.</label>
+                          <input type="text" class="form-control"  id="batch_no"  placeholder="" required="" aria-required="true">
+                        </div>
                       <div class="col-md-3">
                         <div class="form-group">
                           <label for="field-3" class="control-label">Quantity*</label>
@@ -184,14 +184,8 @@
 
                           </select>
                         </div>
-
                       </div>
 
-
-
-
-                    </div>
-                    <div class="row">
                       <div class="col-md-3">
                         <div class="form-group">
                           <label for="field-3" class="control-label">Q/A</label>
