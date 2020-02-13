@@ -40,12 +40,11 @@
                                       <!-- <!-- <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;" onclick="addRecords()">Add <si class="md md-add-circle-outline"></si></button> --> 
                                     @if(Auth::user()->id!=1)
                                         @if(@$module_permission['is_add']=='yes')
-                                        <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float: right;margin-top: 0px !important;" onclick="addRecords()">Add <i class="md md-add-circle-outline"></i></button>
+                                        <a href="{{url('add/users/from')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 0px !important;">Add <i class="md md-add-circle-outline"></i></button></a>
                                         @endif
                                     @else
-                                    <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float: right;margin-top: 0px !important;" onclick="addRecords()">Add <i class="md md-add-circle-outline"></i></button>
+                                    <a href="{{url('add/users/from')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 0px !important;">Add <i class="md md-add-circle-outline"></i></button></a>
                                     @endif 
-                                      <a href="{{url('add/users/from')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 0px !important;">Add <i class="md md-add-circle-outline"></i></button></a>
                                 <thead style="">
                                     <tr>
                                         <th style="width: 55px;">Sl.</th>
