@@ -60,7 +60,13 @@
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">Item Name *</label>
-                                  <input type="text" class="form-control" name="item_name" id="item_name" value="<?php echo e($inv_itemdata->item_name); ?>" placeholder="Item Name" required aria-required="true">
+                                  <!-- <input type="text" class="form-control" name="item_name" id="item_name" value="<?php echo e($inv_itemdata->item_name); ?>" placeholder="Item Name" required aria-required="true"> -->
+                                  <select class="form-control" name="item_name" id="item_name" required aria-required="true">
+                                    <option value="">--Select--</option>
+                                    <?php $__currentLoopData = $itemsData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($val->id); ?>" <?php if(@$val->id==@$inv_itemdata->item_name ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>><?php echo e($val->items_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                  </select>
                                 </div>
                               </div>
 

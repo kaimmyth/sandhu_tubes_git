@@ -216,6 +216,7 @@
 					<a href="#" class="waves-effect"><i class="fa fa-list" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp; <span style="margin-left: 19px;">INVENTORY</span><span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
 						<li><a href="{{url('inv_item/listing')}}"><span>ITEMS</span></a></li>
+						<li><a href="{{url('itemData/listing')}}"><span>DEFINE ITEMS</span></a></li>
 						<li><a href="{{ url('category')}}">CATEGORIES</a></li>
 						<li><a href="{{url('inventory/inventory-location')}}"><span>LOCATION</span></a></li>
 						<li><a href="{{ url('uom_master')}}">UoM</a></li>
@@ -257,6 +258,7 @@
 					<a href="#" class="waves-effect"><i class="fa fa-list" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp; <span style="margin-left: 19px;">INVENTORY</span><span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
 						<li><a href="{{url('inv_item/listing')}}"><span>ITEMS</span></a></li>
+						<li><a href="{{url('itemData/listing')}}"><span>DEFINE ITEMS</span></a></li>
 						<li><a href="{{ url('category')}}">CATEGORIES</a></li>
 						<li><a href="{{url('inventory/inventory-location')}}"><span>LOCATION</span></a></li>
 						<li><a href="{{ url('uom_master')}}">UoM</a></li>

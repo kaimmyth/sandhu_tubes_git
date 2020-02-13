@@ -15,6 +15,7 @@ class inv_ItemsController extends Controller
         foreach ($inv_itemdata as $key => $value) {
             $value->item_category_id = DB::table('category')->where('id',$value->item_category_id)->value('category_name');
             $value->uom_id = DB::table('uom')->where('id',$value->uom_id)->value('uom_name');
+            $value->item_name = DB::table('item')->where('id',$value->item_name)->value('items_name');
         }
         $data['content'] = 'inventory.inv_item';
         return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata]);
@@ -24,8 +25,9 @@ class inv_ItemsController extends Controller
         $categorytData = DB::table('category')->where('is_active',1)->select('id','category_name')->get();
         $uomData = DB::table('uom')->where('status',1)->select('id','uom_name')->get();
         $inventory_location = DB::table('inventory_location')->where('status',1)->get();
+        $itemsData = DB::table('item')->where('status',1)->get();
         $data['content'] = 'inventory.add_inv_item';
-        return view('layouts.content', compact('data'))->with(['categorytData' => $categorytData,'uomData' => $uomData,'inventory_location' => $inventory_location]);
+        return view('layouts.content', compact('data'))->with(['categorytData' => $categorytData,'uomData' => $uomData,'itemsData' => $itemsData,'inventory_location' => $inventory_location]);
     }
     public function addStore(Request $request)
     {
@@ -63,8 +65,9 @@ class inv_ItemsController extends Controller
         $categorytData = DB::table('category')->where('is_active',1)->select('id','category_name')->get();
         $uomData = DB::table('uom')->where('status',1)->select('id','uom_name')->get();
         $inventory_location = DB::table('inventory_location')->where('status',1)->get();
+        $itemsData = DB::table('item')->where('status',1)->get();
         $data['content'] = 'inventory.edit_inv_item';
-        return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata,'categorytData' => $categorytData,'uomData' => $uomData,'inventory_location' => $inventory_location]);
+        return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata,'categorytData' => $categorytData,'uomData' => $uomData,'itemsData' => $itemsData,'inventory_location' => $inventory_location]);
     }
     public function editStore(Request $request)
     {

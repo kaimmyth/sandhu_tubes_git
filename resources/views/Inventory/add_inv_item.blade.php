@@ -60,7 +60,13 @@
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="field-4" class="control-label">Item Name *</label>
-                                <input type="text" class="form-control" name="item_name" id="item_name" placeholder="Item Name" required aria-required="true">
+                                <!-- <input type="text" class="form-control" name="item_name" id="item_name" placeholder="Item Name" required aria-required="true"> -->
+                                <select class="form-control" name="item_name" id="item_name" required aria-required="true">
+                                  <option value="">--Select--</option>
+                                  @foreach($itemsData as $key=>$val)
+                                  <option value="{{$val->id}}">{{$val->items_name}}</option>
+                                  @endforeach
+                                </select>
                               </div>
                             </div>
 

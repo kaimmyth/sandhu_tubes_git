@@ -14,6 +14,7 @@ use App\Org_Designation;
 use App\module;
 use App\user_permission;
 use App\User;
+use App\item;
 
 
 
@@ -495,4 +496,49 @@ class MasterController extends Controller
 		$delete = DB::table('users')->where('id', '=', $id)->delete();
 		return back();
 	}
+
+	//Define item section
+	public function itemData_index()
+    {
+        $itemData = item::orderBy('id', 'DESC')->get();
+
+        $data['content'] = 'master.item_list';
+        return view('layouts.content', compact('data'))->with('itemData', $itemData);
+    }
+
+    public function itemData_Add(Request $request)
+    {
+        // return $request;
+        $data = array(
+            'items_name' => $request->items_name,
+            'status' => $request->status,
+        );
+
+        if ($request->ids != '') {
+            Session::flash('success', 'Updated Successfully..!');
+            $updatedata = DB::table('item')->where('id', $request->ids)->update($data);
+            return back();
+        } else {
+            Session::flash('success', 'Inserted Successfully..!');
+            $insertdata = DB::table('item')->insert($data);
+            return back();
+        }
+    }
+
+    public function itemData_Edit(Request $request, $id)
+    {
+        // return $id;
+        $data =  DB::table('item')->where('id', $id)->first();
+        if ($data) {
+            return Response::json($data);
+        }
+    }
+
+
+    public function itemData_destroy(Request $request, $id)
+    {
+        Session::flash('error', 'Deleted Successfully..!');
+        $delete = DB::table('item')->where('id', '=', $id)->delete();
+        return back();
+    }
 }

@@ -314,6 +314,7 @@ Route::post('inventory-location/Add','InventoryLocation_Controller@inventory_Add
 Route::any('inventory-location/edit/{id}','InventoryLocation_Controller@inventory_Edit');
 Route::get('inventory/destroy/{id}','InventoryLocation_Controller@inventory_destroy');
 
+
 //................................................Amit...Manufacturing........................................................
 Route::get('Manufacturing/list','ManufacturingController@list');
 Route::get('Manufacturing/add','ManufacturingController@add');
@@ -407,3 +408,8 @@ Route::get('users/destroy/{id}', 'MasterController@delete_users');
 Route::get('edit/users/from/{id}','MasterController@users_edit');
 Route::any('users/edit/{id}', 'MasterController@users_edit');
 Route::post('update/users','MasterController@update_user');
+//................................................Raj 13-2-2020...Define Item........................................................
+Route::get('itemData/listing','MasterController@itemData_index');
+Route::post('itemData/Add','MasterController@itemData_Add');
+Route::any('itemData/edit/{id}','MasterController@itemData_Edit');
+Route::get('itemData/delete/{id}','MasterController@itemData_destroy');
