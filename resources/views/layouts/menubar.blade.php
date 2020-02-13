@@ -204,6 +204,10 @@
 		</div>
 		<?php 
 		$module_id=Session::get('module_id');
+		$module_id_add=Session::get('module_id_add');
+		$module_id_edit=Session::get('module_id_edit');
+		$module_id_delete=Session::get('module_id_delete');
+
 	?>
 		<!--- Divider -->
 		<div id="sidebar-menu">
@@ -248,12 +252,12 @@
 			</ul>
 			@else
 			<ul>
-				@if(in_array(1, $module_id))
+				@if(in_array(1, $module_id) || in_array(1, $module_id_add) || in_array(1, $module_id_edit) || in_array(1, $module_id_delete))
 				<li>
 					<a href="{{ URL::to('dashboard')}}" class="waves-effect"><i class="md md-home"></i>&nbsp;&nbsp;<span>DASHBOARD</span></a>
 				</li>
 				@endif
-				@if(in_array(2, $module_id))
+				@if(in_array(2, $module_id) || in_array(2, $module_id_add) || in_array(2, $module_id_edit) || in_array(2, $module_id_delete))
 				<li class="has_sub">
 					<a href="#" class="waves-effect"><i class="fa fa-list" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp; <span style="margin-left: 19px;">INVENTORY</span><span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
@@ -265,11 +269,11 @@
 					</ul>
 				</li>
 				@endif
-				@if(in_array(3, @$module_id))
+				@if(in_array(3, @$module_id) || in_array(3, @$module_id_add) || in_array(3, @$module_id_edit) || in_array(3, @$module_id_delete))
 				<li><a href="{{URL::to('Manufacturing/list')}}" class="waves-effect"><i class="fa fa-industry" style="margin-left: 4px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">MAUNFACTURING</span></a></li>
 				
 				@endif
-				@if(in_array(4, @$module_id))
+				@if(in_array(4, @$module_id) || in_array(4, @$module_id_add) || in_array(4, @$module_id_edit) || in_array(4, @$module_id_delete))
 				<!-- <li><a href="{{URL::to('organization/listing')}}" class="waves-effect"><i class="fa fa-building" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 24px;">ORGNIZATIONS</span></a></li> -->
 				<li class="has_sub">
 					<a href="#" class="waves-effect"><i class="fa fa-building" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp; <span style="margin-left: 19px;">ORGNIZATIONS</span><span class="pull-right"><i class="md md-add"></i></span></a>
@@ -281,10 +285,10 @@
 					</ul>
 				</li>
 				@endif
-				@if(in_array(5, @$module_id))
+				@if(in_array(5, @$module_id) || in_array(5, @$module_id_add) || in_array(5, @$module_id_edit) || in_array(5, @$module_id_delete))
 				<li><a href="{{URL::to('shipment/listing')}}" class="waves-effect"><i class="fa fa-truck" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SHIPMENT</span></a></li>
 				@endif
-				@if(in_array(6, @$module_id))
+				@if(in_array(6, @$module_id) || in_array(6, @$module_id_add) || in_array(6, @$module_id_edit) || in_array(6, @$module_id_delete))
 				<li class="has_sub">
 					<a href="#" class="waves-effect"><i class="ion-settings"></i>&nbsp;&nbsp;SETTINGS<span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">

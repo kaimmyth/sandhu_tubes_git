@@ -38,13 +38,31 @@ class CheckRole
     //    return $odata;
     //    echo "<pre>";
        $module_id=array();
+       $module_id_add=array();
+       $module_id_edit=array();
+       $module_id_delete=array();
        $module_view_id=array();
        foreach($permission_record as $key_per=>$value)
        {
         $module_id[]=$value['permission_value'];
        }
+       foreach($permission_record_add as $key_per=>$value)
+       {
+        $module_id_add[]=$value['permission_value'];
+       }
+       foreach($permission_record_edit as $key_per=>$value)
+       {
+        $module_id_edit[]=$value['permission_value'];
+       }
+       foreach($permission_record_delete as $key_per=>$value)
+       {
+        $module_id_delete[]=$value['permission_value'];
+       }
         // print_r($module_id); die;
         Session::put('module_id',$module_id);
+        Session::put('module_id_add',$module_id_add);
+        Session::put('module_id_edit',$module_id_edit);
+        Session::put('module_id_delete',$module_id_delete);
         Session::put('permission_value',$permission_record);
         Session::put('permission_record_add',$permission_record_add);
         Session::put('permission_record_edit',$permission_record_edit);

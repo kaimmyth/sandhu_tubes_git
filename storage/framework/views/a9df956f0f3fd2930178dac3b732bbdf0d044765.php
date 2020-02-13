@@ -59,7 +59,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="">Password</label>
-                                            <input type="password" class="form-control" id=""  name="password" placeholder="" required>
+                                            <input type="password" class="form-control" id=""  name="password" placeholder="">
                                         </div>
                                 </div> <!-- col-->
 
@@ -110,7 +110,7 @@
                                     <td><input  name="read<?php echo e(@$value['ID']); ?>"  value="read"  <?php if(@$module_permission->is_read=='yes'): ?> checked='checked'  <?php endif; ?>   type="checkbox" ></td>
                                     <td><input  name="add<?php echo e(@$value['ID']); ?>"  value="add"  <?php if(@$module_permission->is_add=='yes'): ?> checked='checked'  <?php endif; ?>   type="checkbox"></td>
                                     <td><input  name="edit<?php echo e(@$value['ID']); ?>"   value="edit" <?php if(@$module_permission->is_edit=='yes'): ?> checked='checked'  <?php endif; ?>   type="checkbox"></td>
-                                    <td><input  name="delete<?php echo e(@$value['ID']); ?>}" value="delete" <?php if(@$module_permission->is_delete=='yes'): ?> checked='checked'  <?php endif; ?>   type="checkbox"></td>
+                                    <td><input  name="delete<?php echo e($value['ID']); ?>" value="delete" <?php if(@$module_permission->is_delete=='yes'): ?> checked='checked'  <?php endif; ?>   type="checkbox"></td>
                                     <tr>
                                     <tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
