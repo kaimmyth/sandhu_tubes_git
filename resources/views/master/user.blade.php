@@ -38,6 +38,13 @@
                             <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                     <!-- <button type="button" data-toggle="modal" data-target="#generic-model" class="btn btn-purple" style="float:right;margin-top: 0px !important;">Set Generic  User<i class="md md-add-circle-outline"></i></button> -->
                                       <!-- <!-- <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;" onclick="addRecords()">Add <si class="md md-add-circle-outline"></si></button> --> 
+                                    @if(Auth::user()->id!=1)
+                                        @if(@$module_permission['is_add']=='yes')
+                                        <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float: right;margin-top: 0px !important;" onclick="addRecords()">Add <i class="md md-add-circle-outline"></i></button>
+                                        @endif
+                                    @else
+                                    <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float: right;margin-top: 0px !important;" onclick="addRecords()">Add <i class="md md-add-circle-outline"></i></button>
+                                    @endif 
                                       <a href="{{url('add/users/from')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 0px !important;">Add <i class="md md-add-circle-outline"></i></button></a>
                                 <thead style="">
                                     <tr>
@@ -72,8 +79,17 @@
                                         @endif
                                         <td>{{date('j M, Y ',strtotime($data->created_at))}}</td>
                                         <td class="actions">
+                                            @if(Auth::user()->id!=1)
+                                                @if(@$module_permission['is_edit']=='yes')
+                                                <a href="{{url('edit/users/from/'.$data->id)}}" class="on-default edit-row" onclick="editRecords({{$data->id}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;&nbsp;
+                                                @endif
+                                                @if(@$module_permission['is_delete']=='yes')
+                                                <a href="{{ URL::to('users/destroy',$data->id)}}" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                                @endif
+                                            @else
                                             <a href="{{url('edit/users/from/'.$data->id)}}" class="on-default edit-row" onclick="editRecords({{$data->id}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;&nbsp;
                                             <a href="{{ URL::to('users/destroy',$data->id)}}" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endif @endforeach

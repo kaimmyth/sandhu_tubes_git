@@ -43,7 +43,13 @@
               <div class="card-body">
                 <div class="row"><br><br><br>
                   <div class="col-md-12 col-sm-12 col-12">
+                    <?php if(Auth::user()->id!=1): ?>
+                      <?php if(@$module_permission['is_add']=='yes'): ?>
+                        <a href="<?php echo e(url('inv_item/add')); ?>"><button id="addToTable" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" data-toggle="modal" style="float:right; margin-top: 19px;"><i class="md md-add-circle-outline"></i> Add</button></a><br>
+                      <?php endif; ?>
+                    <?php else: ?>
                     <a href="<?php echo e(url('inv_item/add')); ?>"><button id="addToTable" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" data-toggle="modal" style="float:right; margin-top: 19px;"><i class="md md-add-circle-outline"></i> Add</button></a><br>
+                    <?php endif; ?>
                     <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                       <thead style="background: #b6e9ff;">
                         <tr>
@@ -65,9 +71,21 @@
                           <td class="rig"><?php echo e($val->quantity); ?> <?php echo e($val->uom_id); ?></td>
                           <td><?php echo e(date('j M, Y',strtotime($val->created_date))); ?></td>
                           <td class="actions">
+                            <?php if(Auth::user()->id!=1): ?>
+                              <?php if(@$module_permission['is_read']=='yes'): ?>
+                                <a href="<?php echo e(url('inv_item/showView/'.$val->id)); ?>" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
+                              <?php endif; ?>
+                              <?php if(@$module_permission['is_edit']=='yes'): ?>
+                                <a href="<?php echo e(url('inv_item/editView/'.$val->id)); ?>" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick=""><i class="fa fa-edit"></i></a>
+                              <?php endif; ?>
+                              <?php if(@$module_permission['is_delete']=='yes'): ?>
+                                <a href="<?php echo e(url('inv_item/deletedata/'.$val->id)); ?>" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash" style="color:red;"></i></a>
+                              <?php endif; ?>
+                            <?php else: ?>
                             <a href="<?php echo e(url('inv_item/showView/'.$val->id)); ?>" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
                             <a href="<?php echo e(url('inv_item/editView/'.$val->id)); ?>" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick=""><i class="fa fa-edit"></i></a>
                             <a href="<?php echo e(url('inv_item/deletedata/'.$val->id)); ?>" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash" style="color:red;"></i></a>
+                            <?php endif; ?>
                           </td>
                         </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

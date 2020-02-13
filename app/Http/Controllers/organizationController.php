@@ -14,8 +14,16 @@ class organizationController extends Controller
     public function index()
     {
         $statusdata = organization::where('status',1)->get();
+        if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 4) {
+                $module_permission = $value_land;
+                }
+            }
+        }
         $data['content'] = 'organization.organization_list';
-        return view('layouts.content', compact('data'))->with(['statusdata' => $statusdata]);
+        return view('layouts.content', compact('data'))->with(['statusdata' => $statusdata,'module_permission' => @$module_permission]);
     }
     public function addView()
     {

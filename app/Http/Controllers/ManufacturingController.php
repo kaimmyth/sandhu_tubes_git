@@ -38,12 +38,19 @@ class ManufacturingController extends Controller
 
       $toReturn = array();
       $toReturn['details'] = manufacturing_details::where('status', 1)->get();
-
+      if (Auth::check() && Auth::user()->users_role != 1) {
+        $land_permission = Session::get('all_module_permission');
+        foreach ($land_permission as $key => $value_land) {
+            if ($value_land['permission_value'] == 3) {
+            $module_permission = $value_land;
+            }
+        }
+      }
 
       $user_id = Session::get('gorgID');
 
       $data['content'] = 'Manufacturing.list';
-      return view('layouts.content', compact('data'))->with(['toReturn' => $toReturn, 'user_id' => $user_id]);
+      return view('layouts.content', compact('data'))->with(['toReturn' => $toReturn, 'user_id' => $user_id,'module_permission' => @$module_permission]);
     } catch (\Exception $e) {
       return $e->getMessage();
     }

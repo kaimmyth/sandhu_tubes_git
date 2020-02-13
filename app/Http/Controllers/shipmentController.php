@@ -12,7 +12,14 @@ class shipmentController extends Controller
 {
     public function index(Request $request)
     {
-        // return $request->shipment_type;
+        if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 5) {
+                $module_permission = $value_land;
+                }
+            }
+        }
         if ($request->shipment_type == null || $request->shipment_type == 2 || $request->shipment_type == 3) {
             $statusdata = shipment::where('status',1)->orderBy('id','ASC')->get();
         } elseif ($request->shipment_type == 1) {
@@ -22,7 +29,7 @@ class shipmentController extends Controller
         }
         $type = $request->shipment_type;
         $data['content'] = 'shipment.shipment_list';
-        return view('layouts.content', compact('data'))->with(['statusdata' => $statusdata,'type' => $type]);
+        return view('layouts.content', compact('data'))->with(['statusdata' => $statusdata,'type' => $type,'module_permission' => @$module_permission]);
     }
     public function addView($id)
     {

@@ -22,10 +22,10 @@
             <!-- Page-Title -->
             <div class="row" id="dashboard-row">
                 <div class="col-sm-12">
-                    <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Item</h4>
+                    <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;ITem</h4>
                     <ol class="breadcrumb pull-right">
                         <li><a href="<?php echo e(URL::to('home')); ?>">Home</a></li>
-                        <li><a href="<?php echo e(URL::to('home')); ?>">Item</a></li>
+                        <li><a href="<?php echo e(URL::to('home')); ?>">ITem</a></li>
                         <!-- <li class="active">location/area</li> -->
                     </ol>
                 </div>
@@ -36,12 +36,18 @@
                 <div class="col-md-12" style="display:block; margin:auto;float:none;">
                     <div class="col-xl-12">
                         <div class="portlet">
+                            <?php if(Auth::user()->id!=1): ?>
+                                <?php if(@$module_permission['is_add']=='yes'): ?>
+                                <button type="button" class="btn btn-primary" style="float:right;margin-top: 1%;" onclick="addRecords()"> <i class="md md-add-circle-outline"></i> Add</button><br>
+                                <?php endif; ?>
+                            <?php else: ?>
                             <button type="button" class="btn btn-primary" style="float:right;margin-top: 1%;" onclick="addRecords()"> <i class="md md-add-circle-outline"></i> Add</button><br>
+                            <?php endif; ?>
                             <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
                                         <th style="width: 55px;">SL No.</th>
-                                        <th>Item Name</th>
+                                        <th>ITem Name</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <th class="action">Action</th>
@@ -67,9 +73,17 @@
                                         <?php endif; ?>
                                         <td><?php echo e(date('j M, Y ',strtotime($value->created_at))); ?></td>
                                         <td class="actions">
+                                            <?php if(Auth::user()->id!=1): ?>
+                                                <?php if(@$module_permission['is_edit']=='yes'): ?>
+                                                <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords(<?php echo e($value->id); ?>)" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
+                                                <?php endif; ?>
+                                                <?php if(@$module_permission['is_delete']=='yes'): ?>
+                                                <a href="<?php echo e(URL::to('itemData/delete',$value->id)); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                                <?php endif; ?>
+                                            <?php else: ?>
                                             <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords(<?php echo e($value->id); ?>)" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
-                                            &nbsp;&nbsp;&nbsp;
                                             <a href="<?php echo e(URL::to('itemData/delete',$value->id)); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -102,7 +116,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="items_name" class="control-label">Item Name<font color="red">*</font></label>
+                                <label for="items_name" class="control-label">ITem Name<font color="red">*</font></label>
                                 <input type="text" id="items_name" name="items_name" class="form-control" required="" aria-required="true" placeholder="120 X 3.05">
                             </div>
                         </div>

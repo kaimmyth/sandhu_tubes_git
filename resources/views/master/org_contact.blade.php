@@ -36,7 +36,13 @@
                 <div class="col-md-12" style="display:block; margin:auto;float:none;">
                     <div class="col-xl-12">
                         <div class="portlet">
+                            @if(Auth::user()->id!=1)
+                                @if(@$module_permission['is_add']=='yes')
+                                <button type="button" class="btn btn-primary" style="float:right;margin-top: 1%;" onclick="addRecords()"> <i class="md md-add-circle-outline"></i> Add</button><br>
+                                @endif
+                            @else
                             <button type="button" class="btn btn-primary" style="float:right;margin-top: 1%;" onclick="addRecords()"> <i class="md md-add-circle-outline"></i> Add</button><br>
+                            @endif
                             <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
@@ -65,9 +71,20 @@
                                         </td>
                                         @endif
                                         <td class="actions">
+                                            @if(Auth::user()->id!=1)
+                                                @if(@$module_permission['is_edit']=='yes')
+                                                <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords({{$value['org_contact_type_id']}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
+                                                &nbsp;&nbsp;&nbsp;
+                                                @endif
+                                                @if(@$module_permission['is_delete']=='yes')
+                                                <a href="{{ URL::to('org/org_contact',$value['org_contact_type_id'])}}" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                                @endif
+                                            @else
                                             <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords({{$value['org_contact_type_id']}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
                                             &nbsp;&nbsp;&nbsp;
                                             <a href="{{ URL::to('org/org_contact',$value['org_contact_type_id'])}}" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                            @endif
+                                            
                                         </td>
                                     </tr>
                                     @endforeach

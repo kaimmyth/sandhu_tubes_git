@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use App\InventoryLocation;
 use DB;
+use Auth;
 use Response;
 use App\conversion;
 use App\Org_Relation;
@@ -26,11 +27,20 @@ class MasterController extends Controller
 /* Category */
 	public function Category_Listing()
 	{
+		if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 2) {
+                $module_permission = $value_land;
+                }
+            }
+		}
+
 		$userData = DB::table('users')->get();
 		$categorytData = DB::table('category')
 		->get();
 		$data['content'] = 'master.category';
-		return view('layouts.content', compact('data'))->with(['categorytData' => $categorytData, 'userData' => $userData]);
+		return view('layouts.content', compact('data'))->with(['categorytData' => $categorytData, 'userData' => $userData,'module_permission'=> @$module_permission]);
 	}
 
 	public function Add_Category(Request $request)
@@ -71,9 +81,17 @@ class MasterController extends Controller
 	/* uom master*/
 	public function Uom_Listing(Request $request)
 	{
+		if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 2) {
+                $module_permission = $value_land;
+                }
+            }
+		}
 		$uomData = DB::table('uom')->get();
 	    $data['content'] = 'master.indexuom';
-		return view('layouts.content', compact('data'))->with(['uomData' => $uomData]);
+		return view('layouts.content', compact('data'))->with(['uomData' => $uomData,'module_permission'=> @$module_permission]);
 	}
 
 	public function Add_Uom(Request $request)
@@ -121,11 +139,19 @@ class MasterController extends Controller
 	/* Department*/
 	public function Department_Listing(Request $request)
 	{
+		if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 6) {
+                $module_permission = $value_land;
+                }
+            }
+		}
 		$userData = DB::table('users')->get();
 		$departmentData = DB::table('departments')
 		->get();
 		$data['content'] = 'master.department';
-		return view('layouts.content', compact('data'))->with(['departmentData' => $departmentData, 'userData' => $userData]);
+		return view('layouts.content', compact('data'))->with(['departmentData' => $departmentData, 'userData' => $userData,'module_permission'=> @$module_permission]);
 	}
 
 	public function Add_Department(Request $request)
@@ -165,10 +191,18 @@ class MasterController extends Controller
     ///...................................................Start Master For conversions............................................  
     public function Convertion_index()
     {
+		if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 6) {
+                $module_permission = $value_land;
+                }
+            }
+		}
         $result_convertion = conversion::orderBy('id', 'DESC')->get()->toArray();
 
         $data['content'] = 'master.convertion';
-        return view('layouts.content', compact('data'))->with('result_convertion', $result_convertion);
+        return view('layouts.content', compact('data'))->with(['result_convertion'=> $result_convertion,'module_permission'=> @$module_permission]);
     }
 
     public function Convertion_Add(Request $request)
@@ -215,10 +249,18 @@ class MasterController extends Controller
     ///.....................................................Start Master For Org-Relationships..............................  
     public function Org_Relation_index()
     {
+		if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 4) {
+                $module_permission = $value_land;
+                }
+            }
+        }
         $result_relation = Org_Relation::orderBy('org_relation_id', 'DESC')->get()->toArray();
 
         $data['content'] = 'master.org_relation';
-        return view('layouts.content', compact('data'))->with('result_relation', $result_relation);
+        return view('layouts.content', compact('data'))->with(['result_relation'=> $result_relation,'module_permission' => @$module_permission]);
     }
 
     public function Org_Relation_add(Request $request)
@@ -264,10 +306,18 @@ class MasterController extends Controller
     ///.....................................................Start Master For Org-Contact............................................  
     public function Contact_type_index()
     {
+		if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 4) {
+                $module_permission = $value_land;
+                }
+            }
+        }
         $result_contact_type = Org_Contact::orderBy('org_contact_type_id', 'DESC')->get()->toArray();
 
         $data['content'] = 'master.org_contact';
-        return view('layouts.content', compact('data'))->with('result_contact_type', $result_contact_type);
+        return view('layouts.content', compact('data'))->with(['result_contact_type'=> $result_contact_type,'module_permission' => @$module_permission]);
     }
 
     public function Contact_type_add(Request $request)
@@ -311,10 +361,18 @@ class MasterController extends Controller
 ///.....................................................Start Master For Org-Designation............................................  
     public function Designation_index()
     {
+		if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 4) {
+                $module_permission = $value_land;
+                }
+            }
+        }
         $result_contact_type = Org_Designation::orderBy('org_designation_id', 'DESC')->get()->toArray();
 
         $data['content'] = 'master.org_designation';
-        return view('layouts.content', compact('data'))->with('result_contact_type', $result_contact_type);
+        return view('layouts.content', compact('data'))->with(['result_contact_type'=> $result_contact_type,'module_permission' => @$module_permission]);
     }
 
     public function Designation_add(Request $request)
@@ -356,10 +414,18 @@ class MasterController extends Controller
 ///..............................................................End Master For Org-Designation.......................................  
     public function userindex(Request $request)
     {
+		if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 6) {
+                $module_permission = $value_land;
+                }
+            }
+        }
         $userData = DB::table('users')->get();
 
         $data['content'] = 'master.user';
-        return view('layouts.content', compact('data'))->with(['userData' => $userData]);
+        return view('layouts.content', compact('data'))->with(['userData' => $userData,'module_permission' => @$module_permission]);
     }
 
     public function add_users(Request $request)
@@ -454,17 +520,20 @@ class MasterController extends Controller
 		$add_user->username=$request->user_name;
 		$add_user->designation=$request->designation;
 		$add_user->phone=$request->phone;
+		if($request->password != "" || $request->password != null)
 		$add_user->password=bcrypt($request->password);
 		$add_user->status=$request->status;
 		$add_user->created_at=date('Y-m-d H:i:s');
 		$add_user->save();
-		// return $add_user;
+		// return $add_user->id;
 		$module = $request->module;
 			// if($add_user!="")
 			// {
 			if($module!="")
 			{
 				foreach ($module as $key => $value) {
+					if($request->module_permission_id[$key]!="")
+					{
 					$permission_update = user_permission::find($request->module_permission_id[$key]);
 					$permission_update->user_id = $add_user->id;
 					$permission_update->employer_id = Session::get('gorgID');
@@ -475,6 +544,19 @@ class MasterController extends Controller
 					$permission_update->is_edit = (!empty($request->input('edit'.$value))) ? "yes" : "no";
 					$permission_update->is_delete = (!empty($request->input('delete'.$value))) ? "yes" : "no";
 					$permission_update->save();
+					}
+					else{
+						$permission_update = new user_permission();
+						$permission_update->user_id = $add_user->id;
+						$permission_update->employer_id = Session::get('gorgID');
+						$permission_update->company_id = Session::get('gorgID');
+						$permission_update->permission_value = $value;
+						$permission_update->is_read = (!empty($request->input('read'.$value))) ? "yes" : "no"; 
+						$permission_update->is_add = (!empty($request->input('add'.$value))) ? "yes" : "no"; 
+						$permission_update->is_edit = (!empty($request->input('edit'.$value))) ? "yes" : "no";
+						$permission_update->is_delete = (!empty($request->input('delete'.$value))) ? "yes" : "no";
+						$permission_update->save();
+					}
 					// echo $permission_update;
 				}
 				// return $permission_update;
@@ -500,10 +582,19 @@ class MasterController extends Controller
 	//Define item section
 	public function itemData_index()
     {
+		if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 2) {
+                $module_permission = $value_land;
+                }
+            }
+		}
+		// echo "<pre>";
+        // print_r($module_permission);exit;
         $itemData = item::orderBy('id', 'DESC')->get();
-
         $data['content'] = 'master.item_list';
-        return view('layouts.content', compact('data'))->with('itemData', $itemData);
+        return view('layouts.content', compact('data'))->with(['itemData'=> $itemData,'module_permission'=> @$module_permission]);
     }
 
     public function itemData_Add(Request $request)

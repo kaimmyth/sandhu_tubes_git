@@ -43,7 +43,13 @@
               <div class="card-body">
                 <div class="row"><br><br><br>
                   <div class="col-md-12 col-sm-12 col-12">
+                    @if(Auth::user()->id!=1)
+                      @if(@$module_permission['is_add']=='yes')
+                        <a href="{{url('inv_item/add')}}"><button id="addToTable" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" data-toggle="modal" style="float:right; margin-top: 19px;"><i class="md md-add-circle-outline"></i> Add</button></a><br>
+                      @endif
+                    @else
                     <a href="{{url('inv_item/add')}}"><button id="addToTable" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" data-toggle="modal" style="float:right; margin-top: 19px;"><i class="md md-add-circle-outline"></i> Add</button></a><br>
+                    @endif
                     <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                       <thead style="background: #b6e9ff;">
                         <tr>
@@ -65,9 +71,21 @@
                           <td class="rig">{{$val->quantity}} {{$val->uom_id}}</td>
                           <td>{{date('j M, Y',strtotime($val->created_date))}}</td>
                           <td class="actions">
+                            @if(Auth::user()->id!=1)
+                              @if(@$module_permission['is_read']=='yes')
+                                <a href="{{url('inv_item/showView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
+                              @endif
+                              @if(@$module_permission['is_edit']=='yes')
+                                <a href="{{url('inv_item/editView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick=""><i class="fa fa-edit"></i></a>
+                              @endif
+                              @if(@$module_permission['is_delete']=='yes')
+                                <a href="{{url('inv_item/deletedata/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash" style="color:red;"></i></a>
+                              @endif
+                            @else
                             <a href="{{url('inv_item/showView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
                             <a href="{{url('inv_item/editView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick=""><i class="fa fa-edit"></i></a>
                             <a href="{{url('inv_item/deletedata/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash" style="color:red;"></i></a>
+                            @endif
                           </td>
                         </tr>
                         @endforeach

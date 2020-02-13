@@ -1,11 +1,21 @@
 <style>
-
-table th {
-        text-align: center;
-    }
-
-</style>
-<div class="content-page"> 
+   table th {
+     text-align: center;
+   }
+ 
+   table td {
+     padding: 3px 10px 3px 10px !important;
+   }
+ 
+   .rig {
+     text-align: right;
+   }
+ 
+   .action {
+     width: 50px;
+   }
+ </style>
+<div class="content-page">
    <div class="content">
       <div class="container-fluid">
          <!-- Page-Title -->
@@ -18,34 +28,35 @@ table th {
                   <li class="active">Manage Department</li>
                </ol>
             </div>
-         </div><hr class="new2">
+         </div>
+         <hr class="new2">
          <div class="row">
-            <div class="col-md-12">           
+            <div class="col-md-12">
                <div class="card card-border card-info">
                   <div class="card-header" style="padding-top: 20px !important;">
-                     
+
                      <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-					 
-					 
-					
-                              <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float: right;margin-top: 0px !important;" onclick="addRecords()" >Add <i class="md md-add-circle-outline"></i></button>
-                           
-					 
-					 
+                        @if(Auth::user()->id!=1)
+                           @if(@$module_permission['is_add']=='yes')
+                           <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float: right;margin-top: 0px !important;" onclick="addRecords()">Add <i class="md md-add-circle-outline"></i></button>
+                           @endif
+                        @else
+                        <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float: right;margin-top: 0px !important;" onclick="addRecords()">Add <i class="md md-add-circle-outline"></i></button>
+                        @endif
                         <thead>
                            <tr>
-                              <th>Id</th>
+                              <th>Sl.</th>
                               <th>Department Name</th>
                               <th>Description</th>
                               <th>Is Active</th>
                               <th>Created Date</th>
-                              <th>Actions</th>
+                              <th class="action">Actions</th>
                            </tr>
                         </thead>
                         <tbody>
                            @foreach($departmentData as $key => $data)
                            <tr>
-                              <td>{{ $key+1 }}</td>
+                              <td class="rig">{{ $key+1 }}</td>
                               <td>{{ $data->department_name }}</td>
                               <td>{{ $data->description }}</td>
                               @if($data->is_active == 1)
@@ -63,9 +74,19 @@ table th {
                               @endif
                               <td>{{ date('d-M-Y',strtotime($data->created_at)) }}</td>
                               <td class="actions">
-                                 <a href="javascript::void(0)" class="on-default edit-row"  onclick="editRecords({{$data->id}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a> 
+                                 @if(Auth::user()->id!=1)
+                                    @if(@$module_permission['is_edit']=='yes')
+                                    <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords({{$data->id}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
+                                    &nbsp;&nbsp;&nbsp;
+                                    @endif
+                                    @if(@$module_permission['is_delete']=='yes')
+                                    <a href="{{ URL::to('department/destroy',$data->id)}}" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                    @endif
+                                 @else
+                                 <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords({{$data->id}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
                                  &nbsp;&nbsp;&nbsp;
                                  <a href="{{ URL::to('department/destroy',$data->id)}}" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                 @endif
                               </td>
                            </tr>
                            @endforeach

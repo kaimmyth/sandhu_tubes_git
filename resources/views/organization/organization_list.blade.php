@@ -35,7 +35,14 @@
                <div class="card card-border card-info">
                   <div class="card-header" style="background-image: linear-gradient(#e9f8ff, white);padding-top: 20px !important;">
                      <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        @if(Auth::user()->id!=1)
+                        @if(@$module_permission['is_add']=='yes')
+                        <a href="{{url('organization/add')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float: right;margin-top: 0px !important;">Add <i class="md md-add-circle-outline"></i></button></a><br>
+                        @endif
+                        @else
                         <a href="{{url('organization/add')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float: right;margin-top: 0px !important;">Add <i class="md md-add-circle-outline"></i></button></a>
+                        @endif
+                        
                         <thead style="background: #fff;">
                            <tr>
                               <th>Organization Name</th>
@@ -54,9 +61,22 @@
                               <td>{{$val->cin}}</td>
                               <td class="rig">{{$val->revenue}}</td>
                               <td class="actions">
+                                 @if(Auth::user()->id!=1)
+                                    @if(@$module_permission['is_read']=='yes')
+                                       <a href="{{url('organization/showView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
+                                    @endif
+                                    @if(@$module_permission['is_edit']=='yes')
+                                       <a href="{{url('organization/editView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick=""><i class="fa fa-edit"></i></a>
+                                    @endif
+                                    @if(@$module_permission['is_delete']=='yes')
+                                       <a href="{{url('organization/deletedata/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this Data?');"><i class="fa fa-trash" style="color:red;"></i></a>
+                                    @endif
+                                 @else
                                  <a href="{{url('organization/showView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
                                  <a href="{{url('organization/editView/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick=""><i class="fa fa-edit"></i></a>
                                  <a href="{{url('organization/deletedata/'.$val->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete this Data?');"><i class="fa fa-trash" style="color:red;"></i></a>
+                                 @endif
+                                 
                               </td>
                            </tr>
                            @endforeach

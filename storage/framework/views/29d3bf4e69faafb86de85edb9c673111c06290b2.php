@@ -33,13 +33,20 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-border card-info">
-                        <div class="card-header" style="background-image: linear-gradient(#e9f8ff, white);">
+                        <div class="card-header" style="padding-top: 20px !important;">
                             
                             <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                     <!-- <button type="button" data-toggle="modal" data-target="#generic-model" class="btn btn-purple" style="float:right;margin-top: 0px !important;">Set Generic  User<i class="md md-add-circle-outline"></i></button> -->
                                       <!-- <!-- <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;" onclick="addRecords()">Add <si class="md md-add-circle-outline"></si></button> --> 
+                                    <?php if(Auth::user()->id!=1): ?>
+                                        <?php if(@$module_permission['is_add']=='yes'): ?>
+                                        <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float: right;margin-top: 0px !important;" onclick="addRecords()">Add <i class="md md-add-circle-outline"></i></button>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                    <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float: right;margin-top: 0px !important;" onclick="addRecords()">Add <i class="md md-add-circle-outline"></i></button>
+                                    <?php endif; ?> 
                                       <a href="<?php echo e(url('add/users/from')); ?>"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 0px !important;">Add <i class="md md-add-circle-outline"></i></button></a>
-                                <thead style="background: #b6e9ff;">
+                                <thead style="">
                                     <tr>
                                         <th style="width: 55px;">Sl.</th>
                                         <th>Name</th>
@@ -72,8 +79,17 @@
                                         <?php endif; ?>
                                         <td><?php echo e(date('j M, Y ',strtotime($data->created_at))); ?></td>
                                         <td class="actions">
+                                            <?php if(Auth::user()->id!=1): ?>
+                                                <?php if(@$module_permission['is_edit']=='yes'): ?>
+                                                <a href="<?php echo e(url('edit/users/from/'.$data->id)); ?>" class="on-default edit-row" onclick="editRecords(<?php echo e($data->id); ?>)" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;&nbsp;
+                                                <?php endif; ?>
+                                                <?php if(@$module_permission['is_delete']=='yes'): ?>
+                                                <a href="<?php echo e(URL::to('users/destroy',$data->id)); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                                <?php endif; ?>
+                                            <?php else: ?>
                                             <a href="<?php echo e(url('edit/users/from/'.$data->id)); ?>" class="on-default edit-row" onclick="editRecords(<?php echo e($data->id); ?>)" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;&nbsp;
                                             <a href="<?php echo e(URL::to('users/destroy',$data->id)); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                     <?php endif; ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

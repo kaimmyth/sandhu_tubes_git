@@ -36,7 +36,13 @@
                 <div class="col-md-12" style="display:block; margin:auto;float:none;">
                     <div class="col-xl-12">
                         <div class="portlet">
-                                <button type="button" class="btn btn-primary" style="float:right;margin-top: 1%;" onclick="addRecords()"> <i class="md md-add-circle-outline"></i> Add</button><br>
+                           <?php if(Auth::user()->id!=1): ?>
+                              <?php if(@$module_permission['is_add']=='yes'): ?>
+                              <button type="button" class="btn btn-primary" style="float:right;margin-top: 1%;" onclick="addRecords()"> <i class="md md-add-circle-outline"></i> Add</button><br>
+                              <?php endif; ?>
+                           <?php else: ?>
+                           <button type="button" class="btn btn-primary" style="float:right;margin-top: 1%;" onclick="addRecords()"> <i class="md md-add-circle-outline"></i> Add</button><br>
+                           <?php endif; ?>
                             <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                   <tr>
@@ -70,9 +76,20 @@
                                        </td>
                                        <?php endif; ?>
                                        <td class="actions">
-                                          <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords(<?php echo e($value['id']); ?>)" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
-                                          &nbsp;&nbsp;&nbsp;
-                                          <a href="<?php echo e(URL::to('inventory/destroy',$value['id'])); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                          <?php if(Auth::user()->id!=1): ?>
+                                             <?php if(@$module_permission['is_edit']=='yes'): ?>
+                                                <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords(<?php echo e($value['id']); ?>)" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
+                                                &nbsp;&nbsp;&nbsp;
+                                             <?php endif; ?>
+                                             <?php if(@$module_permission['is_delete']=='yes'): ?>
+                                                <a href="<?php echo e(URL::to('inventory/destroy',$value['id'])); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                             <?php endif; ?>
+                                          <?php else: ?>
+                                             <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords(<?php echo e($value['id']); ?>)" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
+                                             &nbsp;&nbsp;&nbsp;
+                                             <a href="<?php echo e(URL::to('inventory/destroy',$value['id'])); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                          <?php endif; ?>
+                                          
                                        </td>
                                     </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

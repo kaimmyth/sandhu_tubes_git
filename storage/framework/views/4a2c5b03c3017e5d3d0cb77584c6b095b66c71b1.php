@@ -37,7 +37,13 @@
                      <div class="row">
                         <div class="col-sm-12">
                            <div class="m-b-30">
+                              <?php if(Auth::user()->id!=1): ?>
+                                 <?php if(@$module_permission['is_add']=='yes'): ?>
+                                 <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float: right;" onclick="addRecords()">Add <i class="md md-add-circle-outline"></i></button>
+                                 <?php endif; ?>
+                              <?php else: ?>
                               <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float: right;" onclick="addRecords()">Add <i class="md md-add-circle-outline"></i></button>
+                              <?php endif; ?>
                            </div>
                         </div>
                      </div>
@@ -75,9 +81,20 @@
                               <?php endif; ?>
                               <td><?php echo e(date('j M, Y ',strtotime($data->created_at))); ?></td>
                               <td class="actions">
+                                 <?php if(Auth::user()->id!=1): ?>
+                                    <?php if(@$module_permission['is_edit']=='yes'): ?>
+                                    <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords(<?php echo e($data->id); ?>)" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <?php endif; ?>
+                                    <?php if(@$module_permission['is_delete']=='yes'): ?>
+                                    <a href="<?php echo e(URL::to('uom_master/destroy',$data->id)); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                    <?php endif; ?>
+                                 <?php else: ?>
                                  <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords(<?php echo e($data->id); ?>)" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
                                  &nbsp;&nbsp;&nbsp;
                                  <a href="<?php echo e(URL::to('uom_master/destroy',$data->id)); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                 <?php endif; ?>
+                                 
                               </td>
                            </tr>
                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

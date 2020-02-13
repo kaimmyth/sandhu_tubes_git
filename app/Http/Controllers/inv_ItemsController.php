@@ -11,6 +11,16 @@ class inv_ItemsController extends Controller
 {
     public function index()
     {
+        if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 2) {
+                $module_permission = $value_land;
+                }
+            }
+        }
+        
+        // return $module_permission;
         $inv_itemdata = inv_item::orderBy('id','ASC')->get();
         foreach ($inv_itemdata as $key => $value) {
             $value->item_category_id = DB::table('category')->where('id',$value->item_category_id)->value('category_name');
@@ -18,7 +28,7 @@ class inv_ItemsController extends Controller
             $value->item_name = DB::table('item')->where('id',$value->item_name)->value('items_name');
         }
         $data['content'] = 'inventory.inv_item';
-        return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata]);
+        return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata,'module_permission' => @$module_permission]);
     }
     public function addView()
     {

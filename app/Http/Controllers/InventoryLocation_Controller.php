@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Session;
 use App\InventoryLocation;
 use DB;
+use Auth;
 use Response;
 
 
@@ -20,11 +21,19 @@ class InventoryLocation_Controller extends Controller
    //view to page
     public function index()
     {
-        # code...
+        if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 2) {
+                $module_permission = $value_land;
+                }
+            }
+		}
+
         $inventory_location=InventoryLocation::orderBy('id','DESC')->get()->toArray();
 
         $data['content'] = 'inventory.inventory-location';
-        return view('layouts.content', compact('data'))->with('inventory_location',$inventory_location);
+        return view('layouts.content', compact('data'))->with(['inventory_location'=>$inventory_location,'module_permission'=> @$module_permission]);
     }
 
 
