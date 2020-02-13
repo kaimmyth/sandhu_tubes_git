@@ -244,6 +244,7 @@
 					<ul class="list-unstyled">
 						<li><a href="{{url('convertion')}}"><span>CONVERTIONS</span></a></li>
 						<li><a href="{{ url('department')}}">DEPARTMENT</a></li>
+						<li><a href="{{ url('service/listing')}}">SERVICE</a></li>
 						<li><a href="{{ url('users')}}">USERS</a></li>
 						<!-- <li><a href="{{ url('organization/listing')}}">ORGNIZATIONS</a></li> -->
 						<!--<li><a href="{{ url('subdepartment')}}">SUB-DEPARTMENTS</a></li>-->

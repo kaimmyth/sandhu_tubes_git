@@ -413,3 +413,8 @@ Route::get('itemData/listing','MasterController@itemData_index');
 Route::post('itemData/Add','MasterController@itemData_Add');
 Route::any('itemData/edit/{id}','MasterController@itemData_Edit');
 Route::get('itemData/delete/{id}','MasterController@itemData_destroy');
+//................................................Raj 13-2-2020...service section ........................................................
+Route::get('service/listing','MasterController@service_index');
+Route::post('service/Add','MasterController@service_Add');
+Route::any('service/edit/{id}','MasterController@service_Edit');
+Route::get('service/delete/{id}','MasterController@service_destroy');

@@ -244,6 +244,7 @@
 					<ul class="list-unstyled">
 						<li><a href="<?php echo e(url('convertion')); ?>"><span>CONVERTIONS</span></a></li>
 						<li><a href="<?php echo e(url('department')); ?>">DEPARTMENT</a></li>
+						<li><a href="<?php echo e(url('service/listing')); ?>">SERVICE</a></li>
 						<li><a href="<?php echo e(url('users')); ?>">USERS</a></li>
 						<!-- <li><a href="<?php echo e(url('organization/listing')); ?>">ORGNIZATIONS</a></li> -->
 						<!--<li><a href="<?php echo e(url('subdepartment')); ?>">SUB-DEPARTMENTS</a></li>-->

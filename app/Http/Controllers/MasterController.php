@@ -631,5 +631,68 @@ class MasterController extends Controller
         Session::flash('error', 'Deleted Successfully..!');
         $delete = DB::table('item')->where('id', '=', $id)->delete();
         return back();
+	}
+	
+	//service section
+	public function service_index()
+    {
+		if (Auth::check() && Auth::user()->users_role != 1) {
+            $land_permission = Session::get('all_module_permission');
+            foreach ($land_permission as $key => $value_land) {
+                if ($value_land['permission_value'] == 6) {
+                $module_permission = $value_land;
+                }
+            }
+		}
+		// echo "<pre>";
+        // print_r($module_permission);exit;
+        $serviceData =  DB::table('service_type')->orderBy('id', 'DESC')->get();
+        $data['content'] = 'master.service_list';
+        return view('layouts.content', compact('data'))->with(['serviceData'=> $serviceData,'module_permission'=> @$module_permission]);
+    }
+
+    public function service_Add(Request $request)
+    {
+        // return $request;
+        
+        if ($request->ids != '') {
+			Session::flash('success', 'Updated Successfully..!'); 
+			$data = array(
+				'service_name' => $request->service_name,
+				'service_description' => $request->description,
+				'status' => $request->status,
+				'update_by' => Auth::user()->id,
+				'update_at' => date('Y-m-d'),
+			);
+            $updatedata = DB::table('service_type')->where('id', $request->ids)->update($data);
+            return back();
+        } else {
+			$data = array(
+				'service_name' => $request->service_name,
+				'service_description' => $request->description,
+				'status' => $request->status,
+				'created_by' => Auth::user()->id,
+			);
+            Session::flash('success', 'Inserted Successfully..!');
+            $insertdata = DB::table('service_type')->insert($data);
+            return back();
+        }
+    }
+
+    public function service_Edit(Request $request, $id)
+    {
+        // return $id;
+        $data =  DB::table('service_type')->where('id', $id)->first();
+        if ($data) {
+            return Response::json($data);
+        }
+    }
+
+
+    public function service_destroy(Request $request, $id)
+    {
+        Session::flash('error', 'Deleted Successfully..!');
+        $delete = DB::table('service_type')->where('id', '=', $id)->delete();
+        return back();
     }
 }
