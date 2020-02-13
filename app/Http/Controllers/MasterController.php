@@ -7,7 +7,7 @@ use Session;
 use App\InventoryLocation;
 use DB;
 use Response;
-use App\Convertion;
+use App\conversion;
 use App\Org_Relation;
 use App\Org_Contact;
 use App\Org_Designation;
@@ -161,10 +161,10 @@ class MasterController extends Controller
 		$delete = DB::table('departments')->where('id', '=', $id)->delete();
 		return back();
 	}
-    ///...................................................Start Master For Convertions............................................  
+    ///...................................................Start Master For conversions............................................  
     public function Convertion_index()
     {
-        $result_convertion = Convertion::orderBy('convertions_id', 'DESC')->get()->toArray();
+        $result_convertion = conversion::orderBy('id', 'DESC')->get()->toArray();
 
         $data['content'] = 'master.convertion';
         return view('layouts.content', compact('data'))->with('result_convertion', $result_convertion);
@@ -182,18 +182,18 @@ class MasterController extends Controller
 
         if ($request->ids != '') {
             Session::flash('success', 'Updated Successfully..!');
-            $updatedata = DB::table('convertions')->where('convertions_id', $request->ids)->update($data);
+            $updatedata = DB::table('conversion')->where('id', $request->ids)->update($data);
             return back();
         } else {
             Session::flash('success', 'Inserted Successfully..!');
-            $insertdata = DB::table('convertions')->insert($data);
+            $insertdata = DB::table('conversion')->insert($data);
             return back();
         }
     }
 
     public function Convertion_Edit(Request $request, $id)
     {
-        $data =  DB::table('convertions')->where('convertions_id', $id)->first();
+        $data =  DB::table('conversion')->where('id', $id)->first();
         if ($data) {
             return Response::json($data);
         }
@@ -203,10 +203,10 @@ class MasterController extends Controller
     public function Convertion_destroy(Request $request, $id)
     {
         Session::flash('error', 'Deleted Successfully..!');
-        $delete = DB::table('convertions')->where('convertions_id', '=', $id)->delete();
+        $delete = DB::table('conversion')->where('id', '=', $id)->delete();
         return back();
     }
-    ///........................................................End Master For Convertions...............................................  
+    ///........................................................End Master For conversions...............................................  
 
 
 

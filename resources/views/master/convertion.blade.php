@@ -69,9 +69,9 @@
                                         </td>
                                         @endif
                                         <td class="actions">
-                                            <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords({{$value['convertions_id']}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
+                                            <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords({{$value['id']}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
                                             &nbsp;&nbsp;&nbsp;
-                                            <a href="{{ URL::to('convertion/destroy',$value['convertions_id'])}}" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                            <a href="{{ URL::to('convertion/destroy',$value['id'])}}" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -167,7 +167,7 @@
             contentType: 'application/json',
             success: function (data) {
                 // console.log(data);
-                document.getElementById("ids").value = data.convertions_id;
+                document.getElementById("ids").value = data.id;
                 document.getElementById("from_si_unit").value = data.from_si_unit;
                 document.getElementById("to_si_unit").value = data.to_si_unit;
                 document.getElementById("multiplication_value").value = data.multiplication_value;

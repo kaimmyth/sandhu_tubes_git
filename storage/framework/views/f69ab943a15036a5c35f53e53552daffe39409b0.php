@@ -188,8 +188,7 @@
 
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="field-3" class="control-label">Q/A</label><?php echo e(@$manufacturing_details->qa_check); ?>
-
+                          <label for="field-3" class="control-label">Q/A</label>
                           <select class="form-control" name="qa_check" id="qa_check">
                             <?php if(@$manufacturing_details->qa_check == "0"): ?>
                             <option value="0">No</option>
@@ -313,7 +312,7 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-3" class="control-label">Quantity*</label>
-                        <input type="text" class="form-control" readonly name="metal_scrap_quantity"  id="metal_scrap_quantity" min="1" value="<?php if(@$manufacturing_details->metal_scrap_quantity): ?> <?php echo e($manufacturing_details->metal_scrap_quantity); ?> <?php endif; ?>" placeholder="" required="" aria-required="true">
+                        <input type="text" class="form-control" name="metal_scrap_quantity"  id="metal_scrap_quantity" min="1" value="<?php if(@$manufacturing_details->metal_scrap_quantity): ?> <?php echo e($manufacturing_details->metal_scrap_quantity); ?> <?php endif; ?>" placeholder="" required="" aria-required="true">
                       </div>
                     </div>
 
@@ -371,7 +370,7 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-3" class="control-label">Quantity*</label>
-                        <input type="text" class="form-control" readonly name="invisible_loss_quantity" id="invisible_loss_quantity" min="0" value="<?php if(@$manufacturing_details->invisible_loss_quantity): ?> <?php echo e($manufacturing_details->invisible_loss_quantity); ?> <?php endif; ?>" placeholder="" required="" aria-required="true">
+                        <input type="text" class="form-control" name="invisible_loss_quantity" id="invisible_loss_quantity" min="0" value="<?php if(@$manufacturing_details->invisible_loss_quantity): ?> <?php echo e($manufacturing_details->invisible_loss_quantity); ?> <?php endif; ?>" placeholder="" required="" aria-required="true">
                       </div>
                     </div>
 

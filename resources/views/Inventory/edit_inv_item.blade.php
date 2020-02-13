@@ -116,7 +116,7 @@
                               </div>
                               <div class="col-md-4" id="hidden_div" style="display: none;">
                                 <div class="form-group">
-                                  <label for="field-4" class="control-label">Item Number</label>
+                                  <label for="field-4" class="control-label">Serial Number</label>
                                   <input type="text" class="form-control" name="serial_no" value="{{$inv_itemdata->serial_no}}" id="serial_no" placeholder="Item Number">
                                 </div>
                               </div>
