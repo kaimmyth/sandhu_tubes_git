@@ -1,5 +1,5 @@
 <footer class="footer">
-    Sandhu-Tubes © 2019 IT-SCIENT 
+    Sandhu-Tubes © 2020 IT-SCIENT 
 </footer>
 @include('layouts.alert')
 <style>

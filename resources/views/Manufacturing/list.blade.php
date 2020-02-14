@@ -78,7 +78,7 @@
                             <div class="card-body">
                                 <div class="row"><br><br><br>
                                     <div class="col-md-12 col-sm-12 col-12">
-                                        @if($user_id!=1)
+                                        @if(@$user_id!=1)
                                         @if(@$module_permission['is_add']=='yes')     
                                         <a href="{{url('Manufacturing/add')}}"><button type="button" class="btn btn-purple btn-rounded waves-effect waves-light m-b-5" style="float:right;margin-top: 1%;"><i class="md md-add-circle-outline"></i> Add</button></a><br>
                                         @endif
@@ -123,7 +123,7 @@
                                                     </td>
                                                 @endif
                                                 <td >
-                                                    @if(Auth::user()->id!=1)
+                                                    @if(@Auth::user()->id!=1)
                                                         @if(@$module_permission['is_read']=='yes')
                                                         <a href="{{url('Manufacturing/view_details/'.$value_del['id'])}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" onclick=""><i class="fa fa-eye" style="color:green;"></i></a>
                                                         @endif

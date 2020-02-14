@@ -23,7 +23,8 @@
                 <!-- Page-Title -->
                 <div class="row" id="dashboard-row">
                     <div class="col-sm-12">
-                        <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Add Users</h4>
+                        <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Add Users &nbsp;&nbsp;/ &nbsp;
+                            <a href="{{url('users')}}">Back</a></h4>
                         <ol class="breadcrumb pull-right">
                             <li><a href="{{ URL::to('home') }}">Home</a></li>
                             <li><a href="{{URL::to('home')}}">Master</a></li>

@@ -418,3 +418,7 @@ Route::get('service/listing','MasterController@service_index');
 Route::post('service/Add','MasterController@service_Add');
 Route::any('service/edit/{id}','MasterController@service_Edit');
 Route::get('service/delete/{id}','MasterController@service_destroy');
+
+Route::get('reports','ReportsController@show_report');
+Route::get('report/get_cat/{id}','ReportsController@get_cat_details');
+Route::post('genrate/report','ReportsController@genrate_report');

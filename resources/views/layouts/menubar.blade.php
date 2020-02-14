@@ -238,11 +238,13 @@
 					</ul>
 				</li>
 				<li><a href="{{URL::to('shipment/listing')}}" class="waves-effect"><i class="fa fa-truck" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SHIPMENT</span></a></li>
+				<li><a href="{{URL::to('reports')}}" class="waves-effect"><i class="fa fa-file" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">REPORTS</span></a></li>		
+
 				@if(Auth::user()->users_role==1)
 				<li class="has_sub">
 					<a href="#" class="waves-effect"><i class="ion-settings"></i>&nbsp;&nbsp;SETTINGS<span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
-						<li><a href="{{url('convertion')}}"><span>CONVERTIONS</span></a></li>
+						<li><a href="{{url('convertion')}}"><span > CONVERSION</span></a></li>
 						<li><a href="{{ url('department')}}">DEPARTMENT</a></li>
 						<li><a href="{{ url('service/listing')}}">SERVICE</a></li>
 						<li><a href="{{ url('users')}}">USERS</a></li>
@@ -293,9 +295,11 @@
 				<li class="has_sub">
 					<a href="#" class="waves-effect"><i class="ion-settings"></i>&nbsp;&nbsp;SETTINGS<span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
-						<li><a href="{{url('convertion')}}"><span>CONVERTIONS</span></a></li>
+						<li><a href="{{url('convertion')}}"><span > CONVERSION</span></a></li>
+						<li><a href="{{ url('service/listing')}}">SERVICE</a></li>
 						<li><a href="{{ url('department')}}"> DEPARTMENT</a></li>
-                        <li><a href="{{ url('users')}}">USERS</a></li>
+						<li><a href="{{ url('users')}}">USERS</a></li>
+						
 						
 						<!-- <li><a href="{{ url('organization/listing')}}">ORGNIZATIONS</a></li> -->
 						<!--<li><a href="{{ url('subdepartment')}}">SUB-DEPARTMENTS</a></li>-->
