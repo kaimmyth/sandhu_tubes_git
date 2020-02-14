@@ -227,6 +227,7 @@
 					</ul>
 				</li>
 				
+				<li><a href="<?php echo e(URL::to('serviceManu/list')); ?>" class="waves-effect"><i class="fa fa-industry" style="margin-left: 4px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SERVICE</span></a></li>
 				<li><a href="<?php echo e(URL::to('Manufacturing/list')); ?>" class="waves-effect"><i class="fa fa-industry" style="margin-left: 4px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">MAUNFACTURING</span></a></li>
 				<li class="has_sub">
 					<a href="#" class="waves-effect"><i class="fa fa-building" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp; <span style="margin-left: 19px;">ORGNIZATIONS</span><span class="pull-right"><i class="md md-add"></i></span></a>
@@ -238,11 +239,13 @@
 					</ul>
 				</li>
 				<li><a href="<?php echo e(URL::to('shipment/listing')); ?>" class="waves-effect"><i class="fa fa-truck" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SHIPMENT</span></a></li>
+				<li><a href="<?php echo e(URL::to('reports')); ?>" class="waves-effect"><i class="fa fa-file" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">REPORTS</span></a></li>		
+
 				<?php if(Auth::user()->users_role==1): ?>
 				<li class="has_sub">
 					<a href="#" class="waves-effect"><i class="ion-settings"></i>&nbsp;&nbsp;SETTINGS<span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
-						<li><a href="<?php echo e(url('convertion')); ?>"><span>CONVERTIONS</span></a></li>
+						<li><a href="<?php echo e(url('convertion')); ?>"><span > CONVERSION</span></a></li>
 						<li><a href="<?php echo e(url('department')); ?>">DEPARTMENT</a></li>
 						<li><a href="<?php echo e(url('service/listing')); ?>">SERVICE</a></li>
 						<li><a href="<?php echo e(url('users')); ?>">USERS</a></li>
@@ -270,6 +273,7 @@
 					</ul>
 				</li>
 				<?php endif; ?>
+				<li><a href="<?php echo e(URL::to('serviceManu/list')); ?>" class="waves-effect"><i class="fa fa-industry" style="margin-left: 4px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SERVICE</span></a></li>
 				<?php if(in_array(3, @$module_id) || in_array(3, @$module_id_add) || in_array(3, @$module_id_edit) || in_array(3, @$module_id_delete)): ?>
 				<li><a href="<?php echo e(URL::to('Manufacturing/list')); ?>" class="waves-effect"><i class="fa fa-industry" style="margin-left: 4px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">MAUNFACTURING</span></a></li>
 				
@@ -293,9 +297,11 @@
 				<li class="has_sub">
 					<a href="#" class="waves-effect"><i class="ion-settings"></i>&nbsp;&nbsp;SETTINGS<span class="pull-right"><i class="md md-add"></i></span></a>
 					<ul class="list-unstyled">
-						<li><a href="<?php echo e(url('convertion')); ?>"><span>CONVERTIONS</span></a></li>
+						<li><a href="<?php echo e(url('convertion')); ?>"><span > CONVERSION</span></a></li>
+						<li><a href="<?php echo e(url('service/listing')); ?>">SERVICE</a></li>
 						<li><a href="<?php echo e(url('department')); ?>"> DEPARTMENT</a></li>
-                        <li><a href="<?php echo e(url('users')); ?>">USERS</a></li>
+						<li><a href="<?php echo e(url('users')); ?>">USERS</a></li>
+						
 						
 						<!-- <li><a href="<?php echo e(url('organization/listing')); ?>">ORGNIZATIONS</a></li> -->
 						<!--<li><a href="<?php echo e(url('subdepartment')); ?>">SUB-DEPARTMENTS</a></li>-->

@@ -323,6 +323,14 @@ Route::get('Manufacturing/edit/{id}','ManufacturingController@edit');
 Route::get('Manufacturing/delete/{id}','ManufacturingController@delete');
 Route::get('Manufacturing/view_details/{id}','ManufacturingController@view_details');
 Route::get('Manufacturing/get_item_details/{id}','ManufacturingController@get_item_details');
+//................................................Amit...Service........................................................
+Route::get('serviceManu/list','ServiceController@list');
+Route::get('serviceManu/add','ServiceController@add');
+Route::post('serviceManu/create','ServiceController@create');
+Route::get('serviceManu/edit/{id}','ServiceController@edit');
+Route::get('serviceManu/delete/{id}','ServiceController@delete');
+Route::get('serviceManu/view_details/{id}','ServiceController@view_details');
+Route::get('serviceManu/get_item_details/{id}','ServiceController@get_item_details');
 
 /* =================================================== Inventory Define Items Raj.. 08/02/2020=================================================== */
 Route::prefix('inv_item')->group(function () {

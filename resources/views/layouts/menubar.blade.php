@@ -227,6 +227,7 @@
 					</ul>
 				</li>
 				
+				<li><a href="{{URL::to('serviceManu/list')}}" class="waves-effect"><i class="fa fa-industry" style="margin-left: 4px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SERVICE</span></a></li>
 				<li><a href="{{URL::to('Manufacturing/list')}}" class="waves-effect"><i class="fa fa-industry" style="margin-left: 4px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">MAUNFACTURING</span></a></li>
 				<li class="has_sub">
 					<a href="#" class="waves-effect"><i class="fa fa-building" style="margin-left: 7px;" aria-hidden="true"></i>&nbsp;&nbsp; <span style="margin-left: 19px;">ORGNIZATIONS</span><span class="pull-right"><i class="md md-add"></i></span></a>
@@ -272,6 +273,7 @@
 					</ul>
 				</li>
 				@endif
+				<li><a href="{{URL::to('serviceManu/list')}}" class="waves-effect"><i class="fa fa-industry" style="margin-left: 4px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SERVICE</span></a></li>
 				@if(in_array(3, @$module_id) || in_array(3, @$module_id_add) || in_array(3, @$module_id_edit) || in_array(3, @$module_id_delete))
 				<li><a href="{{URL::to('Manufacturing/list')}}" class="waves-effect"><i class="fa fa-industry" style="margin-left: 4px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">MAUNFACTURING</span></a></li>
 				
