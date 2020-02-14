@@ -36,7 +36,7 @@
                 <div class="col-md-12" style="display:block; margin:auto;float:none;">
                     <div class="col-xl-12">
                         <div class="portlet">
-                            @if(Auth::user()->id!=1)
+                            @if(@Auth::user()->id!=1)
                                 @if(@$module_permission['is_add']=='yes')
                                 <button type="button" class="btn btn-primary" style="float:right;margin-top: 1%;" onclick="addRecords()"> <i class="md md-add-circle-outline"></i> Add</button><br>
                                 @endif
@@ -73,7 +73,7 @@
                                         @endif
                                         <td>{{date('j M, Y ',strtotime($value->created_at))}}</td>
                                         <td class="actions">
-                                            @if(Auth::user()->id!=1)
+                                            @if(@Auth::user()->id!=1)
                                                 @if(@$module_permission['is_edit']=='yes')
                                                 <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords({{$value->id}})" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
                                                 @endif
