@@ -36,7 +36,7 @@
             <hr class="new2">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="{{url('update/users')}}" method="post">
+                            <form action="{{url('update/users')}}" method="post" enctype="multipart/form-data" id="FormValidation" autocomplete="off">
                                 @csrf()
                             <div class="card card-border card-info" style="border-top: 2px solid #018eff;">
                                 <div class="card-body" style="background-image: linear-gradient(#ebf9ff, white);">
@@ -87,6 +87,12 @@
                                         </div>
                                     </div>
                                     </div>
+                            </div> <!-- col-->
+                            <div class="col-xl-4">
+                                <div class="form-group">
+                                    <label for="">Profile Image</label>
+                                    <input type="file" class="form-control" id="profile_image" name="profile_image">
+                                </div>
                             </div> <!-- col-->
                                 </div> <!-- End row -->
 

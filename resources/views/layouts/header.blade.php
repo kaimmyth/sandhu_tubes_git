@@ -438,7 +438,18 @@ background-position: center;
 
             <li class="dropdown open">
             	@php  $logo = DB::table('users')->where('id',Auth::user()->id)->selectRaw("concat('".url('public/images/user_profile/').'/'."',user_image) as logo")->first();  @endphp
-            	<a href="#" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src=" {{ asset('public/assets/images/users/avatar-1.jpg') }} " alt="user-img" class="rounded-circle"> &nbsp;&nbsp;<span style="text-transform: uppercase;">{{Auth::user()->name ?? "User Name"}}</span> </a>
+            	<a href="#" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"> 
+					@if(Auth::user()->user_image!="")
+						@if(@Auth::user()->id!=1)
+						<img src=" {{ asset(@Auth::user()->user_image) }}" alt="user-img" class="rounded-circle">
+						@else
+						<img src="{{asset('public/assets/images/users/avatar-1.jpg') }}" alt="user-img" class="rounded-circle">  
+						@endif
+					@else 
+						<img src="{{asset('public/assets/images/users/avatar-1.jpg') }}" alt="user-img" class="rounded-circle">  
+					@endif 
+					&nbsp;&nbsp;<span style="text-transform: uppercase;">{{Auth::user()->name ?? "User Name"}}</span> 
+				</a>
             	<ul class="dropdown-menu">
             		<li><a href="{{url('user-profile')}}" class="dropdown-item"><i class="md md-face-unlock mr-2"></i> Profile</a></li>
             		<li><a href="javascript:void(0)" class="dropdown-item"><i class="md md-settings mr-2"></i> Settings</a></li>

@@ -430,12 +430,24 @@ class MasterController extends Controller
 
     public function add_users(Request $request)
 	{      
+        $upload_directory = "public/images/user_profile/";
+        if ($request->hasFile('profile_image')) {
+            $file = $request->file('profile_image');
+            $profile_picture_tmp = "profile_picture-".time().rand(1000,5000).'.'.strtolower($file->getClientOriginalExtension());
+            $file->move($upload_directory, $profile_picture_tmp); //  move file
+            $imageName = $upload_directory.$profile_picture_tmp;
+        } else {
+            $imageName = "";
+        }
+        // echo $imageName;exit;
+        // return $request;
 		$data = array(
 			'users_role' => '2',
 			'name' => $request->name,
 			'email' => $request->email,
 			'username' => $request->user_name,
 			'phone' => $request->phone,
+			'user_image' => $imageName,
 			'password' => bcrypt($request->password),
 			'status' => $request->status,
 			'created_at' => date('Y-m-d H:i:s'),
@@ -448,6 +460,7 @@ class MasterController extends Controller
 		$add_user->username=$request->user_name;
 		$add_user->designation=$request->designation;
 		$add_user->phone=$request->phone;
+		$add_user->user_image=$imageName;
 		$add_user->password=bcrypt($request->password);
 		$add_user->status=1;
 		$add_user->created_at=date('Y-m-d H:i:s');
@@ -511,15 +524,32 @@ class MasterController extends Controller
     
     public function update_user(Request $request)
 	{
+        $upload_directory = "public/images/user_profile/";
+        if ($request->hasFile('profile_image')) {
+            $file = $request->file('profile_image');
+
+            $add_user_edit= User::find($request->user_id);
+            if(file_exists($add_user_edit->user_image)){
+                unlink($add_user_edit->user_image);
+            }
+            $profile_picture_tmp = "profile_picture-".time().rand(1000,5000).'.'.strtolower($file->getClientOriginalExtension());
+            $file->move($upload_directory, $profile_picture_tmp); //  move file
+            $imageName = $upload_directory.$profile_picture_tmp;
+        } else {
+            $imageName = "";
+        }
 		// return $request->module_permission_id[1];
-		// return $permission;
-		$add_user= User::find($request->user_id);
+		// return $request;
+        $add_user= User::find($request->user_id);
+        
 		$add_user->users_role=2;
 		$add_user->name=$request->name;
 		$add_user->email=$request->email;
 		$add_user->username=$request->user_name;
 		$add_user->designation=$request->designation;
-		$add_user->phone=$request->phone;
+        $add_user->phone=$request->phone;
+        if($request->hasFile('profile_image'))
+        $add_user->user_image = $imageName;
 		if($request->password != "" || $request->password != null)
 		$add_user->password=bcrypt($request->password);
 		$add_user->status=$request->status;

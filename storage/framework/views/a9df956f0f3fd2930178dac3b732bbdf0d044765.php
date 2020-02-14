@@ -24,7 +24,8 @@
             <!-- Page-Title -->
             <div class="row" id="dashboard-row">
                 <div class="col-sm-12">
-                    <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Edit Users</h4>
+                    <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Edit Users &nbsp;&nbsp;/ &nbsp;
+                        <a href="<?php echo e(url('users')); ?>">Back</a></h4>
                     <ol class="breadcrumb pull-right">
                         <li><a href="<?php echo e(URL::to('home')); ?>">Home</a></li>
                         <li><a href="<?php echo e(URL::to('home')); ?>">Master</a></li>
@@ -35,7 +36,7 @@
             <hr class="new2">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="<?php echo e(url('update/users')); ?>" method="post">
+                            <form action="<?php echo e(url('update/users')); ?>" method="post" enctype="multipart/form-data" id="FormValidation" autocomplete="off">
                                 <?php echo csrf_field(); ?>
                             <div class="card card-border card-info" style="border-top: 2px solid #018eff;">
                                 <div class="card-body" style="background-image: linear-gradient(#ebf9ff, white);">
@@ -86,6 +87,12 @@
                                         </div>
                                     </div>
                                     </div>
+                            </div> <!-- col-->
+                            <div class="col-xl-4">
+                                <div class="form-group">
+                                    <label for="">Profile Image</label>
+                                    <input type="file" class="form-control" id="profile_image" name="profile_image">
+                                </div>
                             </div> <!-- col-->
                                 </div> <!-- End row -->
 
