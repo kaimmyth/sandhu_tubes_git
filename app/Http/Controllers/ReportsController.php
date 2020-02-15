@@ -28,13 +28,14 @@ class ReportsController extends Controller
         $category = $request->category;
         $start_date = $request->start_date;
         $end_date = $request->end_date;
-        $inv_item = inv_item::where('item_category_id',$category)->orderBy('id')->get();
+        $inv_item = inv_item::where('item_category_id',$category)->whereBetween('created_date', [date('Y-m-d',strtotime($start_date)), date('Y-m-d',strtotime($end_date))])->orderBy('id')->get();
         $item_ids_array = array();
         $item_type_ids_array = array();
         foreach ($inv_item as $key => $value) {
            array_push($item_ids_array, $value->id);
            array_push($item_type_ids_array, $value->item_category_id);
         }
+        
         $shipmentIndata = shipment::where('status',1)
                                 ->where('shipment_type',1)
                                 ->whereBetween('shipping_date', [$start_date, $end_date])->get();
@@ -49,6 +50,30 @@ class ReportsController extends Controller
         $itemsdetails = [];
         $itemsdataOutjson = [];
         $itemsdetailsOut = [];
+        if ($inv_item) {
+            foreach ($inv_item as $key => $value) {
+                $manufacture_items = manufacturing_details::where('input_items_id',$value->id)->get();
+                foreach ($manufacture_items as $key_menu => $value_menu) {
+                    $item_name_new_id = inv_item::where('id',$value_menu->input_items_id)->value('item_name');
+                    $value_menu->input_items_id =  DB::table('item')->where('id',$item_name_new_id)->value('items_name');
+                    $value_menu->input_items_uom = DB::table('uom')->where('id',$value_menu->input_items_uom)->value('uom_name');
+        
+                    $item_name_finished_id = inv_item::where('id',$value_menu->finished_goods_name)->value('item_name');
+                    $value_menu->finished_goods_name =  DB::table('item')->where('id',$item_name_finished_id)->value('items_name');
+                    $value_menu->finished_goods_uom = DB::table('uom')->where('id',$value_menu->finished_goods_uom)->value('uom_name');
+                    
+                    $item_name_scrap_id = inv_item::where('id',$value_menu->metal_scrap_name)->value('item_name');
+                    $value_menu->metal_scrap_name =  DB::table('item')->where('id',$item_name_scrap_id)->value('items_name');
+                    $value_menu->metal_scrap_uom = DB::table('uom')->where('id',$value_menu->metal_scrap_uom)->value('uom_name');
+                    
+                    $item_name_loss_id = inv_item::where('id',$value_menu->invisible_loss_name)->value('item_name');
+                    $value_menu->invisible_loss_name =  DB::table('item')->where('id',$item_name_loss_id)->value('items_name');
+                    $value_menu->invisible_loss_uom = DB::table('uom')->where('id',$value_menu->invisible_loss_uom)->value('uom_name');
+                    $value_menu->items_type =  DB::table('category')->where('id',$value->item_category_id)->value('category_name');
+                }
+                array_push($manufacture_items_final,$manufacture_items);
+            }
+        }
         foreach ($shipmentIndata as $key => $value) {
             $itemsdatajson = json_decode($value->shiped_item);
             if($itemsdatajson != "")
@@ -64,26 +89,26 @@ class ReportsController extends Controller
                         $value_item->item_type_id = DB::table('category')->where('id',$value_item->item_type_id)->value('category_name');
                         $value_item->item_uom_id = DB::table('uom')->where('id',$value_item->item_uom_id)->value('uom_name');
                         $value_item->item_location_id = DB::table('inventory_location')->where('id',$value_item->item_location_id)->value('location_name');
-                        $manufacture_items = manufacturing_details::where('input_items_id',$main_item_id)->get();
-                        foreach ($manufacture_items as $key_menu => $value_menu) {
-                            $item_name_new_id = inv_item::where('id',$value_menu->input_items_id)->value('item_name');
-                            $value_menu->input_items_id =  DB::table('item')->where('id',$item_name_new_id)->value('items_name');
-                            $value_menu->input_items_uom = DB::table('uom')->where('id',$value_menu->input_items_uom)->value('uom_name');
+                        // $manufacture_items = manufacturing_details::where('input_items_id',$main_item_id)->get();
+                        // foreach ($manufacture_items as $key_menu => $value_menu) {
+                        //     $item_name_new_id = inv_item::where('id',$value_menu->input_items_id)->value('item_name');
+                        //     $value_menu->input_items_id =  DB::table('item')->where('id',$item_name_new_id)->value('items_name');
+                        //     $value_menu->input_items_uom = DB::table('uom')->where('id',$value_menu->input_items_uom)->value('uom_name');
 
-                            $item_name_finished_id = inv_item::where('id',$value_menu->finished_goods_name)->value('item_name');
-                            $value_menu->finished_goods_name =  DB::table('item')->where('id',$item_name_finished_id)->value('items_name');
-                            $value_menu->finished_goods_uom = DB::table('uom')->where('id',$value_menu->finished_goods_uom)->value('uom_name');
+                        //     $item_name_finished_id = inv_item::where('id',$value_menu->finished_goods_name)->value('item_name');
+                        //     $value_menu->finished_goods_name =  DB::table('item')->where('id',$item_name_finished_id)->value('items_name');
+                        //     $value_menu->finished_goods_uom = DB::table('uom')->where('id',$value_menu->finished_goods_uom)->value('uom_name');
+
+                        //     $item_name_scrap_id = inv_item::where('id',$value_menu->metal_scrap_name)->value('item_name');
+                        //     $value_menu->metal_scrap_name =  DB::table('item')->where('id',$item_name_scrap_id)->value('items_name');
+                        //     $value_menu->metal_scrap_uom = DB::table('uom')->where('id',$value_menu->metal_scrap_uom)->value('uom_name');
                             
-                            $item_name_scrap_id = inv_item::where('id',$value_menu->metal_scrap_name)->value('item_name');
-                            $value_menu->metal_scrap_name =  DB::table('item')->where('id',$item_name_scrap_id)->value('items_name');
-                            $value_menu->metal_scrap_uom = DB::table('uom')->where('id',$value_menu->metal_scrap_uom)->value('uom_name');
-                            
-                            $item_name_loss_id = inv_item::where('id',$value_menu->invisible_loss_name)->value('item_name');
-                            $value_menu->invisible_loss_name =  DB::table('item')->where('id',$item_name_loss_id)->value('items_name');
-                            $value_menu->invisible_loss_uom = DB::table('uom')->where('id',$value_menu->invisible_loss_uom)->value('uom_name');
-                            $value_menu->items_type =  DB::table('category')->where('id',$main_item_type_id)->value('category_name');
-                        }
-                        array_push($manufacture_items_final,$manufacture_items);
+                        //     $item_name_loss_id = inv_item::where('id',$value_menu->invisible_loss_name)->value('item_name');
+                        //     $value_menu->invisible_loss_name =  DB::table('item')->where('id',$item_name_loss_id)->value('items_name');
+                        //     $value_menu->invisible_loss_uom = DB::table('uom')->where('id',$value_menu->invisible_loss_uom)->value('uom_name');
+                        //     $value_menu->items_type =  DB::table('category')->where('id',$main_item_type_id)->value('category_name');
+                        // }
+                        // array_push($manufacture_items_final,$manufacture_items);
                     }
                     else
                     {
