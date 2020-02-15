@@ -4,7 +4,7 @@
   }
   
   table td {
-    padding: 3px 10px 3px 10px !important;
+    padding: 0px 10px 1px 10px !important;
   }
   
   .rig {
@@ -47,6 +47,7 @@
                                     @endif 
                                 <thead style="">
                                     <tr>
+                                        <th style="width: 45px;">Profile</th>
                                         <th style="width: 55px;">Sl.</th>
                                         <th>Name</th>
                                         <th>Email</th>
@@ -59,6 +60,13 @@
                                 <tbody>
                                     @foreach($userData as $key => $data) @if($data->id >1)
                                     <tr>
+                                        <td>
+                                            @if($data->user_image) 
+                                                <img src="{{asset($data->user_image)}}" alt="user-img" class="rounded-circle" style="height: 43px;">
+                                            @else 
+                                                <img src="{{asset('public/assets/images/users/avatar-1.jpg') }}" alt="user-img" class="rounded-circle" style="height: 43px;">  
+                                            @endif
+                                        </td>
                                         <td class="rig">{{ $key}}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>{{ $data->email }}</td>

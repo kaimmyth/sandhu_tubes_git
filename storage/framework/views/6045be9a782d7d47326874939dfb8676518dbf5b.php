@@ -22,7 +22,7 @@
             <!-- Page-Title -->
             <div class="row" id="dashboard-row">
                 <div class="col-sm-12">
-                    <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;ITem</h4>
+                    <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Service</h4>
                     <ol class="breadcrumb pull-right">
                         <li><a href="<?php echo e(URL::to('home')); ?>">Home</a></li>
                         <li><a href="<?php echo e(URL::to('home')); ?>">Service</a></li>
@@ -36,7 +36,7 @@
                 <div class="col-md-12" style="display:block; margin:auto;float:none;">
                     <div class="col-xl-12">
                         <div class="portlet">
-                            <?php if(Auth::user()->id!=1): ?>
+                            <?php if(@Auth::user()->id!=1): ?>
                                 <?php if(@$module_permission['is_add']=='yes'): ?>
                                 <button type="button" class="btn btn-primary" style="float:right;margin-top: 1%;" onclick="addRecords()"> <i class="md md-add-circle-outline"></i> Add</button><br>
                                 <?php endif; ?>
@@ -73,7 +73,7 @@
                                         <?php endif; ?>
                                         <td><?php echo e(date('j M, Y ',strtotime($value->created_at))); ?></td>
                                         <td class="actions">
-                                            <?php if(Auth::user()->id!=1): ?>
+                                            <?php if(@Auth::user()->id!=1): ?>
                                                 <?php if(@$module_permission['is_edit']=='yes'): ?>
                                                 <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords(<?php echo e($value->id); ?>)" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
                                                 <?php endif; ?>

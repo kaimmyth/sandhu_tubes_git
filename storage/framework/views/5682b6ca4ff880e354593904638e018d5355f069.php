@@ -9,7 +9,15 @@
                <div class="bg-picture-overlay"></div>
                <div class="profile-info-name">
                  <?php  $logo = DB::table('users')->where('id',Auth::user()->id)->selectRaw("concat('".url('public/images/user_profile/').'/'."',user_image) as logo")->first();  ?>
-                 <img src="<?php if(@$logo->logo!=''): ?> <?php echo e(@$logo->logo); ?> <?php else: ?> <?php echo e(asset('public/assets/images/users/avatar-1.jpg')); ?> <?php endif; ?>" class="thumb-lg rounded-circle img-thumbnail" alt="profile-image">
+                  <?php if(Auth::user()->user_image!=""): ?>
+                    <?php if(@Auth::user()->id!=1): ?>
+                    <img src=" <?php echo e(asset(@Auth::user()->user_image)); ?>" alt="profile-image" class="thumb-lg rounded-circle img-thumbnail">
+                    <?php else: ?>
+                    <img src="<?php echo e(asset('public/assets/images/users/avatar-1.jpg')); ?>" class="thumb-lg rounded-circle img-thumbnail" alt="profile-image">
+                    <?php endif; ?>
+                  <?php else: ?> 
+                    <img src="<?php echo e(asset('public/assets/images/users/avatar-1.jpg')); ?>" class="thumb-lg rounded-circle img-thumbnail" alt="profile-image">
+                  <?php endif; ?> 
                  <h3 class="text-white"><?php echo e(Auth::user()->username ?? ""); ?></h3>
                </div>
              </div>

@@ -47,6 +47,7 @@
                                     <?php endif; ?> 
                                 <thead style="">
                                     <tr>
+                                        <th style="width: 45px;">Profile</th>
                                         <th style="width: 55px;">Sl.</th>
                                         <th>Name</th>
                                         <th>Email</th>
@@ -59,6 +60,13 @@
                                 <tbody>
                                     <?php $__currentLoopData = $userData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> <?php if($data->id >1): ?>
                                     <tr>
+                                        <td>
+                                            <?php if($data->user_image): ?> 
+                                                <img src="<?php echo e(asset($data->user_image)); ?>" alt="user-img" class="rounded-circle" style="height: 43px;">
+                                            <?php else: ?> 
+                                                <img src="<?php echo e(asset('public/assets/images/users/avatar-1.jpg')); ?>" alt="user-img" class="rounded-circle" style="height: 43px;">  
+                                            <?php endif; ?>
+                                        </td>
                                         <td class="rig"><?php echo e($key); ?></td>
                                         <td><?php echo e($data->name); ?></td>
                                         <td><?php echo e($data->email); ?></td>

@@ -9,7 +9,15 @@
                <div class="bg-picture-overlay"></div>
                <div class="profile-info-name">
                  @php  $logo = DB::table('users')->where('id',Auth::user()->id)->selectRaw("concat('".url('public/images/user_profile/').'/'."',user_image) as logo")->first();  @endphp
-                 <img src="@if(@$logo->logo!='') {{ @$logo->logo}} @else {{ asset('public/assets/images/users/avatar-1.jpg') }} @endif" class="thumb-lg rounded-circle img-thumbnail" alt="profile-image">
+                  @if(Auth::user()->user_image!="")
+                    @if(@Auth::user()->id!=1)
+                    <img src=" {{ asset(@Auth::user()->user_image) }}" alt="profile-image" class="thumb-lg rounded-circle img-thumbnail">
+                    @else
+                    <img src="{{ asset('public/assets/images/users/avatar-1.jpg') }}" class="thumb-lg rounded-circle img-thumbnail" alt="profile-image">
+                    @endif
+                  @else 
+                    <img src="{{ asset('public/assets/images/users/avatar-1.jpg') }}" class="thumb-lg rounded-circle img-thumbnail" alt="profile-image">
+                  @endif 
                  <h3 class="text-white">{{Auth::user()->username ?? "" }}</h3>
                </div>
              </div>
