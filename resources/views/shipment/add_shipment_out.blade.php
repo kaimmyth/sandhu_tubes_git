@@ -226,13 +226,23 @@
             contentType: 'application/json',
             dataType: "json",
             success: function (data) {
-                var to_append = `<span class="col-md-12 row"><div class="col-md-2"><div class="form-group">
+                var to_append = `<span class="col-md-12 row">
+                    <div class="col-md-2"><div class="form-group">
+                        <label for="field-2" class="control-label">Item Type</label>
+                        <select class="form-control" name="item_type_ids[]" id="item_type_ids">
+                            <option value="" selected>--Select--</option>`
+                        for (var i = 0; i < data.item_type.length; i++) {
+                            to_append += `<option value=\"` + data.item_type[i].id + `\">` + data.item_type[i].category_name + `</option>`
+                        }
+                        to_append += `</select>
+                    </div></div>
+                        <div class="col-md-2"><div class="form-group">
                             <label for="field-2" class="control-label">Item Name</label>
                             <select class="form-control" name="item_ids[]" id="item_ids" onchange="showserailno(this.value,`+append_i+`,this)">
                                 <option value="" selected>--Select--</option>`
                                 for(var i = 0; i < data.inv_item.length; i++)
                                 {
-                                    to_append += `<option value=\"`+ data.inv_item[i].id+ `\">`+ data.inv_item[i].item_name +`</option>`
+                                    to_append += `<option value=\"`+ data.inv_item[i].id+ `\">`+ data.inv_item[i].item_name_id +`</option>`
                                 }
                     to_append += `</select>
                         </div></div>

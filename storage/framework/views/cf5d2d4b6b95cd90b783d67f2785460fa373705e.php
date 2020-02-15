@@ -28,7 +28,7 @@
             <div class="row" id="dashboard-row">
                 <div class="col-sm-12">
                     <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Add Shipment Out&nbsp;&nbsp;/ &nbsp;
-                        <a href="javascript::void(0);" onclick="history.back();">Back</a></h4>
+                        <a href="<?php echo e(URL::to('shipment/listing')); ?>">Back</a></h4>
                         <ol class="breadcrumb pull-right">
                             <li><a href="<?php echo e(URL::to('home')); ?>">Home</a></li>
                             <li><a href="<?php echo e(URL::to('home')); ?>">List</a></li>
@@ -65,12 +65,18 @@
                                         </div> -->
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="field-2" class="control-label">Q/A *</label>
-                                                <select class="form-control" name="qa_check" id="qa_check" required="" aria-required="true">
-                                                    <option value="">--Select--</option>
+                                                <label for="field-2" class="control-label">Q/A</label>
+                                                <select class="form-control" name="qa_check" id="qa_check">
                                                     <option value="1">Yes</option>
                                                     <option value="0">No</option>
                                                 </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="field-2" class="control-label">Shipping Date</label>
+                                                <input type="text" class="form-control datepicker" name="date" id="date" autocomplete="off">
                                             </div>
                                         </div>
                                         <!-- <div class="col-md-3">
@@ -220,13 +226,23 @@
             contentType: 'application/json',
             dataType: "json",
             success: function (data) {
-                var to_append = `<span class="col-md-12 row"><div class="col-md-2"><div class="form-group">
+                var to_append = `<span class="col-md-12 row">
+                    <div class="col-md-2"><div class="form-group">
+                        <label for="field-2" class="control-label">Item Type</label>
+                        <select class="form-control" name="item_type_ids[]" id="item_type_ids">
+                            <option value="" selected>--Select--</option>`
+                        for (var i = 0; i < data.item_type.length; i++) {
+                            to_append += `<option value=\"` + data.item_type[i].id + `\">` + data.item_type[i].category_name + `</option>`
+                        }
+                        to_append += `</select>
+                    </div></div>
+                        <div class="col-md-2"><div class="form-group">
                             <label for="field-2" class="control-label">Item Name</label>
                             <select class="form-control" name="item_ids[]" id="item_ids" onchange="showserailno(this.value,`+append_i+`,this)">
                                 <option value="" selected>--Select--</option>`
                                 for(var i = 0; i < data.inv_item.length; i++)
                                 {
-                                    to_append += `<option value=\"`+ data.inv_item[i].id+ `\">`+ data.inv_item[i].item_name +`</option>`
+                                    to_append += `<option value=\"`+ data.inv_item[i].id+ `\">`+ data.inv_item[i].item_name_id +`</option>`
                                 }
                     to_append += `</select>
                         </div></div>
@@ -336,4 +352,10 @@
             return true;
         }
     }
-</script><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/shipment/add_shipment_out.blade.php ENDPATH**/ ?>
+</script>
+
+<script>
+    $(function () {
+    $(".datepicker").datepicker();
+    });
+</script> <?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/shipment/add_shipment_out.blade.php ENDPATH**/ ?>

@@ -131,21 +131,16 @@
                 <input id="description" type="text" name="description" class="form-control" required="" aria-required="true" placeholder="Enter  Description">
               </div>
             </div>
-            <!-- <div class="col-md-6">
+            <div class="col-md-6">
               <div class="form-group">
-                <label for="sel1">POC</label>
-                <select class="select2 form-control" name="pos_id" id="pos_id">
-                  <option value="">--- Select POC ---</option>
-                  @if($userData !='')
-                  @foreach($userData as $data)
-                  @if($data->id > 1)
-                  <option value="{{ $data->id }}">{{ $data->name}}</option>
-                  @endif
-                  @endforeach
-                  @endif
+                <label for="sel1">Process</label>
+                <select class="select2 form-control" name="process" id="process" required="" aria-required="true">
+                  <option value="">--- Select ---</option>
+                  <option value="1">Input</option>
+                  <option value="0">Output</option>
                 </select>
               </div>
-            </div> -->
+            </div>
             <div class="col-md-6">
               <div class="form-group">
                 <p class="control-label"><b>Is Active</b>
@@ -190,7 +185,7 @@
             document.getElementById("ids").value = data.id;
             document.getElementById("category_name").value = data.category_name;
             document.getElementById("description").value = data.description;
-            // document.getElementById("pos_id").value = data.pos_id;
+            document.getElementById("process").value = data.process;
             var val = data.is_active;
             if( val == 1)
             {
@@ -208,7 +203,7 @@ function addRecords() {
  document.getElementById("ids").value ='';
  document.getElementById("category_name").value = '';
  document.getElementById("description").value = '';
-//  document.getElementById("pos_id").value = '';
+ document.getElementById("process").value = '';
  document.getElementById("submitbtn").innerText ='Save';
  $('#category-model').modal('show');
 }

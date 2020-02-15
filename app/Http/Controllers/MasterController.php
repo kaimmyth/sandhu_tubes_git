@@ -48,7 +48,7 @@ class MasterController extends Controller
 		$data = array(
 			'category_name' => $request->category_name,
 			'description' => $request->description,
-			// 'pos_id' => $request->pos_id,
+			'process' => $request->process,
 			'is_active' => $request->is_active,
 			'created_at' => date('Y-m-d H:i:s'),
 		);

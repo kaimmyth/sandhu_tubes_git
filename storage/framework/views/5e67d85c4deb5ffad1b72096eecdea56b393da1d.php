@@ -116,7 +116,7 @@
                                                     <td>OUT</td>
                                                     <?php endif; ?>
                                                     <td><?php echo e($val->supplier_name); ?></td>
-                                                    <td><?php echo e(date('j M, Y ',strtotime($val->created_date))); ?></td>
+                                                    <td><?php echo e(date('j M, Y ',strtotime($val->shipping_date))); ?></td>
                                                     <?php if($val->status == 1): ?>
                                                     <td>
                                                         <p class="mb-0">

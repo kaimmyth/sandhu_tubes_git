@@ -47,7 +47,7 @@ class shipmentController extends Controller
         $items_received_ids = [];
         if ($request->item_ids) {
             foreach ($request->item_ids as $key => $value) {
-                $items_received_ids[] = array('item_id' => $value, 
+                $items_received_ids[] = array('item_type_id' => $request->item_type_ids[$key],'item_id' => $value, 
                                             'item_grn_no' => $request->grn_no[$key], 
                                             'item_invoice_no' => $request->invoice_no[$key], 
                                             'item_location_id' => $request->item_location[$key], 
@@ -145,32 +145,21 @@ class shipmentController extends Controller
         $shiped_item_data = [];
         if($shipmentdata->shiped_item)
         $shiped_item_data = json_decode($shipmentdata->shiped_item);
-        // foreach ($shiped_item_data as $key => $value) {
-        //     $value->item_id = inv_item::where('id',$value->item_id)->value('item_name');
-        //     $value->item_location_id = DB::table('inventory_location')->where('id',$value->item_location_id)->value('location_name');
-        //     // $value->item_quantity;
-        //     // $value->item_serial_no;
-        // }
-        // echo "<pre>";
-        // print_r($shiped_item_data);exit;
-        // $ids = [];
-        // $loc_ids = [];
-        // if($shipmentdata->items_received_ids)
-        // $ids = json_decode($shipmentdata->items_received_ids);
-        // if($shipmentdata->items_location_ids)
-        // $loc_ids = json_decode($shipmentdata->items_location_ids);
-        // $inv_itemdata = inv_item::whereIn('id',$ids)->select('id','item_name','serial_no')->get();
-        // $locationiddata = DB::table('inventory_location')->whereIn('id',$loc_ids)->select('id','location_name')->get();
-        $inv_item = inv_item::select('id','item_name')->orderBy('id')->get();
+
+        $inv_item = inv_item::orderBy('id')->get();
+        foreach ($inv_item as $key => $value) {
+            $value->item_name_id = DB::table('item')->where('id',$value->item_name)->value('items_name');
+        }
         $inventory_location = DB::table('inventory_location')->where('status',1)->get();
         $cities = DB::table('cities')->where('status',1)->select('id','city')->orderBy('city','ASC')->get();
         $state = DB::table('state')->where('status',1)->select('id','state')->orderBy('state','ASC')->get();
         $uomData = DB::table('uom')->where('status',1)->select('id','uom_name')->get();
+        $item_type = DB::table('category')->where('is_active',1)->select('id','category_name')->orderBy('id')->get();
         if($shipmentdata->shipment_type == 1)
         $data['content'] = 'shipment.edit_shipment';
         else
         $data['content'] = 'shipment.edit_shipment_out';
-        return view('layouts.content', compact('data'))->with(['shipmentdata' => $shipmentdata,'inv_item' => $inv_item,'inventory_location' => $inventory_location,'cities' => $cities,'state' => $state,'shiped_item_data' => $shiped_item_data,'uomData' => $uomData]);
+        return view('layouts.content', compact('data'))->with(['shipmentdata' => $shipmentdata,'inv_item' => $inv_item,'inventory_location' => $inventory_location,'cities' => $cities,'state' => $state,'shiped_item_data' => $shiped_item_data,'uomData' => $uomData,'item_type' => $item_type]);
     }
     public function editStore(Request $request)
     {
@@ -178,7 +167,7 @@ class shipmentController extends Controller
         $items_received_ids = [];
         if ($request->item_ids) {
             foreach ($request->item_ids as $key => $value) {
-                $items_received_ids[] = array('item_id' => $value, 
+                $items_received_ids[] = array('item_type_id' => $request->item_type_ids[$key],'item_id' => $value, 
                                             'item_grn_no' => $request->grn_no[$key], 
                                             'item_invoice_no' => $request->invoice_no[$key], 
                                             'item_location_id' => $request->item_location[$key], 
@@ -250,8 +239,12 @@ class shipmentController extends Controller
     public function fetchItems()
     {
         $toReturn['inventory_location'] = DB::table('inventory_location')->where('status',1)->get();
-        $toReturn['inv_item'] = inv_item::select('id','item_name')->orderBy('id')->get();
+        $toReturn['inv_item'] = inv_item::orderBy('id')->get();
+        foreach ($toReturn['inv_item'] as $key => $value) {
+            $value->item_name_id = DB::table('item')->where('id',$value->item_name)->value('items_name');
+        }
         $toReturn['uomData'] = DB::table('uom')->where('status',1)->select('id','uom_name')->get();
+        $toReturn['item_type'] = DB::table('category')->where('is_active',1)->select('id','category_name')->orderBy('id')->get();
         return $toReturn;
     }
 

@@ -38,6 +38,12 @@ class ManufacturingController extends Controller
 
       $toReturn = array();
       $toReturn['details'] = manufacturing_details::where('status', 1)->get();
+      foreach ($toReturn['details'] as $key => $value) {
+        $item_name_id = inv_item::where('id',$value->input_items_id)->value('item_name');
+        $value->input_items_id =  DB::table('item')->where('id',$item_name_id)->value('items_name');
+      }
+      // echo"<pre>";
+      // print_r($toReturn['details']);exit;
       if (Auth::check() && Auth::user()->users_role != 1) {
         $land_permission = Session::get('all_module_permission');
         foreach ($land_permission as $key => $value_land) {
@@ -61,6 +67,9 @@ class ManufacturingController extends Controller
 
     $InventoryLocation = InventoryLocation::where('status', 1)->get();
     $inv_item = inv_item::all();
+    foreach ($inv_item as $key => $value) {
+      $value->item_name =  DB::table('item')->where('id',$value->item_name)->value('items_name');
+    }
     $uom = Uom::where('status', 1)->get();
     $data['content'] = 'Manufacturing.add';
     return view('layouts.content', compact('data'))->with(['uom' => $uom, 'inv_item' => $inv_item, 'InventoryLocation' => $InventoryLocation]);
@@ -128,6 +137,9 @@ class ManufacturingController extends Controller
 
     $InventoryLocation = InventoryLocation::where('status', 1)->get();
     $inv_item = inv_item::all();
+    foreach ($inv_item as $key => $value) {
+      $value->item_name =  DB::table('item')->where('id',$value->item_name)->value('items_name');
+    }
     $uom = Uom::where('status', 1)->get();
     $data['content'] = 'Manufacturing.add';
     return view('layouts.content', compact('data'))->with(['manufacturing_details' => $manufacturing_details, 'inv_item' => $inv_item, 'InventoryLocation' => $InventoryLocation,'uom'=>$uom]);

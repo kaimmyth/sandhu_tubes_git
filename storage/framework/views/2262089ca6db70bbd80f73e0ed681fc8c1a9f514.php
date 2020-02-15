@@ -101,11 +101,11 @@
 
                                               
                                                 <?php $__currentLoopData = $toReturn['details']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key_del=>$value_del): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <?php $item=DB::table('inv_item')->where('id',$value_del['input_items_id'])->first();
-                                                    $Location=DB::table('inventory_location')->where('id',$value_del['input_items_location'])->first();
-                                                    $uom=DB::table('uom')->where('id',$value_del['input_items_uom'])->first();
+                                                    <?php $item=DB::table('inv_item')->where('id',$value_del['input_items_id'])->first();
+                                                        $Location=DB::table('inventory_location')->where('id',$value_del['input_items_location'])->first();
+                                                        $uom=DB::table('uom')->where('id',$value_del['input_items_uom'])->first();
                                                     ?>
-                                                <td><?php echo e(@$item->item_name); ?></td>
+                                                <td><?php echo e(@$value_del['input_items_id']); ?></td>
                                                 <td class="rig"><?php echo e(@$value_del['input_items_quantity']); ?> <?php echo e(@$uom->uom_name); ?></td>
                                                 <td><?php echo e(@$Location->location_name); ?></td>
                                                 

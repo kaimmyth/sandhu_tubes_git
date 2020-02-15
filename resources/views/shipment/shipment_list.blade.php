@@ -116,7 +116,7 @@
                                                     <td>OUT</td>
                                                     @endif
                                                     <td>{{$val->supplier_name}}</td>
-                                                    <td>{{date('j M, Y ',strtotime($val->created_date))}}</td>
+                                                    <td>{{date('j M, Y ',strtotime($val->shipping_date))}}</td>
                                                     @if($val->status == 1)
                                                     <td>
                                                         <p class="mb-0">
