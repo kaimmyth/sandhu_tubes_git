@@ -125,17 +125,30 @@
                   </div>
                   <div class="col-md-12">
                     <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="field-3" class="control-label">Item Type*</label>
+                          <label for="field-1" class="control-label"></label>
+                          <select class="form-control" name="input_itemstype_ids" id="input_itemstype_ids"  required="" aria-required="true" onchange="get_item_names(this.value,check=1)">
+                            <option value="">--Select--</option>
+                            @foreach($inputitem_type as $key=> $value)
+                            <option value="{{$value->id}}" @if(@$manufacturing_details->input_item_type==$value->id) {{"selected"}} @endif>{{$value->category_name}}</option>
+                            @endforeach
+                          </select>
+                        </div>
 
+                      </div>
                       <div class="col-md-3">
 
                         <div class="form-group">
-                          <label for="field-1" class="control-label">Mother Coil/Slit Coil*</label>
-                          <select class="form-control" name="input_items_id"  required="" onchange="get_item_details(this)" aria-required="true">
+                          <label for="field-1" class="control-label">Item Name*</label>
+                          <select class="form-control" name="input_items_id" id="input_items_id"  required="" onchange="get_item_details(this)" aria-required="true">
                             <option value="">--Select--</option>
+                            @if(@$manufacturing_details->input_items_id)
                             @foreach($inv_item as $key=> $value)
                             <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_id==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
                             @endforeach
-
+                            @endif
                           </select>
                         </div>
                         <!-- <div class="row"> -->
@@ -203,13 +216,6 @@
                     </div>
                   </div>
 
-
-
-
-
-
-
-
                   <hr>
                   <p style="font-size: 17px; font-weight: 700;">Output</p>
                   <span style="color:#F83008; font-weight: 600;" id="NotAloowPccCust"> </span><br><br>
@@ -229,20 +235,33 @@
                   </div>
 
                   <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="field-3" class="control-label">Item Type*</label>
+                        <label for="field-1" class="control-label"></label>
+                        <select class="form-control" name="finished_itemstype_ids" id="finished_itemstype_ids"  required="" aria-required="true" onchange="get_item_names(this.value,check=2)">
+                          <option value="">--Select--</option>
+                          @foreach($outputtitem_type as $key=> $value)
+                          <option value="{{$value->id}}" @if(@$manufacturing_details->finished_item_type==$value->id) {{"selected"}} @endif>{{$value->category_name}}</option>
+                          @endforeach
+                        </select>
+                      </div>
 
+                    </div>
                     <div class="col-md-3">
 
                       <div class="form-group">
                         <label for="field-1" class="control-label">Finished Goods*</label>
-                        <select class="form-control" name="finished_goods_name" onchange="get_item_details(this)" id="finished_goods_name" required="" aria-required="true">
-                          <option value=""></option>
+                        <select class="form-control" name="finished_goods_name" id="finished_goods_name" required="" aria-required="true">
+                          <option value="">--Select--</option>
+                          @if(@$manufacturing_details->finished_goods_name)
                           @foreach($inv_item as $key=> $value)
                           <option value="{{$value['id']}}" @if(@$manufacturing_details->finished_goods_name==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
                           @endforeach
+                          @endif
                           <!-- <input type="text" class="form-control" name="finished_goods_name" id="finished_goods_name" value="@if(@$manufacturing_details->finished_goods_name) {{$manufacturing_details->finished_goods_name}} @endif"  placeholder="" required="" aria-required="true"> -->
                         </select>
                       </div>
-
                     </div>
 
                     <div class="col-md-3">
@@ -262,13 +281,11 @@
                           @foreach($uom as $key=> $value)
                           <option value="{{$value['id']}}" @if(@$manufacturing_details->finished_goods_uom==$value['id']) {{"selected"}} @endif>{{$value['uom_name']}}</option>
                           @endforeach
-
                         </select>
                       </div>
-
                     </div>
 
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-3" class="control-label">Inventory Location*</label>
                         <select class="form-control" name="finished_goods_location" id="finished_goods_location"  required="" aria-required="true">
@@ -276,37 +293,38 @@
                           @foreach($InventoryLocation as $key=> $value)
                           <option value="{{$value['id']}}" @if(@$manufacturing_details->finished_goods_location==$value['id']) {{"selected"}} @endif>{{$value['location_name']}}</option>
                           @endforeach
-                          <!-- <option value="Jamshedpur">Jamshedpur, Jharkhand 832108</option> -->
-
-
                         </select>
                       </div>
-
-                    </div>
-
-
-
-
+                    </div> -->
                   </div>
 
 
-
-
                   <div class="row">
-
                     <div class="col-md-3">
-
+                      <div class="form-group">
+                        <label for="field-3" class="control-label">Item Type*</label>
+                        <label for="field-1" class="control-label"></label>
+                        <select class="form-control" name="scrab_itemstype_ids" id="scrab_itemstype_ids"  required="" aria-required="true" onchange="get_item_names(this.value,check=3)">
+                          <option value="">--Select--</option>
+                          @foreach($outputtitem_type as $key=> $value)
+                          <option value="{{$value->id}}" @if(@$manufacturing_details->scrap_item_type==$value->id) {{"selected"}} @endif>{{$value->category_name}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-1" class="control-label">Metal Scrap*</label>
-                        <select class="form-control" name="metal_scrap_name" id="metal_scrap_name" onchange="get_item_details(this)" required="" aria-required="true">
-                          <option value=""></option>
+                        <select class="form-control" name="metal_scrap_name" id="metal_scrap_name" required="" aria-required="true">
+                          <option value="">--Select--</option>
+                          @if(@$manufacturing_details->metal_scrap_name)
                           @foreach($inv_item as $key=> $value)
                           <option value="{{$value['id']}}" @if(@$manufacturing_details->metal_scrap_name==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
                           @endforeach
+                          @endif
                         </select>
                         <!-- <input type="text" class="form-control" name="metal_scrap_name" id="metal_scrap_name"  value="@if(@$manufacturing_details->metal_scrap_name) {{$manufacturing_details->metal_scrap_name}} @endif" placeholder="Metal Scrap" required="" aria-required="true"> -->
                       </div>
-
                     </div>
 
                     <div class="col-md-3">
@@ -327,10 +345,9 @@
                           @endforeach
                         </select>
                       </div>
-
                     </div>
 
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-3" class="control-label">Inventory Location*</label>
                         <label for="field-1" class="control-label"></label>
@@ -342,29 +359,37 @@
                         </select>
                       </div>
 
-                    </div>
-
-
-
+                    </div> -->
 
                   </div>
 
 
                   <div class="row">
-
                     <div class="col-md-3">
-
+                      <div class="form-group">
+                        <label for="field-3" class="control-label">Item Type*</label>
+                        <label for="field-1" class="control-label"></label>
+                        <select class="form-control" name="loss_itemstype_ids" id="loss_itemstype_ids"  required="" aria-required="true" onchange="get_item_names(this.value,check=4)">
+                          <option value="">--Select--</option>
+                          @foreach($outputtitem_type as $key=> $value)
+                          <option value="{{$value->id}}" @if(@$manufacturing_details->loss_item_type==$value->id) {{"selected"}} @endif>{{$value->category_name}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-1" class="control-label">Invisible Loss*</label>
-                        <select class="form-control" name="invisible_loss_name" id="invisible_loss_name" onchange="get_item_details(this)" required="" aria-required="true">
-                          <option value=""></option>
+                        <select class="form-control" name="invisible_loss_name" id="invisible_loss_name" required="" aria-required="true">
+                          <option value="">--Select--</option>
+                          @if(@$manufacturing_details->invisible_loss_name)
                           @foreach($inv_item as $key=> $value)
                           <option value="{{$value['id']}}" @if(@$manufacturing_details->invisible_loss_name==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
                           @endforeach
+                          @endif
                         </select>
                         <!-- <input type="text" class="form-control" name="invisible_loss_name" id="invisible_loss_name"  value="@if(@$manufacturing_details->invisible_loss_name) {{$manufacturing_details->invisible_loss_name}} @endif" placeholder="" required="" aria-required="true"> -->
                       </div>
-
                     </div>
 
                     <div class="col-md-3">
@@ -385,10 +410,9 @@
 
                         </select>
                       </div>
-
                     </div>
 
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                       <div class="form-group">
                         <label for="field-3" class="control-label">Inventory Location*</label>
                         <select class="form-control" name="invisible_loss_auto" id="invisible_loss_auto" required="" aria-required="true">
@@ -399,11 +423,7 @@
                         </select>
                       </div>
 
-                    </div>
-
-
-
-
+                    </div> -->
                   </div>
 
                   <div class="total-mn">
@@ -412,7 +432,6 @@
                         <p>Total Quantity </p>
                       </div>
                       <div class="col-md-6">
-
                         <p id="final_quantity">@if(@$manufacturing_details->input_items_quantity) {{$manufacturing_details->input_items_quantity}} @endif </p>
                       </div>
                     </div>
@@ -545,5 +564,52 @@
           }
         });
          
+        }
+        function get_item_names(element,check) {
+          $.ajax({
+              url: "{{url('Manufacturing/fetchItemname/')}}" + '/' + element,
+              data: {},
+              method: "GET",
+              contentType: 'application/json',
+              dataType: "json",
+              success: function (data) {
+                if(check == 1)
+                {
+                  $("#input_items_id").html("");
+                  var to_append = `<option value="">--Select--</option>`
+                  for (var i = 0; i < data.inv_Type_item.length; i++) {
+                      to_append += `<option value=\"` + data.inv_Type_item[i].id + `\">` + data.inv_Type_item[i].item_name + `</option>`
+                      }
+                  $("#input_items_id").append(to_append);
+                } 
+                else if(check == 2)
+                {
+                  $("#finished_goods_name").html("");
+                  var to_append = `<option value="">--Select--</option>`
+                  for (var i = 0; i < data.inv_Type_item.length; i++) {
+                      to_append += `<option value=\"` + data.inv_Type_item[i].id + `\">` + data.inv_Type_item[i].item_name + `</option>`
+                      }
+                  $("#finished_goods_name").append(to_append);
+                }
+                else if(check == 3)
+                {
+                  $("#metal_scrap_name").html("");
+                  var to_append = `<option value="">--Select--</option>`
+                  for (var i = 0; i < data.inv_Type_item.length; i++) {
+                      to_append += `<option value=\"` + data.inv_Type_item[i].id + `\">` + data.inv_Type_item[i].item_name + `</option>`
+                      }
+                  $("#metal_scrap_name").append(to_append);
+                }
+                else if(check == 4)
+                {
+                  $("#invisible_loss_name").html("");
+                  var to_append = `<option value="">--Select--</option>`
+                  for (var i = 0; i < data.inv_Type_item.length; i++) {
+                      to_append += `<option value=\"` + data.inv_Type_item[i].id + `\">` + data.inv_Type_item[i].item_name + `</option>`
+                      }
+                  $("#invisible_loss_name").append(to_append);
+                }
+              }
+          });
         }
       </script>

@@ -1,4 +1,24 @@
 <style>
+    .card .card-header {
+        padding: 1px 20px;
+        border: none;
+    }
+
+    .form-control {
+        -moz-border-radius: 2px;
+        -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        -webkit-border-radius: 2px;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 2px;
+        border: 1px solid #b3b1b1;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 14px;
+        box-shadow: 0px 0px #ffffff;
+        width: 100%;
+    }
     table th {
         text-align: center;
     }
@@ -14,6 +34,23 @@
     .action {
         width: 50px;
     }
+    @media print {
+        table th:last-child {display:none}  
+        table td:last-child {display:none}
+    }
+
+    #to-print-area { display: none; }
+    @media print
+    {
+        #to-print-area { display: block; }
+    }
+    @media print
+    {    
+        .no-print, .no-print *
+        {
+            display: none !important;
+        }
+    }
 </style>
 <div class="content-page">
     <!-- Start content -->
@@ -22,7 +59,7 @@
             <!-- Page-Title -->
             <div class="row" id="dashboard-row">
                 <div class="col-sm-12">
-                    <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Contact Type</h4>
+                    <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Reports</h4>
                     <ol class="breadcrumb pull-right">
                         <li><a href="{{ URL::to('home') }}">Home</a></li>
                         <li><a href="{{URL::to('home')}}">Reports</a></li>
@@ -68,105 +105,144 @@
             </form>
             <hr class="new2">
             @if(@$itemsdetails)
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card card-border card-info">
-                            <div class="card-header" style="background-image: linear-gradient(#e9f8ff, white);padding: 0px !important;">
-                                <div class="card-body">
-                                    <div class="row"><br><br><br>
-                                        <div class="col-md-12 col-sm-12 col-12">
-                                            <div id="printable-area" class="row">
-                                                <div class="col-md-6">
-                                                    <table class="table table-striped table-bordered dt-responsive nowrap" id="datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                                        <thead style="background: #b6e9ff;">
-                                                            <tr><th colspan="4">Received Items Duration {{date('j M, Y ',strtotime(@$start_date))}} To {{date('j M, Y ',strtotime(@$end_date))}}</th></tr>
+                <div class="card card-border card-info">
+                    <div class="card-header" style="background-image: linear-gradient(#e9f8ff, white);padding: 0px !important;">
+                        <div class="card-body">
+                            <div class="row"><br><br><br>
+                                <div class="col-md-12 col-sm-12 col-12">
+                                    <div id="printable-area" class="row">
+                                        <div class="col-md-6">
+                                            <table class="table table-striped table-bordered dt-responsive" id="datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead style="background: #393e4a59;">
+                                                    <tr><th colspan="4">Received Items Duration {{date('j M, Y ',strtotime(@$start_date))}} To {{date('j M, Y ',strtotime(@$end_date))}}</th></tr>
+                                                    <tr>
+                                                        <th>Item Name</th>
+                                                        <th>Item Type</th>
+                                                        <th>Quantity</th>
+                                                        <th>Location</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach(@$itemsdetails as $key => $value)
+                                                        @foreach($value as $kee => $value_item)
                                                             <tr>
-                                                                <th>Item Name</th>
-                                                                <th>Item Type</th>
-                                                                <th>Quantity</th>
-                                                                <th>Location</th>
+                                                                <td>{{$value_item->item_id}}</td>
+                                                                <td>{{$value_item->item_type_id}}</td>
+                                                                <td class="rig">{{$value_item->item_quantity}} {{$value_item->item_uom_id}}</td>
+                                                                <td>{{$value_item->item_location_id}}</td>
                                                             </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach(@$itemsdetails as $key => $value)
-                                                                @foreach($value as $kee => $value_item)
-                                                                    <tr>
-                                                                        <td>{{$value_item->item_id}}</td>
-                                                                        <td>{{$value_item->item_type_id}}</td>
-                                                                        <td class="rig">{{$value_item->item_quantity}} {{$value_item->item_uom_id}}</td>
-                                                                        <td>{{$value_item->item_location_id}}</td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            @endforeach
-                                                            <tr><th colspan="4" style="text-align: left;">Total Item : {{@$totalItem}}</th> </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="col-md-6" style="padding-top: 8px;">
-                                                    <table class="table table-striped table-bordered dt-responsive nowrap" id="datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                                        <thead style="background: #b6e9ff;">
-                                                            <tr><th colspan="4">Issue Items Duration {{date('j M, Y ',strtotime(@$start_date))}} To {{date('j M, Y ',strtotime(@$end_date))}}</th></tr>
+                                                        @endforeach
+                                                    @endforeach
+                                                    <tr><th colspan="4" style="text-align: left;">Total Item : {{@$totalItem}}</th> </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-6" style="padding-top: 8px;">
+                                            <table class="table table-striped table-bordered dt-responsive" id="datatable-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead style="background: #393e4a59;">
+                                                    <tr><th colspan="4">Issue Items Duration {{date('j M, Y ',strtotime(@$start_date))}} To {{date('j M, Y ',strtotime(@$end_date))}}</th></tr>
+                                                    <tr>
+                                                        <th>Item Name</th>
+                                                        <th>Item Type</th>
+                                                        <th>Quantity</th>
+                                                        <th>Location</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach(@$itemsdetailsOut as $key => $value)
+                                                        @foreach($value as $kee => $value_item)
                                                             <tr>
-                                                                <th>Item Name</th>
-                                                                <th>Item Type</th>
-                                                                <th>Quantity</th>
-                                                                <th>Location</th>
+                                                                <td>{{$value_item->item_id}}</td>
+                                                                <td>{{$value_item->item_type_id}}</td>
+                                                                <td class="rig">{{$value_item->item_quantity}} {{$value_item->item_uom_id}}</td>
+                                                                <td>{{$value_item->item_location_id}}</td>
                                                             </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach(@$itemsdetailsOut as $key => $value)
-                                                                @foreach($value as $kee => $value_item)
-                                                                    <tr>
-                                                                        <td>{{$value_item->item_id}}</td>
-                                                                        <td>{{$value_item->item_type_id}}</td>
-                                                                        <td class="rig">{{$value_item->item_quantity}} {{$value_item->item_uom_id}}</td>
-                                                                        <td>{{$value_item->item_location_id}}</td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            @endforeach
-                                                            <tr><th colspan="4" style="text-align: left;">Total Item : {{@$totalOutItem}}</th> </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <table class="table table-striped table-bordered dt-responsive nowrap" id="datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                                        <thead style="background: #b6e9ff;">
-                                                            <tr><th colspan="9">Manufacturing Items Duration {{date('j M, Y ',strtotime(@$start_date))}} To {{date('j M, Y ',strtotime(@$end_date))}}</th></tr>
+                                                        @endforeach
+                                                    @endforeach
+                                                    <tr><th colspan="4" style="text-align: left;">Total Item : {{@$totalOutItem}}</th> </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <table class="table table-striped table-bordered dt-responsive" id="datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead style="background: #393e4a59;">
+                                                    <tr><th colspan="12">Manufacturing Items Duration {{date('j M, Y ',strtotime(@$start_date))}} To {{date('j M, Y ',strtotime(@$end_date))}}</th></tr>
+                                                    <tr>
+                                                        <th>Item Type</th>
+                                                        <th>Item Name</th>
+                                                        <th>Total Quantity</th>
+                                                        <th>Rest Quantity</th>
+                                                        <th>Input Quantity</th>
+                                                        <th>Finished Goods</th>
+                                                        <th>Output Quantity</th>
+                                                        <th>Metal Scrap</th>
+                                                        <th>Output Quantity</th>
+                                                        <th>Invisible Loss</th>
+                                                        <th>Output Quantity</th>
+                                                        <th>Created Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach(@$manufacture_items_final as $key => $value)
+                                                        @foreach($value as $kee => $value_menu)
                                                             <tr>
-                                                                <th>Item Type</th>
-                                                                <th>Item Name</th>
-                                                                <th>Quantity</th>
-                                                                <th>Finished Goods</th>
-                                                                <th>Quantity</th>
-                                                                <th>Metal Scrap</th>
-                                                                <th>Quantity</th>
-                                                                <th>Invisible Loss</th>
-                                                                <th>Quantity</th>
+                                                                <td>{{$value_menu->items_type}}</td>
+                                                                <td>{{$value_menu->input_items_id}}</td>
+                                                                <td class="rig">{{$value_menu->total_quantity}} {{$value_menu->main_uom}}</td>
+                                                                <td class="rig">{{$value_menu->rest_quantity}} {{$value_menu->main_uom}}</td>
+                                                                <td class="rig">{{$value_menu->input_items_quantity}} {{$value_menu->input_items_uom}}</td>
+
+                                                                <td>{{$value_menu->finished_goods_name}}</td>
+                                                                <td class="rig">{{$value_menu->finished_goods_quantity}} {{$value_menu->finished_goods_uom}}</td>
+
+                                                                <td>{{$value_menu->metal_scrap_name}}</td>
+                                                                <td class="rig">{{$value_menu->metal_scrap_quantity}} {{$value_menu->metal_scrap_uom}}</td>
+
+                                                                <td>{{$value_menu->invisible_loss_name}}</td>
+                                                                <td class="rig">{{$value_menu->invisible_loss_quantity}} {{$value_menu->invisible_loss_uom}}</td>
+                                                                <td>{{date('j M, Y ',strtotime($value_menu->created_at))}}</td>
                                                             </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach(@$manufacture_items_final as $key => $value)
-                                                                @foreach($value as $kee => $value_menu)
-                                                                    <tr>
-                                                                        <td>{{$value_menu->items_type}}</td>
-                                                                        <td>{{$value_menu->input_items_id}}</td>
-                                                                        <td class="rig">{{$value_menu->input_items_quantity}} {{$value_menu->input_items_uom}}</td>
+                                                        @endforeach
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <table class="table table-striped table-bordered dt-responsive" id="datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead style="background: #393e4a59;">
+                                                    <tr><th colspan="4">Items Opening And Closing Stock {{date('j M, Y ',strtotime(@$start_date))}} To {{date('j M, Y ',strtotime(@$end_date))}}</th></tr>
+                                                    <tr>
+                                                        <th>Item Name</th>
+                                                        <th>Item Type</th>
+                                                        <th>Opening Stock</th>
+                                                        <th>Closing Stock</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach(@$inv_item as $key => $value)
+                                                    <?php 
+                                                        $itemName = DB::table('item')->where('id',$value->item_name)->value('items_name');
+                                                        $itemtypeName = DB::table('category')->where('id',$value->item_category_id)->value('category_name');
+                                                    ?>
+                                                        <tr>
+                                                            <td>{{$itemName}}</td>
+                                                            <td>{{$itemtypeName}}</td>
+                                                            @if($value->ClosingStock == 0)
+                                                            <td class="rig">{{$value->quantity}}</td>
+                                                            @else
+                                                            <td class="rig">{{$value->ClosingStock}}</td>
+                                                            @endif
 
-                                                                        <td>{{$value_menu->finished_goods_name}}</td>
-                                                                        <td class="rig">{{$value_menu->finished_goods_quantity}} {{$value_menu->finished_goods_uom}}</td>
-
-                                                                        <td>{{$value_menu->metal_scrap_name}}</td>
-                                                                        <td class="rig">{{$value_menu->metal_scrap_quantity}} {{$value_menu->metal_scrap_uom}}</td>
-
-                                                                        <td>{{$value_menu->invisible_loss_name}}</td>
-                                                                        <td class="rig">{{$value_menu->invisible_loss_quantity}} {{$value_menu->invisible_loss_uom}}</td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
+                                                            @if($value->openingStock == 0)
+                                                            <td class="rig">{{$value->quantity}}</td>
+                                                            @else
+                                                            <td class="rig">{{$value->openingStock}}</td>
+                                                            @endif
+                                                        </tr>
+                                                    @endforeach
+                                                    <tr><th colspan="4" style="text-align: left;">Total Item : {{count(@$inv_item)}}</th> </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>

@@ -229,7 +229,7 @@
                 var to_append = `<span class="col-md-12 row">
                     <div class="col-md-2"><div class="form-group">
                         <label for="field-2" class="control-label">Item Type</label>
-                        <select class="form-control" name="item_type_ids[]" id="item_type_ids">
+                        <select class="form-control" name="item_type_ids[]" id="item_type_ids" onchange="showsitemtypedata(this.value,this)">
                             <option value="" selected>--Select--</option>`
                         for (var i = 0; i < data.item_type.length; i++) {
                             to_append += `<option value=\"` + data.item_type[i].id + `\">` + data.item_type[i].category_name + `</option>`
@@ -239,12 +239,7 @@
                         <div class="col-md-2"><div class="form-group">
                             <label for="field-2" class="control-label">Item Name</label>
                             <select class="form-control" name="item_ids[]" id="item_ids" onchange="showserailno(this.value,`+append_i+`,this)">
-                                <option value="" selected>--Select--</option>`
-                                for(var i = 0; i < data.inv_item.length; i++)
-                                {
-                                    to_append += `<option value=\"`+ data.inv_item[i].id+ `\">`+ data.inv_item[i].item_name_id +`</option>`
-                                }
-                    to_append += `</select>
+                            </select>
                         </div></div>
                         <div class="col-md-2"><div class="form-group">
                         <label for="field-2" class="control-label">GRN No.</label>
@@ -342,7 +337,25 @@
             }
         });
     }
+    function showsitemtypedata(element, e) {
+        // alert(append);
+        $.ajax({
+            url: "{{url('shipment/fetchitemType/')}}" + '/' + element,
+            data: {},
+            method: "GET",
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (data) {
+                $(e).closest('span').find("#item_ids").html("");
+                var to_append = `<option value="">--Select--</option>`
+                for (var i = 0; i < data.inv_Type_item.length; i++) {
+                     to_append += `<option value=\"` + data.inv_Type_item[i].id + `\">` + data.inv_Type_item[i].item_name + `</option>`
+                    }
+                $(e).closest('span').find("#item_ids").append(to_append);
 
+            }
+        });
+    }
     function datacheck() {
         
         if (quantity_error==true) {

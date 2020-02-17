@@ -71,8 +71,10 @@ class ManufacturingController extends Controller
       $value->item_name =  DB::table('item')->where('id',$value->item_name)->value('items_name');
     }
     $uom = Uom::where('status', 1)->get();
+    $inputitem_type = DB::table('category')->where('is_active',1)->where('process',1)->select('id','category_name')->orderBy('id')->get();
+    $outputtitem_type = DB::table('category')->where('is_active',1)->where('process',0)->select('id','category_name')->orderBy('id')->get();
     $data['content'] = 'Manufacturing.add';
-    return view('layouts.content', compact('data'))->with(['uom' => $uom, 'inv_item' => $inv_item, 'InventoryLocation' => $InventoryLocation]);
+    return view('layouts.content', compact('data'))->with(['uom' => $uom, 'inv_item' => $inv_item, 'InventoryLocation' => $InventoryLocation, 'outputtitem_type' => $outputtitem_type, 'inputitem_type' => $inputitem_type]);
   }
   public function create(Request $request)
   {
@@ -96,6 +98,10 @@ class ManufacturingController extends Controller
       $manufacturing_details->invisible_loss_auto = $request->invisible_loss_auto;
       $manufacturing_details->status = 1;
       $manufacturing_details->qa_check = $request->qa_check;
+      $manufacturing_details->input_item_type = $request->input_itemstype_ids;
+      $manufacturing_details->finished_item_type = $request->finished_itemstype_ids;
+      $manufacturing_details->scrap_item_type = $request->scrab_itemstype_ids;
+      $manufacturing_details->loss_item_type = $request->loss_itemstype_ids;
       $manufacturing_details->updated_at = date('Y-m-d');
       $manufacturing_details->created_by = Auth::user()->id;
       $manufacturing_details->update_by = Auth::user()->id;
@@ -121,6 +127,10 @@ class ManufacturingController extends Controller
       $manufacturing_details->invisible_loss_auto = $request->invisible_loss_auto;
       $manufacturing_details->status = 1;
       $manufacturing_details->qa_check = $request->qa_check;
+      $manufacturing_details->input_item_type = $request->input_itemstype_ids;
+      $manufacturing_details->finished_item_type = $request->finished_itemstype_ids;
+      $manufacturing_details->scrap_item_type = $request->scrab_itemstype_ids;
+      $manufacturing_details->loss_item_type = $request->loss_itemstype_ids;
       $manufacturing_details->updated_at = date('Y-m-d');
       $manufacturing_details->created_by = Auth::user()->id;
       $manufacturing_details->update_by = Auth::user()->id;
@@ -141,8 +151,10 @@ class ManufacturingController extends Controller
       $value->item_name =  DB::table('item')->where('id',$value->item_name)->value('items_name');
     }
     $uom = Uom::where('status', 1)->get();
+    $inputitem_type = DB::table('category')->where('is_active',1)->where('process',1)->select('id','category_name')->orderBy('id')->get();
+    $outputtitem_type = DB::table('category')->where('is_active',1)->where('process',0)->select('id','category_name')->orderBy('id')->get();
     $data['content'] = 'Manufacturing.add';
-    return view('layouts.content', compact('data'))->with(['manufacturing_details' => $manufacturing_details, 'inv_item' => $inv_item, 'InventoryLocation' => $InventoryLocation,'uom'=>$uom]);
+    return view('layouts.content', compact('data'))->with(['manufacturing_details' => $manufacturing_details, 'inv_item' => $inv_item, 'InventoryLocation' => $InventoryLocation,'uom'=>$uom, 'outputtitem_type' => $outputtitem_type, 'inputitem_type' => $inputitem_type]);
   }
   public function delete($id = "")
   {
@@ -169,5 +181,14 @@ class ManufacturingController extends Controller
   {
     $inv_item = inv_item::where('id',$id)->first();
     return $inv_item;
+  }
+
+  public function fetchItemname($type)
+  {
+    $toReturn['inv_Type_item'] = inv_item::where('item_category_id',$type)->select('id','item_name','item_category_id')->orderBy('id')->get();
+    foreach ($toReturn['inv_Type_item'] as $key => $value) {
+        $value->item_name = DB::table('item')->where('id',$value->item_name)->value('items_name');
+    }
+    return $toReturn;
   }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\inv_item;
+use App\history_inv_item;
 use Auth;
 use Session;
 use DB;
@@ -59,6 +60,18 @@ class inv_ItemsController extends Controller
         $inv_itemData->created_date = date('Y-m-d');
         $inv_itemData->save();
         Session::flash('success', 'Create Success');
+        $history_inv_item = new history_inv_item();
+        $history_inv_item->inv_item_id = $inv_itemData->id;
+        $history_inv_item->item_type = $request->item_category;
+        $history_inv_item->quantity = $request->quantity;
+        $history_inv_item->uom_id = $request->uom;
+        $history_inv_item->opening_quantity = $request->quantity;
+        $history_inv_item->closing_quantity = $request->quantity;
+        $history_inv_item->update_value = 0;
+        $history_inv_item->table_id = 1;
+        $history_inv_item->created_by = Auth::user()->id;
+        // $history_inv_item->created_date = date('Y-m-d h:i:s');
+        $history_inv_item->save();
         return redirect('inv_item/listing');
     }
     public function showView($id)
@@ -104,6 +117,19 @@ class inv_ItemsController extends Controller
         $Edit_inv_itemData->modified_date = date('Y-m-d');
         $Edit_inv_itemData->save();
         Session::flash('success', 'Update Success');
+        $historyData = history_inv_item::where('inv_item_id',$Edit_inv_itemData->id)->select('id','opening_quantity','closing_quantity')->orderBy('created_date','DESC')->first();
+        $history_inv_item = new history_inv_item();
+        $history_inv_item->inv_item_id = $Edit_inv_itemData->id;
+        $history_inv_item->item_type = $request->item_category;
+        $history_inv_item->quantity = $request->quantity;
+        $history_inv_item->uom_id = $request->uom;
+        $history_inv_item->opening_quantity = $historyData->closing_quantity;
+        $history_inv_item->closing_quantity = $request->quantity;
+        $history_inv_item->update_value = $request->quantity;
+        $history_inv_item->table_id = 1;
+        $history_inv_item->created_by = Auth::user()->id;
+        // $history_inv_item->created_date = date('Y-m-d h:i:s');
+        $history_inv_item->save();
         return redirect('inv_item/listing');
     }
     public function deletedata($id)

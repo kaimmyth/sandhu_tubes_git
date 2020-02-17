@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\inv_item;
 use App\shipment;
+use App\history_inv_item;
 use Auth;
 use Session;
 use DB;
@@ -104,6 +105,26 @@ class shipmentController extends Controller
                     $Edit_inv_itemData->save();
                 }
             }
+        }
+        foreach ($request->item_ids as $key => $value) {
+            $historyData = history_inv_item::where('inv_item_id',$value)->select('id','opening_quantity','closing_quantity')->orderBy('created_date','DESC')->first();
+            $history_inv_item = new history_inv_item();
+            $history_inv_item->inv_item_id = $value;
+            $history_inv_item->item_type = $request->item_type_ids[$key];
+            $history_inv_item->quantity = $request->quantity[$key];
+            $history_inv_item->uom_id = $request->uom_ids[$key];
+            $history_inv_item->opening_quantity = $historyData->closing_quantity;
+            $history_inv_item->update_value = $request->quantity[$key];
+            if ($request->shipment_type == 1) {
+                $history_inv_item->closing_quantity = $historyData->closing_quantity + $request->quantity[$key];
+                $history_inv_item->table_id = 2;
+            } else {
+                $history_inv_item->closing_quantity = $historyData->closing_quantity - $request->quantity[$key];
+                $history_inv_item->table_id = 3;
+            }
+            
+            $history_inv_item->created_by = Auth::user()->id;
+            $history_inv_item->save();
         }
         Session::flash('success', 'Create Success');
         return redirect('shipment/listing');
@@ -223,6 +244,26 @@ class shipmentController extends Controller
                 }
             }
         }
+        foreach ($request->item_ids as $key => $value) {
+            $historyData = history_inv_item::where('inv_item_id',$value)->select('id','opening_quantity','closing_quantity')->orderBy('created_date','DESC')->first();
+            $history_inv_item = new history_inv_item();
+            $history_inv_item->inv_item_id = $value;
+            $history_inv_item->item_type = $request->item_type_ids[$key];
+            $history_inv_item->quantity = $request->quantity[$key];
+            $history_inv_item->uom_id = $request->uom_ids[$key];
+            $history_inv_item->opening_quantity = $historyData->closing_quantity;
+            $history_inv_item->update_value = $request->quantity[$key];
+            if ($request->shipment_type == 1) {
+                $history_inv_item->closing_quantity = $historyData->closing_quantity + $request->quantity[$key];
+                $history_inv_item->table_id = 2;
+            } else {
+                $history_inv_item->closing_quantity = $historyData->closing_quantity - $request->quantity[$key];
+                $history_inv_item->table_id = 3;
+            }
+            
+            $history_inv_item->created_by = Auth::user()->id;
+            $history_inv_item->save();
+        }
         Session::flash('success', 'Update Success');
         return redirect('shipment/listing');
     }
@@ -251,6 +292,14 @@ class shipmentController extends Controller
     public function fetchItemsserialno($id)
     {
         $toReturn['inv_item_sl'] = inv_item::select('id','item_name','serial_no','quantity')->where('id',$id)->first();
+        return $toReturn;
+    }
+    public function fetchitemType($type)
+    {
+        $toReturn['inv_Type_item'] = inv_item::where('item_category_id',$type)->select('id','item_name','item_category_id')->orderBy('id')->get();
+        foreach ($toReturn['inv_Type_item'] as $key => $value) {
+            $value->item_name = DB::table('item')->where('id',$value->item_name)->value('items_name');
+        }
         return $toReturn;
     }
 }

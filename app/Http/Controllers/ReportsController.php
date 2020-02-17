@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use App\inv_item;
+use App\history_inv_item;
 use App\shipment;
 use App\manufacturing_details;
 
@@ -29,6 +30,21 @@ class ReportsController extends Controller
         $start_date = $request->start_date;
         $end_date = $request->end_date;
         $inv_item = inv_item::where('item_category_id',$category)->whereBetween('created_date', [date('Y-m-d',strtotime($start_date)), date('Y-m-d',strtotime($end_date))])->orderBy('id')->get();
+       
+        $openingStock = 0;
+        $ClosingStock = 0;
+        foreach ($inv_item as $key => $value) {
+            $history_inv_item = history_inv_item::where('inv_item_id',$value->id)->get();
+            foreach ($history_inv_item as $kee => $value1) {
+                $openingStock = $value1->opening_quantity;
+                $ClosingStock = $value1->closing_quantity;
+            }
+            $value->openingStock =$openingStock;
+            $value->ClosingStock =$ClosingStock;
+        }
+        // echo "<pre>";
+        // print_r($inv_item);
+        // exit;
         $item_ids_array = array();
         $item_type_ids_array = array();
         foreach ($inv_item as $key => $value) {
@@ -44,6 +60,7 @@ class ReportsController extends Controller
                                 ->whereBetween('shipping_date', [$start_date, $end_date])->get();
         $totalItem = 0;
         $totalOutItem = 0;
+        $manufaCount = 0;
         $itemsdatajson = [];
         $manufacture_items = [];
         $manufacture_items_final = [];
@@ -54,6 +71,7 @@ class ReportsController extends Controller
             foreach ($inv_item as $key => $value) {
                 $manufacture_items = manufacturing_details::where('input_items_id',$value->id)->get();
                 foreach ($manufacture_items as $key_menu => $value_menu) {
+                    // $manufaCount++;
                     $item_name_new_id = inv_item::where('id',$value_menu->input_items_id)->value('item_name');
                     $value_menu->input_items_id =  DB::table('item')->where('id',$item_name_new_id)->value('items_name');
                     $value_menu->input_items_uom = DB::table('uom')->where('id',$value_menu->input_items_uom)->value('uom_name');
@@ -70,6 +88,15 @@ class ReportsController extends Controller
                     $value_menu->invisible_loss_name =  DB::table('item')->where('id',$item_name_loss_id)->value('items_name');
                     $value_menu->invisible_loss_uom = DB::table('uom')->where('id',$value_menu->invisible_loss_uom)->value('uom_name');
                     $value_menu->items_type =  DB::table('category')->where('id',$value->item_category_id)->value('category_name');
+                    $value_menu->total_quantity =  $value->quantity;
+                    if ($key_menu == 0) {
+                        $value_menu->rest_quantity =  $value->quantity - $value_menu->input_items_quantity;
+                        $manufaCount = $value_menu->rest_quantity;
+                    } else {
+                        $value_menu->rest_quantity =  $manufaCount - $value_menu->input_items_quantity;
+                        $manufaCount = $manufaCount - $value_menu->input_items_quantity;
+                    }
+                    $value_menu->main_uom = DB::table('uom')->where('id',$value->uom_id)->value('uom_name');
                 }
                 array_push($manufacture_items_final,$manufacture_items);
             }
