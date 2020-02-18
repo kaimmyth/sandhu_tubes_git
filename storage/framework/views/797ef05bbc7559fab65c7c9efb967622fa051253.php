@@ -75,9 +75,19 @@
                         <div class="form-group">
                             <label for="field-2" class="control-label">Process</label>
                             <select class="select2 form-control" onchange="get_cat_details(this);" name="procreportsreportsess" id="process" required>
-                                <option value="">--- Select Type ---</option>
-                                <option value="1">Input</option>
-                                <option value="0">Output</option>
+                                <?php if(@$process_id != null || @$process_id != ""): ?>
+                                    <?php if(@$process_id == 1): ?>
+                                        <option value="1">Input</option>
+                                        <option value="0">Output</option>
+                                    <?php else: ?>
+                                        <option value="0">Output</option>
+                                        <option value="1">Input</option>
+                                    <?php endif; ?>
+                                <?php else: ?>
+                                    <option value="">--- Select Type ---</option>
+                                    <option value="1">Input</option>
+                                    <option value="0">Output</option>
+                                <?php endif; ?>
                             </select>
                         </div>
                     </div>
@@ -85,25 +95,34 @@
                         <div class="form-group">
                             <label for="field-2" class="control-label">Item Type</label>
                             <select class="select2 form-control" name="category" id="category" required>
+                                <?php if(@$item_type_data): ?>
+                                    <?php $__currentLoopData = $item_type_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($value->id); ?>" <?php if(@$value->id == @$category ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>><?php echo e($value->category_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php else: ?>
                                 <option value="">---Select---</option>
+                                <?php endif; ?>
                             </select>
                         </div>
                     </div>
                     <div class="col-xl-2">
                         <label for="field-2" class="control-label">Start Date</label>
-                        <input type="text" name="start_date" class="form-control datepicker" required>
+                        <input type="text" name="start_date" class="form-control datepicker" value="<?php if(@$start_date): ?> <?php echo e($start_date); ?> <?php endif; ?>" required>
                     </div>
                     <div class="col-xl-2">
                         <label for="field-2" class="control-label">End Date</label>
-                        <input type="text" name="end_date" class="form-control datepicker" required>
+                        <input type="text" name="end_date" class="form-control datepicker" value="<?php if(@$end_date): ?> <?php echo e($end_date); ?> <?php endif; ?>" required>
                     </div>
                     <div class="col-xl-2">
                         <button type="submit" class="btn btn-primary" style="margin-top: 30px;"> <i class="md md-add-circle-outline"></i> Genrate</button>
                         <a href="<?php echo e(url('reports')); ?>"><button type="button" class="btn btn-primary" style="margin-top: 30px;"> <i class="md md-add-circle-outline"></i> Undo</button></a>
+                        <?php if(@$itemsdetails): ?>
+                        <a href="#"><button id="prtbtn"  onclick="printDiv('datatable ')" class="btn btn-primary" style="margin-top:30px;">Print</button></a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </form>
-            <hr class="new2">
+            <hr class="new2 ">
             <?php if(@$itemsdetails): ?>
                 <div class="card card-border card-info">
                     <div class="card-header" style="background-image: linear-gradient(#e9f8ff, white);padding: 0px !important;">
@@ -138,7 +157,7 @@
                                             </table>
                                         </div>
                                         <div class="col-md-6" style="padding-top: 8px;">
-                                            <table class="table table-striped table-bordered dt-responsive" id="datatable-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <table class="table table-striped table-bordered dt-responsive" id="datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead style="background: #393e4a59;">
                                                     <tr><th colspan="4">Issue Items Duration <?php echo e(date('j M, Y ',strtotime(@$start_date))); ?> To <?php echo e(date('j M, Y ',strtotime(@$end_date))); ?></th></tr>
                                                     <tr>
@@ -280,6 +299,8 @@
         $(".datepicker").datepicker();
     });
 </script>
+<div id="to-print-area" style="position: fixed;top:0;left:0;width:100vw; height: 100vh; z-index: +999;background: white;">
+</div>
 <script>
     function get_cat_details(e) {
         var process_id = $(e).val();
@@ -300,5 +321,9 @@
                 $("#category").append(to_append);
             }
         });
+    }
+    function printDiv() {
+        $("#to-print-area").html($("#printable-area").html());
+        window.print();
     }
 </script><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/reports/report.blade.php ENDPATH**/ ?>

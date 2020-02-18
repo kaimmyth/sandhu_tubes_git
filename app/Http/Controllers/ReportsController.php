@@ -25,7 +25,7 @@ class ReportsController extends Controller
         return $categorytData;
     }
     public function genrate_report(Request $request){
-        $process_id = $request->process;
+        $process_id = $request->procreportsreportsess;
         $category = $request->category;
         $start_date = $request->start_date;
         $end_date = $request->end_date;
@@ -168,11 +168,14 @@ class ReportsController extends Controller
                 array_push($itemsdetailsOut,$itemsdataOutjson);
             }
         }
+        $item_type_data = DB::table('category')->where('is_active',1)->where('process',$process_id)->select('id','category_name')->get();
         // echo "<pre>"; 
-        // print_r($manufacture_items_final);
+        // print_r($item_type_data);
         // exit;
         $data['content'] = 'reports.report';
         return view('layouts.content', compact('data'))->with(['inv_item'=>$inv_item,'itemsdetails'=>$itemsdetails,'totalItem'=>$totalItem,
-        'itemsdetailsOut'=>$itemsdetailsOut,'totalOutItem'=>$totalOutItem,'manufacture_items_final'=>$manufacture_items_final,'start_date'=>$start_date,'end_date'=>$end_date]);
+        'itemsdetailsOut'=>$itemsdetailsOut,'totalOutItem'=>$totalOutItem,'manufacture_items_final'=>$manufacture_items_final
+        ,'start_date'=>$start_date,'end_date'=>$end_date,'process_id'=>$process_id,'category'=>$category,'item_type_data'=>$item_type_data]);
+        
     }
 }
