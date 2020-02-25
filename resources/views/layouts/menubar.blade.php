@@ -252,6 +252,8 @@
 						<li><a href="{{url('finished-goods-type')}}">FINISHED GOODS TYPE</a></li>
 						<li><a href="{{url('metal-scrap')}}">METAL SCRAP</a></li>
 						<li><a href="{{url('invisible-loss-percentage')}}">INVISIBLE LOSS PERCENTAGE</li>
+						<li><a href="{{url('yield-percentage')}}">YIELD PERCENTAGE</a></li>
+						<li><a href="{{url('grade')}}">GRADE</a></li>
 						
 						<!-- <li><a href="{{ url('organization/listing')}}">ORGNIZATIONS</a></li> -->
 						<!--<li><a href="{{ url('subdepartment')}}">SUB-DEPARTMENTS</a></li>-->
@@ -308,6 +310,8 @@
 						<li><a href="{{url('finished-goods-type')}}">FINISHED GOODS TYPE</a></li>
 						<li><a href="{{url('metal-scrap')}}">METAL SCRAP</a></li>
 						<li><a href="{{url('invisible-loss-percentage')}}">INVISIBLE LOSS PERCENTAGE</li>
+						<li><a href="{{url('yield-percentage')}}">YIELD PERCENTAGE</a></li>
+						<li><a href="{{url('grade')}}">GRADE</a></li>
 
 						
 						<!-- <li><a href="{{ url('organization/listing')}}">ORGNIZATIONS</a></li> -->

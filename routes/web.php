@@ -377,6 +377,17 @@ Route::post('invisible-loss-percentage/add','MasterController@invisible_loss_per
 Route::any('invisible-loss-percentage/edit/{id}','MasterController@invisible_loss_percentage_Edit');
 Route::get('invisible-loss-percentage/destroy/{id}','MasterController@invisible_loss_percentage_destroy');
 
+//................................................Master of Grade........................................................
+Route::get('grade','MasterController@grade_index');
+Route::post('grade/add','MasterController@grade_Add');
+Route::any('grade/edit/{id}','MasterController@grade_Edit');
+Route::get('grade/destroy/{id}','MasterController@grade_destroy');
+
+//................................................Master of Yield Percentage........................................................
+Route::get('yield-percentage','MasterController@yield_percentage_index');
+Route::post('yield-percentage/add','MasterController@yield_percentage_Add');
+Route::any('yield-percentage/edit/{id}','MasterController@yield_percentage_Edit');
+Route::get('yield-percentage/destroy/{id}','MasterController@yield_percentage_destroy');
 
 //................................................Rohit...Org Relationship........................................................
 Route::get('org/org_relationship','MasterController@Org_Relation_index');

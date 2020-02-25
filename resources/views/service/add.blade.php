@@ -444,7 +444,7 @@
               },
               success:function(data){
               
-                console.log(data);
+                // console.log(data);
                   $("#item_name_id").html('<option value="">--Select--</option>');
                   for(var i=0;i<data.length;i++){
                       $("#item_name_id").append('<option value="'+data[i].item_name+'" >'+data[i].item_name+'</option>');

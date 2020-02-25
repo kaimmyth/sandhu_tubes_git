@@ -20,7 +20,8 @@ use App\MetalScrap;
 use App\FinishedGoodsType;
 use App\Uom;
 use App\InvisibleLossPercentage;
-
+use App\Grade;
+use App\YieldPercentage;
 
 
 
@@ -322,6 +323,117 @@ class MasterController extends Controller
  }
  ///........................................................End Master For Metal Scrap...............................................  
 
+ ///...................................................Start Grade............................................  
+ public function grade_index()
+ {
+     if (Auth::check() && Auth::user()->users_role != 1) {
+         $land_permission = Session::get('all_module_permission');
+         foreach ($land_permission as $key => $value_land) {
+             if ($value_land['permission_value'] == 6) {
+             $module_permission = $value_land;
+             }
+         }
+     }
+     $result_grade = Grade::orderBy('id', 'DESC')->get()->toArray();
+
+     $data['content'] = 'master.grade';
+     return view('layouts.content', compact('data'))->with(['result_grade'=> $result_grade,'module_permission'=> @$module_permission]);
+ }
+
+ public function grade_Add(Request $request)
+ {
+    
+     $data = array(
+         'grade' => $request->grade,
+         'description' =>  $request->description,
+        
+         'status' => $request->status,
+        
+     );
+
+     if ($request->ids != '') {
+         Session::flash('success', 'Updated Successfully..!');
+         $updatedata = DB::table('grade')->where('id', $request->ids)->update($data);
+         return back();
+     } else {
+         Session::flash('success', 'Inserted Successfully..!');
+         $insertdata = DB::table('grade')->insert($data);
+         return back();
+     }
+ }
+
+ public function grade_Edit(Request $request, $id)
+ {
+     $data =  DB::table('grade')->where('id', $id)->first();
+     if ($data) {
+         return Response::json($data);
+     }
+ }
+
+
+ public function grade_destroy(Request $request, $id)
+ {
+     Session::flash('error', 'Deleted Successfully..!');
+     $delete = DB::table('grade')->where('id', '=', $id)->delete();
+     return back();
+ }
+ ///........................................................End Master For Grade...............................................  
+
+ ///...................................................Start Yield Percentage............................................  
+ public function yield_percentage_index()
+ {
+     if (Auth::check() && Auth::user()->users_role != 1) {
+         $land_permission = Session::get('all_module_permission');
+         foreach ($land_permission as $key => $value_land) {
+             if ($value_land['permission_value'] == 6) {
+             $module_permission = $value_land;
+             }
+         }
+     }
+     $result_yield_percentage = YieldPercentage::orderBy('id', 'DESC')->get()->toArray();
+
+     $data['content'] = 'master.yield_percentage';
+     return view('layouts.content', compact('data'))->with(['result_yield_percentage'=> $result_yield_percentage,'module_permission'=> @$module_permission]);
+ }
+
+ public function yield_percentage_Add(Request $request)
+ {
+    
+     $data = array(
+         'yield_percentage' => $request->yield_percentage,
+         'description' =>  $request->description,
+        
+         'status' => $request->status,
+        
+     );
+
+     if ($request->ids != '') {
+         Session::flash('success', 'Updated Successfully..!');
+         $updatedata = DB::table('yield_percentage')->where('id', $request->ids)->update($data);
+         return back();
+     } else {
+         Session::flash('success', 'Inserted Successfully..!');
+         $insertdata = DB::table('yield_percentage')->insert($data);
+         return back();
+     }
+ }
+
+ public function yield_percentage_Edit(Request $request, $id)
+ {
+     $data =  DB::table('yield_percentage')->where('id', $id)->first();
+     if ($data) {
+         return Response::json($data);
+     }
+ }
+
+
+ public function yield_percentage_destroy(Request $request, $id)
+ {
+     Session::flash('error', 'Deleted Successfully..!');
+     $delete = DB::table('yield_percentage')->where('id', '=', $id)->delete();
+     return back();
+ }
+ ///........................................................End Master For Yield Percentage...............................................  
 
 
  ///...................................................Start Master For Finished Goods Type............................................  
