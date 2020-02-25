@@ -58,7 +58,7 @@
           <h4 class="pull-left page-title" style="color: #000; font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Inventory Item Info&nbsp;&nbsp;/ &nbsp; <a href="<?php echo e(url('inv_item/listing')); ?>">Back</a></h4>
           <ol class="breadcrumb pull-right">
             <li><a href="<?php echo e(URL::to('home')); ?>">Home</a></li>
-            <li><a href="">Item</a></li>
+            <li><a href="<?php echo e(url('inv_item/listing')); ?>">Item</a></li>
             <li class="active">View Inventory Item</li>
           </ol>
         </div>

@@ -116,6 +116,7 @@
                                                     <tr>
                                                         @php 
                                                             $item=DB::table('item')->where('id',$value_del['inv_item_id'])->first();
+                                                            $get_item_name = DB::table('inv_item')->where('id',$value_del['item_name'])->first();
                                                             $uom=DB::table('uom')->where('id',$value_del['input_uom_id'])->first();
                                                             $service_type=DB::table('service_type')->where('id',$value_del['service_type_id'])->first();
                                                             $item_type=DB::table('category')->where('id',$value_del['item_type_id'])->first();
@@ -123,7 +124,7 @@
                                                         <td class="rig">{{$key_del + 1}}</td>
                                                         <td>{{@$item_type->category_name}}</td>
                                                         <td>{{@$service_type->service_name}}</td>
-                                                        <td>{{@$item->items_name}}</td>
+                                                        <td>{{@$get_item_name->item_name}}</td>
                                                         <td class="rig">{{@$value_del['input_quantity']}} {{@$uom->uom_name}}</td>
 
                                                         @if(@$value_del['status']==1)

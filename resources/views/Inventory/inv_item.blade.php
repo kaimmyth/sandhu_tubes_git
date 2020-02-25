@@ -29,7 +29,7 @@
           <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp; Inventory Item</h4>
           <ol class="breadcrumb pull-right">
             <li><a href="{{ URL::to('home') }}">Home</a></li>
-            <li><a href="{{URL::to('home')}}">Item</a></li>
+            <li><a href="{{URL::to('#')}}">Item</a></li>
             <li class="active">Inventory Item</li>
           </ol>
         </div>
@@ -57,6 +57,7 @@
                           <th>Item Name</th>
                           <th>Item Category</th>
                           <th>Quantity</th>
+                          <th>Age</th>
                           <th>Created Date</th>
                           <th class="action">Action</th>
                         </tr>
@@ -65,11 +66,18 @@
                         @if($inv_itemdata)
                         @foreach($inv_itemdata as $key=>$val)
                         <tr>
-                          <td>{{$val->item_code}}</td>
-                          <td>{{$val->item_name}}</td>
+                          <td style="text-align: right;">{{$val->item_code}}</td>
+                          <td style="text-align: right;">{{$val->item_name}}</td>
                           <td>{{$val->item_category_id}}</td>
                           <td class="rig">{{$val->quantity}} {{$val->uom_id}}</td>
-                          <td>{{date('j M, Y',strtotime($val->created_date))}}</td>
+                          <td style="text-align: right;"><?php $date = date('m/d/Y'); 
+                                     $created_at =  $val->created_date;
+                                     $age = abs(strtotime($date) - strtotime($created_at));
+                                     $years = floor($age / (365*60*60*24));
+                                    $months = floor(($age - $years * 365*60*60*24) / (30*60*60*24));
+                                    $days = floor(($age - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+                                    ?>{{$months}} months : {{$days}} days</td>
+                          <td style="text-align: right;">{{date('j M, Y',strtotime($val->created_date))}}</td>
                           <td class="actions">
                             @if(Auth::user()->id!=1)
                               @if(@$module_permission['is_read']=='yes')

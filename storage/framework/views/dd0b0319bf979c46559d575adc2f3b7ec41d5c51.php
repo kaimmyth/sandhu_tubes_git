@@ -22,10 +22,10 @@
             <!-- Page-Title -->
             <div class="row" id="dashboard-row">
                 <div class="col-sm-12">
-                    <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Conversion</h4>
+                    <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Metal Scrap</h4>
                     <ol class="breadcrumb pull-right">
                         <li><a href="<?php echo e(URL::to('home')); ?>">Home</a></li>
-                        <li><a href="<?php echo e(URL::to('convertion')); ?>">Conversion</a></li>
+                        <li><a href="<?php echo e(URL::to('metal-scrap')); ?>">Metal Scrap</a></li>
                         <!-- <li class="active">location/area</li> -->
                     </ol>
                 </div>
@@ -47,20 +47,20 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 55px;">SL No.</th>
-                                        <th>From SI Unit</th>
-                                        <th>To SI Unit</th>
-                                        <th>Multiplication Value</th>
+                                        <th>Metal Scrap Name</th>
+                                        <th>Description</th>
                                         <th>Status</th>
+                                        <th>Created Date</th>
                                         <th class="action">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $__currentLoopData = $result_convertion; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $result_metal_scrap; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td class="rig"><?php echo e($key+1); ?></td>
-                                        <td><?php echo e($value['from_si_unit']); ?></td>
-                                        <td><?php echo e($value['to_si_unit']); ?></td>
-                                        <td class="rig"><?php echo e($value['multiplication_value']); ?></td>
+                                        <td><?php echo e($value['metal_scrap_name']); ?></td>
+                                        <td><?php echo e($value['description']); ?></td>
+                                       
                                         <?php if($value['status']== 1): ?>
                                         <td>
                                             <p class="mb-0">
@@ -74,6 +74,7 @@
                                             </p>
                                         </td>
                                         <?php endif; ?>
+                                        <td class="rig"><?php echo e($value['created_at']); ?></td>
                                         <td class="actions">
                                             <?php if(Auth::user()->id!=1): ?>
                                                 <?php if(@$module_permission['is_edit']=='yes'): ?>
@@ -81,12 +82,12 @@
                                                 &nbsp;&nbsp;&nbsp;
                                                 <?php endif; ?>
                                                 <?php if(@$module_permission['is_delete']=='yes'): ?>
-                                                <a href="<?php echo e(URL::to('convertion/destroy',$value['id'])); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                                <a href="<?php echo e(URL::to('metal-scrap/destroy',$value['id'])); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
                                                 <?php endif; ?>
                                             <?php else: ?>
                                             <a href="javascript::void(0)" class="on-default edit-row" onclick="editRecords(<?php echo e($value['id']); ?>)" data-toggle="tooltip" data-modal="modal-12" data-placement="top" title="" data-original-title="Edit"><i class="fas fa-edit"></i></a>
                                             &nbsp;&nbsp;&nbsp;
-                                            <a href="<?php echo e(URL::to('convertion/destroy',$value['id'])); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
+                                            <a href="<?php echo e(URL::to('metal-scrap/destroy',$value['id'])); ?>" class="on-default remove-row" onclick="return confirm('Are you sure you want to delete this item?');" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fas fa-trash" style="color:red;"></i></a>
                                             <?php endif; ?>
                                             
                                         </td>
@@ -105,51 +106,35 @@
 </div>
 </div>
 <!--- MODEL CALL--->
-<div id="convertion-model" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+<div id="metal-scrap-model" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title mt-0">Conversion</h4>
+                <h4 class="modal-title mt-0">Metal Scrap</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?php echo e(url('convertion/add')); ?>" method="POST" id="FormValidation" enctype="multipart/form-data" autocomplete="off">
+            <form action="<?php echo e(url('metal-scrap/add')); ?>" method="POST" id="FormValidation" enctype="multipart/form-data" autocomplete="off">
                 <?php echo csrf_field(); ?>
                 <input type="hidden" name="ids" id="ids">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="from_si_unit" class="control-label">From SI Unit<font color="red">*</font></label>
-                                   
-                                <select name="from_si_unit" id="from_si_unit" class="form-control" required>
-                                 <option value="">--Select--</option>
-                                <?php $__currentLoopData = $get_to_uom_name; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($data->id); ?>"><?php echo e($data->uom_name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select> 
+                                <label for="metal_scrap_name" class="control-label">Metal Scrap Name<font color="red">*</font></label>
+                                <input type="text" id="metal_scrap_name" name="metal_scrap_name" class="form-control" required="" aria-required="true" placeholder="Metal Scrap Name">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="to_si_unit" class="control-label">To SI Unit<font color="red">*</font></label>
-                                <select name="to_si_unit" id="to_si_unit" class="form-control" required>
-                                 <option value="">--Select--</option>
-                                <?php $__currentLoopData = $get_to_uom_name; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($data->id); ?>"><?php echo e($data->uom_name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select> 
+                                <label for="description" class="control-label">Description<font color="red">*</font></label>
+                                <input type="text" id="description" name="description" class="form-control" required="" aria-required="true" placeholder="Description">
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="multiplication_value" class="control-label">Multiplication Value<font color="red">*</font></label>
-                                <input type="text" id="multiplication_value" name="multiplication_value" class="form-control" required="" aria-required="true" placeholder="Multiplication Value">
-                            </div>
-                        </div>
+    
 
                         <div class="col-md-6">
                             <div class="form-group">
@@ -190,23 +175,23 @@
 
 
         $.ajax({
-            url: "<?php echo e(url('convertion/edit/')); ?>" + '/' + id,
+            url: "<?php echo e(url('metal-scrap/edit/')); ?>" + '/' + id,
             method: "POST",
             contentType: 'application/json',
             success: function (data) {
                 // console.log(data);
                 document.getElementById("ids").value = data.id;
-                document.getElementById("from_si_unit").value = data.from_si_unit;
-                document.getElementById("to_si_unit").value = data.to_si_unit;
-                document.getElementById("multiplication_value").value = data.multiplication_value;
+                document.getElementById("metal_scrap_name").value = data.metal_scrap_name;
+                document.getElementById("description").value = data.description;
+               
                 var val = data.status;
                 if (val == 1) {
                     $('input[name=status][value=' + val + ']').prop('checked', true);
                 } else {
                     $('input[name=status][value=' + val + ']').prop('checked', true);
                 }
-                document.getElementById("submitbtn").innerText = 'UPDATE';
-                $('#convertion-model').modal('show');
+                document.getElementById("submitbtn").innerText = 'Update';
+                $('#metal-scrap-model').modal('show');
             }
         });
     }
@@ -214,11 +199,10 @@
 
     function addRecords() {
         document.getElementById("ids").value = '';
-        document.getElementById("from_si_unit").value = '';
-        document.getElementById("to_si_unit").value = '';
-        document.getElementById("multiplication_value").value = '';
+        document.getElementById("metal_scrap_name").value = '';
+        document.getElementById("description").value = '';
         document.getElementById("submitbtn").innerText = 'Save';
-        $('#convertion-model').modal('show');
+        $('#metal-scrap-model').modal('show');
     }
 
-</script><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/master/convertion.blade.php ENDPATH**/ ?>
+</script><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/master/metal_scrap.blade.php ENDPATH**/ ?>

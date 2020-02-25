@@ -181,35 +181,9 @@ Route::prefix('company')->group(function () {
 	Route::get('destroy/{id}', 'CompanyController@destroy');
 	Route::any('edit/{id}', 'CompanyController@edit');
 });
-Route::get('pcc/pcc_action_view','PccActionController@pcc_action_list');
-Route::get('pcc/pcc_from','PccActionController@pccform_view');
-Route::post('pcc/pcc_from/add','PccActionController@pccform_add');
-Route::get('pcc/pcc_actionview/{id}','PccActionController@pcc_action_view');
-Route::get('pcc/edit_from/{id}','PccActionController@edit_pcc_form');
-Route::post('pcc/pcc_from/update','PccActionController@pccform_update');
-Route::get('pcc/entity_search/{enitity_id}','PccActionController@search_entity');
-Route::get('pcc/searchLand/{query}','PccActionController@SearchLand');
-Route::get('pcc/searchcompany/{query}','PccActionController@SearchCustomer');
-Route::get('pcc/getland/{id}','PccActionController@AddwizardSearchLand');
-Route::get('pcc/getcompany/{id}','PccActionController@AddContractCustomer');
-Route::get('pcc/pcc_agenda/freeze/{id}','PccActionController@freeze_Pcc');
-Route::post('pcc/pccAgenda_final_save','PccActionController@save_finalPcc');
-Route::get('pcc/{action_type}/{action_cat}/{element}','PccActionController@allocated_pcc');
-Route::get('pcc/searchRegisterRecord/{query}','PccActionController@searchRegister');
-Route::get('pcc/getregister/{id}','PccActionController@getregister');
-// Route::get('pcc/searchunit/{id}','PccActionController@ ');
-
-Route::get('entity_master','MasterController@Entity_Listing');
-Route::post('add/entity_master', 'MasterController@Add_Entity');
-Route::get('entity_master/destroy/{id}', 'MasterController@Delete_Entity');
-Route::any('entity_master/edit/{id}', 'MasterController@Edit_Entity');
 
 
-// pcc all route 
-Route::get('pcc_master','MasterController@PccMaster_Listing');
-Route::post('add/pcc_master', 'MasterController@Add_PccMaster');
-Route::get('pcc_master/destroy/{id}', 'MasterController@Delete_PccMaster');
-Route::any('pcc_master/edit/{id}', 'MasterController@Edit_PccMaster');
+
 
 // industries all route 
 Route::get('industries_master','MasterController@IndustriesMaster_Listing');
@@ -221,11 +195,6 @@ Route::post('add/entity_master', 'MasterController@Add_Entity');
 Route::get('entity_master/destroy/{id}', 'MasterController@Delete_Entity');
 Route::any('entity_master/edit/{id}', 'MasterController@Edit_Entity');
 
-// pcc all route 
-Route::get('pcc_master','MasterController@PccMaster_Listing');
-Route::post('add/pcc_master', 'MasterController@Add_PccMaster');
-Route::get('pcc_master/destroy/{id}', 'MasterController@Delete_PccMaster');
-Route::any('pcc_master/edit/{id}', 'MasterController@Edit_PccMaster');
 
 // industries all route 
 Route::get('industries_master','MasterController@IndustriesMaster_Listing');
@@ -332,6 +301,7 @@ Route::get('serviceManu/edit/{id}','ServiceController@edit');
 Route::get('serviceManu/delete/{id}','ServiceController@delete');
 Route::get('serviceManu/view_details/{id}','ServiceController@view_details');
 Route::get('serviceManu/get_item_details/{id}','ServiceController@get_item_details');
+Route::get('Service/get_item_name/{id}','ServiceController@get_item_name');
 
 /* =================================================== Inventory Define Items Raj.. 08/02/2020=================================================== */
 Route::prefix('inv_item')->group(function () {
@@ -388,6 +358,24 @@ Route::get('convertion','MasterController@Convertion_index');
 Route::post('convertion/add','MasterController@Convertion_Add');
 Route::any('convertion/edit/{id}','MasterController@Convertion_Edit');
 Route::get('convertion/destroy/{id}','MasterController@Convertion_destroy');
+
+//................................................Master of finished goods type........................................................
+Route::get('finished-goods-type','MasterController@finished_goods_type_index');
+Route::post('finished-goods-type/add','MasterController@finished_goods_type_Add');
+Route::any('finished-goods-type/edit/{id}','MasterController@finished_goods_type_Edit');
+Route::get('finished-goods-type/destroy/{id}','MasterController@finished_goods_type_destroy');
+
+//................................................Master of metal scrap........................................................
+Route::get('metal-scrap','MasterController@metal_scrap_index');
+Route::post('metal-scrap/add','MasterController@metal_scrap_Add');
+Route::any('metal-scrap/edit/{id}','MasterController@metal_scrap_Edit');
+Route::get('metal-scrap/destroy/{id}','MasterController@metal_scrap_destroy');
+
+//................................................Master of Invisible Loss Percentage........................................................
+Route::get('invisible-loss-percentage','MasterController@invisible_loss_percentage_index');
+Route::post('invisible-loss-percentage/add','MasterController@invisible_loss_percentage_Add');
+Route::any('invisible-loss-percentage/edit/{id}','MasterController@invisible_loss_percentage_Edit');
+Route::get('invisible-loss-percentage/destroy/{id}','MasterController@invisible_loss_percentage_destroy');
 
 
 //................................................Rohit...Org Relationship........................................................

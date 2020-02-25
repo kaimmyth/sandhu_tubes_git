@@ -59,7 +59,7 @@
             <a href="{{url('organization/listing')}}">Back</a></h4>
           <ol class="breadcrumb pull-right">
             <li><a href="{{ URL::to('home') }}">Home</a></li>
-            <li><a href="">Organization</a></li>
+            <li><a href="{{url('organization/listing')}}">Organization</a></li>
             <li class="active">View Organization</li>
           </ol>
         </div>

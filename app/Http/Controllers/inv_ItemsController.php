@@ -26,7 +26,7 @@ class inv_ItemsController extends Controller
         foreach ($inv_itemdata as $key => $value) {
             $value->item_category_id = DB::table('category')->where('id',$value->item_category_id)->value('category_name');
             $value->uom_id = DB::table('uom')->where('id',$value->uom_id)->value('uom_name');
-            $value->item_name = DB::table('item')->where('id',$value->item_name)->value('items_name');
+            // $value->item_name = DB::table('item')->where('id',$value->item_name)->value('items_name');
         }
         $data['content'] = 'inventory.inv_item';
         return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata,'module_permission' => @$module_permission]);
@@ -49,12 +49,13 @@ class inv_ItemsController extends Controller
         $inv_itemData->inv_location_id = $request->location;
         $inv_itemData->item_name = $request->item_name;
         $inv_itemData->item_code = $request->item_code;
-        $inv_itemData->batch_no = $request->batch_no;
+        $inv_itemData->batch_no = $request->item_code;
         $inv_itemData->quantity = $request->quantity;
+        $inv_itemData->quality = $request->quality;
         $inv_itemData->seralized = $request->seralized;
         if($request->serial_no)
         $inv_itemData->serial_no = $request->serial_no;
-        $inv_itemData->leasable = $request->leasable;
+        // $inv_itemData->leasable = $request->leasable;
         $inv_itemData->description = $request->description;
         $inv_itemData->created_by = Auth::user()->id;
         $inv_itemData->created_date = date('Y-m-d');
@@ -79,7 +80,7 @@ class inv_ItemsController extends Controller
         $inv_itemdata = inv_item::where('id',$id)->first();
         $inv_itemdata->item_category_id = DB::table('category')->where('id',$inv_itemdata->item_category_id)->value('category_name');
         $inv_itemdata->uom_id = DB::table('uom')->where('id',$inv_itemdata->uom_id)->value('uom_name');
-        $inv_itemdata->item_name = DB::table('item')->where('id',$inv_itemdata->item_name)->value('items_name');
+        // $inv_itemdata->item_name = DB::table('inv_item')->value('item_name');
         $data['content'] = 'inventory.view_inv_item';
         return view('layouts.content', compact('data'))->with(['inv_itemdata' => $inv_itemdata]);
     }

@@ -23,7 +23,7 @@
             <a href="<?php echo e(url('inv_item/listing')); ?>">Back</a></h4>
           <ol class="breadcrumb pull-right">
             <li><a href="<?php echo e(URL::to('home')); ?>">Home</a></li>
-            <li><a href="<?php echo e(URL::to('home')); ?>">Item</a></li>
+            <li><a href="<?php echo e(URL::to('inv_item/listing')); ?>">Item</a></li>
             <li class="active">Edit Inventory Item</li>
           </ol>
         </div>
@@ -46,27 +46,27 @@
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">Item Code *</label>
-                                  <input type="text" class="form-control" name="item_code" id="item_code" value="<?php echo e($inv_itemdata->item_code); ?>" placeholder="Item Code" required aria-required="true">
+                                  <input type="text" class="form-control" name="item_code" id="item_code" value="<?php echo e($inv_itemdata->item_code); ?>" placeholder="Item Code" required aria-required="true" onkeyup="get_batch_number();">
                                 </div>
                               </div>
 
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">Batch No.</label>
-                                  <input type="text" class="form-control" value="<?php echo e($inv_itemdata->batch_no); ?>" name="batch_no" id="batch_no" placeholder="Batch No.">
+                                  <input type="text" class="form-control" value="<?php echo e($inv_itemdata->batch_no); ?>" name="batch_no" id="batch_no" placeholder="Batch No." disabled>
                                 </div>
                               </div>
 
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">Item Name *</label>
-                                  <!-- <input type="text" class="form-control" name="item_name" id="item_name" value="<?php echo e($inv_itemdata->item_name); ?>" placeholder="Item Name" required aria-required="true"> -->
-                                  <select class="form-control" name="item_name" id="item_name" required aria-required="true">
+                                  <input type="text" class="form-control" name="item_name" id="item_name" value="<?php echo e($inv_itemdata->item_name); ?>" placeholder="Item Name" required aria-required="true">
+                                  <!-- <select class="form-control" name="item_name" id="item_name" required aria-required="true">
                                     <option value="">--Select--</option>
                                     <?php $__currentLoopData = $itemsData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <option value="<?php echo e($val->id); ?>" <?php if(@$val->id==@$inv_itemdata->item_name ?? ''): ?><?php echo e('selected'); ?> <?php endif; ?>><?php echo e($val->items_name); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                  </select>
+                                  </select> -->
                                 </div>
                               </div>
 
@@ -127,7 +127,7 @@
                                 </div>
                               </div>
   
-                              <div class="col-md-4">
+                              <!-- <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">Leasable</label>
                                   <select class="form-control" name="leasable" id="leasable">
@@ -141,7 +141,7 @@
                                   </select>
                                 </div>
                               </div>
-                              
+                               -->
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">Location</label>
@@ -153,14 +153,33 @@
                                   </select>
                                 </div>
                               </div>
+
                               <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="field-3" class="control-label">Q/A</label>
+                          <select class="form-control" name="quality" id="quality">
+                          <?php if($inv_itemdata->quality == 1): ?>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                    <?php else: ?>
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                    <?php endif; ?>
+                           
+                          </select>
+                        </div>
+                      </div>
+                             
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">Description</label>
-                                  <input type="text" class="form-control" name="description" value="<?php echo e($inv_itemdata->description); ?>" id="description" placeholder="Description">
+                                  <textarea class="form-control" name="description" id="description" placeholder="Description" row="5"><?php echo e($inv_itemdata->description); ?></textarea>
+
+                                  <!-- <input type="text" class="form-control" name="description" value="<?php echo e($inv_itemdata->description); ?>" id="description" placeholder="Description"> -->
                                 </div>
                               </div>
   
-                            </div>
                             <!-- <div class="row">
                             </div> -->
                           </div>
@@ -193,4 +212,11 @@
   {
       document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
   }
+
+  function get_batch_number()
+  {
+    var item_code = $("#item_code").val();
+    $("#batch_no").val(item_code);
+  }
+
 </script><?php /**PATH C:\xampp\htdocs\sandhu_tubes_git\resources\views/inventory/edit_inv_item.blade.php ENDPATH**/ ?>

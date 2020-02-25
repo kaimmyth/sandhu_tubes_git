@@ -24,7 +24,7 @@
                <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Organization Summary</h4>
                <ol class="breadcrumb pull-right">
                   <li><a href="<?php echo e(URL::to('home')); ?>">Home</a></li>
-                  <li><a href="<?php echo e(URL::to('home')); ?>">Organization</a></li>
+                  <li><a href="<?php echo e(URL::to('organization/listing')); ?>">Organization</a></li>
                   <li class="active">Organization Summary</li>
                </ol>
             </div>

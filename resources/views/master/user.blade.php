@@ -52,7 +52,8 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
-                                        <th>Is Active</th>
+                                        <th>Designation</th>
+                                        <th>Status</th>
                                         <th>Created Date</th>
                                         <th class="action">Actions</th>
                                     </tr>
@@ -71,6 +72,7 @@
                                         <td>{{ $data->name }}</td>
                                         <td>{{ $data->email }}</td>
                                         <td>{{ $data->phone }}</td>
+                                        <td>{{$data->designation}}</td>
                                         @if($data->status == 1)
                                         <td>
                                             <p class="mb-0">

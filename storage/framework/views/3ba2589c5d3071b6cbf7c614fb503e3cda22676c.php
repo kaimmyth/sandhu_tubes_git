@@ -172,7 +172,7 @@ endif; ?>
                                         <br>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="rememberPass" style="margin: 12px 0 0 2px;">
-                                                  <span class="mdl-switch__label" style="text-transform: capitalize;font-weight: normal;font-size: 14px;">Remember</span>
+                                                  <span class="mdl-switch__label" style="text-transform: capitalize;font-weight: normal;font-size: 14px;">Remember Me</span>
                                         <input type="checkbox" id="rememberPass" class="mdl-switch__input" style="vertical-align: text-bottom;">
                                       
                                         </label>

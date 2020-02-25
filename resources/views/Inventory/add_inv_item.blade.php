@@ -23,7 +23,7 @@
             <a href="{{url('inv_item/listing')}}">Back</a></h4>
           <ol class="breadcrumb pull-right">
             <li><a href="{{ URL::to('home') }}">Home</a></li>
-            <li><a href="{{URL::to('home')}}">Item</a></li>
+            <li><a href="{{URL::to('inv_item/listing')}}">Item</a></li>
             <li class="active">Add Inventory Item</li>
           </ol>
         </div>
@@ -39,92 +39,92 @@
                   <div class="row gutters justify-content-left">
                     @csrf
                     <div class="card-body">
+                      <!-- <div class="row">
+                        <div class="col-sm-12"> -->
                       <div class="row">
-                        <div class="col-sm-12">
-                          <div class="row">
 
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label for="field-4" class="control-label">Item Code *</label>
-                                <input type="text" class="form-control" name="item_code" id="item_code" placeholder="Item Code" required aria-required="true">
-                              </div>
-                            </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="field-4" class="control-label">Item Code<span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" name="item_code" id="item_code" placeholder="Item Code" required aria-required="true" onkeyup="get_batch_number();">
+                          </div>
+                        </div>
 
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label for="field-4" class="control-label">Batch No.</label>
-                                <input type="text" class="form-control" name="batch_no" id="batch_no" placeholder="Batch No.">
-                              </div>
-                            </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="field-4" class="control-label">Batch No.</label>
+                            <input type="text" class="form-control" name="batch_no" id="batch_no" placeholder="Batch No." disabled>
+                          </div>
+                        </div>
 
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label for="field-4" class="control-label">Item Name *</label>
-                                <!-- <input type="text" class="form-control" name="item_name" id="item_name" placeholder="Item Name" required aria-required="true"> -->
-                                <select class="form-control" name="item_name" id="item_name" required aria-required="true">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="field-4" class="control-label">Item Name<span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" name="item_name" id="item_name" placeholder="Item Name" required aria-required="true">
+                            <!-- <select class="form-control" name="item_name" id="item_name" required aria-required="true">
                                   <option value="">--Select--</option>
                                   @foreach($itemsData as $key=>$val)
                                   <option value="{{$val->id}}">{{$val->items_name}}</option>
                                   @endforeach
-                                </select>
-                              </div>
-                            </div>
-
-                            
+                                </select> -->
                           </div>
-                          <div class="row">
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label for="field-4" class="control-label">Item Category *</label>
-                                <select class="form-control" name="item_category" id="item_category" required aria-required="true">
-                                  <option value="">--Select--</option>
-                                  @foreach($categorytData as $key=>$val)
-                                  <option value="{{$val->id}}">{{$val->category_name}}</option>
-                                  @endforeach
-                                </select>
-                              </div>
-                            </div>
+                        </div>
 
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label for="field-4" class="control-label">Quantity *</label>
-                                <input type="text" min="0" class="form-control" name="quantity" id="quantity" placeholder="Quantity" required aria-required="true">
-                              </div>
-                            </div>
 
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label for="field-4" class="control-label">UoM *</label>
-                                <select class="form-control" name="uom" id="uom" required aria-required="true">
-                                  <option value="">--Select--</option>
-                                  @foreach($uomData as $key=>$val)
-                                  <option value="{{$val->id}}">{{$val->uom_name}}</option>
-                                  @endforeach
-                                </select>
-                              </div>
-                            </div>
-
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="field-4" class="control-label">Item Category<span style="color:red;">*</span></label>
+                            <select class="form-control" name="item_category" id="item_category" required aria-required="true" required>
+                              <option value="">--Select--</option>
+                              @foreach($categorytData as $key=>$val)
+                              <option value="{{$val->id}}">{{$val->category_name}}</option>
+                              @endforeach
+                            </select>
                           </div>
-                          <div class="row">
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label for="field-4" class="control-label">Seralized</label>
-                                <select class="form-control" name="seralized" id="seralized" onchange="showDiv('hidden_div', this)">
-                                  <option value="">--Select--</option>
-                                  <option value="1">Yes</option>
-                                  <option value="0">No</option>
-                                </select>
-                              </div>
-                            </div>
+                        </div>
 
-                            <div class="col-md-4" id="hidden_div" style="display: none;">
-                              <div class="form-group">
-                                <label for="field-4" class="control-label">Serial Number</label>
-                                <input type="text" class="form-control" name="serial_no" id="serial_no" placeholder="Serial Number">
-                              </div>
-                            </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="field-4" class="control-label">Quantity<span style="color:red;">*</span></label>
+                            <input type="text" min="0" class="form-control" name="quantity" id="quantity" placeholder="Quantity" required aria-required="true" required>
+                          </div>
+                        </div>
 
-                            <div class="col-md-4">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="field-4" class="control-label">UoM<span style="color:red;">*</span></label>
+                            <select class="form-control" name="uom" id="uom" required aria-required="true" required>
+                              <option value="">--Select--</option>
+                              @foreach($uomData as $key=>$val)
+                              <option value="{{$val->id}}">{{$val->uom_name}}</option>
+                              @endforeach
+                            </select>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="field-4" class="control-label">Seralized</label>
+                            <select class="form-control" name="seralized" id="seralized" onchange="showDiv('hidden_div', this)">
+                              <option value="">--Select--</option>
+                              <option value="1">Yes</option>
+                              <option value="0">No</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="col-md-4" id="hidden_div" style="display: none;">
+                          <div class="form-group">
+                            <label for="field-4" class="control-label">Serial Number</label>
+                            <input type="text" class="form-control" name="serial_no" id="serial_no" placeholder="Serial Number">
+                          </div>
+                        </div>
+
+                        <!-- <div class="col-md-4">
                               <div class="form-group">
                                 <label for="field-4" class="control-label">Leasable</label>
                                 <select class="form-control" name="leasable" id="leasable">
@@ -133,26 +133,39 @@
                                   <option value="0">No</option>
                                 </select>
                               </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label for="field-4" class="control-label">Location</label>
-                                <select class="form-control" name="location" id="location">
-                                  <option value="">--Select--</option>
-                                  @foreach($inventory_location as $key=>$val)
-                                  <option value="{{$val->id}}">{{$val->location_name}}</option>
-                                  @endforeach
-                                </select>
-                              </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label for="field-4" class="control-label">Description</label>
-                                <input type="text" class="form-control" name="description" id="description" placeholder="Description">
-                              </div>
-                            </div>
-
+                            </div> -->
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="field-4" class="control-label">Location</label>
+                            <select class="form-control" name="location" id="location">
+                              <option value="">--Select--</option>
+                              @foreach($inventory_location as $key=>$val)
+                              <option value="{{$val->id}}">{{$val->location_name}}</option>
+                              @endforeach
+                            </select>
                           </div>
+                        </div>
+
+                        <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="field-3" class="control-label">Q/A</label>
+                          <select class="form-control" name="quality" id="quality">
+                            <option value="">--Select--</option>
+                           
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                           
+                          </select>
+                        </div>
+                      </div>
+
+                      </div>
+
+                      <div class="form-group">
+                        <label for="field-4" class="control-label">Description</label>
+                        <textarea class="form-control" name="description" id="description" placeholder="Description" row="5"></textarea>
+                              </div>
+                           
                           <!-- <div class="row">
                           </div> -->
                         </div>
@@ -177,5 +190,12 @@
   function showDiv(divId, element)
   {
       document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
+  }
+</script>
+<script>
+  function get_batch_number()
+  {
+    var item_code = $("#item_code").val();
+    $("#batch_no").val(item_code);
   }
 </script>

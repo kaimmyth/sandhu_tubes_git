@@ -18,6 +18,7 @@ use App\Customer;
 use App\Leasedata;
 use App\ShareCustomer;
 use App\CustCompany;
+use App\FinishedGoodsType;
 use App\lease_invoice;
 use App\Industries;
 use App\InputDetails;
@@ -29,7 +30,8 @@ use App\inv_item;
 use App\service;
 use App\InventoryLocation;
 use App\manufacturing_details;
-
+use App\MetalScrap;
+use App\InvisibleLossPercentage;
 
 class ServiceController extends Controller
 {
@@ -55,6 +57,7 @@ class ServiceController extends Controller
     } catch (\Exception $e) {
       return $e->getMessage();
     }
+   
   }
 
   public function add(Request $request)
@@ -63,11 +66,16 @@ class ServiceController extends Controller
     // $InventoryLocation = InventoryLocation::where('status', 1)->get();
     $inv_item = inv_item::get();
     $items = DB::table('item')->where('status',1)->get();
+    $finished_goods = FinishedGoodsType::where('status',1)->get();
+    $metal_scrap = MetalScrap::where('status',1)->get();
+    $invisible_loss_percentage = InvisibleLossPercentage::where('status',1)->get();
     $categorys = DB::table('category')->where('is_active',1)->get();
     $service_type = DB::table('service_type')->where('status',1)->get();
     $uom = Uom::where('status', 1)->get();
+   
+
     $data['content'] = 'service.add';
-    return view('layouts.content', compact('data'))->with(['uom' => $uom, 'inv_item' => $inv_item, 'items' => $items, 'categorys' => $categorys, 'service_type' => $service_type]);
+    return view('layouts.content', compact('data'))->with(['uom' => $uom,'invisible_loss_percentage'=>$invisible_loss_percentage,'metal_scrap'=>$metal_scrap,'finished_goods'=>$finished_goods,'inv_item' => $inv_item, 'items' => $items, 'categorys' => $categorys, 'service_type' => $service_type]);
   }
   public function create(Request $request)
   {
@@ -88,9 +96,13 @@ class ServiceController extends Controller
       $service_details->invisible_loss = $request->invisible_loss_name;
       $service_details->invisible_quantity = $request->invisible_loss_quantity;
       $service_details->invisible_uom = $request->invisible_loss_uom;
+      $service_details->finished_good_name = $request->finished_goods_dimension;
+      $service_details->metal_scrap_name = $request->metal_scrap_dimension ;
+      $service_details->invisible_loss_name = $request->invisible_loss_dimension ;
+
       // $service_details->invisible_loss_auto = $request->invisible_loss_auto;
       $service_details->status = 1;
-      $service_details->qa = $request->qa_check;
+      // $service_details->qa = $request->qa_check;
       $service_details->update_at = date('Y-m-d');
       $service_details->update_by = Auth::user()->id;
       $service_details->save();
@@ -112,8 +124,11 @@ class ServiceController extends Controller
       $service_details->invisible_quantity = $request->invisible_loss_quantity;
       $service_details->invisible_uom = $request->invisible_loss_uom;
       // $service_details->invisible_loss_auto = $request->invisible_loss_auto;
+      $service_details->finished_good_name = $request->finished_goods_dimension;
+      $service_details->metal_scrap_name = $request->metal_scrap_dimension ;
+      $service_details->invisible_loss_name = $request->invisible_loss_dimension ;
       $service_details->status = 1;
-      $service_details->qa = $request->qa_check;
+      // $service_details->qa = $request->qa_check;
       $service_details->created_at = date('Y-m-d');
       $service_details->created_by = Auth::user()->id;
       $service_details->save();
@@ -131,10 +146,13 @@ class ServiceController extends Controller
     $inv_item = inv_item::all();
     $uom = Uom::where('status', 1)->get();
     $items = DB::table('item')->where('status',1)->get();
+    $finished_goods = FinishedGoodsType::where('status',1)->get();
+    $metal_scrap = MetalScrap::where('status',1)->get();
+    $invisible_loss_percentage = InvisibleLossPercentage::where('status',1)->get();
     $categorys = DB::table('category')->where('is_active',1)->get();
     $service_type = DB::table('service_type')->where('status',1)->get();
     $data['content'] = 'service.add';
-    return view('layouts.content', compact('data'))->with(['service_details' => $service_details, 'inv_item' => $inv_item,'uom'=>$uom, 'items' => $items, 'categorys' => $categorys, 'service_type' => $service_type]);
+    return view('layouts.content', compact('data'))->with(['service_details' => $service_details,'finished_goods'=>$finished_goods,'metal_scrap'=>$metal_scrap,'invisible_loss_percentage'=>$invisible_loss_percentage,'inv_item' => $inv_item,'uom'=>$uom, 'items' => $items, 'categorys' => $categorys, 'service_type' => $service_type]);
   }
   public function delete($id = "")
   {
@@ -153,6 +171,7 @@ class ServiceController extends Controller
   public function view_details($id="")
   {
     $service_details = service::where('id', $id)->first();
+   
     $data['content'] = 'service.view_details';
     return view('layouts.content', compact('data'))->with(['service_details' => $service_details]);
  
@@ -161,5 +180,12 @@ class ServiceController extends Controller
   {
     $inv_item = inv_item::where('id',$id)->first();
     return $inv_item;
+  }
+
+  public function get_item_name(Request $request)
+  {
+    $datas = inv_item::where('item_category_id', $request->item_name_id)->select('item_name')->get();
+  
+    return $datas;
   }
 }

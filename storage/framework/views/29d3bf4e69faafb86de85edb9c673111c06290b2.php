@@ -4,7 +4,7 @@
   }
   
   table td {
-    padding: 3px 10px 3px 10px !important;
+    padding: 0px 10px 1px 10px !important;
   }
   
   .rig {
@@ -52,7 +52,8 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
-                                        <th>Is Active</th>
+                                        <th>Designation</th>
+                                        <th>Status</th>
                                         <th>Created Date</th>
                                         <th class="action">Actions</th>
                                     </tr>
@@ -71,6 +72,7 @@
                                         <td><?php echo e($data->name); ?></td>
                                         <td><?php echo e($data->email); ?></td>
                                         <td><?php echo e($data->phone); ?></td>
+                                        <td><?php echo e($data->designation); ?></td>
                                         <?php if($data->status == 1): ?>
                                         <td>
                                             <p class="mb-0">

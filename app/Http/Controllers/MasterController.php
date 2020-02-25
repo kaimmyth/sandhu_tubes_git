@@ -16,6 +16,10 @@ use App\module;
 use App\user_permission;
 use App\User;
 use App\item;
+use App\MetalScrap;
+use App\FinishedGoodsType;
+use App\Uom;
+use App\InvisibleLossPercentage;
 
 
 
@@ -198,16 +202,33 @@ class MasterController extends Controller
                 $module_permission = $value_land;
                 }
             }
-		}
-        $result_convertion = conversion::orderBy('id', 'DESC')->get()->toArray();
+        }
+     
 
+        $result_convertion = conversion::orderBy('id', 'DESC')
+                                    ->get();
+     
+        $get_to_uom_name = Uom::where('status',1)->select('uom_name','id')->get();
+      
+        foreach($result_convertion as $data)
+        {
+           
+            $data->from_si_unit = Uom::where('id','=',$data->from_si_unit)->value('uom_name');
+           
+            $data->to_si_unit = Uom::where('id','=',$data->to_si_unit)->value('uom_name');
+
+          
+        }
+
+                             
         $data['content'] = 'master.convertion';
-        return view('layouts.content', compact('data'))->with(['result_convertion'=> $result_convertion,'module_permission'=> @$module_permission]);
+        return view('layouts.content', compact('data'))->with(['result_convertion'=> $result_convertion,'get_to_uom_name'=>$get_to_uom_name,'module_permission'=> @$module_permission]);
     }
 
     public function Convertion_Add(Request $request)
     {
         // return $request;
+
         $data = array(
             'from_si_unit' => $request->from_si_unit,
             'to_si_unit' =>  $request->to_si_unit,
@@ -243,6 +264,177 @@ class MasterController extends Controller
     }
     ///........................................................End Master For conversions...............................................  
 
+
+
+ ///...................................................Start Master For Metal Scrap............................................  
+ public function metal_scrap_index()
+ {
+     if (Auth::check() && Auth::user()->users_role != 1) {
+         $land_permission = Session::get('all_module_permission');
+         foreach ($land_permission as $key => $value_land) {
+             if ($value_land['permission_value'] == 6) {
+             $module_permission = $value_land;
+             }
+         }
+     }
+     $result_metal_scrap = MetalScrap::orderBy('id', 'DESC')->get()->toArray();
+
+     $data['content'] = 'master.metal_scrap';
+     return view('layouts.content', compact('data'))->with(['result_metal_scrap'=> $result_metal_scrap,'module_permission'=> @$module_permission]);
+ }
+
+ public function metal_scrap_Add(Request $request)
+ {
+    //  return $request;
+     $data = array(
+         'metal_scrap_name' => $request->metal_scrap_name,
+         'description' =>  $request->description,
+        
+         'status' => $request->status,
+        
+     );
+
+     if ($request->ids != '') {
+         Session::flash('success', 'Updated Successfully..!');
+         $updatedata = DB::table('metal_scrap')->where('id', $request->ids)->update($data);
+         return back();
+     } else {
+         Session::flash('success', 'Inserted Successfully..!');
+         $insertdata = DB::table('metal_scrap')->insert($data);
+         return back();
+     }
+ }
+
+ public function metal_scrap_Edit(Request $request, $id)
+ {
+     $data =  DB::table('metal_scrap')->where('id', $id)->first();
+     if ($data) {
+         return Response::json($data);
+     }
+ }
+
+
+ public function metal_scrap_destroy(Request $request, $id)
+ {
+     Session::flash('error', 'Deleted Successfully..!');
+     $delete = DB::table('metal_scrap')->where('id', '=', $id)->delete();
+     return back();
+ }
+ ///........................................................End Master For Metal Scrap...............................................  
+
+
+
+ ///...................................................Start Master For Finished Goods Type............................................  
+ public function finished_goods_type_index()
+ {
+     if (Auth::check() && Auth::user()->users_role != 1) {
+         $land_permission = Session::get('all_module_permission');
+         foreach ($land_permission as $key => $value_land) {
+             if ($value_land['permission_value'] == 6) {
+             $module_permission = $value_land;
+             }
+         }
+     }
+     $result_finished_goods_type = FinishedGoodsType::orderBy('id', 'DESC')->get()->toArray();
+
+     $data['content'] = 'master.finished_goods_type';
+     return view('layouts.content', compact('data'))->with(['result_finished_goods_type'=> $result_finished_goods_type,'module_permission'=> @$module_permission]);
+ }
+
+ public function finished_goods_type_Add(Request $request)
+ {
+    //  return $request;
+     $data = array(
+         'finished_goods_type_name' => $request->finished_goods_type_name,
+         'description' =>  $request->description,
+        
+         'status' => $request->status,
+        
+     );
+
+     if ($request->ids != '') {
+         Session::flash('success', 'Updated Successfully..!');
+         $updatedata = DB::table('finished_goods_type')->where('id', $request->ids)->update($data);
+         return back();
+     } else {
+         Session::flash('success', 'Inserted Successfully..!');
+         $insertdata = DB::table('finished_goods_type')->insert($data);
+         return back();
+     }
+ }
+
+ public function finished_goods_type_Edit(Request $request, $id)
+ {
+     $data =  DB::table('finished_goods_type')->where('id', $id)->first();
+     if ($data) {
+         return Response::json($data);
+     }
+ }
+
+
+ public function finished_goods_type_destroy(Request $request, $id)
+ {
+     Session::flash('error', 'Deleted Successfully..!');
+     $delete = DB::table('finished_goods_type')->where('id', '=', $id)->delete();
+     return back();
+ }
+ ///........................................................End Master For Finished Goods Type...............................................  
+
+ ///...................................................Start Master For Invisible Loss Percentage............................................  
+ public function invisible_loss_percentage_index()
+ {
+     if (Auth::check() && Auth::user()->users_role != 1) {
+         $land_permission = Session::get('all_module_permission');
+         foreach ($land_permission as $key => $value_land) {
+             if ($value_land['permission_value'] == 6) {
+             $module_permission = $value_land;
+             }
+         }
+     }
+     $result_invisible_loss_percentage = InvisibleLossPercentage::orderBy('id', 'DESC')->get()->toArray();
+
+     $data['content'] = 'master.invisible_loss_percentage';
+     return view('layouts.content', compact('data'))->with(['result_invisible_loss_percentage'=> $result_invisible_loss_percentage,'module_permission'=> @$module_permission]);
+ }
+
+ public function invisible_loss_percentage_Add(Request $request)
+ {
+    //  return $request;
+     $data = array(
+         'invisible_loss_percentage' => $request->invisible_loss_percentage,
+         'description' =>  $request->description,
+        
+         'status' => $request->status,
+        
+     );
+
+     if ($request->ids != '') {
+         Session::flash('success', 'Updated Successfully..!');
+         $updatedata = DB::table('invisible_loss_percentage')->where('id', $request->ids)->update($data);
+         return back();
+     } else {
+         Session::flash('success', 'Inserted Successfully..!');
+         $insertdata = DB::table('invisible_loss_percentage')->insert($data);
+         return back();
+     }
+ }
+
+ public function invisible_loss_percentage_Edit(Request $request, $id)
+ {
+     $data =  DB::table('invisible_loss_percentage')->where('id', $id)->first();
+     if ($data) {
+         return Response::json($data);
+     }
+ }
+
+
+ public function invisible_loss_percentage_destroy(Request $request, $id)
+ {
+     Session::flash('error', 'Deleted Successfully..!');
+     $delete = DB::table('invisible_loss_percentage')->where('id', '=', $id)->delete();
+     return back();
+ }
+ ///........................................................End Master For Invisible Loss Percentage...............................................  
 
 
 
