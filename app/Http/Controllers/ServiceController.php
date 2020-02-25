@@ -105,6 +105,9 @@ class ServiceController extends Controller
       // $service_details->qa = $request->qa_check;
       $service_details->update_at = date('Y-m-d');
       $service_details->update_by = Auth::user()->id;
+     
+    
+     
       $service_details->save();
       Session::flash('success', 'Service Details Update Succesfully');
     } else {
@@ -131,6 +134,7 @@ class ServiceController extends Controller
       // $service_details->qa = $request->qa_check;
       $service_details->created_at = date('Y-m-d');
       $service_details->created_by = Auth::user()->id;
+
       $service_details->save();
       Session::flash('success', 'Service Details Save Succesfully');
     }

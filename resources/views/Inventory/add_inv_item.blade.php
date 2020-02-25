@@ -46,14 +46,14 @@
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="field-4" class="control-label">Item Code<span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" name="item_code" id="item_code" placeholder="Item Code" required aria-required="true" onkeyup="get_batch_number();">
+                            <input type="text" class="form-control" name="item_code" id="item_code" placeholder="Item Code" required aria-required="true">
                           </div>
                         </div>
 
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="field-4" class="control-label">Batch No.</label>
-                            <input type="text" class="form-control" name="batch_no" id="batch_no" placeholder="Batch No." disabled>
+                            <input type="text" class="form-control" name="batch_no" id="batch_no" placeholder="Batch No.">
                           </div>
                         </div>
 

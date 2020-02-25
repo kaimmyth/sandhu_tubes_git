@@ -53,7 +53,7 @@
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="field-4" class="control-label">Batch No.</label>
-                                  <input type="text" class="form-control" value="{{$inv_itemdata->batch_no}}" name="batch_no" id="batch_no" placeholder="Batch No." disabled>
+                                  <input type="text" class="form-control" value="{{$inv_itemdata->batch_no}}" name="batch_no" id="batch_no" placeholder="Batch No.">
                                 </div>
                               </div>
 

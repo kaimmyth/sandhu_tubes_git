@@ -293,6 +293,7 @@ Route::get('Manufacturing/delete/{id}','ManufacturingController@delete');
 Route::get('Manufacturing/view_details/{id}','ManufacturingController@view_details');
 Route::get('Manufacturing/get_item_details/{id}','ManufacturingController@get_item_details');
 Route::get('Manufacturing/fetchItemname/{type}','ManufacturingController@fetchItemname');
+Route::get('Manufacturing/get_item_name/{id}','ManufacturingController@get_item_name');
 //................................................Amit...Service........................................................
 Route::get('serviceManu/list','ServiceController@list');
 Route::get('serviceManu/add','ServiceController@add');

@@ -92,7 +92,7 @@
                                                 <tr>
                                                     <th>Item Name </th>
                                                     <th>Quantity</th>
-                                                    <th>Inventory Location</th>                                     
+                                                    <!-- <th>Inventory Location</th>                                      -->
                                                     <th>Status</th>
                                                     <th class="action">Action</th>
                                                 </tr>
@@ -101,13 +101,14 @@
 
                                               
                                                 @foreach($toReturn['details'] as $key_del=>$value_del)
-                                                    @php $item=DB::table('inv_item')->where('id',$value_del['input_items_id'])->first();
+                                                    @php 
+                                                        $item=DB::table('inv_item')->where('id',$value_del['input_items_id'])->first();
                                                         $Location=DB::table('inventory_location')->where('id',$value_del['input_items_location'])->first();
                                                         $uom=DB::table('uom')->where('id',$value_del['input_items_uom'])->first();
                                                     @endphp
-                                                <td>{{@$value_del['input_items_id']}}</td>
+                                                <td> {{@$item->item_name}}</td>
                                                 <td class="rig">{{@$value_del['input_items_quantity']}} {{@$uom->uom_name}}</td>
-                                                <td>{{@$Location->location_name}}</td>
+                                                <!-- <td>{{@$Location->location_name}}</td> -->
                                                 
                                                 @if(@$value_del['status']==1)
                                                     <td>

@@ -49,7 +49,7 @@ class inv_ItemsController extends Controller
         $inv_itemData->inv_location_id = $request->location;
         $inv_itemData->item_name = $request->item_name;
         $inv_itemData->item_code = $request->item_code;
-        $inv_itemData->batch_no = $request->item_code;
+        $inv_itemData->batch_no = $request->batch_no;
         $inv_itemData->quantity = $request->quantity;
         $inv_itemData->quality = $request->quality;
         $inv_itemData->seralized = $request->seralized;
@@ -102,7 +102,7 @@ class inv_ItemsController extends Controller
         $Edit_inv_itemData->uom_id = $request->uom;
         $Edit_inv_itemData->inv_location_id = $request->location;
         $Edit_inv_itemData->item_name = $request->item_name;
-        $Edit_inv_itemData->item_code = $request->item_code;
+        $Edit_inv_itemData->item_code = $request->batch_no;
         $Edit_inv_itemData->batch_no = $request->batch_no;
         $Edit_inv_itemData->quantity = $request->quantity;
         $Edit_inv_itemData->seralized = $request->seralized;
