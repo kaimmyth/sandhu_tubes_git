@@ -239,7 +239,8 @@
 					</ul>
 				</li>
 				<li><a href="{{URL::to('shipment/listing')}}" class="waves-effect"><i class="fa fa-truck" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SHIPMENT</span></a></li>
-				<li><a href="{{URL::to('reports')}}" class="waves-effect"><i class="fa fa-file" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">REPORTS</span></a></li>		
+				<li><a href="{{URL::to('reports')}}" class="waves-effect"><i class="fa fa-file" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">REPORTS</span></a></li>
+				<li><a href="{{url('summary-report')}}" class="waves-effect"><i class="fa fa-file" style="margin-left: 5px;" aria-hidden="true"></i>&nbsp;&nbsp;<span style="margin-left: 21px;">SUMMARY REPORTS</span></a></li>		
 
 				@if(Auth::user()->users_role==1)
 				<li class="has_sub">
@@ -254,9 +255,6 @@
 						<li><a href="{{url('invisible-loss-percentage')}}">INVISIBLE LOSS PERCENTAGE</li>
 						<li><a href="{{url('yield-percentage')}}">YIELD PERCENTAGE</a></li>
 						<li><a href="{{url('grade')}}">GRADE</a></li>
-						
-						<!-- <li><a href="{{ url('organization/listing')}}">ORGNIZATIONS</a></li> -->
-						<!--<li><a href="{{ url('subdepartment')}}">SUB-DEPARTMENTS</a></li>-->
 				</li>
 				@endif
 			</ul>

@@ -64,7 +64,7 @@
                     <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp; Manufacturing Details</h4>
                     <ol class="breadcrumb pull-right">
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">Manufacturing: </a></li>
+                        <li><a href="#">Manufacturing </a></li>
                         <li class="active">Manufacturing: listing</li>
                     </ol>
                 </div>

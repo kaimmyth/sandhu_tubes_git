@@ -112,7 +112,7 @@ class inv_ItemsController extends Controller
         else
         $Edit_inv_itemData->serial_no = $request->serial_no;
 
-        $Edit_inv_itemData->leasable = $request->leasable;
+        // $Edit_inv_itemData->leasable = $request->leasable;
         $Edit_inv_itemData->description = $request->description;
         $Edit_inv_itemData->modified_by = Auth::user()->id;
         $Edit_inv_itemData->modified_date = date('Y-m-d');

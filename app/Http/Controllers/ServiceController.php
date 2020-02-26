@@ -72,14 +72,14 @@ class ServiceController extends Controller
     $categorys = DB::table('category')->where('is_active',1)->get();
     $service_type = DB::table('service_type')->where('status',1)->get();
     $uom = Uom::where('status', 1)->get();
-   
+  //  return $inv_item[0]['id'];
 
     $data['content'] = 'service.add';
     return view('layouts.content', compact('data'))->with(['uom' => $uom,'invisible_loss_percentage'=>$invisible_loss_percentage,'metal_scrap'=>$metal_scrap,'finished_goods'=>$finished_goods,'inv_item' => $inv_item, 'items' => $items, 'categorys' => $categorys, 'service_type' => $service_type]);
   }
   public function create(Request $request)
   {
-    // return $request;
+    return $request;
     if ($request->service_details_id != "") {
       $service_details = service::find($request->service_details_id);
       $service_details->service_type_id = $request->service_type_id;
@@ -104,10 +104,7 @@ class ServiceController extends Controller
       $service_details->status = 1;
       // $service_details->qa = $request->qa_check;
       $service_details->update_at = date('Y-m-d');
-      $service_details->update_by = Auth::user()->id;
-     
-    
-     
+      $service_details->update_by = Auth::user()->id;    
       $service_details->save();
       Session::flash('success', 'Service Details Update Succesfully');
     } else {

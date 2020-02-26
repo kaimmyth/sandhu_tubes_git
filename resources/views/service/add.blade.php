@@ -136,11 +136,10 @@
                       <div class="col-md-3">
                         <div class="form-group"> 
                           <label for="field-1" class="control-label">Item Name<span style="color: red;">*<span></label>
-                          <!-- <input type="text" class="form-control" name="item_name_id" id="item_name_id" value="{{$service_details->inv_item_id ?? ''}}" onchange="get_item_details(this)" required> -->
                           <select class="form-control" name="item_name_id" id="item_name_id" required="" aria-required="true" onchange="get_item_details(this)" required>
                             <option value="">--Select--</option>
                             @foreach($inv_item as  $value)
-                            <option value="{{$value->id}}" @if(@$service_details->inv_item_id==$value->id) {{"selected"}} @endif>{{$value->item_name}}</option>
+                            <option value="{{$value->id}}" @if(@$service_details->inv_item_id==$value->id) {{"selected"}} @endif > {{$value->item_name}}</option>
                             @endforeach
                           </select>
                         </div>

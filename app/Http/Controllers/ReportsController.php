@@ -42,9 +42,7 @@ class ReportsController extends Controller
             $value->openingStock =$openingStock;
             $value->ClosingStock =$ClosingStock;
         }
-        // echo "<pre>";
-        // print_r($inv_item);
-        // exit;
+        
         $item_ids_array = array();
         $item_type_ids_array = array();
         foreach ($inv_item as $key => $value) {
@@ -178,4 +176,36 @@ class ReportsController extends Controller
         ,'start_date'=>$start_date,'end_date'=>$end_date,'process_id'=>$process_id,'category'=>$category,'item_type_data'=>$item_type_data]);
         
     }
+
+    public function show_summary_report(Request $request)
+    {
+        $fromDate = date("Y-m-d",strtotime($request->start_date));
+        $toDate = date("Y-m-d",strtotime($request->end_date));
+
+    //   $to_send_datas = [];
+    //   $get_item_type_datas = history_inv_item::select('item_type','inv_item_id')->groupBy('item_type','inv_item_id')->distinct()->get();
+    //   $sum_distinct_datas = history_inv_item::select('quantity')->whereIn('item_type',$get_item_type_datas)->get();
+    // //   $get_distinct_datas = history_inv_item::select('inv_item_id')->distinct()->get();
+
+    // $distinct_item_types = history_inv_item::whereRaw(
+    //                     "(created_date >= ? AND created_date <= ?)", 
+    //                     [$fromDate." 00:00:00", $toDate." 23:59:59"]
+    //                 )->distinct()
+    //                 ->pluck('item_type');
+
+
+    
+      
+      
+        $reservations = history_inv_item::whereRaw(
+          "(created_date >= ? AND created_date <= ?)", 
+          [$fromDate." 00:00:00", $toDate." 23:59:59"]
+        )->get();
+
+    
+
+        $data['content'] = 'reports.summary-reports';
+        return view('layouts.content', compact('data'))->with(['reservations'=>$reservations,'fromDate'=>$fromDate,'toDate'=>$toDate]);
+    }
+    
 }

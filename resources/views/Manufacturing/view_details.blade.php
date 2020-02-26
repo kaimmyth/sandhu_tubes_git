@@ -81,9 +81,11 @@
                         $input_item_name=DB::table('inv_item')->where('id',$manufacturing_details->input_items_id)->value('item_name');
                         $input_items_location=DB::table('inventory_location')->where('id',$manufacturing_details->input_items_location)->value('location_name');
                         $input_items_uom=DB::table('uom')->where('id',$manufacturing_details->input_items_uom)->value('uom_name');
+                        $input_item_type = DB::table('category')->where('id',$manufacturing_details->input_item_type)->value('category_name');
+
                         @endphp
                         <div class="col-md-3">
-                        <p>Item Type : <b style="color: #F0560A"></b></p>
+                        <p>Item Type : <b style="color: #F0560A">{{$input_item_type}}</b></p>
                       </div>
                       <div class="col-md-3">
                         <p>Item Name : <b style="color: #F0560A">{{$input_item_name}}</b></p>
@@ -114,10 +116,11 @@
                     $finished_goods_name=DB::table('inv_item')->where('id',$manufacturing_details->finished_goods_name)->value('item_name');
                     $finished_goods_location=DB::table('inventory_location')->where('id',$manufacturing_details->finished_goods_location)->value('location_name');
                     $finished_goods_uom=DB::table('uom')->where('id',$manufacturing_details->finished_goods_uom)->value('uom_name');
+                    $finished_goods_type=DB::table('finished_goods_type')->where('id',$manufacturing_details->finished_goods_dimension)->value('finished_goods_type_name');
                     @endphp
                     <div class="row">
                     <div class="col-md-3">
-                        <p>Item Type : <b style="color: #F0560A"></b></p>
+                        <p>Item Type : <b style="color: #F0560A">{{$finished_goods_type}}</b></p>
                       </div>
                       <div class="col-md-3">
                         <p>Item Name : <b style="color: #F0560A">{{$manufacturing_details->finished_goods_name}}</b></p>
@@ -147,10 +150,11 @@
                     $metal_scrap_name=DB::table('inv_item')->where('id',$manufacturing_details->metal_scrap_name)->value('item_name');
                     $metal_scrap_location=DB::table('inventory_location')->where('id',$manufacturing_details->metal_scrap_location)->value('location_name');
                     $metal_scrap_uom=DB::table('uom')->where('id',$manufacturing_details->metal_scrap_uom)->value('uom_name');
+                    $metal_scrap_type=DB::table('metal_scrap')->where('id',$manufacturing_details->metal_scrap_dimension)->value('metal_scrap_name');
                     @endphp
                     <div class="row">
                     <div class="col-md-3">
-                        <p>Item Type : <b style="color: #F0560A"></b></p>
+                        <p>Item Type : <b style="color: #F0560A">{{$metal_scrap_type}}</b></p>
                       </div>
                       <div class="col-md-3">
                         <p>Item Name : <b style="color: #F0560A">{{$manufacturing_details->metal_scrap_name}}</b></p>
@@ -180,10 +184,12 @@
                     $invisible_loss_name=DB::table('inv_item')->where('id',$manufacturing_details->invisible_loss_name)->value('item_name');
                     $metal_scrap_location=DB::table('inventory_location')->where('id',$manufacturing_details->metal_scrap_location)->value('location_name');
                     $invisible_loss_uom=DB::table('uom')->where('id',$manufacturing_details->invisible_loss_uom)->value('uom_name');
+                    $invisible_loss_type=DB::table('invisible_loss_percentage')->where('id',$manufacturing_details->invisible_loss_dimension)->value('invisible_loss_percentage');
+
                     @endphp
                     <div class="row">
                     <div class="col-md-3">
-                        <p>Item Type : <b style="color: #F0560A"></b></p>
+                        <p>Item Type : <b style="color: #F0560A">{{$invisible_loss_type}}</b></p>
                       </div>
                       <div class="col-md-3">
                         <p>Item Name : <b style="color: #F0560A">{{$manufacturing_details->invisible_loss_name}}</b></p>
