@@ -177,35 +177,75 @@ class ReportsController extends Controller
         
     }
 
+    // public function show_summary_report(Request $request)
+    // {
+    //     $fromDate = date("Y-m-d",strtotime($request->start_date));
+    //     $toDate = date("Y-m-d",strtotime($request->end_date));
+
+  
+
+    //     $to_send_send_datas = [];
+    //     $distinct_item_type_ids = history_inv_item::whereRaw(
+    //         "(created_date >= ? AND created_date <= ?)", 
+    //         [$fromDate." 00:00:00", $toDate." 23:59:59"]
+    //       )->distinct()->pluck('item_type');
+
+    //       foreach($distinct_item_type_ids as $distinct_item_type_id)
+    //       {
+    //             $tmp = [];
+    //             $get_item_type = DB::table('category')->where('id',$distinct_item_type_id)->first()->category_name;
+                
+    //             $tmp['item_type_name'] = $get_item_type;
+
+              
+
+                // $sum_datas = history_inv_item::leftJoin('inv_item','history_inv_item.inv_item_id','=','inv_item.id')
+                //     ->whereRaw(
+                //     "(its_history_inv_item.created_date >= ? AND its_history_inv_item.created_date <= ?)", 
+                //     [$fromDate." 00:00:00", $toDate." 23:59:59"])
+                //   ->where('history_inv_item.item_type',$distinct_item_type_id)
+                //   ->select(DB::raw('its_inv_item.item_name, SUM(its_history_inv_item.quantity) as quantity, SUM(its_history_inv_item.opening_quantity) as opening_quantity, SUM(its_history_inv_item.closing_quantity) as closing_quantity'))
+                //   ->groupBy('inv_item.item_name')
+                //   ->get()->toArray();
+
+    //               $tmp['datas'] = $sum_datas;
+
+
+    //               $to_send_send_datas[] = $tmp;
+                  
+                
+    //       }
+       
+    
+
+    //     $data['content'] = 'reports.summary-reports';
+    //     return view('layouts.content', compact('data'))->with(['to_send_send_datas'=>$to_send_send_datas,'fromDate'=>$fromDate,'toDate'=>$toDate]);
+    // }
+
     public function show_summary_report(Request $request)
     {
         $fromDate = date("Y-m-d",strtotime($request->start_date));
         $toDate = date("Y-m-d",strtotime($request->end_date));
 
-    //   $to_send_datas = [];
-    //   $get_item_type_datas = history_inv_item::select('item_type','inv_item_id')->groupBy('item_type','inv_item_id')->distinct()->get();
-    //   $sum_distinct_datas = history_inv_item::select('quantity')->whereIn('item_type',$get_item_type_datas)->get();
-    // //   $get_distinct_datas = history_inv_item::select('inv_item_id')->distinct()->get();
-
-    // $distinct_item_types = history_inv_item::whereRaw(
-    //                     "(created_date >= ? AND created_date <= ?)", 
-    //                     [$fromDate." 00:00:00", $toDate." 23:59:59"]
-    //                 )->distinct()
-    //                 ->pluck('item_type');
-
-
-    
-      
-      
         $reservations = history_inv_item::whereRaw(
-          "(created_date >= ? AND created_date <= ?)", 
-          [$fromDate." 00:00:00", $toDate." 23:59:59"]
-        )->get();
+                    "(created_date >= ? AND created_date <= ?)", 
+                    [$fromDate." 00:00:00", $toDate." 23:59:59"]
+                  )->get();
 
-    
+                  //loop for mother coil
+        $to_send_datas = manufacturing_details::where('input_item_type',8)
+                            ->select(DB::raw('
+                            SUM(input_items_quantity) as input_items_quantity,
+                            SUM(metal_scrap_quantity) as metal_scrap_quantity,
+                            SUM(invisible_loss_quantity) as invisible_loss_quantity,
+                            SUM(finished_goods_quantity) as finished_goods_quantity'))
+                            ->get();
+                      
+     
+        // return $to_send_datas;
 
         $data['content'] = 'reports.summary-reports';
-        return view('layouts.content', compact('data'))->with(['reservations'=>$reservations,'fromDate'=>$fromDate,'toDate'=>$toDate]);
+        return view('layouts.content', compact('data'))->with(['reservations'=>$reservations,'to_send_datas'=>$to_send_datas,'fromDate'=>$fromDate,'toDate'=>$toDate]);
     }
     
 }

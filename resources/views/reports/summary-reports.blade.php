@@ -68,7 +68,7 @@
                 </div>
             </div>
             <hr class="new2">
-            <form method="post" action="{{url('genrate/summary-report')}}" autocomplete="off" id="summary_report">
+            <form method="post" action="{{url('generate/summary-report')}}" autocomplete="off" id="summary_report">
                 @csrf()
                 <div class="row" style="width: 100%; margin-left: 0px;">
                    
@@ -90,9 +90,9 @@
                     </div>
                 </div>
             </form>
-            @if(count($reservations)!=0)
+          
             <hr class="new2 ">
-       
+                @if(count($to_send_datas) != 0 )
                 <div class="card card-border card-info">
                     <div class="card-header" style="background-image: linear-gradient(#e9f8ff, white);padding: 0px !important;">
                         <div class="card-body">
@@ -103,41 +103,32 @@
                                             <table class="table table-striped table-bordered dt-responsive" id="datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead style="background: #393e4a59;">
                                                     <tr><th colspan="5">Report Summary {{date('j M, Y ',strtotime(@$fromDate))}} To {{date('j M, Y ',strtotime(@$toDate))}}</th></tr>
+                                                    <tr><th colspan="4">Mother Coil</th></tr>
                                                     <tr>
-                                                        <th>Item Inventory</th>
-                                                        <th>Item Type(category)</th>
-                                                        <th>Quantity</th>
-                                                        <th>Opening Quantity</th>
-                                                        <th>Closing Quantity</th>
+                                                        <th>Mother Coil Issued for Production</th>
+                                                        <th>Scrap Generated</th>
+                                                        <th>Production/Invisible Loss</th>
+                                                        <th>Finished Slitted Coil</th>
                                                     </tr>
                                                 </thead>
-                                              
+                                              @foreach($to_send_datas as $to_send_data)
                                                 <tbody>
-                                                 @foreach($reservations as $value)
-                                                        <tr>
-                                                           <td>
-                                                           <?php
-                                                              $get_item_type = DB::table('inv_item')->where('id',$value->inv_item_id)->value('item_name');
-                                                               
-                                                              echo $get_item_type;
-                                                          
-                                                           ?>
-                                                            </td>
-                                                           <td>
-                                                           <?php 
-                                                    
-                                                                $get_item_category = DB::table('category')->where('id',$value->item_type)->value('category_name');
-                                                                echo $get_item_category;
-                                                            ?>    
-                                                          </td>
-                                                           <td style="text-align:right;"><?php  $get_uom_name = DB::table('uom')->where('id',$value->uom_id)->value('uom_name');?>{{$value->quantity}}<?php echo $get_uom_name?></td>
-                                                           <td style="text-align:right;">{{$value->opening_quantity}}<?php echo $get_uom_name?></td>
-                                                           <td style="text-align:right;">{{$value->closing_quantity}}<?php echo $get_uom_name?></td>
-                                                         
-                                                        </tr>
-                                                @endforeach
+                                                    <td>{{$to_send_data['input_items_quantity']}}</td>
+                                                    <td>{{$to_send_data['metal_scrap_quantity']}}</td>
+                                                    <td>{{$to_send_data['invisible_loss_quantity']}}</td>
+                                                    <td>{{$to_send_data['finished_goods_quantity']}}</td>
+
+                                                    <!-- <tr>Slitted Coil</tr>
+                                                    <tr>
+                                                        <th>Mother Coil Issued for Production</th>
+                                                        <th>Scrap Generated</th>
+                                                        <th>Production/Invisible Loss</th>
+                                                        <th>Finished Slitted Coil</th>
+                                                    </tr>
+                                                         -->
                                                    
                                                 </tbody>
+                                                @endforeach
                                             </table>
                                         </div>
                                     </div>
@@ -146,11 +137,7 @@
                         </div>
                     </div>
                 </div>
-                @else
-                <div>
-                    <span style="display:none;">No data Found</span>
-                </div>
-                @endif
+               @endif
 
         </div>
     </div>

@@ -117,7 +117,7 @@
                           <select class="form-control" name="item_type_id" id="item_type_id" required="" aria-required="true" onchange="get_item_name()">
                             <option value="">--Select--</option>
                             @foreach($categorys as $key => $value)
-                            <option value="{{$value->id}}" @if(@$service_details->item_type_id==$value->id) {{"selected"}} @endif>{{$value->category_name}}</option>
+                            <option value="{{$value->id}}" @if(@$service_details->item_type_id==$value->id) {{"selected"}} @endif @if(strtolower($value->category_name)==strtolower("Mother Coil")) @endif>{{$value->category_name}}</option>
                             @endforeach
                           </select>
                         </div>

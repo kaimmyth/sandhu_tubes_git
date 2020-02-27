@@ -69,7 +69,7 @@ class ServiceController extends Controller
     $finished_goods = FinishedGoodsType::where('status',1)->get();
     $metal_scrap = MetalScrap::where('status',1)->get();
     $invisible_loss_percentage = InvisibleLossPercentage::where('status',1)->get();
-    $categorys = DB::table('category')->where('is_active',1)->get();
+    $categorys = DB::table('category')->where('is_active',1)->where('process',1)->get();
     $service_type = DB::table('service_type')->where('status',1)->get();
     $uom = Uom::where('status', 1)->get();
   //  return $inv_item[0]['id'];
@@ -79,7 +79,7 @@ class ServiceController extends Controller
   }
   public function create(Request $request)
   {
-    return $request;
+    // return $request;
     if ($request->service_details_id != "") {
       $service_details = service::find($request->service_details_id);
       $service_details->service_type_id = $request->service_type_id;

@@ -434,4 +434,4 @@ Route::post('genrate/report','ReportsController@genrate_report');
 
 //Summary Report
 Route::get('summary-report','ReportsController@show_summary_report');
-Route::post('genrate/summary-report','ReportsController@show_summary_report');
+Route::post('generate/summary-report','ReportsController@show_summary_report');
