@@ -70,9 +70,9 @@ class ManufacturingController extends Controller
 
     $InventoryLocation = InventoryLocation::where('status', 1)->get();
     $inv_item = inv_item::all();
-    foreach ($inv_item as $key => $value) {
-      $value->item_name =  DB::table('item')->where('id',$value->item_name)->value('items_name');
-    }
+    // foreach ($inv_item as $key => $value) {
+    //   $value->item_name =  DB::table('item')->where('id',$value->item_name)->value('items_name');
+    // }
     $uom = Uom::where('status', 1)->get();
     $inputitem_type = DB::table('category')->where('is_active',1)->where('process',1)->select('id','category_name')->orderBy('id')->get();
     $outputtitem_type = DB::table('category')->where('is_active',1)->where('process',0)->select('id','category_name')->orderBy('id')->get();
@@ -86,7 +86,7 @@ class ManufacturingController extends Controller
   }
   public function create(Request $request)
   {
-   
+  //  return $request;
     if ($request->manufacturing_details_id != "") {
       $manufacturing_details = manufacturing_details::find($request->manufacturing_details_id);
       $manufacturing_details->input_items_id = $request->input_items_id;
@@ -161,16 +161,22 @@ class ManufacturingController extends Controller
     $manufacturing_details = manufacturing_details::where('id', $id)->first();
 
     $InventoryLocation = InventoryLocation::where('status', 1)->get();
-    $inv_item = inv_item::all();
+    $inv_item = DB::table('inv_item')->get();
+   
+  
     foreach ($inv_item as $key => $value) {
-      $value->item_name =  DB::table('item')->where('id',$value->item_name)->value('items_name');
+      $value->item_name =  DB::table('inv_item')->where('id',$value->item_name)->value('item_name');
     }
+    
     $uom = Uom::where('status', 1)->get();
     $inputitem_type = DB::table('category')->where('is_active',1)->where('process',1)->select('id','category_name')->orderBy('id')->get();
     $outputtitem_type = DB::table('category')->where('is_active',1)->where('process',0)->select('id','category_name')->orderBy('id')->get();
     $finished_goods_type = FinishedGoodsType::where('status',1)->get();
     $metal_scrap_type = MetalScrap::where('status',1)->get();
     $invisible_loss_percentage = InvisibleLossPercentage::where('status',1)->get();
+
+
+
     $data['content'] = 'Manufacturing.add';
     return view('layouts.content', compact('data'))->with(['finished_goods_type'=>$finished_goods_type,'metal_scrap_type'=>$metal_scrap_type,'invisible_loss_percentage'=>$invisible_loss_percentage,'manufacturing_details' => $manufacturing_details, 'inv_item' => $inv_item, 'InventoryLocation' => $InventoryLocation,'uom'=>$uom, 'outputtitem_type' => $outputtitem_type, 'inputitem_type' => $inputitem_type]);
   }
@@ -212,7 +218,7 @@ class ManufacturingController extends Controller
 
   public function get_item_name(Request $request)
   {
-    $datas = inv_item::where('item_category_id', $request->input_items_id)->select('item_name')->get();
+    $datas = inv_item::where('item_category_id', $request->input_items_id)->get();
   
     return $datas;
   }

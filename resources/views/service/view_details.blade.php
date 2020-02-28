@@ -78,9 +78,10 @@
                       <div class="col-md-3">
                         @php
                         $input_items_uom=DB::table('uom')->where('id',$service_details->input_uom_id)->value('uom_name');
-                        $get_item_name = DB::table('inv_item')->where('id','$service_details->inv_item_id')->value('item_name');
+                        $get_item_name = DB::table('inv_item')->where('id',$service_details['inv_item_id'])->value('item_name');
+
                         @endphp
-                        <p>Item Name : <b style="color: #F0560A">{{$get_item_name}}</b></p>
+                        <p>Item Name : <b style="color: #F0560A">{{@$get_item_name->item_name}}</b></p>
                       </div>
                       <div class="col-md-3">
                         <p>Item Quanitity : <b style="color: #F0560A">{{$service_details->input_quantity}} {{$input_items_uom}}</b></p>

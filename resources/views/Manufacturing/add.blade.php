@@ -85,7 +85,7 @@
       <!-- Page-Title -->
       <div class="row" id="dashboard-row">
         <div class="col-sm-12">
-          <h4 class="pull-left page-title" style="color: #000;font-weight:200;">&nbsp;<i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Manufacturing Actions&nbsp;&nbsp;/ &nbsp; <a href="{{URL::to('Manufacturing/list')}}">Back</a></h4>
+          <h4 class="pull-left page-title" style="color: #000;font-weight:200;">&nbsp;<i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Manufacturing &nbsp;&nbsp;/ &nbsp; <a href="{{URL::to('Manufacturing/list')}}">Back</a></h4>
           <ol class="breadcrumb pull-right">
             <li><a href="#">Home</a></li>
             <li><a href="{{url('Manufacturing/list')}}">Manufacturing</a></li>
@@ -127,7 +127,7 @@
                     <div class="row">
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="field-3" class="control-label">Item Type*</label>
+                          <label for="field-3" class="control-label">Item Type<span style="color:red;">*</span></label>
                           <label for="field-1" class="control-label"></label>
                           <select class="form-control" name="input_itemstype_ids" id="input_itemstype_ids"  required="" aria-required="true" onchange="get_item_name();">
                             <option value="">--Select--</option>
@@ -141,12 +141,11 @@
                       <div class="col-md-3">
 
                         <div class="form-group">
-                          <label for="field-1" class="control-label">Item Name*</label>
+                          <label for="field-1" class="control-label">Item Name<span style="color:red;">*</span></label>
                           <select class="form-control" name="input_items_id" id="input_items_id"  required=""  aria-required="true">
                             <option value="">--Select--</option>
-                          
                             @foreach($inv_item as $key=> $value)
-                            <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_id==$value['id']) {{"selected"}} @endif>{{$value['item_name']}}</option>
+                            <option value="{{$value['id']}}" @if(@$manufacturing_details->input_items_id==$value['id']) {{"selected"}} @endif>{{$value->item_name}}</option>
                             @endforeach
                          
                           </select>
@@ -166,14 +165,14 @@
                         </div>
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="field-3" class="control-label">Quantity*</label>
+                          <label for="field-3" class="control-label">Quantity<span style="color:red;">*</span></label>
                           <input type="text" class="form-control" name="input_items_quantity" onblur="clc_per();" id="input_items_quantity" min="1" value="@if(@$manufacturing_details->input_items_quantity) {{$manufacturing_details->input_items_quantity}} @endif" placeholder="" required="" aria-required="true">
                         </div>
                       </div>
 
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="field-3" class="control-label">UoM*</label>
+                          <label for="field-3" class="control-label">UoM<span style="color:red;">*</span></label>
                           <label for="field-1" class="control-label"></label>
                           <select class="form-control" name="input_items_uom"  required="" aria-required="true">
                             <option value="">--Select--</option>
@@ -237,7 +236,7 @@
                   <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Finished Goods Type*</label>
+                        <label for="field-3" class="control-label">Finished Goods Type<span style="color:red;">*</span></label>
                         <label for="field-1" class="control-label"></label>
                         <select class="form-control" name="finished_goods_type" id="finished_goods_type"  required="" aria-required="true">
                           <option value="">--Select--</option>
@@ -251,7 +250,7 @@
                     <div class="col-md-3">
 
                       <div class="form-group">
-                        <label for="field-1" class="control-label">Finished Goods Name*</label>
+                        <label for="field-1" class="control-label">Finished Goods Name<span style="color:red;">*</span></label>
                         <input type="text" class="form-control" name="finished_goods_name" id="finished_goods_name" required="" aria-required="true" value="@if(@$manufacturing_details->finished_goods_name) {{$manufacturing_details->finished_goods_name}} @endif">
                         
                       </div>
@@ -259,7 +258,7 @@
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Quantity*</label>
+                        <label for="field-3" class="control-label">Quantity<span style="color:red;">*</span></label>
                         <input type="text" class="form-control" name="finished_goods_quantity"  onblur="clc_scrap();" id="finished_goods_quantity" min="1" value="@if(@$manufacturing_details->finished_goods_quantity) {{$manufacturing_details->finished_goods_quantity}} @endif" placeholder="" required="" aria-required="true">
                       </div>
                       <span id="finished_goods_quantity_error" style="color: #F83008;display:none">Finished Goods Quantity</span>
@@ -267,7 +266,7 @@
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">UoM*</label>
+                        <label for="field-3" class="control-label">UoM<span style="color:red;">*</span></label>
                         <label for="field-1" class="control-label"></label>
                         <select class="form-control" name="finished_goods_uom" id="finished_goods_uom" required="" aria-required="true">
                           <option value="">--Select--</option>
@@ -295,7 +294,7 @@
                   <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Metal Scrap*</label>
+                        <label for="field-3" class="control-label">Metal Scrap<span style="color:red;">*</span></label>
                         <label for="field-1" class="control-label"></label>
                         <select class="form-control" name="scrab_itemstype_ids" id="scrab_itemstype_ids"  required="" aria-required="true">
                           <option value="">--Select--</option>
@@ -307,7 +306,7 @@
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-1" class="control-label">Metal Scrap Name*</label>
+                        <label for="field-1" class="control-label">Metal Scrap Name<span style="color:red;">*</span></label>
                         <input type="text" class="form-control" name="metal_scrap_name" id="metal_scrap_name" required="" aria-required="true" value="@if(@$manufacturing_details->metal_scrap_name) {{$manufacturing_details->metal_scrap_name}} @endif">
                          
                         <!-- <input type="text" class="form-control" name="metal_scrap_name" id="metal_scrap_name"  value="@if(@$manufacturing_details->metal_scrap_name) {{$manufacturing_details->metal_scrap_name}} @endif" placeholder="Metal Scrap" required="" aria-required="true"> -->
@@ -316,14 +315,14 @@
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Quantity*</label>
+                        <label for="field-3" class="control-label">Quantity<span style="color:red;">*</span></label>
                         <input type="text" class="form-control" name="metal_scrap_quantity"  id="metal_scrap_quantity" min="1" value="@if(@$manufacturing_details->metal_scrap_quantity) {{$manufacturing_details->metal_scrap_quantity}} @endif" placeholder="" required="" aria-required="true">
                       </div>
                     </div>
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">UoM*</label>
+                        <label for="field-3" class="control-label">UoM<span style="color:red;">*</span></label>
                         <label for="field-1" class="control-label"></label>
                         <select class="form-control" name="metal_scrap_uom" id="metal_scrap_uom" required="" aria-required="true">
                           <option value="">--Select--</option>
@@ -354,7 +353,7 @@
                   <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Invisible Loss Percentage*</label>
+                        <label for="field-3" class="control-label">Invisible Loss Percentage<span style="color:red;">*</span></label>
                         <label for="field-1" class="control-label"></label>
                         <select class="form-control" name="loss_itemstype_ids" id="loss_itemstype_ids"  required="" aria-required="true" >
                           <option value="">--Select--</option>
@@ -366,7 +365,7 @@
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-1" class="control-label">Invisible Loss Name*</label>
+                        <label for="field-1" class="control-label">Invisible Loss Name<span style="color:red;">*</span></label>
                         <input type="text" class="form-control" name="invisible_loss_name" id="invisible_loss_name" required="" aria-required="true" value="@if(@$manufacturing_details->invisible_loss_name) {{$manufacturing_details->invisible_loss_name}} @endif">
                          
                         <!-- <input type="text" class="form-control" name="invisible_loss_name" id="invisible_loss_name"  value="@if(@$manufacturing_details->invisible_loss_name) {{$manufacturing_details->invisible_loss_name}} @endif" placeholder="" required="" aria-required="true"> -->
@@ -375,14 +374,14 @@
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">Quantity*</label>
+                        <label for="field-3" class="control-label">Quantity<span style="color:red;">*</span></label>
                         <input type="text" class="form-control" name="invisible_loss_quantity" id="invisible_loss_quantity" min="0" value="@if(@$manufacturing_details->invisible_loss_quantity) {{$manufacturing_details->invisible_loss_quantity}} @endif" placeholder="" required="" aria-required="true">
                       </div>
                     </div>
 
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="field-3" class="control-label">UoM*</label>
+                        <label for="field-3" class="control-label">UoM<span style="color:red;">*</span></label>
                         <select class="form-control" name="invisible_loss_uom" id="invisible_loss_uom" required="" aria-required="true">
                           <option value="">--Select--</option>
                           @foreach($uom as $key=> $value)
@@ -512,7 +511,7 @@
           url: "{{url('Manufacturing/get_item_details/')}}" + '/' + item_id,
           type: "GET",
           success: function(data) {
-          console.log(data);
+          // console.log(data);
           if(data.serial_no!=null)
           {
             $("#hidden_section_serial").css('display','block');

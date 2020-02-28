@@ -9,6 +9,8 @@ use App\inv_item;
 use App\history_inv_item;
 use App\shipment;
 use App\manufacturing_details;
+use App\category;
+use App\service;
 
 class ReportsController extends Controller
 {
@@ -222,52 +224,61 @@ class ReportsController extends Controller
     //     return view('layouts.content', compact('data'))->with(['to_send_send_datas'=>$to_send_send_datas,'fromDate'=>$fromDate,'toDate'=>$toDate]);
     // }
 
+    
     public function show_summary_report(Request $request)
     {
+      
         $fromDate = date("Y-m-d",strtotime($request->start_date));
         $toDate = date("Y-m-d",strtotime($request->end_date));
 
-        
-        //loop for mother coil from manufacturing table
       
-        $to_send_datas = manufacturing_details::
-                        leftJoin('service','manufacturing_details.input_items_id','=','service.item_type_id')
-                            ->whereRaw(
-                                "(its_service.created_at >= ? AND its_service.created_at <= ?)", 
-                                [$fromDate." 00:00:00", $toDate." 23:59:59"])
-                            ->whereRaw(
-                                "(its_manufacturing_details.created_at >= ? AND its_manufacturing_details.created_at <= ?)", 
-                                [$fromDate." 00:00:00", $toDate." 23:59:59"])
-                            ->where('manufacturing_details.input_item_type',8)
-                            ->where('service.item_type_id',8)
-                            ->select(DB::raw('
-                            (SUM(its_manufacturing_details.input_items_quantity)+SUM(its_service.input_quantity)) as input_items_quantity,
-                            (SUM(its_manufacturing_details.metal_scrap_quantity)+SUM(its_service.scrap_quantity)) as metal_scrap_quantity,
-                            (SUM(its_manufacturing_details.invisible_loss_quantity)+SUM(its_service.invisible_quantity)) as invisible_loss_quantity,
-                            (SUM(its_manufacturing_details.finished_goods_quantity)+SUM(its_service.finished_good_quantity)) as finished_goods_quantity'))
-                           ->get();
-  
-    //loop for slitted coil from manufacturing table  
-    $slitted_coil_datas = manufacturing_details::
-                        leftJoin('service','manufacturing_details.input_items_id','=','service.item_type_id')
-                            ->whereRaw(
-                                "(its_service.created_at >= ? AND its_service.created_at <= ?)", 
-                                [$fromDate." 00:00:00", $toDate." 23:59:59"])
-                            ->whereRaw(
-                                "(its_manufacturing_details.created_at >= ? AND its_manufacturing_details.created_at <= ?)", 
-                                [$fromDate." 00:00:00", $toDate." 23:59:59"])
-                            ->where('manufacturing_details.input_item_type',11)
-                            ->where('service.item_type_id',11)
-                            ->select(DB::raw('
-                            (SUM(its_manufacturing_details.input_items_quantity)+SUM(its_service.input_quantity)) as count_input_items_quantity,
-                            (SUM(its_manufacturing_details.metal_scrap_quantity)+SUM(its_service.scrap_quantity)) as metal_scrap_quantity,
-                            (SUM(its_manufacturing_details.invisible_loss_quantity)+SUM(its_service.invisible_quantity)) as invisible_loss_quantity,
-                            (SUM(its_manufacturing_details.finished_goods_quantity)+SUM(its_service.finished_good_quantity)) as finished_goods_quantity'))
-                            ->get();
-    
+        $item_cat=category::where("process",1)->get();
+        $manfacturing_array=array();
+        $service_array=array();
 
+        foreach($item_cat as $value_cat)
+        {
+          
+            $manfacturing_array[] = manufacturing_details::where('input_item_type',$value_cat['id'])->whereBetween('created_at',[$fromDate." 00:00:00",$toDate." 23:59:59"])->select(DB::raw('SUM(input_items_quantity) as input_items_quantity,SUM(metal_scrap_quantity) as metal_scrap_quantity,SUM(invisible_loss_quantity) as invisible_loss_quantity,SUM(finished_goods_quantity) as finished_goods_quantity'))->get()->toArray();
+            $service_array[] = service::where('item_type_id',$value_cat['id'])->whereBetween('created_at',[$fromDate." 00:00:00",$toDate." 23:59:59"])->select(DB::raw('SUM(input_quantity) as input_quantity,SUM(scrap_quantity) as scrap_quantity,SUM(invisible_quantity) as invisible_quantity,SUM(finished_good_quantity) as finished_good_quantity'))->get()->toArray();
+        }
+        // return $manfacturing_array;
+    
+        $to_send_datas = manufacturing_details::leftJoin('service','manufacturing_details.input_item_type','=','service.item_type_id')
+       
+                        // ->whereRaw(
+                        //     "(its_service.created_at >= ? AND its_service.created_at <= ?)", 
+                        //     [$fromDate." 00:00:00", $toDate." 23:59:59"])
+                        // ->whereRaw(
+                        //     "(its_manufacturing_details.created_at >= ? AND its_manufacturing_details.created_at <= ?)", 
+                        //     [$fromDate." 00:00:00", $toDate." 23:59:59"])
+                        ->whereBetween('manufacturing_details.created_at',[$fromDate." 00:00:00",$toDate." 23:59:59"])
+                        // ->where('manufacturing_details.input_item_type',8)
+                        // ->where('service.item_type_id',8)
+                        ->select(DB::raw('
+                        (SUM(its_manufacturing_details.input_items_quantity)+SUM(its_service.input_quantity)) as input_items_quantity,
+                        (SUM(its_manufacturing_details.metal_scrap_quantity)+SUM(its_service.scrap_quantity)) as metal_scrap_quantity,
+                        (SUM(its_manufacturing_details.invisible_loss_quantity)+SUM(its_service.invisible_quantity)) as invisible_loss_quantity,
+                        (SUM(its_manufacturing_details.finished_goods_quantity)+SUM(its_service.finished_good_quantity)) as finished_goods_quantity'))
+                        ->get();
+                    
+    
+           
+        //getting summary report for mother coil from service table
+        $mother_coils = service::whereRaw(
+                        "(created_at >= ? AND created_at <= ?)", 
+                        [$fromDate." 00:00:00", $toDate." 23:59:59"])
+                    ->where('item_type_id',8)
+                    ->select(DB::raw('
+                    SUM(input_quantity) as count_input_items_quantity,
+                    SUM(scrap_quantity) as metal_scrap_quantity,
+                    SUM(invisible_quantity) as invisible_quantity,
+                    SUM(finished_good_quantity) as finished_goods_quantity'))
+                    ->get();
+          
+                
         $data['content'] = 'reports.summary-reports';
-        return view('layouts.content', compact('data'))->with(['to_send_datas'=>$to_send_datas,'slitted_coil_datas'=>$slitted_coil_datas,'fromDate'=>$fromDate,'toDate'=>$toDate]);
+        return view('layouts.content', compact('data'))->with(['to_send_datas'=>$to_send_datas,'mother_coils'=>$mother_coils,'fromDate'=>$fromDate,'toDate'=>$toDate]);
     }
     
 }

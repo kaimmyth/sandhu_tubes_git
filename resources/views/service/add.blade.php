@@ -85,11 +85,12 @@
       <!-- Page-Title -->
       <div class="row" id="dashboard-row">
         <div class="col-sm-12">
-          <h4 class="pull-left page-title" style="color: #000;font-weight:200;">&nbsp;<i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Service Actions&nbsp;&nbsp;/ &nbsp; <a href="{{URL::to('serviceManu/list')}}">Back</a></h4>
+          <h4 class="pull-left page-title" style="color: #000;font-weight:200;">&nbsp;<i class="ion-arrow-right-b"></i> &nbsp;&nbsp;Service &nbsp;&nbsp;/ &nbsp; <a href="{{URL::to('serviceManu/list')}}">Back</a></h4>
           <ol class="breadcrumb pull-right">
             <li><a href="{{url('dashboard')}}">Home</a></li>
             <li><a href="{{url('serviceManu/list')}}">Service</a></li>
-            <!-- <li class="active">Process</li> -->
+            <li class="active">Process </li>
+           
           </ol>
         </div>
       </div>

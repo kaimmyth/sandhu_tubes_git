@@ -171,6 +171,7 @@ class ServiceController extends Controller
   public function view_details($id="")
   {
     $service_details = service::where('id', $id)->first();
+    // return $service_details;
    
     $data['content'] = 'service.view_details';
     return view('layouts.content', compact('data'))->with(['service_details' => $service_details]);

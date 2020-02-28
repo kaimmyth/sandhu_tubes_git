@@ -65,7 +65,7 @@
                     <ol class="breadcrumb pull-right">
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Manufacturing </a></li>
-                        <li class="active">Manufacturing: listing</li>
+                        <li class="active">Manufacturing Listing</li>
                     </ol>
                 </div>
             </div>
@@ -90,9 +90,9 @@
                                         <table id="datatable"  class=" table table-striped table-bordered dt-responsive" style="border-collapse: collapse; width:100%; border-spacing: 0;">
                                             <thead style="background: #b6e9ff;">
                                                 <tr>
+                                                    <th>Item Type</th>
                                                     <th>Item Name </th>
                                                     <th>Quantity</th>
-                                                    <!-- <th>Inventory Location</th>                                      -->
                                                     <th>Status</th>
                                                     <th class="action">Action</th>
                                                 </tr>
@@ -103,12 +103,14 @@
                                                 @foreach($toReturn['details'] as $key_del=>$value_del)
                                                     @php 
                                                         $item=DB::table('inv_item')->where('id',$value_del['input_items_id'])->first();
-                                                        $Location=DB::table('inventory_location')->where('id',$value_del['input_items_location'])->first();
-                                                        $uom=DB::table('uom')->where('id',$value_del['input_items_uom'])->first();
+                                                        $Location = DB::table('inventory_location')->where('id',$value_del['input_items_location'])->first();
+                                                        $uom = DB::table('uom')->where('id',$value_del['input_items_uom'])->first();
+                                                        $get_category = DB::table('category')->where('id',$value_del['input_item_type'])->first();
                                                     @endphp
+                                                <td>{{@$get_category->category_name}}</td>
                                                 <td> {{@$item->item_name}}</td>
                                                 <td class="rig">{{@$value_del['input_items_quantity']}} {{@$uom->uom_name}}</td>
-                                                <!-- <td>{{@$Location->location_name}}</td> -->
+                                                
                                                 
                                                 @if(@$value_del['status']==1)
                                                     <td>

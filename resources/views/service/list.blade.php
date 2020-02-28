@@ -74,8 +74,8 @@
                     <h4 class="pull-left page-title" style="color: #000;font-weight:200;"><i class="ion-arrow-right-b"></i> &nbsp;&nbsp; Service Details</h4>
                     <ol class="breadcrumb pull-right">
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">Service: </a></li>
-                        <li class="active">Service: Listing</li>
+                        <li><a href="#">Service </a></li>
+                        <li class="active">Service Listing</li>
                     </ol>
                 </div>
             </div>
@@ -116,11 +116,13 @@
                                                     <tr>
                                                         @php 
                                                             $item=DB::table('item')->where('id',$value_del['inv_item_id'])->first();
-                                                            $get_item_name = DB::table('inv_item')->where('id',$value_del['item_type_id'])->first();
+                                                            $get_item_name = DB::table('inv_item')->where('id',$value_del['inv_item_id'])->first();
                                                             $uom=DB::table('uom')->where('id',$value_del['input_uom_id'])->first();
                                                             $service_type=DB::table('service_type')->where('id',$value_del['service_type_id'])->first();
                                                             $item_type=DB::table('category')->where('id',$value_del['item_type_id'])->first();
                                                         @endphp
+
+                                                
                                                         <td class="rig">{{$key_del + 1}}</td>
                                                         <td>{{@$item_type->category_name}}</td>
                                                         <td>{{@$service_type->service_name}}</td>
