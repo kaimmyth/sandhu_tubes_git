@@ -79,7 +79,6 @@ class ServiceController extends Controller
   }
   public function create(Request $request)
   {
-    // return $request;
     if ($request->service_details_id != "") {
       $service_details = service::find($request->service_details_id);
       $service_details->service_type_id = $request->service_type_id;
@@ -185,7 +184,7 @@ class ServiceController extends Controller
 
   public function get_item_name(Request $request)
   {
-    $datas = inv_item::where('item_category_id', $request->item_name_id)->select('item_name')->get();
+    $datas = inv_item::where('item_category_id', $request->item_name_id)->get();
   
     return $datas;
   }

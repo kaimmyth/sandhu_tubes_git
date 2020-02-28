@@ -227,28 +227,47 @@ class ReportsController extends Controller
         $fromDate = date("Y-m-d",strtotime($request->start_date));
         $toDate = date("Y-m-d",strtotime($request->end_date));
 
-        $reservations = history_inv_item::whereRaw(
-                    "(created_date >= ? AND created_date <= ?)", 
-                    [$fromDate." 00:00:00", $toDate." 23:59:59"]
-                  )->get();
-
-        //loop for mother coil
-        $to_send_datas = manufacturing_details::whereRaw(
-                                "(created_at >= ? AND created_at <= ?)", 
+        
+        //loop for mother coil from manufacturing table
+      
+        $to_send_datas = manufacturing_details::
+                        leftJoin('service','manufacturing_details.input_items_id','=','service.item_type_id')
+                            ->whereRaw(
+                                "(its_service.created_at >= ? AND its_service.created_at <= ?)", 
                                 [$fromDate." 00:00:00", $toDate." 23:59:59"])
-                            ->where('input_item_type',8)
+                            ->whereRaw(
+                                "(its_manufacturing_details.created_at >= ? AND its_manufacturing_details.created_at <= ?)", 
+                                [$fromDate." 00:00:00", $toDate." 23:59:59"])
+                            ->where('manufacturing_details.input_item_type',8)
+                            ->where('service.item_type_id',8)
                             ->select(DB::raw('
-                            SUM(input_items_quantity) as input_items_quantity,
-                            SUM(metal_scrap_quantity) as metal_scrap_quantity,
-                            SUM(invisible_loss_quantity) as invisible_loss_quantity,
-                            SUM(finished_goods_quantity) as finished_goods_quantity'))
+                            (SUM(its_manufacturing_details.input_items_quantity)+SUM(its_service.input_quantity)) as input_items_quantity,
+                            (SUM(its_manufacturing_details.metal_scrap_quantity)+SUM(its_service.scrap_quantity)) as metal_scrap_quantity,
+                            (SUM(its_manufacturing_details.invisible_loss_quantity)+SUM(its_service.invisible_quantity)) as invisible_loss_quantity,
+                            (SUM(its_manufacturing_details.finished_goods_quantity)+SUM(its_service.finished_good_quantity)) as finished_goods_quantity'))
+                           ->get();
+  
+    //loop for slitted coil from manufacturing table  
+    $slitted_coil_datas = manufacturing_details::
+                        leftJoin('service','manufacturing_details.input_items_id','=','service.item_type_id')
+                            ->whereRaw(
+                                "(its_service.created_at >= ? AND its_service.created_at <= ?)", 
+                                [$fromDate." 00:00:00", $toDate." 23:59:59"])
+                            ->whereRaw(
+                                "(its_manufacturing_details.created_at >= ? AND its_manufacturing_details.created_at <= ?)", 
+                                [$fromDate." 00:00:00", $toDate." 23:59:59"])
+                            ->where('manufacturing_details.input_item_type',11)
+                            ->where('service.item_type_id',11)
+                            ->select(DB::raw('
+                            (SUM(its_manufacturing_details.input_items_quantity)+SUM(its_service.input_quantity)) as count_input_items_quantity,
+                            (SUM(its_manufacturing_details.metal_scrap_quantity)+SUM(its_service.scrap_quantity)) as metal_scrap_quantity,
+                            (SUM(its_manufacturing_details.invisible_loss_quantity)+SUM(its_service.invisible_quantity)) as invisible_loss_quantity,
+                            (SUM(its_manufacturing_details.finished_goods_quantity)+SUM(its_service.finished_good_quantity)) as finished_goods_quantity'))
                             ->get();
-                      
-     
-        // return $to_send_datas;
+    
 
         $data['content'] = 'reports.summary-reports';
-        return view('layouts.content', compact('data'))->with(['reservations'=>$reservations,'to_send_datas'=>$to_send_datas,'fromDate'=>$fromDate,'toDate'=>$toDate]);
+        return view('layouts.content', compact('data'))->with(['to_send_datas'=>$to_send_datas,'slitted_coil_datas'=>$slitted_coil_datas,'fromDate'=>$fromDate,'toDate'=>$toDate]);
     }
     
 }

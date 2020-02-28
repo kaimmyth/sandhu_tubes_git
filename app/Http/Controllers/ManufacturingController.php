@@ -155,7 +155,6 @@ class ManufacturingController extends Controller
     
 
     return redirect('Manufacturing/list');
-    return $manufacturing_details;
   }
   public function edit($id = "")
   {
