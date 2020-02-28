@@ -232,8 +232,11 @@ class ReportsController extends Controller
                     [$fromDate." 00:00:00", $toDate." 23:59:59"]
                   )->get();
 
-                  //loop for mother coil
-        $to_send_datas = manufacturing_details::where('input_item_type',8)
+        //loop for mother coil
+        $to_send_datas = manufacturing_details::whereRaw(
+                                "(created_at >= ? AND created_at <= ?)", 
+                                [$fromDate." 00:00:00", $toDate." 23:59:59"])
+                            ->where('input_item_type',8)
                             ->select(DB::raw('
                             SUM(input_items_quantity) as input_items_quantity,
                             SUM(metal_scrap_quantity) as metal_scrap_quantity,

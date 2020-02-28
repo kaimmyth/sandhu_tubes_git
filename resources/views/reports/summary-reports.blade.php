@@ -93,7 +93,7 @@
           
             <hr class="new2 ">
                 @if(count($to_send_datas) != 0 )
-                <div class="card card-border card-info">
+                <div class="card card-border card-info" id="manufacturing-mother-coil">
                     <div class="card-header" style="background-image: linear-gradient(#e9f8ff, white);padding: 0px !important;">
                         <div class="card-body">
                             <div class="row"><br><br><br>
@@ -143,26 +143,7 @@
     </div>
 </div>
 
-<script>
-    function editRecords(id) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
 
-        $.ajax({
-            url: "{{url('org/org_contact/edit/')}}" + '/' + id,
-            method: "POST",
-            contentType: 'application/json',
-            success: function (data) {
-                // console.log(data);
-
-            }
-        });
-    }
-
-</script>
 <script>
     $(function () {
         $(".datepicker").datepicker();
@@ -170,34 +151,3 @@
 </script>
 <div id="to-print-area" style="position: fixed;top:0;left:0;width:100vw; height: 100vh; z-index: +999;background: white;">
 </div>
-<script>
-    function get_cat_details(e) {
-        var process_id = $(e).val();
-        // alert(process_id);
-        $.ajax({
-            url: "{{url('report/get_cat')}}" + '/' + process_id,
-            method: "get",
-            contentType: 'application/json',
-            success: function (data) {
-                $("#category").html("");
-                var to_append = "";
-                if (data != null) {
-                    to_append +=`<option value="">---Select---</option>`;
-                    for (i = 0; i < data.length; i++) {
-                        to_append += `<option value="` + data[i].id + `">` + data[i].category_name + `</option>`;
-                    }
-                }
-                $("#category").append(to_append);
-            }
-        });
-    }
-    function printDiv() {
-        $("#to-print-area").html($("#printable-area").html());
-        window.print();
-    }
-
-    function form_reset()
-    {
-        document.getElementById('summary_report').reset();
-    }
-</script>
